@@ -13,7 +13,7 @@
 <P> The time on the server is ${serverTime}. </P>
 
 
-<c:if test="${not empty users}">
+<c:if test="${not empty products}">
     <h3>Users</h3>
 
     <table>
@@ -25,11 +25,11 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="product" items="${products}">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
+                <td>${product.productId}</td>
+                <td>${product.code}</td>
+                <td>${product.name}</td>
             </tr>
         </c:forEach>
         </tbody>

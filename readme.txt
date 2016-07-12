@@ -7,7 +7,7 @@ SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');
 
 # create table
 use evozon;
-create table `user` (
+create table `product` (
 	`ID` int(10) UNSIGNED NOT NULL auto_increment,
     `FIRSTNAME` varchar(30) not null,
     `LASTNAME` varchar(30) not null,
