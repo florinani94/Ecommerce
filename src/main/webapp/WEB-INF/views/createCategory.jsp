@@ -16,21 +16,25 @@
 <body>
 
 <h1>Create Category</h1>
-<form action="addCategory" method="post">
+<form action="addCategory" method="post" id="addCat">
     Id: <br>
-    <input type="text" name="id"/> <br><br>
+    <input type="text" name="id"/>
+    <br><br>
     Name: <br>
-    <input type="text" name="name"/> <br><br>
+    <input type="text" name="name"/>
+    <br><br>
     Description: <br>
-    <input type="text" name="description"/> <br><br>
+    <textarea rows="4" cols="50" name="description" form="addCat"></textarea>
+    <br><br>
     <input type="submit" value="Save"/>
 </form>
 
+<br><br>
 <c:if test="${message == true}">
-    <h1>Category added</h1>
+    <h3>Category added!</h3>
 </c:if>
 <c:if test="${message == false}">
-    <h1>You have errors ! The category was not added</h1>
+    <h3>You have errors! The category was not added!</h3>
 </c:if>
 
 </body>
