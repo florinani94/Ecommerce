@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by mihai on 7/12/2016.
  */
 @Controller
+@RequestMapping(value = "Category")
 public class CategoryController {
 
     @Autowired
