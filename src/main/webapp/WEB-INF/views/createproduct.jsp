@@ -3,13 +3,13 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>Create product</title>
 </head>
 <body>
 
 <h3> Create a new product </h3>
 
-<form mothod="post" action="">
+<form mothod="post" action="backoffice/createproduct">
     <table>
         <tr>
             <td>Code</td>
@@ -35,8 +35,6 @@
 
     <input type="submit" value="Save"/>
 </form>
-
-
 
 
 </body>
