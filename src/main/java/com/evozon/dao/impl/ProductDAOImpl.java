@@ -19,16 +19,18 @@ public class ProductDAOImpl implements ProductDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+
     public List<Product> getAllProducts() {
         Session session = sessionFactory.getCurrentSession();
-        List<Product> products = session.createQuery("FROM product as P").list();
-        return products;
+        return session.createQuery("FROM Product as P").list();
     }
+
 
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
         session.save(product);
     }
+
 
     public void addDefaultProducts() {
         Product product1 = new Product("KX123456", "Adidas", "The best product in town", 20.25, 10);

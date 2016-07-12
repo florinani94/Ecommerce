@@ -6,8 +6,9 @@ import java.io.Serializable;
 @Entity
 public class Product implements Serializable {
 
+    @Column(nullable = false)
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+    private Integer product_id;
 
     @Column(nullable = false, length = 8)
     private String code;
@@ -35,12 +36,12 @@ public class Product implements Serializable {
         this.stockLevel = stockLevel;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getProduct_id() {
+        return product_id;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
     }
 
     public String getCode() {
@@ -81,5 +82,17 @@ public class Product implements Serializable {
 
     public void setStockLevel(Integer stockLevel) {
         this.stockLevel = stockLevel;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_id=" + product_id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stockLevel=" + stockLevel +
+                '}';
     }
 }

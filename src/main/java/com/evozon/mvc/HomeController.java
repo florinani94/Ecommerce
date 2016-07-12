@@ -1,6 +1,6 @@
 package com.evozon.mvc;
 
-import com.evozon.dao.ProductDAO;
+import com.evozon.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ import java.util.Locale;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+class HomeController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    private ProductDAO productDAO;
+    private ProductService productService;
 
     /**
      * Simply selects the home view to render by returning its name.
@@ -38,11 +38,21 @@ public class HomeController {
 
         model.addAttribute("serverTime", formattedDate);
 
-        productDAO.addDefaultProducts();
-
-        model.addAttribute("users", productDAO.getAllProducts());
+//        productDAO.addDefaultProducts();
+//
+//        model.addAttribute("users", productDAO.getAllProducts());
 
         return "home";
     }
+
+    @RequestMapping(value = "/backoffice/products", method = RequestMethod.GET)
+    public String getAllProducts(Model model) {
+
+        productService.addDefaultProducts();
+        model.addAttribute("allProducts", productService.getAllProducts());
+
+        return "products";
+    }
+
 
 }
