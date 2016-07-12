@@ -14,12 +14,6 @@ public class ProductService
     @Autowired
     private ProductDAO productDAO;
 
-
-    public void setProductDAOImpl(ProductDAO productDAO ) {
-        this.productDAO = productDAO;
-    }
-
-
     public void addProduct(Product product) {
         this.productDAO.addProduct(product);
     }

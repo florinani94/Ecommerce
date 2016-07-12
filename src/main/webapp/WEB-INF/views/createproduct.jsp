@@ -9,7 +9,7 @@
 
 <h3> Create a new product </h3>
 
-<form mothod="post" action="backoffice/createproduct">
+<form method="post" action="createproduct">
     <table>
         <tr>
             <td>Code</td>
@@ -36,6 +36,13 @@
     <input type="submit" value="Save"/>
 </form>
 
+
+<c:if test="${message == true}">
+    <h3>Prodact creted with success</h3>
+</c:if>
+<c:if test="${message == false}">
+    <h3>Product was not created</h3>
+</c:if>
 
 </body>
 </html>
