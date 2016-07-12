@@ -1,6 +1,7 @@
 package com.evozon.service;
 
 import com.evozon.dao.ProductDAO;
+import com.evozon.domain.Product;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
