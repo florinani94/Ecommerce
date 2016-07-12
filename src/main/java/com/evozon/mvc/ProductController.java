@@ -15,25 +15,11 @@ package com.evozon.mvc;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @RequestMapping(value = "/backoffice/createproduct", method = RequestMethod.GET)
     public String goToCreateProductPage() {
         return "createproduct";
     }
 
-    @RequestMapping(value = "/backoffice/createproduct", method = RequestMethod.POST)
-    public String getProductDetails(Product product) {
-        if (productService.validateProduct(product)) {
-            return "redirect:/createproduct/success";
-        }
-        else
-        {
-            return "redirect:/createproduct/unsuccess";
-        }
-    }
-    @RequestMapping(value = "/createproduct/success", method = RequestMethod.GET)
-    public  String goToCetareProductSuccessPage() {
-        return "createproductsuccess";
-    }
 }
