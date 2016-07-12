@@ -2,15 +2,18 @@ package com.evozon.service;
 
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by horatiucernean on 12/07/2016.
  */
 
-@Transactional
-public class ProductService
-{
+@Service
+public class ProductService {
+
+    @Autowired
     private ProductDAO productDAO;
 
     public void setProductDAOImpl(ProductDAO productDAO ) {
@@ -28,5 +31,4 @@ public class ProductService
        this.productDAO.addProduct(product);
 
     }
-
 }
