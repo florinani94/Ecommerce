@@ -26,6 +26,7 @@
 
 		<property name="annotatedClasses">
 			<list>
+				<value>com.evozon.domain.Category</value>
 				<value>com.evozon.domain.User</value>
 			</list>
 		</property>
