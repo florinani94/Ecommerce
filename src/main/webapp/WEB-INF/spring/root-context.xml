@@ -20,14 +20,14 @@
 
 		<!--<property name="mappingResources">-->
 			<!--<list>-->
-				<!--<value>User.hbm.xml</value>-->
+				<!--<value>Product.hbm.xml</value>-->
 			<!--</list>-->
 		<!--</property>-->
 
 		<property name="annotatedClasses">
 			<list>
 				<value>com.evozon.domain.Category</value>
-				<value>com.evozon.domain.User</value>
+				<value>com.evozon.domain.Product</value>
 			</list>
 		</property>
 

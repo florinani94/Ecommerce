@@ -3,16 +3,16 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.evozon.domain.User" table="user">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID"/>
-            <generator class="identity"/>
-        </id>
-        <property name="firstName" type="java.lang.String">
-            <column name="FIRSTNAME" length="30" not-null="true"/>
-        </property>
-        <property name="lastName" type="java.lang.String">
-            <column name="LASTNAME" length="30" not-null="true"/>
-        </property>
-    </class>
+    <!--<class name="com.evozon.domain.Product" table="product">-->
+        <!--<id name="productId" type="java.lang.Integer">-->
+            <!--<column name="ID"/>-->
+            <!--<generator class="identity"/>-->
+        <!--</id>-->
+        <!--<property name="code" type="java.lang.String">-->
+            <!--<column name="FIRSTNAME" length="30" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="name" type="java.lang.String">-->
+            <!--<column name="LASTNAME" length="30" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
 </hibernate-mapping>

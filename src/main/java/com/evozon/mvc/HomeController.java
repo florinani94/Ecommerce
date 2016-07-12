@@ -38,9 +38,9 @@ public class HomeController {
 
         model.addAttribute("serverTime", formattedDate);
 
-//        userDAO.addDefaultUsers();
-//
-//        model.addAttribute("users", userDAO.getAllUsers());
+        productDAO.addDefaultProducts();
+
+        model.addAttribute("users", productDAO.getAllProducts());
 
         return "home";
     }
