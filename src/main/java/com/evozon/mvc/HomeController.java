@@ -1,6 +1,5 @@
 package com.evozon.mvc;
 
-import com.evozon.dao.UserDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class HomeController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @Autowired
-    private UserDAO userDAO;
-
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -37,10 +33,6 @@ public class HomeController {
         String formattedDate = dateFormat.format(date);
 
         model.addAttribute("serverTime", formattedDate);
-
-        productDAO.addDefaultProducts();
-
-        model.addAttribute("users", productDAO.getAllProducts());
 
         return "home";
     }
