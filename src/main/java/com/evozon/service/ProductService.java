@@ -17,8 +17,16 @@ public class ProductService
         this.productDAO = productDAO;
     }
 
+    public boolean validateProduct(Product product)
+    {
+        if ((product.getCode()!=null) &&(product.getName()!=null)) {
+            return true;
+        }
+        return false;
+    }
     public void addProduct(Product product) {
-        this.productDAO.addProduct(product);
+       this.productDAO.addProduct(product);
+
     }
 
 }
