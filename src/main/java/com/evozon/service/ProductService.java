@@ -33,4 +33,12 @@ public class ProductService
     public void addDefaultProducts(){
         productDAO.addDefaultProducts();
     }
+
+    public boolean validateProduct(Product product)
+    {
+        if ((product.getCode()!=null) &&(product.getName()!=null)) {
+            return true;
+        }
+        return false;
+    }
 }
