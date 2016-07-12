@@ -27,12 +27,14 @@ public class CategoryController {
 
     @RequestMapping(value="/addCategory", method = RequestMethod.POST)
     public String addCategory(Model model, @ModelAttribute("category") Category category, BindingResult result){
-        if (result.hasErrors()) {
-            return "createCategory";
-        }
+
         try {
             categoryService.addCategory(category);
             model.addAttribute("message", true);
+            if (result.hasErrors()) {
+                model.addAttribute("message", false);
+                return "createCategory";
+            }
         }catch (Exception e){
             model.addAttribute("message", false);
         }
