@@ -13,4 +13,6 @@ public interface ProductDAO {
     void addProduct(Product product);
 
     void importFromFile(String filename);
+
+    Product getProductById(Integer id);
 }

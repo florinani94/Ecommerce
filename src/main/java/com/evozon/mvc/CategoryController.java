@@ -34,6 +34,7 @@ public class CategoryController {
             model.addAttribute("message", true);
             if (result.hasErrors()) {
                 model.addAttribute("message", false);
+                model.addAttribute("category",category);
                 return "createCategory";
             }
         }catch (Exception e){

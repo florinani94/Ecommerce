@@ -36,6 +36,7 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
+                <td><a href="<c:url value='edit/${product.product_id}' />" >Edit</a>
             </tr>
         </c:forEach>
         </tbody>

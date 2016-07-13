@@ -52,4 +52,11 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
 
+    public Product getProductById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.product_id = :id");
+        query.setParameter("id", id);
+        List<Product> products = query.list();
+        return products.get(0);
+    }
 }
