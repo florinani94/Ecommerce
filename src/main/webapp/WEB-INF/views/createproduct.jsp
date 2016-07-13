@@ -9,7 +9,7 @@
 
 <h3> Create a new product </h3>
 <c:if test="${message == null}">
-    <form method="post" action="createproduct" >
+    <form method="post" action="createProduct" >
     <table>
     <tr>
     <td>Code</td>
@@ -40,7 +40,7 @@
 
 <c:if test="${message == true}">
     <h3>Product creted with success</h3>
-    <form method="get" action="createproduct">
+    <form method="get" action="createProduct">
         <input type="submit" value="New product">
     </form>
 
@@ -51,7 +51,7 @@
 </c:if>
 <c:if test="${message == false}">
     <h3>Product was not created</h3>
-    <form method="get" action="createproduct">
+    <form method="get" action="createProduct">
         <input type="submit" value="New product">
     </form>
 </c:if>

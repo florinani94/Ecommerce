@@ -32,13 +32,13 @@ public class ProductController {
         return "viewProducts";
     }
 
-    @RequestMapping(value = "/createproduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
         model.addAttribute("product", new Product());
-        return "createproduct";
+        return "createProduct";
     }
 
-    @RequestMapping(value = "/createproduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
 
         try {
@@ -46,13 +46,13 @@ public class ProductController {
             model.addAttribute("message", true);
             if (result.hasErrors() && productService.validateProduct(product)) {
                 model.addAttribute("message", false);
-                return "createproduct";
+                return "createProduct";
             }
         }catch (Exception e){
             model.addAttribute("message", false);
         }
 
-        return "createproduct";
+        return "createProduct";
 
     }
 
