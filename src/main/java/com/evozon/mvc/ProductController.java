@@ -46,4 +46,12 @@ public class ProductController {
 
     }
 
+    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    public String importFromFile(Model model) {
+        productService.importFromFile("C:/Users/dianamohanu/IdeaProjects/javaint-2016-summer5/db.csv");
+        return "importProducts";
+    }
+
+
+
 }
