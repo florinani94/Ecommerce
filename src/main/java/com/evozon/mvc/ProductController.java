@@ -136,4 +136,8 @@ public class ProductController {
         return "editProduct";
     }
 
+    @RequestMapping(value = "/deleteSelected", method = RequestMethod.POST)
+    public String deleteAll(Model model) {
+        return "viewProducts";
+    }
 }

@@ -30,6 +30,7 @@
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
+                <td><input type="checkbox" name="idProd" value=${product.productId}></td>
                 <td>${product.productId}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
@@ -42,11 +43,14 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
+    <form action="deleteSelected">
+        <input type="submit" id="deleteButton" value="Delete selected"/>
+    </form>
 </c:if>
 
 <a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
-<br>
-<br>
+
 <a href="exportproducts" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
 
 <br> <br>
