@@ -23,7 +23,7 @@ package com.evozon.mvc;
  */
 
 @Controller
-@RequestMapping(value = "backoffice")
+@RequestMapping(value = "/backoffice")
 public class ProductController {
 
     @Autowired
@@ -121,11 +121,10 @@ public class ProductController {
 
         return "exportProducts";
     }
-    @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/editProduct", method = RequestMethod.POST)
     public String editPerson(Model model, @ModelAttribute("product") Product product, BindingResult result){
-//        model.addAttribute("product", this.productService.getProductById(id));
-        //model.addAttribute("listProducts", this.productService.getAllProducts());
-//        productService.a
+        productService.updateProduct(product);
+        model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
     }
 

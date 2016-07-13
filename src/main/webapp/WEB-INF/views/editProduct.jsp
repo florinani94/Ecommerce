@@ -9,11 +9,13 @@
 
 <h3> Update product </h3>
 
-<form method="put" action="editProduct" >
+<c:url var="editUrl" value="/backoffice/editProduct"/>
+
+<form method="POST" action="${editUrl}" >
     <table>
         <tr>
             <td>ID</td>
-            <td> <input type="text" name="code" maxlength="8" value="${product.product_id}" readonly /></td>
+            <td> <input type="text" name="product_id" maxlength="8" value="${product.product_id}" readonly /></td>
         </tr>
         <tr>
             <td>Code</td>

@@ -36,7 +36,7 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
-                <td><a href="<c:url value='edit/${product.product_id}' />" >Edit</a>
+                <td><a href="<c:url value='edit/${product.product_id}' />" ><input type="submit" value="Edit"></a></td>
                 <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
