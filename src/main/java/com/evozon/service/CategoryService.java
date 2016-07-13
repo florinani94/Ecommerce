@@ -15,8 +15,12 @@ public class CategoryService {
     @Autowired
     private CategoryDAO categoryDAO;
 
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
         categoryDAO.addCategory(category);
+    }
+
+    public void deleteCategory(int categoryId) {
+        categoryDAO.deleteCategory(categoryId);
     }
 
 }

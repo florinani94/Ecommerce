@@ -22,4 +22,13 @@ public class CategoryDAOImpl implements CategoryDAO{
         Session session = sessionFactory.getCurrentSession();
         session.save(category);
     }
+
+    public void deleteCategory(int categoryId) {
+        Session session = sessionFactory.getCurrentSession();
+        Category c = (Category) session.load(Category.class, new Integer(categoryId));
+        if (null != c) {
+            session.delete(c);
+        }
+
+    }
 }
