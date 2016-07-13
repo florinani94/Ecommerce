@@ -22,7 +22,7 @@ public class CategoryService {
     }
 
     public void deleteCategory(int categoryId) {
-        categoryDAO.deleteCategory(categoryId);
+        this.categoryDAO.deleteCategory(categoryId);
     }
 
     public List<Category> getAllCategories(){

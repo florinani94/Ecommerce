@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by mihai on 7/12/2016.
@@ -41,20 +38,24 @@ public class CategoryController {
         }catch (Exception e){
             model.addAttribute("message", false);
         }
+
+        model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/viewCategories", method = RequestMethod.GET)
     public String viewCategories(Model model){
         model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
 
-//    @RequestMapping(value="/viewCategory",method = RequestMethod.GET)
-//    public String goToViewCategory(){
-//        categoryService.deleteCategory(categoryId);
-//
-//        return "viewCategories";
-//    }
+    @RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
+    public String deleteCategory(@RequestParam("id") int id, Model model){
+        categoryService.deleteCategory(id);
+        model.addAttribute("allCategories", categoryService.getAllCategories());
+
+        return "viewCategories";
+    }
+
 
 }
