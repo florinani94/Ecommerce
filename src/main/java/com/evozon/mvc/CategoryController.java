@@ -40,7 +40,7 @@ public class CategoryController {
         }catch (Exception e){
             model.addAttribute("message", false);
         }
-        return "viewCategory";
+        return "viewCategories";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -49,11 +49,13 @@ public class CategoryController {
         return "viewCategories";
     }
 
-    @RequestMapping(value="/delete/{categoryId}",method = RequestMethod.GET)
-    public String deleteCategory(@PathVariable("categoryId") int categoryId){
-        categoryService.deleteCategory(categoryId);
+//    @RequestMapping(value="/viewCategory",method = RequestMethod.GET)
+//    public String goToViewCategory(){
+//        categoryService.deleteCategory(categoryId);
+//
+//        return "viewCategories";
+//    }
 
-        return "viewCategories";
-    }
+
 
 }
