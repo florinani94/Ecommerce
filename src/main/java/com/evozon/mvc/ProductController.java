@@ -2,6 +2,9 @@ package com.evozon.mvc;
 
         import com.evozon.domain.Product;
         import com.evozon.service.ProductService;
+        import org.apache.commons.fileupload.FileItem;
+        import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+        import org.apache.commons.fileupload.servlet.ServletFileUpload;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
@@ -10,6 +13,11 @@ package com.evozon.mvc;
         import org.springframework.web.bind.annotation.RequestMapping;
         import org.springframework.web.bind.annotation.RequestMethod;
         import org.springframework.web.bind.annotation.RequestParam;
+
+        import javax.servlet.http.HttpServletRequest;
+        import java.io.File;
+        import java.util.Iterator;
+        import java.util.List;
 
 /**
  * Created by horatiucernean on 12/07/2016.
@@ -58,7 +66,34 @@ public class ProductController {
 
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importFromFile(Model model) {
-        productService.importFromFile("C:/Users/dianamohanu/IdeaProjects/javaint-2016-summer5/db.csv");
+        return "importProducts";
+    }
+
+    @RequestMapping(value = "/import", method = RequestMethod.POST)
+    public String importFromFile(HttpServletRequest request, Model model) {
+        File file ;
+        String contentType = request.getContentType();
+        if ((contentType.indexOf("multipart/form-data") >= 0)) {
+
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            try{
+                List fileItems = upload.parseRequest(request);
+                Iterator i = fileItems.iterator();
+
+                while ( i.hasNext () )
+                {
+                    FileItem fi = (FileItem)i.next();
+                    if ( !fi.isFormField () )  {
+                        file = new File("temp.csv") ;
+                        fi.write( file ) ;
+                    }
+                }
+            }catch(Exception ex) {
+                System.out.println(ex);
+            }
+        }
+        productService.importFromFile("temp.csv");
         return "importProducts";
     }
 
