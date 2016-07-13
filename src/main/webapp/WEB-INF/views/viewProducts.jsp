@@ -43,7 +43,9 @@
 </c:if>
 
 <a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
-
+<br>
+<br>
+<a href="exportproducts" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
 
 </body>
 </html>

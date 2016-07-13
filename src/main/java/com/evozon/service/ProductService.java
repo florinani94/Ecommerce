@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
 @Service
-public class ProductService
-{
+public class ProductService {
     @Autowired
     private ProductDAO productDAO;
 
@@ -25,17 +25,16 @@ public class ProductService
     }
 
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }
 
 
-    public void addDefaultProducts(){
+    public void addDefaultProducts() {
         productDAO.addDefaultProducts();
     }
 
-    public boolean validateProduct(Product product)
-    {
+    public boolean validateProduct(Product product) {
         if ((!product.getCode().equals("") && (!product.getName().equals("")))) {
             return true;
         }
@@ -43,5 +42,81 @@ public class ProductService
     }
 
     public void importFromFile(String filename) {
-        productDAO.importFromFile(filename);}
+        productDAO.importFromFile(filename);
+    }
+
+    public void exportToCSV(String fileName) {
+
+        List<Product> products = productDAO.getAllProducts();
+
+        FileWriter writer = null;
+
+
+            try {
+                writer = new FileWriter(fileName + ".csv");
+                for (Product product : products) {
+                    writer.append(String.valueOf(product.getProduct_id()));
+                    writer.append(",");
+                    writer.append(product.getCode());
+                    writer.append(",");
+                    writer.append(product.getName());
+                    writer.append(",");
+                    writer.append(product.getDescription());
+                    writer.append(",");
+                    writer.append(String.valueOf(product.getPrice()));
+                    writer.append(",");
+                    writer.append(String.valueOf(product.getStockLevel()));
+                    writer.append("\n");
+                }
+
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public List<Product> validateExport(String fileName) {
+
+        BufferedReader br = null;
+        String line = "";
+        String csvSplitBy = ",";
+
+        List<Product> list = new ArrayList<Product>();
+
+        try {
+
+            br = new BufferedReader(new FileReader((fileName + ".csv")));
+            while ((line = br.readLine()) != null) {
+
+                String[] product = line.split(csvSplitBy);
+                Product newProduct = new Product();
+                newProduct.setProduct_id(Integer.valueOf(product[0]));
+                newProduct.setCode(product[1]);
+                newProduct.setName(product[2]);
+                newProduct.setDescription(product[3]);
+                newProduct.setPrice(Double.valueOf(product[4]));
+                newProduct.setStockLevel(Integer.valueOf(product[5]));
+
+                list.add(newProduct);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return list;
+    }
 }
+
