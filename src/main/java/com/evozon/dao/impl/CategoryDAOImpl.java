@@ -27,12 +27,11 @@ public class CategoryDAOImpl implements CategoryDAO{
         session.save(category);
     }
 
-    public void deleteCategory(int categoryId) {
+    public void deleteCategory(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Category c = (Category) session.load(Category.class, new Integer(categoryId));
-        if (null != c) {
-            session.delete(c);
-        }
+        Query query=session.createQuery("DELETE FROM Category WHERE id=:id");
+        query.setParameter("id", id);
+        query.executeUpdate();
 
     }
 

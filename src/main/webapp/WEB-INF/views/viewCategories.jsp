@@ -31,8 +31,8 @@
                 <td>${category.id}</td>
                 <td>${category.name}</td>
                 <td>${category.description}</td>
-                <td><a href="<c:url value='/edit/${category.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/delete/${category.id}' />" >Delete</a></td>
+                <td><a href="editCategory?id=${category.id}" methods="GET"><input type="submit" value="Edit"></a></td>
+                <td><a href="deleteCategory?id=${category.id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
