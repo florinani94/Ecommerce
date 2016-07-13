@@ -24,6 +24,8 @@ public class ProductService
         this.productDAO.addProduct(product);
     }
 
+    public void deleteProduct(int product_id) { this.productDAO.deleteProduct(product_id);}
+
 
     public List<Product> getAllProducts(){
         return productDAO.getAllProducts();

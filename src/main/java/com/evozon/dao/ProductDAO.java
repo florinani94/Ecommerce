@@ -12,5 +12,7 @@ public interface ProductDAO {
 
     void addProduct(Product product);
 
+    void deleteProduct(int product_id);
+
     void importFromFile(String filename);
 }
