@@ -9,7 +9,9 @@
 
 <h3> Update product </h3>
 
-<form method="put" action="editProduct" >
+<c:url var="editUrl" value="/backoffice/editProduct"/>
+
+<form method="POST" action="${editUrl}" >
     <table>
         <tr>
             <td>ID</td>

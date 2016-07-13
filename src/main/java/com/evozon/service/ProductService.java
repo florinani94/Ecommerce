@@ -127,7 +127,7 @@ public class ProductService {
     }
 
     public void updateProduct(Product product) {
-        this.productDAO.updateProduct(product);
+        productDAO.updateProduct(product);
     }
 }
 
