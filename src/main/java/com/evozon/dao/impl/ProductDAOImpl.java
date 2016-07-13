@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -50,6 +51,20 @@ public class ProductDAOImpl implements ProductDAO {
             addProduct(product2);
             addProduct(product3);
         }
+    }
+    public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
+
+        int infRange = ((startPageIndex-1 )*recordsPerPage);
+        int supRange = recordsPerPage ;
+
+            Session session = sessionFactory.getCurrentSession();
+            Query query = session.createQuery("from Product as P");
+
+            query.setFirstResult(infRange);
+            query.setMaxResults(supRange);
+            List<Product> products = query.list();
+
+            return products;
     }
 
 }

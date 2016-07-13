@@ -52,28 +52,28 @@ public class ProductService {
         FileWriter writer = null;
 
 
-            try {
-                writer = new FileWriter(fileName + ".csv");
-                for (Product product : products) {
-                    writer.append(String.valueOf(product.getProduct_id()));
-                    writer.append(",");
-                    writer.append(product.getCode());
-                    writer.append(",");
-                    writer.append(product.getName());
-                    writer.append(",");
-                    writer.append(product.getDescription());
-                    writer.append(",");
-                    writer.append(String.valueOf(product.getPrice()));
-                    writer.append(",");
-                    writer.append(String.valueOf(product.getStockLevel()));
-                    writer.append("\n");
-                }
-
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            writer = new FileWriter(fileName + ".csv");
+            for (Product product : products) {
+                writer.append(String.valueOf(product.getProduct_id()));
+                writer.append(",");
+                writer.append(product.getCode());
+                writer.append(",");
+                writer.append(product.getName());
+                writer.append(",");
+                writer.append(product.getDescription());
+                writer.append(",");
+                writer.append(String.valueOf(product.getPrice()));
+                writer.append(",");
+                writer.append(String.valueOf(product.getStockLevel()));
+                writer.append("\n");
             }
+
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Product> validateExport(String fileName) {
@@ -117,6 +117,13 @@ public class ProductService {
         }
 
         return list;
+    }
+    public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
+
+        if(startPageIndex<=0){
+            return null;
+        }
+        return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
     }
 }
 
