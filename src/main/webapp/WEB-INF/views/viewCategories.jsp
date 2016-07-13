@@ -42,7 +42,9 @@
 <c:if test="${empty allCategories}">
     <h1>No category yet! Try adding one.</h1>
 </c:if>
-<a href="addCategory" methods="GET"><input type="submit" value="Create new category"></a>
+
+<br><br>
+<a href="/mvc/Category/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
 
 </body>
 </html>
