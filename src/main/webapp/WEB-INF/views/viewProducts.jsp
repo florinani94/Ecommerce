@@ -19,37 +19,27 @@
     <table>
         <thead>
         <tr>
-            <th>Mark</th>
             <th>Product ID</th>
             <th>Code </th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
             <th>Stock Level</th>
-            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-
         <c:forEach var="product" items="${allProducts}">
-                <td><input type="checkbox" name="idProd" value=${product.product_id}></td>
-
-                <form action="deleteProduct" method="get">
-                <td><input type="hidden" name="id" value=${product.product_id} >${product.product_id}</td>
+            <tr>
+                <td>${product.product_id}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
-                <td><input type="submit" value="Delete"></td>
-                </form>
+                <td><a href="<c:url value='edit/${product.product_id}' />" ><input type="submit" value="Edit"></a></td>
+                <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
-
-        <form action="deleteSelected">
-            <input type="submit" id="deleteButton" value="Delete selected"/>
-        </form>
-
         </tbody>
     </table>
 </c:if>

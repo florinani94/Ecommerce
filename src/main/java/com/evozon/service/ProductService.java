@@ -47,6 +47,11 @@ public class ProductService {
         productDAO.importFromFile(filename);
     }
 
+    public Product getProductById(Integer id){
+       return  productDAO.getProductById(id);
+    }
+
+
     public void exportToCSV(String fileName) {
 
         List<Product> products = productDAO.getAllProducts();
@@ -119,6 +124,10 @@ public class ProductService {
         }
 
         return list;
+    }
+
+    public void updateProduct(Product product) {
+        productDAO.updateProduct(product);
     }
 }
 
