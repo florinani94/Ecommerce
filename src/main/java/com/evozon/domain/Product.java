@@ -8,7 +8,7 @@ public class Product implements Serializable {
 
     @Column(nullable = false)
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer product_id;
+    private Integer productId;
 
     @Column(nullable = false, length = 8)
     private String code;
@@ -36,12 +36,13 @@ public class Product implements Serializable {
         this.stockLevel = stockLevel;
     }
 
-    public Integer getProduct_id() {
-        return product_id;
+
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getCode() {
@@ -87,7 +88,7 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" +
-                "product_id=" + product_id +
+                "productId=" + productId +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

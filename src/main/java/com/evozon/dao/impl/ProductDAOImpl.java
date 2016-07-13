@@ -34,7 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     public void deleteProduct(int product_id) {
         Session session=sessionFactory.getCurrentSession();
-        Query query=session.createQuery("DELETE FROM Product WHERE product_id=:id");
+        Query query=session.createQuery("DELETE FROM Product WHERE productId=:id");
         query.setParameter("id", product_id);
         query.executeUpdate();
     }
@@ -61,7 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     public Product getProductById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Product as P WHERE P.product_id = :id");
+        Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
         query.setParameter("id", id);
         List<Product> products = query.list();
         return products.get(0);

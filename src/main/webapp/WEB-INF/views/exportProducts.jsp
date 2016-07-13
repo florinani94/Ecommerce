@@ -32,7 +32,7 @@
     <c:forEach var="product" items="${export}">
         <tr>
 
-            <td>${product.product_id}</td>
+            <td>${product.productId}</td>
             <td>${product.code}</td>
             <td>${product.name}</td>
             <td>${product.description}</td>

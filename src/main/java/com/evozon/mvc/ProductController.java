@@ -121,7 +121,7 @@ public class ProductController {
 
         return "exportProducts";
     }
-    @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/edit/{productId}", method = RequestMethod.PUT)
     public String editPerson(Model model, @ModelAttribute("product") Product product, BindingResult result){
 //        model.addAttribute("product", this.productService.getProductById(id));
         //model.addAttribute("listProducts", this.productService.getAllProducts());
@@ -129,8 +129,8 @@ public class ProductController {
         return "viewProducts";
     }
 
-    @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.GET)
-    public String goToCreateProductPage(@PathVariable("product_id") int id, Model model) {
+    @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
+    public String goToCreateProductPage(@PathVariable("productId") int id, Model model) {
         Product product = productService.getProductById(id);
         logger.info("Product code : ",product.getCode());
         model.addAttribute("product", product);

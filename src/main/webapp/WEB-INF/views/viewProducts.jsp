@@ -30,14 +30,14 @@
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
-                <td>${product.product_id}</td>
+                <td>${product.productId}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
-                <td><a href="<c:url value='edit/${product.product_id}' />" >Edit</a>
-                <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
+                <td><a href="<c:url value='edit/${product.productId}' />" >Edit</a>
+                <td><a href="deleteProduct?id=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>

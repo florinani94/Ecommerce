@@ -14,7 +14,7 @@ public interface ProductDAO {
 
     void updateProduct(Product product);
 
-    void deleteProduct(int product_id);
+    void deleteProduct(int productId);
 
     void importFromFile(String filename);
 
