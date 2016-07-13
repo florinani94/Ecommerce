@@ -44,7 +44,7 @@
 </c:if>
 
 <br><br>
-<a href="/mvc/Category/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
+<a href="/mvc/backoffice/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
 
 </body>
 </html>

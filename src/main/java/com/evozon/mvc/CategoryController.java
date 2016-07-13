@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by mihai on 7/12/2016.
  */
 @Controller
-@RequestMapping(value = "Category")
+@RequestMapping(value = "/backoffice")
 public class CategoryController {
 
     @Autowired
