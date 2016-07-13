@@ -41,6 +41,19 @@ public class ProductController {
     }
 
 
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
+    public String deleteProduct(Model model, @RequestParam("id") int id) {
+        try {
+            productService.deleteProduct(id);
+            model.addAttribute("message", true);
+            model.addAttribute("allProducts", productService.getAllProducts());
+        } catch(Exception e) {
+            model.addAttribute("message", false);
+        }
+        return "viewProducts";
+    }
+
+
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
         model.addAttribute("product", new Product());

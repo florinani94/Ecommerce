@@ -36,6 +36,7 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
+                <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -46,6 +47,14 @@
 <br>
 <br>
 <a href="exportproducts" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
+
+<br> <br>
+<c:if test="${message == true}">
+    <h3>Product deleted!</h3>
+</c:if>
+<c:if test="${message == false}">
+    <h3>You have errors! The product was not deleted!</h3>
+</c:if>
 
 </body>
 </html>
