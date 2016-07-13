@@ -24,7 +24,7 @@ public class ProductService {
         this.productDAO.addProduct(product);
     }
 
-    public void deleteProduct(int product_id) { this.productDAO.deleteProduct(product_id);}
+    public void deleteProduct(int productId) { this.productDAO.deleteProduct(productId);}
 
 
     public List<Product> getAllProducts() {
@@ -62,7 +62,7 @@ public class ProductService {
             try {
                 writer = new FileWriter(fileName + ".csv");
                 for (Product product : products) {
-                    writer.append(String.valueOf(product.getProduct_id()));
+                    writer.append(String.valueOf(product.getProductId()));
                     writer.append(",");
                     writer.append(product.getCode());
                     writer.append(",");
@@ -98,7 +98,7 @@ public class ProductService {
 
                 String[] product = line.split(csvSplitBy);
                 Product newProduct = new Product();
-                newProduct.setProduct_id(Integer.valueOf(product[0]));
+                newProduct.setProductId(Integer.valueOf(product[0]));
                 newProduct.setCode(product[1]);
                 newProduct.setName(product[2]);
                 newProduct.setDescription(product[3]);

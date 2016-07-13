@@ -15,7 +15,7 @@
     <table>
         <tr>
             <td>ID</td>
-            <td> <input type="text" name="product_id" maxlength="8" value="${product.product_id}" readonly /></td>
+            <td> <input type="text" name="productId" maxlength="8" value="${product.productId}" readonly /></td>
         </tr>
         <tr>
             <td>Code</td>

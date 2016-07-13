@@ -30,15 +30,15 @@
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
-                <td><input type="checkbox" name="idProd" value=${product.product_id}></td>
-                <td>${product.product_id}</td>
+                <td><input type="checkbox" name="idProd" value=${product.productId}></td>
+                <td>${product.productId}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
-                <td><a href="<c:url value='edit/${product.product_id}' />" ><input type="submit" value="Edit"></a></td>
-                <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
+                <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit"></a></td>
+                <td><a href="deleteProduct?id=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>

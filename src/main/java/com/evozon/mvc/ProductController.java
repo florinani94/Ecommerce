@@ -128,8 +128,8 @@ public class ProductController {
         return "viewProducts";
     }
 
-    @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.GET)
-    public String goToCreateProductPage(@PathVariable("product_id") int id, Model model) {
+    @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
+    public String goToCreateProductPage(@PathVariable("productId") int id, Model model) {
         Product product = productService.getProductById(id);
         logger.info("Product code : ",product.getCode());
         model.addAttribute("product", product);
