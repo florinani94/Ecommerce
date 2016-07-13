@@ -2,6 +2,7 @@ package com.evozon.dao.impl;
 
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class ProductDAOImpl implements ProductDAO {
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
         session.save(product);
+    }
+
+    public void importFromFile(String filename) {
+        Session session=sessionFactory.getCurrentSession();
+        Query query = session.createSQLQuery("LOAD DATA LOCAL INFILE :filename INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (code, description, name, price, stockLevel)").setString("filename", filename);
+        int rowCount = query.executeUpdate();
     }
 
 

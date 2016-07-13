@@ -11,4 +11,6 @@ public interface ProductDAO {
     void addDefaultProducts();
 
     void addProduct(Product product);
+
+    void importFromFile(String filename);
 }

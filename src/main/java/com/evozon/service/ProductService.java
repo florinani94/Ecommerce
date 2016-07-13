@@ -35,4 +35,6 @@ public class ProductService
         }
         return false;
     }
+
+    public void importFromFile(String filename) { productDAO.importFromFile(filename);}
 }
