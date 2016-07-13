@@ -38,20 +38,7 @@ class HomeController {
 
         model.addAttribute("serverTime", formattedDate);
 
-//        productDAO.addDefaultProducts();
-//
-//        model.addAttribute("users", productDAO.getAllProducts());
-
         return "home";
-    }
-
-    @RequestMapping(value = "/backoffice/products", method = RequestMethod.GET)
-    public String getAllProducts(Model model) {
-
-        productService.addDefaultProducts();
-        model.addAttribute("allProducts", productService.getAllProducts());
-
-        return "products";
     }
 
 

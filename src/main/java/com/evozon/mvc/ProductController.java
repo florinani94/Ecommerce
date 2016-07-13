@@ -22,6 +22,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public String getAllProducts(Model model) {
+
+        productService.addDefaultProducts();
+        model.addAttribute("allProducts", productService.getAllProducts());
+
+        return "viewProducts";
+    }
+
     @RequestMapping(value = "/createproduct", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
         model.addAttribute("product", new Product());
