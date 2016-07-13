@@ -42,4 +42,10 @@ public class CategoryController {
         return "createCategory";
     }
 
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public String viewCategories(Model model){
+        model.addAttribute("allCategories", categoryService.getAllCategories());
+        return "viewCategories";
+    }
+
 }

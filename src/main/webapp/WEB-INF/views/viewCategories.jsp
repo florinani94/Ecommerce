@@ -21,8 +21,8 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
-                <%--<th>Edit</th>--%>
-                <%--<th>Delete</th>--%>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -31,13 +31,18 @@
                 <td>${category.id}</td>
                 <td>${category.name}</td>
                 <td>${category.description}</td>
-                <%--<td><a href="<c:url value='/edit/${category.id}' />" >Edit</a></td>--%>
-                <%--<td><a href="<c:url value='/delete/${category.id}' />" >Delete</a></td>--%>
+                <td><a href="<c:url value='/edit/${category.id}' />" >Edit</a></td>
+                <td><a href="<c:url value='/delete/${category.id}' />" >Delete</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </c:if>
+
+<c:if test="${empty allCategories}">
+    <h1>No category yet! Try adding one.</h1>
+</c:if>
+<a href="addCategory" methods="GET"><input type="submit" value="Create new category"></a>
 
 </body>
 </html>
