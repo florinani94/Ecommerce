@@ -54,7 +54,7 @@ public class ProductController {
         try {
             productService.addProduct(product);
             model.addAttribute("message", true);
-            if (result.hasErrors() && productService.validateProduct(product)) {
+            if (result.hasErrors() || productService.validateProduct(product)) {
                 model.addAttribute("message", false);
                 return "createProduct";
             }

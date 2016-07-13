@@ -35,7 +35,7 @@ public class ProductService
 
     public boolean validateProduct(Product product)
     {
-        if ((product.getCode()!=null) &&(product.getName()!=null)) {
+        if ((!product.getCode().equalsIgnoreCase("") && !(product.getName().equalsIgnoreCase("")))) {
             return true;
         }
         return false;
