@@ -21,6 +21,10 @@ public class CategoryService {
         categoryDAO.addCategory(category);
     }
 
+    public void deleteCategory(int categoryId) {
+        categoryDAO.deleteCategory(categoryId);
+    }
+
     public List<Category> getAllCategories(){
         return categoryDAO.getAllCategories();
     }

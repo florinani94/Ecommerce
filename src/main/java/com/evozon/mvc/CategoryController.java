@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,13 +41,20 @@ public class CategoryController {
         }catch (Exception e){
             model.addAttribute("message", false);
         }
-        return "createCategory";
+        return "viewCategories";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String viewCategories(Model model){
         model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
+
+//    @RequestMapping(value="/viewCategory",method = RequestMethod.GET)
+//    public String goToViewCategory(){
+//        categoryService.deleteCategory(categoryId);
+//
+//        return "viewCategories";
+//    }
 
 }

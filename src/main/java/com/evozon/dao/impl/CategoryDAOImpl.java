@@ -27,6 +27,15 @@ public class CategoryDAOImpl implements CategoryDAO{
         session.save(category);
     }
 
+    public void deleteCategory(int categoryId) {
+        Session session = sessionFactory.getCurrentSession();
+        Category c = (Category) session.load(Category.class, new Integer(categoryId));
+        if (null != c) {
+            session.delete(c);
+        }
+
+    }
+
     public List<Category> getAllCategories() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("FROM Category AS c").list();
