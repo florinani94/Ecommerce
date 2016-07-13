@@ -24,6 +24,8 @@ public class ProductService {
         this.productDAO.addProduct(product);
     }
 
+    public void deleteProduct(int product_id) { this.productDAO.deleteProduct(product_id);}
+
 
     public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
@@ -45,6 +47,11 @@ public class ProductService {
         productDAO.importFromFile(filename);
     }
 
+    public Product getProductById(Integer id){
+       return  productDAO.getProductById(id);
+    }
+
+
     public void exportToCSV(String fileName) {
 
         List<Product> products = productDAO.getAllProducts();
@@ -52,28 +59,28 @@ public class ProductService {
         FileWriter writer = null;
 
 
-        try {
-            writer = new FileWriter(fileName + ".csv");
-            for (Product product : products) {
-                writer.append(String.valueOf(product.getProduct_id()));
-                writer.append(",");
-                writer.append(product.getCode());
-                writer.append(",");
-                writer.append(product.getName());
-                writer.append(",");
-                writer.append(product.getDescription());
-                writer.append(",");
-                writer.append(String.valueOf(product.getPrice()));
-                writer.append(",");
-                writer.append(String.valueOf(product.getStockLevel()));
-                writer.append("\n");
-            }
+            try {
+                writer = new FileWriter(fileName + ".csv");
+                for (Product product : products) {
+                    writer.append(String.valueOf(product.getProduct_id()));
+                    writer.append(",");
+                    writer.append(product.getCode());
+                    writer.append(",");
+                    writer.append(product.getName());
+                    writer.append(",");
+                    writer.append(product.getDescription());
+                    writer.append(",");
+                    writer.append(String.valueOf(product.getPrice()));
+                    writer.append(",");
+                    writer.append(String.valueOf(product.getStockLevel()));
+                    writer.append("\n");
+                }
 
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     public List<Product> validateExport(String fileName) {
@@ -124,6 +131,10 @@ public class ProductService {
             return null;
         }
         return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
+    }
+
+    public void updateProduct(Product product) {
+        productDAO.updateProduct(product);
     }
 }
 

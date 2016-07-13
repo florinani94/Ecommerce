@@ -5,14 +5,13 @@ package com.evozon.mvc;
         import org.apache.commons.fileupload.FileItem;
         import org.apache.commons.fileupload.disk.DiskFileItemFactory;
         import org.apache.commons.fileupload.servlet.ServletFileUpload;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.validation.BindingResult;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RequestParam;
+        import org.springframework.web.bind.annotation.*;
 
         import javax.servlet.http.HttpServletRequest;
         import java.io.File;
@@ -24,11 +23,13 @@ package com.evozon.mvc;
  */
 
 @Controller
-@RequestMapping(value = "backoffice")
+@RequestMapping(value = "/backoffice")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
@@ -37,6 +38,19 @@ public class ProductController {
         productService.addDefaultProducts();
         model.addAttribute("allProducts", productService.getAllProducts());
 
+        return "viewProducts";
+    }
+
+
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
+    public String deleteProduct(Model model, @RequestParam("id") int id) {
+        try {
+            productService.deleteProduct(id);
+            model.addAttribute("message", true);
+            model.addAttribute("allProducts", productService.getAllProducts());
+        } catch(Exception e) {
+            model.addAttribute("message", false);
+        }
         return "viewProducts";
     }
 
@@ -106,5 +120,24 @@ public class ProductController {
         model.addAttribute("export", productService.validateExport(fileName));
 
         return "exportProducts";
+    }
+    @RequestMapping(value = "/editProduct", method = RequestMethod.POST)
+    public String editPerson(Model model, @ModelAttribute("product") Product product, BindingResult result){
+        productService.updateProduct(product);
+        model.addAttribute("allProducts", productService.getAllProducts());
+        return "viewProducts";
+    }
+
+    @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.GET)
+    public String goToCreateProductPage(@PathVariable("product_id") int id, Model model) {
+        Product product = productService.getProductById(id);
+        logger.info("Product code : ",product.getCode());
+        model.addAttribute("product", product);
+        return "editProduct";
+    }
+
+    @RequestMapping(value = "/deleteSelected", method = RequestMethod.POST)
+    public String deleteAll(Model model) {
+        return "viewProducts";
     }
 }

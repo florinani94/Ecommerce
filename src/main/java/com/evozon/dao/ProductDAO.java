@@ -12,7 +12,13 @@ public interface ProductDAO {
 
     void addProduct(Product product);
 
+    void updateProduct(Product product);
+
+    void deleteProduct(int product_id);
+
     void importFromFile(String filename);
+
+    Product getProductById(Integer id);
 
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 }

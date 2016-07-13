@@ -33,6 +33,13 @@ public class ProductDAOImpl implements ProductDAO {
         session.save(product);
     }
 
+    public void deleteProduct(int product_id) {
+        Session session=sessionFactory.getCurrentSession();
+        Query query=session.createQuery("DELETE FROM Product WHERE product_id=:id");
+        query.setParameter("id", product_id);
+        query.executeUpdate();
+    }
+
     public void importFromFile(String filename) {
         Session session=sessionFactory.getCurrentSession();
         Query query = session.createSQLQuery("LOAD DATA LOCAL INFILE :filename INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (code, description, name, price, stockLevel)").setString("filename", filename);
@@ -67,4 +74,16 @@ public class ProductDAOImpl implements ProductDAO {
             return products;
     }
 
+    public Product getProductById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.product_id = :id");
+        query.setParameter("id", id);
+        List<Product> products = query.list();
+        return products.get(0);
+    }
+
+    public void updateProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+    }
 }

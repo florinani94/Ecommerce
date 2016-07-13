@@ -30,22 +30,36 @@
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
+                <td><input type="checkbox" name="idProd" value=${product.product_id}></td>
                 <td>${product.product_id}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
+                <td><a href="<c:url value='edit/${product.product_id}' />" ><input type="submit" value="Edit"></a></td>
+                <td><a href="deleteProduct?id=${product.product_id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <br>
+    <form action="deleteSelected">
+        <input type="submit" id="deleteButton" value="Delete selected"/>
+    </form>
 </c:if>
 
 <a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
-<br>
-<br>
+
 <a href="exportproducts" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
+
+<br> <br>
+<c:if test="${message == true}">
+    <h3>Product deleted!</h3>
+</c:if>
+<c:if test="${message == false}">
+    <h3>You have errors! The product was not deleted!</h3>
+</c:if>
 
 </body>
 </html>

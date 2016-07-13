@@ -31,7 +31,7 @@
 
 <br> <br>
 <c:if test="${message == true}">
-    <h3>Category added!</h3>
+    <h3>Category with the id ${category.id} was added!</h3>
 </c:if>
 <c:if test="${message == false}">
     <h3>You have errors! The category was not added!</h3>

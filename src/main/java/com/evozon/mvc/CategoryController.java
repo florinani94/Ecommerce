@@ -6,15 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by mihai on 7/12/2016.
  */
 @Controller
-@RequestMapping(value = "Category")
+@RequestMapping(value = "/backoffice")
 public class CategoryController {
 
     @Autowired
@@ -34,18 +32,30 @@ public class CategoryController {
             model.addAttribute("message", true);
             if (result.hasErrors()) {
                 model.addAttribute("message", false);
+                model.addAttribute("category",category);
                 return "createCategory";
             }
         }catch (Exception e){
             model.addAttribute("message", false);
         }
-        return "createCategory";
+
+        model.addAttribute("allCategories", categoryService.getAllCategories());
+        return "viewCategories";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewCategories", method = RequestMethod.GET)
     public String viewCategories(Model model){
         model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
+
+    @RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
+    public String deleteCategory(@RequestParam("id") int id, Model model){
+        categoryService.deleteCategory(id);
+        model.addAttribute("allCategories", categoryService.getAllCategories());
+
+        return "viewCategories";
+    }
+
 
 }
