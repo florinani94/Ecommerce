@@ -36,7 +36,7 @@ public class ProductController {
             model.addAttribute("message", true);
             if (result.hasErrors() && productService.validateProduct(product)) {
                 model.addAttribute("message", false);
-                return "createCategory";
+                return "createproduct";
             }
         }catch (Exception e){
             model.addAttribute("message", false);
