@@ -67,11 +67,11 @@ public class ProductController {
         try {
             productService.addProduct(product);
             model.addAttribute("message", true);
-            if (result.hasErrors() || productService.validateProduct(product)==false) {
+            if (result.hasErrors() || productService.validateProduct(product) == false) {
                 model.addAttribute("message", false);
                 return "createProduct";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("message", false);
         }
 
@@ -88,23 +88,22 @@ public class ProductController {
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
-        File file ;
+        File file;
         String contentType = request.getContentType();
         if ((contentType.indexOf("multipart/form-data") >= 0)) {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
-            try{
+            try {
                 List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
-                while ( i.hasNext () )
-                {
-                    FileItem fi = (FileItem)i.next();
-                    if ( !fi.isFormField () )  {
-                        file = new File("temp.csv") ;
-                        fi.write( file ) ;
+                while (i.hasNext()) {
+                    FileItem fi = (FileItem) i.next();
+                    if (!fi.isFormField()) {
+                        file = new File("temp.csv");
+                        fi.write(file);
                     }
                 }
-            }catch(Exception ex) {
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
@@ -112,4 +111,13 @@ public class ProductController {
         return "importProducts";
     }
 
+    @RequestMapping(value = "/exportproducts", method = RequestMethod.GET)
+    public String export(Model model) {
+
+        String fileName = "exportProducts";
+        productService.exportToCSV(fileName);
+        model.addAttribute("export", productService.validateExport(fileName));
+
+        return "exportProducts";
+    }
 }

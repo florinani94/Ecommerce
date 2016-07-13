@@ -15,7 +15,7 @@
     <table border="0">
         <tr>
             <td>Add file: </td>
-            <td><input type="file" name="filename" size="50" /></td>
+            <td><input type="file" name="filename" size="50" accept=".csv"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Upload" /></td>

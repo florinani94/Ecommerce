@@ -39,7 +39,13 @@ public class CategoryController {
         }catch (Exception e){
             model.addAttribute("message", false);
         }
-        return "createCategory";
+        return "viewCategory";
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewCategories(Model model){
+        model.addAttribute("allCategories", categoryService.getAllCategories());
+        return "viewCategories";
     }
 
 }
