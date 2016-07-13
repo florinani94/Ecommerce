@@ -72,18 +72,17 @@ public class ProductController {
         return "importProducts";
     }
 
+
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
         File file ;
         String contentType = request.getContentType();
         if ((contentType.indexOf("multipart/form-data") >= 0)) {
-
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
             try{
                 List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
-
                 while ( i.hasNext () )
                 {
                     FileItem fi = (FileItem)i.next();
@@ -99,7 +98,5 @@ public class ProductController {
         productService.importFromFile("temp.csv");
         return "importProducts";
     }
-
-
 
 }
