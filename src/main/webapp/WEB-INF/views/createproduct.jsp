@@ -54,7 +54,6 @@
     <form method="get" action="createproduct">
         <input type="submit" value="New product">
     </form>
-
 </c:if>
 
 </body>
