@@ -32,11 +32,13 @@ public class ProductController {
         return "viewProducts";
     }
 
+
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
         model.addAttribute("product", new Product());
         return "createProduct";
     }
+
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
@@ -55,6 +57,7 @@ public class ProductController {
         return "createProduct";
 
     }
+
 
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importFromFile(Model model) {
