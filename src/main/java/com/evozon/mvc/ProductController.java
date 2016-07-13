@@ -122,7 +122,7 @@ public class ProductController {
         return "exportProducts";
     }
     @RequestMapping(value = "/edit/{product_id}", method = RequestMethod.PUT)
-    public String editPerson(@PathVariable("product_id") int id, Model model){
+    public String editPerson(Model model, @ModelAttribute("product") Product product, BindingResult result){
 //        model.addAttribute("product", this.productService.getProductById(id));
         //model.addAttribute("listProducts", this.productService.getAllProducts());
 //        productService.a

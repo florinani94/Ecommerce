@@ -66,4 +66,9 @@ public class ProductDAOImpl implements ProductDAO {
         List<Product> products = query.list();
         return products.get(0);
     }
+
+    public void updateProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+    }
 }

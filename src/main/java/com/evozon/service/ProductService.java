@@ -38,9 +38,6 @@ public class ProductService {
 
     public boolean validateProduct(Product product) {
         if ((!product.getCode().equals("") && (!product.getName().equals("")))) {
-    public boolean validateProduct(Product product)
-    {
-        if ((product.getCode()!=null) &&(product.getName()!=null)) {
             return true;
         }
         return false;
@@ -49,12 +46,11 @@ public class ProductService {
     public void importFromFile(String filename) {
         productDAO.importFromFile(filename);
     }
-        productDAO.importFromFile(filename);}
 
     public Product getProductById(Integer id){
        return  productDAO.getProductById(id);
     }
-}
+
 
     public void exportToCSV(String fileName) {
 
@@ -128,6 +124,10 @@ public class ProductService {
         }
 
         return list;
+    }
+
+    public void updateProduct(Product product) {
+        this.productDAO.updateProduct(product);
     }
 }
 
