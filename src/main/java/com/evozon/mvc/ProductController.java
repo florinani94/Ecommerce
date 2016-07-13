@@ -120,4 +120,9 @@ public class ProductController {
 
         return "exportProducts";
     }
+
+    @RequestMapping(value = "/deleteSelected", method = RequestMethod.POST)
+    public String deleteAll(Model model) {
+        return "viewProducts";
+    }
 }
