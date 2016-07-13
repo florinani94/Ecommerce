@@ -42,7 +42,7 @@
     </table>
 </c:if>
 
-<a href="createproduct/" methods="GET"><input type="submit" value="Create new product"></a>
+<a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
 
 
 </body>
