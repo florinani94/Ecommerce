@@ -29,7 +29,7 @@
     <input type="submit" value="Save"/>
 </form>
 
-<br><br>
+<br> <br>
 <c:if test="${message == true}">
     <h3>Category added!</h3>
 </c:if>
