@@ -136,5 +136,9 @@ public class ProductService {
     public void updateProduct(Product product) {
         productDAO.updateProduct(product);
     }
+
+    public int getSize(){
+        return productDAO.getAllProducts().size();
+    }
 }
 
