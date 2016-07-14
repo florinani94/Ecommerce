@@ -110,11 +110,7 @@ public class ProductController {
             }
         }
         productService.importFromFile("temp.csv");
-
-        model.addAttribute("message", "Products imported successfully!");
-
         model.addAttribute("allProducts", productService.getAllProducts());
-
         return "viewProducts";
     }
 
