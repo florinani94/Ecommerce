@@ -15,7 +15,7 @@
 <c:if test="${not empty allCategories}">
     <h3>Categories</h3>
 
-    <table>
+    <table id="categoriesTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -44,7 +44,7 @@
 </c:if>
 
 <br><br>
-<a href="/mvc/Category/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
+<a href="/mvc/backoffice/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
 
 </body>
 </html>

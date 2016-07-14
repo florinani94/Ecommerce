@@ -24,7 +24,7 @@ public class ProductService {
         this.productDAO.addProduct(product);
     }
 
-    public void deleteProduct(int product_id) { this.productDAO.deleteProduct(product_id);}
+    public void deleteProduct(int productId) { this.productDAO.deleteProduct(productId);}
 
 
     public List<Product> getAllProducts() {
@@ -36,6 +36,7 @@ public class ProductService {
         productDAO.addDefaultProducts();
     }
 
+    //todo: replace comparisons with Yoda Conditions - https://en.wikipedia.org/wiki/Yoda_conditions
     public boolean validateProduct(Product product) {
         if ((!product.getCode().equals("") && (!product.getName().equals("")))) {
             return true;
@@ -62,7 +63,7 @@ public class ProductService {
             try {
                 writer = new FileWriter(fileName + ".csv");
                 for (Product product : products) {
-                    writer.append(String.valueOf(product.getProduct_id()));
+                    writer.append(String.valueOf(product.getProductId()));
                     writer.append(",");
                     writer.append(product.getCode());
                     writer.append(",");
@@ -79,6 +80,7 @@ public class ProductService {
                 writer.flush();
                 writer.close();
             } catch (IOException e) {
+                //todo: close stream in case of exception in finally block
                 e.printStackTrace();
             }
     }
@@ -98,7 +100,7 @@ public class ProductService {
 
                 String[] product = line.split(csvSplitBy);
                 Product newProduct = new Product();
-                newProduct.setProduct_id(Integer.valueOf(product[0]));
+                newProduct.setProductId(Integer.valueOf(product[0]));
                 newProduct.setCode(product[1]);
                 newProduct.setName(product[2]);
                 newProduct.setDescription(product[3]);
@@ -125,9 +127,20 @@ public class ProductService {
 
         return list;
     }
+    public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
+
+        if(startPageIndex<=0){
+            return null;
+        }
+        return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
+    }
 
     public void updateProduct(Product product) {
         productDAO.updateProduct(product);
+    }
+
+    public int getSize(){
+        return productDAO.getAllProducts().size();
     }
 }
 

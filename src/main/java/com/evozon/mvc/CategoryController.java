@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by mihai on 7/12/2016.
  */
+//todo: refactor URLS - can create restful API here
 @Controller
-@RequestMapping(value = "Category")
+@RequestMapping(value = "/backoffice")
 public class CategoryController {
 
     @Autowired

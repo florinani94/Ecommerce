@@ -14,9 +14,11 @@ public interface ProductDAO {
 
     void updateProduct(Product product);
 
-    void deleteProduct(int product_id);
+    void deleteProduct(int productId);
 
     void importFromFile(String filename);
 
     Product getProductById(Integer id);
+
+    List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 }
