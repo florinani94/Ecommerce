@@ -56,7 +56,7 @@
     </c:if>
     <a href= "/mvc/products?page=${currentPage}" methods="GET" >${currentPage}</a>
 
-    <c:if test="${currentPage !=nrPagesInt-1}">
+    <c:if test="${currentPage <nrPagesInt-1}">
         <a href= "/mvc/products?page=${currentPage+1}" methods="GET" >${currentPage+1}</a>
     </c:if>
     <c:if test="${currentPage+1 <nrPagesInt-1}">
