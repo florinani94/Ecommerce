@@ -13,6 +13,8 @@
 </head>
 <body>
 
+<jsp:include page="backofficeHeader.jsp" />
+
 <c:if test="${not empty allProducts}">
     <h3>Products</h3>
 
