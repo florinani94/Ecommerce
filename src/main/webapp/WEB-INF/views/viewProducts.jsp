@@ -65,7 +65,8 @@
 </c:if>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="../webapp/js/myscript.js"></script>
+<c:url var="jsUrl" value="/resources/js/myscript.js"/>
+<script type="text/javascript" src="${jsUrl}"></script>
 
 </body>
 </html>
