@@ -16,14 +16,14 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
     <title>Products</title>
-        </head>
-            <body>
+</head>
+<body>
 
                 <c:if test="${not empty products}">
 
                     <div id="container">
                             <c:forEach var="product" items="${products}">
-                                <div class="square">
+                                <div class="square" >
                                     <ul>
                                         <li>Code: ${product.code} </li>
                                         <li>Name: ${product.name} </li>
@@ -38,19 +38,34 @@
                 </c:if>
 
     <c:set var="nrPages" value="${productSize div 9}"/>
-
-    <br>
     <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
-
     <c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>
 
     <c:if test="${dateParts[1]!=\"0\"}">
         <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
     </c:if>
 
-    <c:forEach var="i" begin="1" end="${nrPagesInt}">
-        <a href= "/mvc/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
-    </c:forEach>
+    <c:if test="${currentPage>1}">
+        <a href= "/mvc/products?page=${1}" methods="GET" >1</a>
+    </c:if>
+    <c:if test="${currentPage-1 >1}">
+        ...
+    </c:if>
+    <c:if test="${currentPage!=1 && currentPage-1!=1}">
+        <a href= "/mvc/products?page=${currentPage-1}" methods="GET" >${currentPage-1}</a>
+    </c:if>
+    <a href= "/mvc/products?page=${currentPage}" methods="GET" >${currentPage}</a>
+
+    <c:if test="${currentPage !=nrPagesInt-1}">
+        <a href= "/mvc/products?page=${currentPage+1}" methods="GET" >${currentPage+1}</a>
+    </c:if>
+    <c:if test="${currentPage+1 <nrPagesInt-1}">
+        ...
+    </c:if>
+    <c:if test="${currentPage!=nrPagesInt}">
+        <a href= "/mvc/products?page=${nrPagesInt}" methods="GET">${nrPagesInt}</a>
+    </c:if>
+
 
 </body>
 </html>

@@ -22,6 +22,7 @@ public class CustomerProductController {
 
         model.addAttribute("products", productService.getProductsForPage(startPageIndex, MAX_PRODUCTS_PER_PAGE));
         model.addAttribute("productSize", productService.getSize());
+        model.addAttribute("currentPage",startPageIndex);
         return "customerViewProducts";
     }
 
