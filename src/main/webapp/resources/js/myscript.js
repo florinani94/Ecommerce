@@ -24,3 +24,8 @@ $("#deleteButton").click(function() {
         });
     });
 });
+
+
+$("#selectall").change(function(){
+    $(".check").prop('checked', $(this).prop("checked"));
+});

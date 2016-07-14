@@ -43,9 +43,9 @@ public class ProductController {
 
 
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
-    public String deleteProduct(Model model, @RequestParam("id") int id) {
+    public String deleteProduct(Model model, @RequestParam("productId") int productId) {
         try {
-            productService.deleteProduct(id);
+            productService.deleteProduct(productId);
             //todo: give meaningful name
             model.addAttribute("message", true);
             model.addAttribute("allProducts", productService.getAllProducts());

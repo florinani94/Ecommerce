@@ -19,6 +19,9 @@
     <table id="prodTable">
         <thead>
         <tr>
+            <input type="checkbox" id="selectall"/> Select All </input>
+        </tr>
+        <tr>
             <th>Mark</th>
             <th>Product ID</th>
             <th>Code </th>
@@ -33,7 +36,7 @@
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
-                <td><input type="checkbox" id="idProd" value=${product.productId}></td>
+                <td><input type="checkbox" id="idProd" class="check" value=${product.productId}></td>
                 <td>${product.productId}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
@@ -41,7 +44,7 @@
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
                 <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit"></a></td>
-                <td><a href="deleteProduct?id=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
+                <td><a href="deleteProduct?productId=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
