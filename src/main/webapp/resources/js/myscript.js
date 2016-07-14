@@ -10,12 +10,12 @@ $("#deleteButton").click(function() {
 
         $.ajax({
             type : "POST",
-            url : "../backoffice/product",
+            url : "../product/",
             data : {
                 prodArray: arr
             },
             success : function(response) {
-                $("#prodTable").load( "../backoffice/product #prodTable" );
+                $("#prodTable").load( "../product/ #prodTable" );
                 console.log("success");
             },
             error : function(e) {
