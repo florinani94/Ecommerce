@@ -13,51 +13,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All Products</title>
-</head>
-<body>
+    <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
-<c:if test="${not empty products}">
-    <h3>Products</h3>
+    <title>Products</title>
+        </head>
+            <body>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Code </th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock Level</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="product" items="${products}">
-            <tr>
-                <td>${product.code}</td>
-                <td>${product.name}</td>
-                <td>${product.description}</td>
-                <td>${product.price}</td>
-                <td>${product.stockLevel}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</c:if>
+                <c:if test="${not empty products}">
 
-<c:set var="nrPages" value="${productSize div 9}"/>
+                    <div id="container">
+                            <c:forEach var="product" items="${products}">
+                                <div class="square">
+                                    <ul>
+                                        <li>Code: ${product.code} </li>
+                                        <li>Name: ${product.name} </li>
+                                        <li>Description: ${product.description} </li>
+                                        <li>Price: ${product.price}</li>
+                                        <li>StockLevel: ${product.stockLevel}</li>
+                                    </ul>
+                                </div>
+                            </c:forEach>
+                    </div>
 
-<br>
-<c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
+                </c:if>
 
-<c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>
+    <c:set var="nrPages" value="${productSize div 9}"/>
 
-<c:if test="${dateParts[1]!=\"0\"}">
-    <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
-</c:if>
+    <br>
+    <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
 
-<c:forEach var="i" begin="1" end="${nrPagesInt}">
-    <a href= "/mvc/customer/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
-</c:forEach>
+    <c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>
+
+    <c:if test="${dateParts[1]!=\"0\"}">
+        <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
+    </c:if>
+
+    <c:forEach var="i" begin="1" end="${nrPagesInt}">
+        <a href= "/mvc/customer/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
+    </c:forEach>
 
 </body>
 </html>

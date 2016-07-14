@@ -27,8 +27,6 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-
-    //todo: replace comparisons with Yoda Conditions - https://en.wikipedia.org/wiki/Yoda_conditions - solved
     public boolean validateProduct(Product product) {
         String voidString="";
         if ((!voidString.equals(product.getCode()) && (!voidString.equals(product.getName())))) {
@@ -76,7 +74,7 @@ public class ProductService {
 
                 e.printStackTrace();
             }
-            finally { //todo: added finally block- solved
+            finally {
                 if (writer != null) {
                     try {
                         writer.close();

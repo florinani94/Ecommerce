@@ -1,0 +1,13 @@
+#container {
+    width:50%;
+    height:50%;
+}
+.square{
+    border:1px solid #000;
+    padding-bottom: 20%;
+    height: 0;
+    width:30%;
+    margin:1%;
+    float:left;
+    display:block;
+}
