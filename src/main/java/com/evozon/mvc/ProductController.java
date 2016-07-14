@@ -22,6 +22,7 @@ package com.evozon.mvc;
  * Created by horatiucernean on 12/07/2016.
  */
 
+//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "/backoffice")
 public class ProductController {
@@ -46,6 +47,7 @@ public class ProductController {
     public String deleteProduct(Model model, @RequestParam("id") int id) {
         try {
             productService.deleteProduct(id);
+            //todo: give meaningful name
             model.addAttribute("message", true);
             model.addAttribute("allProducts", productService.getAllProducts());
         } catch(Exception e) {
