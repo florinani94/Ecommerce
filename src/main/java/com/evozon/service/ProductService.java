@@ -28,13 +28,13 @@ public class ProductService {
     }
 
 
-    //todo: replace comparisons with Yoda Conditions - https://en.wikipedia.org/wiki/Yoda_conditions
+    //todo: replace comparisons with Yoda Conditions - https://en.wikipedia.org/wiki/Yoda_conditions - solved
     public boolean validateProduct(Product product) {
-        if ((!product.getCode().equals("") && (!product.getName().equals("")))) {
+        String voidString="";
+        if ((!voidString.equals(product.getCode()) && (!voidString.equals(product.getName())))) {
             return true;
         }
         return false;
-
     }
 
     public void importFromFile(String filename) {
