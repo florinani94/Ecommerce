@@ -63,7 +63,7 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
 
-    //todo: fix identation
+    //todo: fix indentation
     public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
 
         int infRange = ((startPageIndex-1 )*recordsPerPage);
