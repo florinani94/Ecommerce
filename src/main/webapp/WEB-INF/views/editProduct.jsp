@@ -40,7 +40,7 @@
 </head>
 <body>
 
-<c:url var="editUrl" value="/backoffice/editProduct"/>
+<c:url var="editUrl" value="/backoffice/product/edit"/>
 
 <div class="page-header"><h1> Update Product </h1></div>
 

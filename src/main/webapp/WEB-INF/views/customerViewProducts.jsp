@@ -7,7 +7,6 @@
 --%>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -50,7 +49,7 @@
     </c:if>
 
     <c:forEach var="i" begin="1" end="${nrPagesInt}">
-        <a href= "/mvc/customer/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
+        <a href= "/mvc/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
     </c:forEach>
 
 </body>

@@ -16,7 +16,7 @@
 <body>
 
 <h1>Create Category</h1>
-<form action="addCategory" method="post" id="addCat">
+<form action="add" method="post" id="addCat">
     Id: <br>
     <input type="text" name="id"/>
     <br><br>

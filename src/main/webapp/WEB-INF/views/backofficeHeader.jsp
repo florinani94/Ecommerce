@@ -32,10 +32,10 @@
 
         <div class = "col-md-6">
             <ul>
-                <li><a href="backoffice/products">View Products</a></li>
-                <li><a href="backoffice/createProduct">Create Product</a></li>
-                <li><a href="backoffice/import">Import teas from file </a></li>
-                <li><a href="backoffice/exportproducts">Export teas to file</a></li>
+                <li><a href="backoffice/product/">View Products</a></li>
+                <li><a href="backoffice/product/add">Create Product</a></li>
+                <li><a href="backoffice/product/import">Import teas from file </a></li>
+                <li><a href="backoffice/product/export">Export teas to file</a></li>
             </ul>
         </div>
     </div>

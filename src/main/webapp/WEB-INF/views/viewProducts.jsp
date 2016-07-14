@@ -44,7 +44,7 @@
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
                 <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit"></a></td>
-                <td><a href="deleteProduct?productId=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
+                <td><a href="delete?productId=${product.productId}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -55,9 +55,9 @@
 
 </c:if>
 
-<a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
+<a href="add" methods="GET"><input type="submit" value="Create new product"></a>
 
-<a href="exportproducts" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
+<a href="export" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
 
 <br> <br>
 <c:if test="${message == true}">

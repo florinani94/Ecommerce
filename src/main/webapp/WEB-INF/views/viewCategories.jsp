@@ -31,8 +31,8 @@
                 <td>${category.id}</td>
                 <td>${category.name}</td>
                 <td>${category.description}</td>
-                <td><a href="editCategory?id=${category.id}" methods="GET"><input type="submit" value="Edit"></a></td>
-                <td><a href="deleteCategory?id=${category.id}" methods="GET"><input type="submit" value="Delete"></a></td>
+                <td><a href="edit?id=${category.id}" methods="GET"><input type="submit" value="Edit"></a></td>
+                <td><a href="delete?id=${category.id}" methods="GET"><input type="submit" value="Delete"></a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -44,7 +44,7 @@
 </c:if>
 
 <br><br>
-<a href="/mvc/backoffice/addCategory" methods="GET"><input type="submit" value="Create new category"></a>
+<a href="/mvc/backoffice/category/add" methods="GET"><input type="submit" value="Create new category"></a>
 
 </body>
 </html>

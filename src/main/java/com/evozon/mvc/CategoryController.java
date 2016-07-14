@@ -13,19 +13,20 @@ import org.springframework.web.bind.annotation.*;
  */
 //todo: refactor URLS - can create restful API here
 @Controller
-@RequestMapping(value = "/backoffice")
+@RequestMapping(value = "/backoffice/category/*")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value="/addCategory", method = RequestMethod.GET)
+
+    @RequestMapping(value="/add", method = RequestMethod.GET)
     public String showAddCategory(Model model){
         model.addAttribute("category", new Category());
         return "createCategory";
     }
 
-    @RequestMapping(value="/addCategory", method = RequestMethod.POST)
+    @RequestMapping(value="/add", method = RequestMethod.POST)
     public String addCategory(Model model, @ModelAttribute("category") Category category, BindingResult result){
 
         try {
@@ -44,13 +45,13 @@ public class CategoryController {
         return "viewCategories";
     }
 
-    @RequestMapping(value = "/viewCategories", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String viewCategories(Model model){
         model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
 
-    @RequestMapping(value = "/deleteCategory", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteCategory(@RequestParam("id") int id, Model model){
         categoryService.deleteCategory(id);
         model.addAttribute("allCategories", categoryService.getAllCategories());

@@ -24,7 +24,7 @@ package com.evozon.mvc;
 
 //todo: refactor URLS - can create restful API here
 @Controller
-@RequestMapping(value = "/backoffice")
+@RequestMapping(value = "/backoffice/product/*")
 public class ProductController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @RequestMapping(value="", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
 
         model.addAttribute("allProducts", productService.getAllProducts());
@@ -42,7 +42,7 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteProduct(Model model, @RequestParam("productId") int productId) {
         try {
             productService.deleteProduct(productId);
@@ -56,14 +56,14 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
         model.addAttribute("product", new Product());
         return "createProduct";
     }
 
 
-    @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
 
         try {
@@ -114,7 +114,7 @@ public class ProductController {
         return "viewProducts";
     }
 
-    @RequestMapping(value = "/exportproducts", method = RequestMethod.GET)
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
     public String export(Model model) {
 
         String fileName = "exportProducts";
@@ -123,7 +123,7 @@ public class ProductController {
 
         return "exportProducts";
     }
-    @RequestMapping(value = "/editProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editProduct(Model model, @ModelAttribute("product") Product product, BindingResult result){
         productService.updateProduct(product);
         model.addAttribute("allProducts", productService.getAllProducts());
@@ -137,7 +137,7 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String deleteAll(Model model, @RequestParam(value="prodArray[]") List<Integer> prodArray) {
         for (Integer i : prodArray) {
             productService.deleteProduct(i);
