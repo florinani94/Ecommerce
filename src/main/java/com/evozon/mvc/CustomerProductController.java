@@ -10,27 +10,21 @@ import org.springframework.web.bind.annotation.*;
 
 //todo: refactor URLS - can create restful API here
 @Controller
-@RequestMapping(value = "customer")
+@RequestMapping(value = "products")
 public class CustomerProductController {
+
+    public static final int MAX_PRODUCTS_PER_PAGE= 9;
 
     @Autowired
     private ProductService productService;
 
-
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String getAllProducts(Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex ) {
 
-        //todo: extract constants from business logic code
-        model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
+        model.addAttribute("products", productService.getProductsForPage(startPageIndex, MAX_PRODUCTS_PER_PAGE));
         model.addAttribute("productSize", productService.getSize());
         return "customerViewProducts";
     }
 
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String goToHome(){
-
-       return "redirect:/customer/products";
-    }
 
 }

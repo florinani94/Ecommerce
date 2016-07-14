@@ -50,7 +50,7 @@
     </c:if>
 
     <c:forEach var="i" begin="1" end="${nrPagesInt}">
-        <a href= "/mvc/customer/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
+        <a href= "/mvc/products?page=${i}" methods="GET"><input type="submit" value="${i}"></a>
     </c:forEach>
 
 </body>
