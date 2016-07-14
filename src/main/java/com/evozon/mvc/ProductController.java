@@ -142,6 +142,6 @@ public class ProductController {
         for (Integer i : prodArray) {
             productService.deleteProduct(i);
         }
-        return "redirect:/";
+        return "viewProducts";
     }
 }
