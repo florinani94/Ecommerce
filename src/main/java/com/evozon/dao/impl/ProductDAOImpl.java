@@ -45,21 +45,6 @@ public class ProductDAOImpl implements ProductDAO {
         query.executeUpdate();
     }
 
-
-    //todo: remove default products in the system when test data import is finished
-    public void addDefaultProducts() {
-        Product product1 = new Product("KX123456", "Adidas", "The best product in town", 20.25, 10);
-        Product product2 = new Product("KX173456", "Nike", "The best product in country", 30.25, 10);
-        Product product3 = new Product("TX123456", "Milka", "The best product in town", 20.25, 10);
-
-        List<Product> products = getAllProducts();
-        if (CollectionUtils.isEmpty(products)) {
-            addProduct(product1);
-            addProduct(product2);
-            addProduct(product3);
-        }
-    }
-
     public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
         int infRange = ((startPageIndex-1 )*recordsPerPage);
         int supRange = recordsPerPage ;

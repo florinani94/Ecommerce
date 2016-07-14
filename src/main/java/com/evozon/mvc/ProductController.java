@@ -36,7 +36,6 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
 
-        productService.addDefaultProducts();
         model.addAttribute("allProducts", productService.getAllProducts());
 
         return "viewProducts";
@@ -111,11 +110,7 @@ public class ProductController {
             }
         }
         productService.importFromFile("temp.csv");
-
-        model.addAttribute("message", "Products imported successfully!");
-
         model.addAttribute("allProducts", productService.getAllProducts());
-
         return "viewProducts";
     }
 
