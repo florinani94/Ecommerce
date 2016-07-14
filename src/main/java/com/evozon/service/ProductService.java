@@ -73,9 +73,20 @@ public class ProductService {
                 writer.flush();
                 writer.close();
             } catch (IOException e) {
-                //todo: close stream in case of exception in finally block
+
                 e.printStackTrace();
             }
+            finally { //todo: added finally block- solved
+                if (writer != null) {
+                    try {
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
     }
 
     public List<Product> validateExport(String fileName) {
