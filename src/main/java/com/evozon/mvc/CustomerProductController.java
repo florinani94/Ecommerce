@@ -20,6 +20,7 @@ import java.util.List;
  * Created by horatiucernean on 12/07/2016.
  */
 
+//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "customer")
 public class CustomerProductController {
@@ -33,6 +34,7 @@ public class CustomerProductController {
 
         productService.addDefaultProducts();
 
+        //todo: extract constants from business logic code
         model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
         model.addAttribute("productSize", productService.getSize());
         return "customerViewProducts";

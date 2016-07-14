@@ -36,6 +36,7 @@ public class ProductService {
         productDAO.addDefaultProducts();
     }
 
+    //todo: replace comparisons with Yoda Conditions - https://en.wikipedia.org/wiki/Yoda_conditions
     public boolean validateProduct(Product product) {
         if ((!product.getCode().equals("") && (!product.getName().equals("")))) {
             return true;
@@ -79,6 +80,7 @@ public class ProductService {
                 writer.flush();
                 writer.close();
             } catch (IOException e) {
+                //todo: close stream in case of exception in finally block
                 e.printStackTrace();
             }
     }
