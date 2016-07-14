@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "products")
 public class CustomerProductController {
