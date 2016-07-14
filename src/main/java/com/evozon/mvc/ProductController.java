@@ -136,8 +136,11 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(value = "/deleteSelected", method = RequestMethod.POST)
-    public String deleteAll(Model model) {
-        return "viewProducts";
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    public String deleteAll(Model model, @RequestParam(value="prodArray[]") List<Integer> prodArray) {
+        for (Integer i : prodArray) {
+            productService.deleteProduct(i);
+        }
+        return "redirect:/";
     }
 }
