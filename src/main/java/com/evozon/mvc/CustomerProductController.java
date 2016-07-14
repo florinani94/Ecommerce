@@ -29,12 +29,19 @@ public class CustomerProductController {
 
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String getAllProducts(Model model, @RequestParam("page") int startPageIndex ) {
+    public String getAllProducts(Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex ) {
 
         productService.addDefaultProducts();
-        model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
 
+        model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
+        model.addAttribute("productSize", productService.getSize());
         return "customerViewProducts";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String goToHome(){
+
+       return "redirect:/customer/products";
     }
 
 }
