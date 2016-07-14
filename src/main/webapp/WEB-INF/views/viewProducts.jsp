@@ -16,21 +16,24 @@
 <c:if test="${not empty allProducts}">
     <h3>Products</h3>
 
-    <table>
+    <table id="prodTable">
         <thead>
         <tr>
+            <th>Mark</th>
             <th>Product ID</th>
             <th>Code </th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Stock Level</th>
+            <th>Stock</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="product" items="${allProducts}">
             <tr>
-                <td><input type="checkbox" name="idProd" value=${product.productId}></td>
+                <td><input type="checkbox" id="idProd" value=${product.productId}></td>
                 <td>${product.productId}</td>
                 <td>${product.code}</td>
                 <td>${product.name}</td>
@@ -44,9 +47,9 @@
         </tbody>
     </table>
     <br>
-    <form action="deleteSelected">
-        <input type="submit" id="deleteButton" value="Delete selected"/>
-    </form>
+
+    <input type="submit" id="deleteButton" value="Delete selected"/>
+
 </c:if>
 
 <a href="createProduct" methods="GET"><input type="submit" value="Create new product"></a>
@@ -60,6 +63,22 @@
 <c:if test="${message == false}">
     <h3>You have errors! The product was not deleted!</h3>
 </c:if>
+
+<form method="post" action="import" enctype="multipart/form-data">
+    <table border="0">
+        <tr>
+            <td>Add file: </td>
+            <td><input type="file" name="filename" size="50" accept=".csv"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" id="importButton" value="Upload" /></td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<c:url var="jsUrl" value="/resources/js/myscript.js"/>
+<script type="text/javascript" src="${jsUrl}"></script>
 
 </body>
 </html>

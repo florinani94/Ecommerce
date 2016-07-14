@@ -11,16 +11,12 @@
     <title>Import</title>
 </head>
 <body>
-<form method="post" action="import" enctype="multipart/form-data">
-    <table border="0">
-        <tr>
-            <td>Add file: </td>
-            <td><input type="file" name="filename" size="50" accept=".csv"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Upload" /></td>
-        </tr>
-    </table>
+
+<h3>${message}</h3>
+
+<form method="get" action="products">
+    <input type="submit" value="View products">
 </form>
+
 </body>
 </html>
