@@ -22,6 +22,7 @@ package com.evozon.mvc;
  * Created by horatiucernean on 12/07/2016.
  */
 
+//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "/backoffice")
 public class ProductController {
@@ -46,6 +47,7 @@ public class ProductController {
     public String deleteProduct(Model model, @RequestParam("id") int id) {
         try {
             productService.deleteProduct(id);
+            //todo: give meaningful name
             model.addAttribute("message", true);
             model.addAttribute("allProducts", productService.getAllProducts());
         } catch(Exception e) {
@@ -80,12 +82,12 @@ public class ProductController {
 
     }
 
-
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importFromFile(Model model) {
-        return "importProducts";
-    }
+        model.addAttribute("allProducts", productService.getAllProducts());
 
+        return "viewProducts";
+    }
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
@@ -109,7 +111,12 @@ public class ProductController {
             }
         }
         productService.importFromFile("temp.csv");
-        return "importProducts";
+
+        model.addAttribute("message", "Products imported successfully!");
+
+        model.addAttribute("allProducts", productService.getAllProducts());
+
+        return "viewProducts";
     }
 
     @RequestMapping(value = "/exportproducts", method = RequestMethod.GET)
@@ -136,8 +143,11 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(value = "/deleteSelected", method = RequestMethod.POST)
-    public String deleteAll(Model model) {
-        return "viewProducts";
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    public String deleteAll(Model model, @RequestParam(value="prodArray[]") List<Integer> prodArray) {
+        for (Integer i : prodArray) {
+            productService.deleteProduct(i);
+        }
+        return "redirect:/";
     }
 }

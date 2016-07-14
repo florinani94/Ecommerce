@@ -15,7 +15,7 @@
 <c:if test="${not empty allCategories}">
     <h3>Categories</h3>
 
-    <table>
+    <table id="categoriesTable">
         <thead>
             <tr>
                 <th>ID</th>

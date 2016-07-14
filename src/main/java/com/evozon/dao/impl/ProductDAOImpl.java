@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,10 +42,11 @@ public class ProductDAOImpl implements ProductDAO {
     public void importFromFile(String filename) {
         Session session=sessionFactory.getCurrentSession();
         Query query = session.createSQLQuery("LOAD DATA LOCAL INFILE :filename INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (code, description, name, price, stockLevel)").setString("filename", filename);
-        int rowCount = query.executeUpdate();
+        query.executeUpdate();
     }
 
 
+    //todo: remove default products in the system when test data import is finished
     public void addDefaultProducts() {
         Product product1 = new Product("KX123456", "Adidas", "The best product in town", 20.25, 10);
         Product product2 = new Product("KX173456", "Nike", "The best product in country", 30.25, 10);
@@ -59,19 +59,19 @@ public class ProductDAOImpl implements ProductDAO {
             addProduct(product3);
         }
     }
-    public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
 
+    public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
         int infRange = ((startPageIndex-1 )*recordsPerPage);
         int supRange = recordsPerPage ;
 
-            Session session = sessionFactory.getCurrentSession();
-            Query query = session.createQuery("from Product as P");
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Product as P");
 
-            query.setFirstResult(infRange);
-            query.setMaxResults(supRange);
-            List<Product> products = query.list();
+        query.setFirstResult(infRange);
+        query.setMaxResults(supRange);
+        List<Product> products = query.list();
 
-            return products;
+        return products;
     }
 
     public Product getProductById(Integer id) {

@@ -20,6 +20,7 @@ import java.util.List;
  * Created by horatiucernean on 12/07/2016.
  */
 
+//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "customer")
 public class CustomerProductController {
@@ -29,12 +30,20 @@ public class CustomerProductController {
 
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String getAllProducts(Model model, @RequestParam("page") int startPageIndex ) {
+    public String getAllProducts(Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex ) {
 
         productService.addDefaultProducts();
-        model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
 
+        //todo: extract constants from business logic code
+        model.addAttribute("products", productService.getProductsForPage(startPageIndex, 9));
+        model.addAttribute("productSize", productService.getSize());
         return "customerViewProducts";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String goToHome(){
+
+       return "redirect:/customer/products";
     }
 
 }
