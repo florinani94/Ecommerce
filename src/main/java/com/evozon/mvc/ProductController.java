@@ -80,6 +80,13 @@ public class ProductController {
 
     }
 
+    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    public String importFromFile(Model model) {
+        model.addAttribute("allProducts", productService.getAllProducts());
+
+        return "viewProducts";
+    }
+
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
         File file;
@@ -105,7 +112,9 @@ public class ProductController {
 
         model.addAttribute("message", "Products imported successfully!");
 
-        return "importProducts";
+        model.addAttribute("allProducts", productService.getAllProducts());
+
+        return "viewProducts";
     }
 
     @RequestMapping(value = "/exportproducts", method = RequestMethod.GET)

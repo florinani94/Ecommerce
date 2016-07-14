@@ -60,9 +60,6 @@
 <c:if test="${message == true}">
     <h3>Product deleted!</h3>
 </c:if>
-<c:if test="${message == false}">
-    <h3>You have errors! The product was not deleted!</h3>
-</c:if>
 
 <form method="post" action="import" enctype="multipart/form-data">
     <table border="0">
