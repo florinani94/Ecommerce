@@ -129,7 +129,7 @@ public class ProductController {
         return "exportProducts";
     }
     @RequestMapping(value = "/editProduct", method = RequestMethod.POST)
-    public String editPerson(Model model, @ModelAttribute("product") Product product, BindingResult result){
+    public String editProduct(Model model, @ModelAttribute("product") Product product, BindingResult result){
         productService.updateProduct(product);
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
@@ -138,7 +138,6 @@ public class ProductController {
     @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
     public String goToCreateProductPage(@PathVariable("productId") int id, Model model) {
         Product product = productService.getProductById(id);
-        logger.info("Product code : ",product.getCode());
         model.addAttribute("product", product);
         return "editProduct";
     }
