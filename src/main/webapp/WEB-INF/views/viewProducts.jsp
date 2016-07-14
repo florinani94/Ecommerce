@@ -19,7 +19,7 @@
     <table id="prodTable">
         <thead>
         <tr>
-            <input type="checkbox" id="selectall"/> Select All </input>
+            <input type="checkbox" id="selectall"/> Mark All </input>
         </tr>
         <tr>
             <th>Mark</th>
@@ -77,6 +77,10 @@
 </form>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
+<script type="text/javascript" src="${jqueyUrl}"></script>
+
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
 
