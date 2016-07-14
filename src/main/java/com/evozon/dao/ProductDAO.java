@@ -8,8 +8,6 @@ public interface ProductDAO {
 
     List<Product> getAllProducts();
 
-    void addDefaultProducts();
-
     void addProduct(Product product);
 
     void updateProduct(Product product);

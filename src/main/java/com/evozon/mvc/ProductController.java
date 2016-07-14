@@ -36,7 +36,6 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
 
-        productService.addDefaultProducts();
         model.addAttribute("allProducts", productService.getAllProducts());
 
         return "viewProducts";
