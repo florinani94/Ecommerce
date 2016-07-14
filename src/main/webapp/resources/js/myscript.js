@@ -8,8 +8,6 @@ $("#deleteButton").click(function() {
         var toInt = parseInt(this.value);
         arr.push(toInt);
 
-        console.log(arr);
-
         $.ajax({
             type : "POST",
             url : "/mvc/backoffice/products",
@@ -25,5 +23,4 @@ $("#deleteButton").click(function() {
             }
         });
     });
-
 });

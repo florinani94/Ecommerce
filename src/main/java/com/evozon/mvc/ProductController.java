@@ -80,13 +80,6 @@ public class ProductController {
 
     }
 
-
-    @RequestMapping(value = "/import", method = RequestMethod.GET)
-    public String importFromFile(Model model) {
-        return "importProducts";
-    }
-
-
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
         File file;
@@ -109,6 +102,9 @@ public class ProductController {
             }
         }
         productService.importFromFile("temp.csv");
+
+        model.addAttribute("message", "Products imported successfully!");
+
         return "importProducts";
     }
 

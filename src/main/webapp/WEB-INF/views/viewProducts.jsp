@@ -64,6 +64,18 @@
     <h3>You have errors! The product was not deleted!</h3>
 </c:if>
 
+<form method="post" action="import" enctype="multipart/form-data">
+    <table border="0">
+        <tr>
+            <td>Add file: </td>
+            <td><input type="file" name="filename" size="50" accept=".csv"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" id="importButton" value="Upload" /></td>
+        </tr>
+    </table>
+</form>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
