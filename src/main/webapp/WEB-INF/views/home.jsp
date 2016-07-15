@@ -24,33 +24,43 @@
 <c:url var="customerURL" value="/products"/>
 <body style="background-image: url(${bkgURL});
         background-repeat: no-repeat;)">
-    <h1 style="text-align: center">TEA SHOP</h1>
-    <div style=" top: 70%; left: 20%; text-align: center ">
-        <b>
-        <p>
-            Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia.<br>
-            After water, it is the most widely consumed drink in the world.[5] There are many different types of tea; some teas, like Darjeeling and Chinese greens,<br>
-            have a cooling, slightly bitter, and astringent flavour,[6] while others have vastly different profiles that include sweet, nutty, floral or grassy notes. <br>
-        </p>
-        <p>
-            Tea originated in southwestern China, where it was used as a medicinal drink.[7] It was popularized as a recreational drink during the Chinese Tang dynasty,<br>
-            and tea drinking spread to other East Asian countries. Portuguese priests and merchants introduced it to the West during the 16th century.[8] During the 17th century, <br>
-            drinking tea became fashionable among Britons, who started large-scale production and commercialization of the plant in India to bypass a Chinese monopoly at that time. <br>
-        </p>
-        <p>
-            The phrase herbal tea usually refers to infusions of fruit or herbs made without the tea plant, such as steeps of rosehip, chamomile, or rooibos. <br>
-            These are also known as tisanes or herbal infusions to distinguish them from "tea" as it is commonly construed.
-        </p>
-        </b>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <h1>TEA SHOP</h1>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div style=" top: 70%; left: 20%; text-align: center; font-family: 'SansSerif'; margin-top: 10%">
+            <b>
+                <p>
+                    Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia.<br>
+                    After water, it is the most widely consumed drink in the world. There are many different types of tea; some teas, like Darjeeling and Chinese greens,<br>
+                    have a cooling, slightly bitter, and astringent flavour, while others have vastly different profiles that include sweet, nutty, floral or grassy notes. <br>
+                </p>
+                <p>
+                    Tea originated in southwestern China, where it was used as a medicinal drink. It was popularized as a recreational drink during the Chinese Tang dynasty,<br>
+                    and tea drinking spread to other East Asian countries. Portuguese priests and merchants introduced it to the West during the 16th century. During the 17th century, <br>
+                    drinking tea became fashionable among Britons, who started large-scale production and commercialization of the plant in India to bypass a Chinese monopoly at that time. <br>
+                </p>
+                <p>
+                    The phrase herbal tea usually refers to infusions of fruit or herbs made without the tea plant, such as steeps of rosehip, chamomile, or rooibos. <br>
+                    These are also known as tisanes or herbal infusions to distinguish them from "tea" as it is commonly construed.
+                </p>
+            </b>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20%">
     <a href="${backofficeURL}">
         <input type="submit" name="backoffice" value="Backoffice page" style=" position: fixed;top: 32%; left: 42%; width:150px;height:45px"/>
     </a>
 
     <a href="${customerURL}">
         <input type="submit" name="action" value="Customer page" style=" position: fixed;top: 32%; left:52%; width:150px;height:45px" />
-</a>
-
+    </a>
+</div>
 
 </body>
 </html>
