@@ -37,6 +37,8 @@
             <c:forEach var="product" items="${products}">
                 <div class="square">
                     <ul>
+                        <br>
+
                         <li>Code: ${product.code} </li>
                         <li>Name: ${product.name} </li>
                         <li>Description: ${product.description} </li>
@@ -44,6 +46,7 @@
                         <li>StockLevel: ${product.stockLevel}</li>
 
                         <br>
+
                         <c:if test="${product.stockLevel gt 0}">
                             <span class="label label-success">In stock!</span>
                         </c:if>
