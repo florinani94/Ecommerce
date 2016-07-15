@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +11,15 @@
             text-align: center;
         }
     </style>
+
+    <c:url var="homePage" value="/home"></c:url>
+    <c:url var="backgroundResUrl" value="/resources/orangeBackground.jpg"></c:url>
+    <c:url var="logoResUrl" value="/resources/teaLogo.png"></c:url>
 </head>
-<body background="/orangeBackground.jpg">
-    <c:url var="homePage" url="/home"></c:url>
+<body background="${backgroundResUrl}">
     <p class="logo">
-    <a href="${homePage}"
-        <img align="middle" src="/teaLogo.png" alt="Welcome!"> </img>
+    <a href="${homePage}">
+        <img align="middle" src="${logoResUrl}" alt="Welcome!"> </img>
     </a>
     </p>
 </body>

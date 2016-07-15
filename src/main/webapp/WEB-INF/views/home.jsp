@@ -19,7 +19,7 @@
 
     <title>Tea Shop</title>
 </head>
-<c:url var="bkgURL" value="/resources/tea.jpg"/>
+<c:url var="bkgURL" value="/resources/orangeBackground.jpg"/>
 <c:url var="backofficeURL" value="/backoffice/product/"/>
 <c:url var="customerURL" value="/products"/>
 <body style="background-image: url(${bkgURL});
