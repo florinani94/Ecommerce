@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<jsp:include page="backofficeHeader.jsp" />
+
 <h1>Create Category</h1>
 <form action="add" method="post" id="addCat">
     Id: <br>

@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<jsp:include page="backofficeHeader.jsp" />
+
 <h3> Create a new product </h3>
 <c:if test="${message == null}">
     <form method="post" action="add" >

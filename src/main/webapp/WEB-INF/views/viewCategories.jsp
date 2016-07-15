@@ -12,6 +12,9 @@
     <title>View categories</title>
 </head>
 <body>
+
+<jsp:include page="backofficeHeader.jsp" />
+
 <c:if test="${not empty allCategories}">
     <h3>Categories</h3>
 

@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<jsp:include page="backofficeHeader.jsp" />
+
 <h2>All the products were exported to CSV</h2>
 <h3> Exported Products</h3>
 <table>

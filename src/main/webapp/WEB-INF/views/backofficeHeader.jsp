@@ -3,7 +3,12 @@
 <%@ page session="false" %>
 <html>
 <head>
-     <c:url var="cssUrl" value="/resources/style/ProjectStyle.css"></c:url>
+    <c:url var="cssUrl" value="/resources/style/ProjectStyle.css"/>
+    <c:url var="listURL" value="/backoffice/product/"/>
+    <c:url var="importURL" value="/backoffice/product/import"/>
+    <c:url var="exportURL" value="/backoffice/product/export"/>
+    <c:url var="addURL" value="/backoffice/product/add"/>
+
 
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
     <link rel="stylesheet"
@@ -32,10 +37,10 @@
 
         <div class = "col-md-6">
             <ul>
-                <li><a href="import">Import teas from file </a></li>
-                <li><a href="export">Export teas to file</a></li>
-                <li><a href="add">Create Product</a></li>
-                <li><a href="product/">View Products</a></li>
+                <li><a href="${importURL}">Import teas from file </a></li>
+                <li><a href="${exportURL}">Export teas to file</a></li>
+                <li><a href="${addURL}">Create Product</a></li>
+                <li><a href="${listURL}">View Products</a></li>
             </ul>
         </div>
     </div>
