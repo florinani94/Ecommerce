@@ -26,7 +26,7 @@
         <thead>
 
         <tr>
-            <th><input type="checkbox" id="selectall"/> Mark All </th>
+            <th><input type="checkbox" id="selectall"/> Select All </th>
             <th>ID</th>
             <th>Code </th>
             <th>Name</th>
