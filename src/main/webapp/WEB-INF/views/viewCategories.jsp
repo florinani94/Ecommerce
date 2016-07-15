@@ -16,38 +16,62 @@
 <jsp:include page="backofficeHeader.jsp" />
 
 <c:if test="${not empty allCategories}">
-    <h3>Categories</h3>
 
-    <table id="categoriesTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="category" items="${allCategories}">
-            <tr>
-                <td>${category.id}</td>
-                <td>${category.name}</td>
-                <td>${category.description}</td>
-                <td><a href="edit?id=${category.id}" methods="GET"><input type="submit" value="Edit"></a></td>
-                <td><a href="delete?id=${category.id}" methods="GET"><input type="submit" value="Delete"></a></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+            <h1>Categories</h1>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <table id="categoriesTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="category" items="${allCategories}">
+                <tr>
+                    <td>${category.id}</td>
+                    <td>${category.name}</td>
+                    <td>${category.description}</td>
+                    <td><a href="edit?id=${category.id}" methods="GET"><input type="submit" value="Edit" class="btn btn-primary"></a></td>
+                    <td><a href="delete?id=${category.id}" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 </c:if>
 
 <c:if test="${empty allCategories}">
-    <h1>No category yet! Try adding one.</h1>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h1>No category yet! Try adding one.</h1>
+            <br><br>
+            <a href="/mvc/backoffice/category/add" methods="GET"><input type="submit" value="Create new category" class="btn btn-default"></a>
+        </div>
+    </div>
+
 </c:if>
 
-<br><br>
-<a href="/mvc/backoffice/category/add" methods="GET"><input type="submit" value="Create new category"></a>
+<c:if test="${not empty allCategories}">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <br><br>
+            <a href="/mvc/backoffice/category/add" methods="GET"><input type="submit" value="Create new category" class="btn btn-default"></a>
+        </div>
+    </div>
+</c:if>
+
 
 </body>
 </html>
