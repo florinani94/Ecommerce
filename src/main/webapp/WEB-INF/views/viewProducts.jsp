@@ -24,11 +24,9 @@
     <div class="col-md-6 col-md-offset-3">
     <table id="prodTable" class="table table-striped">
         <thead>
+
         <tr>
-            <input type="checkbox" id="selectall"/> Mark All </input>
-        </tr>
-        <tr>
-            <th>Mark</th>
+            <th><input type="checkbox" id="selectall"/> Mark All </th>
             <th>ID</th>
             <th>Code </th>
             <th>Name</th>
@@ -80,9 +78,10 @@
                     <td>Add file: </td>
                     <td><input type="file" name="filename" size="50" accept=".csv"/></td>
                 </tr>
-                <tr>
-                    <td><input type="submit" id="importButton" value="Upload" class="btn btn-success"/></td>
-                </tr>
+                    <tr>
+                        <br>
+                        <td><input type="submit" id="importButton" value="Upload" class="btn btn-success"/></td>
+                    </tr>
             </table>
         </form>
     </div>

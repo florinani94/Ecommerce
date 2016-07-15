@@ -8,35 +8,46 @@
 <body>
 
 <jsp:include page="backofficeHeader.jsp" />
-
-<h3> Create a new product </h3>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <h3> Create a new product </h3>
+        <br>
+    </div>
+</div>
 <c:if test="${result == null}">
-    <form method="post" action="add" >
-        <table>
-            <tr>
-                <td>Code</td>
-                <td><input type="text" name="code" maxlength="8"/></td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="name" maxlength="20"/></td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td><input type="text" name="description" maxlength="255"/></td>
-            </tr>
-            <tr>
-                <td>Price</td>
-                <td><input type="text" name="price"/></td>
-            </tr>
-            <tr>
-                <td>Stock level</td>
-                <td><input type="text" name="stockLevel"/></td>
-            </tr>
-        </table>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <form method="post" action="add" class="form-inline">
+                <table>
+                    <tr>
+                        <td>Code</td>
+                        <td><input type="text" name="code" maxlength="8" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" name="name" maxlength="20" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td><input type="text" name="description" maxlength="255" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="text" name="price" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>Stock level</td>
+                        <td><input type="text" name="stockLevel" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Save" class="btn btn-success"/></td>
+                    </tr>
+                </table>
 
-        <input type="submit" value="Save"/>
-    </form>
+            </form>
+        </div>
+    </div>
 </c:if>
 
 

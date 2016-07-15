@@ -39,12 +39,11 @@
 
         <div class = "col-md-6">
             <ul>
-                <li><a href="${createCategoryURL}">Create Category</a></li>
-                <li><a href="${listCategoryURL}">View Category</a></li>
-                <li><a href="${importURL}">Import teas from file </a></li>
+                <li><a href="${createCategoryURL}">Create category</a></li>
+                <li><a href="${listCategoryURL}">View categories</a></li>
                 <li><a href="${exportURL}">Export teas to file</a></li>
-                <li><a href="${addURL}">Create Product</a></li>
-                <li><a href="${listURL}">View Products</a></li>
+                <li><a href="${addURL}">Create product</a></li>
+                <li><a href="${listURL}">View products</a></li>
             </ul>
         </div>
     </div>
