@@ -24,7 +24,7 @@ package com.evozon.mvc;
 
 
 @Controller
-@RequestMapping(value = "/backoffice/product/*")
+@RequestMapping(value = "/backoffice/product")
 public class ProductController {
 
     @Autowired

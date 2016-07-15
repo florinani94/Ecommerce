@@ -7,6 +7,10 @@
 </head>
 <body>
 
+<c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
+<c:url var="viewProdUrl" value="/backoffice/product"></c:url>
+
+
 <jsp:include page="backofficeHeader.jsp" />
 <div class="row">
     <div class="col-md-2 col-md-offset-5">
@@ -14,6 +18,7 @@
         <br>
     </div>
 </div>
+
 <c:if test="${result == null}">
     <div class="row">
         <div class="col-md-2 col-md-offset-5">
@@ -52,21 +57,20 @@
 
 
 <c:if test="${result == true}">
-    <h3>Product created with success</h3>
-    <form method="get" action="add">
-        <input type="submit" value="New product">
-    </form>
+    <h3>Product created with success!</h3>
 
-    <form method="get" action="*">
-        <input type="submit" value="View products">
-    </form>
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
 
+    <a href="${viewProdUrl}" class="btn btn-default" role="button">View products
+    </a>
 </c:if>
+
 <c:if test="${result == false}">
-    <h3>Product was not created</h3>
-    <form method="get" action="add">
-        <input type="submit" value="New product">
-    </form>
+    <h3>Product was not created!</h3>
+
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
 </c:if>
 
 </body>

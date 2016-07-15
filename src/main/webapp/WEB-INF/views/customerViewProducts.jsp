@@ -27,7 +27,7 @@
 
                 <c:if test="${not empty products}">
 
-                    <div id="container">
+                    <div class="container">
                             <c:forEach var="product" items="${products}">
                                 <div class="square" >
                                     <ul>
@@ -59,7 +59,7 @@
         <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
     </c:if>
 
-    <div style="position:absolute; top: 70%; left: 20%">
+    <div style="position:absolute; bottom: 10%; width: 100%; text-align: center">
 
         <c:if test="${currentPage>1}">
             <a href= "/mvc/products?page=${1}" methods="GET" >1</a>
