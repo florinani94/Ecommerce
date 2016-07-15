@@ -15,6 +15,8 @@
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
+    <c:url var="bkgURL2" value="/resources/orangeBackground.jpg"></c:url>
+
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -23,7 +25,8 @@
 
     <title>Products</title>
 </head>
-<body>
+
+<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
 
     <div class="row">
         <div class="col-md-3 col-md-offset-5">
@@ -90,5 +93,6 @@
             <a href="<c:url value='/products?page=${nrPagesInt}'/>" methods="GET">${nrPagesInt}</a>
         </c:if>
     </div>
+
 </body>
 </html>
