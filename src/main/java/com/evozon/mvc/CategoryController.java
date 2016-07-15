@@ -8,10 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by mihai on 7/12/2016.
- */
-//todo: refactor URLS - can create restful API here
 @Controller
 @RequestMapping(value = "/backoffice/category/*")
 public class CategoryController {

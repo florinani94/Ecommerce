@@ -22,7 +22,7 @@ package com.evozon.mvc;
  * Created by horatiucernean on 12/07/2016.
  */
 
-//todo: refactor URLS - can create restful API here
+
 @Controller
 @RequestMapping(value = "/backoffice/product/*")
 public class ProductController {
