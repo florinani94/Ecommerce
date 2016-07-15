@@ -29,12 +29,12 @@
         <b>
         <p>
             Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia.<br>
-            After water, it is the most widely consumed drink in the world.[5] There are many different types of tea; some teas, like Darjeeling and Chinese greens,<br>
-            have a cooling, slightly bitter, and astringent flavour,[6] while others have vastly different profiles that include sweet, nutty, floral or grassy notes. <br>
+            After water, it is the most widely consumed drink in the world. There are many different types of tea; some teas, like Darjeeling and Chinese greens,<br>
+            have a cooling, slightly bitter, and astringent flavour, while others have vastly different profiles that include sweet, nutty, floral or grassy notes. <br>
         </p>
         <p>
-            Tea originated in southwestern China, where it was used as a medicinal drink.[7] It was popularized as a recreational drink during the Chinese Tang dynasty,<br>
-            and tea drinking spread to other East Asian countries. Portuguese priests and merchants introduced it to the West during the 16th century.[8] During the 17th century, <br>
+            Tea originated in southwestern China, where it was used as a medicinal drink. It was popularized as a recreational drink during the Chinese Tang dynasty,<br>
+            and tea drinking spread to other East Asian countries. Portuguese priests and merchants introduced it to the West during the 16th century. During the 17th century, <br>
             drinking tea became fashionable among Britons, who started large-scale production and commercialization of the plant in India to bypass a Chinese monopoly at that time. <br>
         </p>
         <p>
