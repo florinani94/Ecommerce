@@ -19,13 +19,12 @@
 
     <title>Tea Shop</title>
 </head>
-<c:url var="bkgURL" value="/resources/orangeBackground.jpg"/>
+<c:url var="bkgURL" value="/resources/background2.jpg"/>
 <c:url var="backofficeURL" value="/backoffice/product/"/>
 <c:url var="customerURL" value="/products"/>
-<body style="background-image: url(${bkgURL});
-        background-repeat: no-repeat;)">
+<body background="${bkgURL}" style="background-size: 100%">
 <div class="row" style="margin-top: 5%">
-    <div class="col-md-2 col-md-offset-5" style="text-align: center;">
+    <div class="col-md-2 col-md-offset-5" style="text-align: center; color: #ffe8e6">
         <h1>TEA SHOP</h1>
     </div>
 </div>
@@ -33,7 +32,7 @@
 <div class="row" style="margin-top: 9%">
     <div class="col-md-6 col-md-offset-3">
             <b>
-                <p style="text-align: center; font-family: SansSerif">
+                <p style="text-align: center; font-family: 'Segoe UI'; color: #ffe8e6">
                     Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia.
                     After water, it is the most widely consumed drink in the world.
                     <br>
@@ -54,13 +53,13 @@
 <div class="row" style="margin-top: 12%">
     <div class="col-md-2 col-md-offset-4">
         <a href="${backofficeURL}">
-            <input type="submit" name="backoffice" value="Backoffice page" class="btn btn-primary"/>
+            <input type="submit" name="backoffice" value="Backoffice page" class="btn btn-default"/>
         </a>
     </div>
 
     <div class="col-md-2 col-md-offset-1">
         <a href="${customerURL}">
-            <input type="submit" name="action" value="Customer page" class="btn btn-primary"/>
+            <input type="submit" name="action" value="Customer page" class="btn btn-default"/>
         </a>
     </div>
 </div>
