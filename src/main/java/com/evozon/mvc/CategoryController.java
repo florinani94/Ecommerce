@@ -31,14 +31,14 @@ public class CategoryController {
 
         try {
             categoryService.addCategory(category);
-            model.addAttribute("message", true);
+            model.addAttribute("result", true);
             if (result.hasErrors()) {
-                model.addAttribute("message", false);
+                model.addAttribute("result", false);
                 model.addAttribute("category",category);
                 return "createCategory";
             }
         }catch (Exception e){
-            model.addAttribute("message", false);
+            model.addAttribute("result", false);
         }
 
         model.addAttribute("allCategories", categoryService.getAllCategories());

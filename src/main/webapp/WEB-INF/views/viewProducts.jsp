@@ -61,7 +61,7 @@
     <a href="export" methods="GET"><input type= "submit" value="Export Products to CSV"></a>
 
     <br> <br>
-    <c:if test="${message == true}">
+    <c:if test="${result == true}">
         <h3>Product deleted!</h3>
     </c:if>
 

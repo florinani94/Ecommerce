@@ -46,11 +46,11 @@ public class ProductController {
     public String deleteProduct(Model model, @RequestParam("productId") int productId) {
         try {
             productService.deleteProduct(productId);
-            //todo: give meaningful name
-            model.addAttribute("message", true);
+
+            model.addAttribute("result", true);
             model.addAttribute("allProducts", productService.getAllProducts());
         } catch(Exception e) {
-            model.addAttribute("message", false);
+            model.addAttribute("result", false);
         }
         return "viewProducts";
     }
@@ -68,13 +68,13 @@ public class ProductController {
 
         try {
             productService.addProduct(product);
-            model.addAttribute("message", true);
+            model.addAttribute("result", true);
             if (result.hasErrors() || productService.validateProduct(product) == false) {
-                model.addAttribute("message", false);
+                model.addAttribute("result", false);
                 return "createProduct";
             }
         } catch (Exception e) {
-            model.addAttribute("message", false);
+            model.addAttribute("result", false);
         }
 
         return "createProduct";
