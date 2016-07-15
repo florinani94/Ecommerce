@@ -1,6 +1,7 @@
-#container {
+.container {
     width:50%;
     height:50%;
+    margin: 0 auto;
 }
 .square{
     border:1px solid #000;
