@@ -67,9 +67,11 @@ public class ProductController {
     public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
 
         try {
-            productService.addProduct(product);
-            model.addAttribute("result", true);
-            if (result.hasErrors() || productService.validateProduct(product) == false) {
+
+            if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
+                productService.addProduct(product);
+                model.addAttribute("result", true);
+            }else if (result.hasErrors() || productService.validateProduct(product) == false) {
                 model.addAttribute("result", false);
                 return "createProduct";
             }
