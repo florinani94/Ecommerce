@@ -32,10 +32,10 @@
 </form>
 
 <br> <br>
-<c:if test="${message == true}">
+<c:if test="${result == true}">
     <h3>Category with the id ${category.id} was added!</h3>
 </c:if>
-<c:if test="${message == false}">
+<c:if test="${result == false}">
     <h3>You have errors! The category was not added!</h3>
 </c:if>
 

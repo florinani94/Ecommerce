@@ -10,7 +10,7 @@
 <jsp:include page="backofficeHeader.jsp" />
 
 <h3> Create a new product </h3>
-<c:if test="${message == null}">
+<c:if test="${result == null}">
     <form method="post" action="add" >
         <table>
             <tr>
@@ -40,7 +40,7 @@
 </c:if>
 
 
-<c:if test="${message == true}">
+<c:if test="${result == true}">
     <h3>Product created with success</h3>
     <form method="get" action="add">
         <input type="submit" value="New product">
@@ -51,7 +51,7 @@
     </form>
 
 </c:if>
-<c:if test="${message == false}">
+<c:if test="${result == false}">
     <h3>Product was not created</h3>
     <form method="get" action="add">
         <input type="submit" value="New product">
