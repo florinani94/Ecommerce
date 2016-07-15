@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ page session="false" %>
+
 <html>
 <head>
     <title>Create product</title>
@@ -8,6 +8,8 @@
 <body>
 
 <jsp:include page="backofficeHeader.jsp" />
+<c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
+<c:url var="viewProdUrl" value="/backoffice/product"></c:url>
 
 <h3> Create a new product </h3>
 <c:if test="${result == null}">
@@ -35,27 +37,26 @@
             </tr>
         </table>
 
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Add" class="btn btn-default"/>
     </form>
 </c:if>
 
 
 <c:if test="${result == true}">
-    <h3>Product created with success</h3>
-    <form method="get" action="add">
-        <input type="submit" value="New product">
-    </form>
+    <h3>Product created with success!</h3>
 
-    <form method="get" action="*">
-        <input type="submit" value="View products">
-    </form>
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
 
+    <a href="${viewProdUrl}" class="btn btn-default" role="button">View products
+    </a>
 </c:if>
+
 <c:if test="${result == false}">
-    <h3>Product was not created</h3>
-    <form method="get" action="add">
-        <input type="submit" value="New product">
-    </form>
+    <h3>Product was not created!</h3>
+
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
 </c:if>
 
 </body>

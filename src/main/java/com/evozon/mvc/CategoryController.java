@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/backoffice/category/*")
+@RequestMapping(value = "/backoffice/category")
 public class CategoryController {
 
     @Autowired
