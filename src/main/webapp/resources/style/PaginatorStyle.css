@@ -6,11 +6,12 @@
 .square {
     border:1px solid #000;
     padding-bottom: 20%;
-    height: 0;
+    height: 30%;
     width:30%;
     margin:1%;
     float:left;
     display:block;
+    background: url("/resources/teaTile.jpg");
 }
 
 .paginationView {

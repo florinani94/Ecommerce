@@ -15,6 +15,7 @@
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
+    <c:url var="tileImage" value="/resources/teaTile.jpg"></c:url>
     <c:url var="bkgURL2" value="/resources/orangeBackground.jpg"></c:url>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">

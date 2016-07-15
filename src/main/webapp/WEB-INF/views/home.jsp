@@ -24,27 +24,34 @@
 <c:url var="customerURL" value="/products"/>
 <body style="background-image: url(${bkgURL});
         background-repeat: no-repeat;)">
-<div class="row">
-    <div class="col-md-2 col-md-offset-5">
+<div class="row" style="margin-top: 5%">
+    <div class="col-md-2 col-md-offset-5" style="text-align: center;">
         <h1>TEA SHOP</h1>
     </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 9%">
     <div class="col-md-6 col-md-offset-3">
             <b>
-                <p style="text-align: center">
+                <p style="text-align: center; font-family: SansSerif">
                     Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia.
-                    After water, it is the most widely consumed drink in the world. There are many different types of tea; some teas, like Darjeeling and Chinese greens,
+                    After water, it is the most widely consumed drink in the world.
+                    <br>
+                    There are many different types of tea; some teas, like Darjeeling and Chinese greens,
                     have a cooling, slightly bitter, and astringent flavour, while others have vastly different profiles that include sweet, nutty, floral or grassy notes.
+                    <br><br>
                     Tea originated in southwestern China, where it was used as a medicinal drink. It was popularized as a recreational drink during the Chinese Tang dynasty,
-                    and tea drinking spread to other East Asian countries. Portuguese priests and merchants introduced it to the West during the 16th century. During the 17th century,
+                    and tea drinking spread to other East Asian countries.
+                    <br>
+                    Portuguese priests and merchants introduced it to the West during the 16th century.
+                    <br>
+                    During the 17th century,
                     drinking tea became fashionable among Britons, who started large-scale production and commercialization of the plant in India to bypass a Chinese monopoly at that time.
                 </p>
             </b>
     </div>
 </div>
-<div class="row">
+<div class="row" style="margin-top: 12%">
     <div class="col-md-2 col-md-offset-4">
         <a href="${backofficeURL}">
             <input type="submit" name="backoffice" value="Backoffice page" class="btn btn-primary"/>
