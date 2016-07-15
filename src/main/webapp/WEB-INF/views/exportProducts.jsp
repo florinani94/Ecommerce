@@ -17,33 +17,48 @@
 
 <jsp:include page="backofficeHeader.jsp" />
 
-<h2>All the products were exported to CSV</h2>
-<h3> Exported Products</h3>
-<table>
-    <thead>
-    <tr>
-        <th>Product ID</th>
-        <th>Code </th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Stock Level</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="product" items="${export}">
-        <tr>
+<div class="row">
+    <div class="col-md-3 col-md-offset-5">
+        <h1>Exported Products</h1>
+    </div>
+</div>
 
-            <td>${product.productId}</td>
-            <td>${product.code}</td>
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.price}</td>
-            <td>${product.stockLevel}</td>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h3>All the products were exported to CSV</h3>
+    </div>
+</div>
 
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <table  class="table table-striped">
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Code </th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock Level</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="product" items="${export}">
+                <tr>
+
+                    <td>${product.productId}</td>
+                    <td>${product.code}</td>
+                    <td>${product.name}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price}</td>
+                    <td>${product.stockLevel}</td>
+
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

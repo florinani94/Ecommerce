@@ -25,31 +25,40 @@
 </head>
 <body>
 
-                <c:if test="${not empty products}">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+            <h1>Our Products</h1>
+        </div>
+    </div>
 
-                    <div class="container">
-                            <c:forEach var="product" items="${products}">
-                                <div class="square" >
-                                    <ul>
-                                        <li>Code: ${product.code} </li>
-                                        <li>Name: ${product.name} </li>
-                                        <li>Description: ${product.description} </li>
-                                        <li>Price: ${product.price}</li>
-                                        <li>StockLevel: ${product.stockLevel}</li>
+    <c:if test="${not empty products}">
 
-                                        <br>
-                                        <c:if test="${product.stockLevel gt 0}">
-                                            <span class="label label-success">In stock!</span>
-                                        </c:if>
-                                        <c:if test="${product.stockLevel lt 1}">
-                                            <span class="label label-warning">Out of stock!</span>
-                                        </c:if>
-                                    </ul>
-                                </div>
-                            </c:forEach>
-                    </div>
+        <div class="container">
+            <c:forEach var="product" items="${products}">
+                <div class="square">
+                    <ul>
+                        <br>
 
-                </c:if>
+                        <li>Code: ${product.code} </li>
+                        <li>Name: ${product.name} </li>
+                        <li>Description: ${product.description} </li>
+                        <li>Price: ${product.price}</li>
+                        <li>StockLevel: ${product.stockLevel}</li>
+
+                        <br>
+
+                        <c:if test="${product.stockLevel gt 0}">
+                            <span class="label label-success">In stock!</span>
+                        </c:if>
+                        <c:if test="${product.stockLevel lt 1}">
+                            <span class="label label-warning">Out of stock!</span>
+                        </c:if>
+                    </ul>
+                </div>
+            </c:forEach>
+        </div>
+
+    </c:if>
 
     <c:set var="nrPages" value="${productSize div 9}"/>
     <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
@@ -59,29 +68,27 @@
         <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
     </c:if>
 
-    <div style="position:absolute; bottom: 10%; width: 100%; text-align: center">
-
+    <div class="paginationView">
         <c:if test="${currentPage>1}">
-            <a href= "/mvc/products?page=${1}" methods="GET" >1</a>
+            <a href="<c:url value='/products?page=${1}'/>" methods="GET">1</a>
         </c:if>
         <c:if test="${currentPage-1 >1}">
             ...
         </c:if>
         <c:if test="${currentPage!=1 && currentPage-1!=1}">
-            <a href= "/mvc/products?page=${currentPage-1}" methods="GET" >${currentPage-1}</a>
+            <a href="<c:url value='/products?page=${currentPage-1}'/>" methods="GET">${currentPage-1}</a>
         </c:if>
-        <a href= "/mvc/products?page=${currentPage}" methods="GET" >${currentPage}</a>
+        <a href="<c:url value='/products?page=${currentPage}'/>" methods="GET">${currentPage}</a>
 
         <c:if test="${currentPage <nrPagesInt-1}">
-            <a href= "/mvc/products?page=${currentPage+1}" methods="GET" >${currentPage+1}</a>
+            <a href="<c:url value='/products?page=${currentPage+1}'/>" methods="GET">${currentPage+1}</a>
         </c:if>
         <c:if test="${currentPage+1 <nrPagesInt-1}">
             ...
         </c:if>
         <c:if test="${currentPage!=nrPagesInt}">
-            <a href= "/mvc/products?page=${nrPagesInt}" methods="GET">${nrPagesInt}</a>
+            <a href="<c:url value='/products?page=${nrPagesInt}'/>" methods="GET">${nrPagesInt}</a>
         </c:if>
     </div>
-
 </body>
 </html>

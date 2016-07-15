@@ -3,7 +3,7 @@
     height:50%;
     margin: 0 auto;
 }
-.square{
+.square {
     border:1px solid #000;
     padding-bottom: 20%;
     height: 0;
@@ -11,4 +11,11 @@
     margin:1%;
     float:left;
     display:block;
+}
+
+.paginationView {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    text-align: center;
 }

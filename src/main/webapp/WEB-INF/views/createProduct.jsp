@@ -1,44 +1,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
+<%@ page session="false" %>
 <html>
 <head>
     <title>Create product</title>
 </head>
 <body>
 
-<jsp:include page="backofficeHeader.jsp" />
 <c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
 <c:url var="viewProdUrl" value="/backoffice/product"></c:url>
 
-<h3> Create a new product </h3>
-<c:if test="${result == null}">
-    <form method="post" action="add" >
-        <table>
-            <tr>
-                <td>Code</td>
-                <td><input type="text" name="code" maxlength="8"/></td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="name" maxlength="20"/></td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td><input type="text" name="description" maxlength="255"/></td>
-            </tr>
-            <tr>
-                <td>Price</td>
-                <td><input type="text" name="price"/></td>
-            </tr>
-            <tr>
-                <td>Stock level</td>
-                <td><input type="text" name="stockLevel"/></td>
-            </tr>
-        </table>
 
-        <input type="submit" value="Add" class="btn btn-default"/>
-    </form>
+<jsp:include page="backofficeHeader.jsp" />
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h1> Create a new product </h1>
+        <br>
+    </div>
+</div>
+
+<c:if test="${result == null}">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+                <form action="add" method="post" id="addProd" class="form-inline">
+                    Code: <br>
+                    <input type="text" name="code" maxlength="8" class="form-control"/>
+                    <br><br>
+                    Name: <br>
+                    <input type="text" name="name" maxlength="20" class="form-control"/>
+                    <br><br>
+                    Description: <br>
+                    <textarea rows="4" cols="50" name="description" maxlength="255" form="addProd" class="form-control"></textarea>
+                    <br><br>
+                    Price: <br>
+                    <input type="text" name="price" class="form-control"/>
+                    <br><br>
+                    Stock level: <br>
+                    <input type="text" name="stockLevel" class="form-control"/>
+                    <br><br>
+                    <input type="submit" value="Save" class="btn btn-success"/>
+                </form>
+        </div>
+    </div>
 </c:if>
 
 
