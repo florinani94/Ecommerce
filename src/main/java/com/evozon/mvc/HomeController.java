@@ -36,7 +36,7 @@ class HomeController {
 
         model.addAttribute("serverTime", formattedDate);
 
-        return "backofficeHeader";
+        return "splashPage";
     }
 
 
