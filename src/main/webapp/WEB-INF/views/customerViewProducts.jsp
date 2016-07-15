@@ -15,8 +15,7 @@
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
-    <c:url var="tileImage" value="/resources/teaTile.jpg"></c:url>
-    <c:url var="bkgURL2" value="/resources/orangeBackground.jpg"></c:url>
+    <c:url var="bkgURL2" value="/resources/background2.jpg"></c:url>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
@@ -31,7 +30,7 @@
 
     <div class="row">
         <div class="col-md-3 col-md-offset-5">
-            <h1>Our Products</h1>
+            <h1><b>Our Products</b></h1>
         </div>
     </div>
 
