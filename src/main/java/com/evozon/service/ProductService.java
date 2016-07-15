@@ -29,7 +29,7 @@ public class ProductService {
 
     public boolean validateProduct(Product product) {
         String voidString="";
-        if ((!voidString.equals(product.getCode()) && (!voidString.equals(product.getName())))) {
+        if ( (!voidString.equals(product.getCode()) && (!voidString.equals(product.getName()) && (0 <= product.getPrice()) && (0 <= product.getStockLevel()))) ) {
             return true;
         }
         return false;
