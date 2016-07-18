@@ -24,9 +24,11 @@
     <div class="col-md-6 col-md-offset-3">
     <table id="prodTable" class="table table-striped">
         <thead>
-
         <tr>
-            <th><input type="checkbox" id="selectall"/> Select All </th>
+            <input type="checkbox" id="selectall"/> Select All
+        </tr>
+        <tr>
+            <th></th>
             <th>ID</th>
             <th>Code </th>
             <th>Name</th>

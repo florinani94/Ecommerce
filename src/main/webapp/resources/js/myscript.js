@@ -25,7 +25,6 @@ $("#deleteButton").click(function() {
     });
 });
 
-
-$("#selectall").change(function(){
+$("#prodTable").on('change','#selectall',function(){
     $(".check").prop('checked', $(this).prop("checked"));
 });
