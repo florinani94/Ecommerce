@@ -48,7 +48,7 @@
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
                 <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit" class="btn btn-primary"></a></td>
-                <td><a href="delete?productId=${product.productId}" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
+                <td><a href="<c:url value='/backoffice/product/delete?productId=${product.productId}'/>" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -58,10 +58,15 @@
     <input type="submit" id="deleteButton" value="Delete selected" class="btn btn-default"/>
 
     </c:if>
+        <c:url var="addProduct" value="/backoffice/product/add"/>
+        <c:url var="exportProductas" value="/backoffice/product/export"/>
+        <c:url var="importProductas" value="/backoffice/product/import"/>
 
-    <a href="add" methods="GET"><input type="submit" value="Create new product" class="btn btn-default"></a>
 
-    <a href="export" methods="GET"><input type= "submit" value="Export Products to CSV" class="btn btn-default"></a>
+
+    <a href="${addProduct}" methods="GET"><input type="submit" value="Create new product" class="btn btn-default"></a>
+
+    <a href="${exportProductas}" methods="GET"><input type= "submit" value="Export Products to CSV" class="btn btn-default"></a>
 
     <br> <br>
     <c:if test="${result == true}">
@@ -72,7 +77,7 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form method="post" action="import" enctype="multipart/form-data">
+        <form method="post" action="${importProductas}" enctype="multipart/form-data">
             <table border="0">
                 <tr>
                     <td>Add file: </td>
