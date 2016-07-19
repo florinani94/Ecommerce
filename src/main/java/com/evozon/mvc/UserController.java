@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 /**
  * Created by dianamohanu on 18/07/2016.
@@ -52,9 +53,8 @@ public class UserController {
             user.setUsername(username);
             user.setPassword(pass1);
             user.setActive(false);
-
-            java.util.Date date= new java.util.Date();
-            String keyUrl = username + email + date.getTime();
+            
+            String keyUrl = username + UUID.randomUUID().toString();
             user.setKeyUrl(keyUrl);
 
             userService.addUser(user);
