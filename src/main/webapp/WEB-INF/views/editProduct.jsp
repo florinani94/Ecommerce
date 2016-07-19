@@ -86,6 +86,18 @@
                 <form:input path="stockLevel" cssClass="form-control"/>
             </div>
         </div>
+        <form>
+            <select name="category" onchange='this.form.submit()'>
+                <c:forEach var="category" items="${allCategories}">
+                    <%--<option value="Tea"> Green Tea</option>--%>
+                    <%--<option value="Tea">Red Tea</option>--%>
+                    <%--<option value="Tea">Black Tea</option>--%>
+                    <option value="${category.name}" >${category.name}</option>
+                </c:forEach>
+            </select>
+            <noscript><input type="submit" value="Submit"></noscript>
+                <%--<input type="submit" value="Submit">--%>
+        </form>
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
                 <input type="submit" value="Save" class="btn btn-lg btn-primary"/>

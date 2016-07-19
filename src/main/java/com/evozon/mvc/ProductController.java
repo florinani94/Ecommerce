@@ -1,6 +1,8 @@
 package com.evozon.mvc;
 
+        import com.evozon.domain.Category;
         import com.evozon.domain.Product;
+        import com.evozon.service.CategoryService;
         import com.evozon.service.ProductService;
         import org.apache.commons.fileupload.FileItem;
         import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -29,6 +31,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
@@ -37,7 +41,6 @@ public class ProductController {
     public String getAllProducts(Model model) {
 
         model.addAttribute("allProducts", productService.getAllProducts());
-
         return "viewProducts";
     }
 
@@ -58,6 +61,7 @@ public class ProductController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
+        model.addAttribute("allCategories", categoryService.getAllCategories());
         model.addAttribute("product", new Product());
         return "createProduct";
     }
@@ -69,6 +73,7 @@ public class ProductController {
         try {
 
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
+
                 productService.addProduct(product);
                 model.addAttribute("result", true);
             }else if (result.hasErrors() || productService.validateProduct(product) == false) {
@@ -135,6 +140,7 @@ public class ProductController {
     @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
     public String goToCreateProductPage(@PathVariable("productId") int id, Model model) {
         Product product = productService.getProductById(id);
+        model.addAttribute("allCategories", categoryService.getAllCategories());
         model.addAttribute("product", product);
         return "editProduct";
     }

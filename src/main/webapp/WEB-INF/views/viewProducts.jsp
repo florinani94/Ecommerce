@@ -13,6 +13,18 @@
 </head>
 <body>
 
+<%--<form>--%>
+    <%--<select name="products">--%>
+        <%--<option value="Tea"> Green Tea</option>--%>
+        <%--<option value="Tea">Red Tea</option>--%>
+        <%--<option value="Tea">Black Tea</option>--%>
+    <%--</select>--%>
+    <%--<input type="submit" value="Submit">--%>
+<%--</form>--%>
+
+<%--<p>Choose a tea brand , and click the "Submit" button to send input to the server.</p>--%>
+
+
 <jsp:include page="backofficeHeader.jsp" />
 <div class="row">
     <div class="col-md-2 col-md-offset-5">
@@ -33,6 +45,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Stock</th>
+            <th>Category</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -47,10 +60,25 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
+                <td>${product.category}</td>
                 <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit" class="btn btn-primary"></a></td>
                 <td><a href="delete?productId=${product.productId}" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
             </tr>
+
         </c:forEach>
+
+            <%--<form>--%>
+                <%--<select name="category">--%>
+                    <%--<c:forEach var="category" items="${allCategories}">--%>
+                    <%--&lt;%&ndash;<option value="Tea"> Green Tea</option>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<option value="Tea">Red Tea</option>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<option value="Tea">Black Tea</option>&ndash;%&gt;--%>
+                    <%--<option value="${category.name}">${category.name}</option>--%>
+                    <%--</c:forEach>--%>
+                <%--</select>--%>
+                <%--<input type="submit" value="Submit">--%>
+            <%--</form>--%>
+
         </tbody>
     </table>
     <br>

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "product")
 public class Product implements Serializable {
 
     @Column(nullable = false)
@@ -25,18 +26,40 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Integer stockLevel;
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Category category;
+
+
+//    public Product(String code, String name, String description, Double price, Integer stockLevel) {
+//
+//        this.code = code;
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.stockLevel = stockLevel;
+//    }
+
+
+
     public Product() {
     }
 
-    public Product(String code, String name, String description, Double price, Integer stockLevel) {
+    public Product(String code, String name, String description, Double price, Integer stockLevel,Category category) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockLevel = stockLevel;
+        this.category=category;
     }
-
-
     public Integer getProductId() {
         return productId;
     }
