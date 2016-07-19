@@ -63,17 +63,8 @@ public class ProductController {
     public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
 
         try {
-            if((!image.isEmpty()) && (productService.validateImage(image) == true)) {
-                productService.saveImage(product.getCode() + ".jpg", image);
-                String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
-                product.setImageURL(imageURL);
-            } else {
-                String imageURL = "/resources/productImages/default@product.jpg";
-                product.setImageURL(imageURL);
-            }
-
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
-                productService.addProduct(product);
+                productService.addProduct(productService.doImageSaveOperation(product, image));
                 model.addAttribute("result", true);
             }else if (result.hasErrors() || productService.validateProduct(product) == false) {
                 model.addAttribute("result", false);
@@ -131,8 +122,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editProduct(Model model, @ModelAttribute("product") Product product, BindingResult result){
-        productService.updateProduct(product);
+    public String editProduct(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result){
+        productService.updateProduct(productService.doImageSaveOperation(product, image));
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
     }

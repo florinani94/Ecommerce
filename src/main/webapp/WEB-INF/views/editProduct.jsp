@@ -48,7 +48,7 @@
 
 <div class="layout-edit">
 
-    <form:form commandName="product" method="POST" action="${editUrl}" cssClass="form-horizontal registrationForm">
+    <form:form commandName="product" method="POST" action="${editUrl}" cssClass="form-horizontal registrationForm" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="productId" class="control-label col-xs-2">ID: </label>
@@ -86,6 +86,14 @@
                 <form:input path="stockLevel" cssClass="form-control"/>
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <b>Select a image (.jpg)</b> <br><br>
+                <input name="image" type="file" accept=".jpg"/>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
                 <input type="submit" value="Save" class="btn btn-lg btn-primary"/>
