@@ -1,8 +1,8 @@
 package com.evozon.dao.impl;
 
-import com.evozon.dao.CartDAO;
+import com.evozon.dao.EntryDAO;
 import com.evozon.domain.Cart;
-import com.evozon.domain.Category;
+import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,31 +11,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * Created by vladblana on 19/07/2016.
  */
-
-@Repository("CartDAO")
+@Repository("EntryDAO")
 @Transactional
-public class CartDAOImpl implements CartDAO{
+public class EntryDAOImpl implements EntryDAO{
 
-
-   @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
 
-    public void addCart(Cart cart) {
+    @Override
+    public void addEntry(Entry entry) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(cart);
+        session.save(entry);
     }
 
-    public void deleteCart(int id) {
+    @Override
+    public void deleteEntry(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("DELETE FROM Cart WHERE cartId=:id");
+        Query query=session.createQuery("DELETE FROM Cart WHERE entryId=:id");
         query.setParameter("id", id);
         query.executeUpdate();
 
     }
-
+    @Override
+    public void addProductToEntry(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query=session.createQuery("DELETE FROM Cart WHERE entryId=:id");
+    }
 }
