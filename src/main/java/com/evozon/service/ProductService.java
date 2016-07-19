@@ -2,23 +2,28 @@ package com.evozon.service;
 
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 @Service
 public class ProductService {
+
     @Autowired
     private ProductDAO productDAO;
+
 
     public void addProduct(Product product) {
         this.productDAO.addProduct(product);
     }
+
 
     public void deleteProduct(int productId) { this.productDAO.deleteProduct(productId);}
 
@@ -26,6 +31,7 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }
+
 
     public boolean validateProduct(Product product) {
         String voidString="";
@@ -35,9 +41,11 @@ public class ProductService {
         return false;
     }
 
+
     public void importFromFile(String filename) {
         productDAO.importFromFile(filename);
     }
+
 
     public Product getProductById(Integer id){
        return  productDAO.getProductById(id);
@@ -129,6 +137,8 @@ public class ProductService {
 
         return list;
     }
+
+
     public List<Product> getProductsForPage(int startPageIndex, int recordsPerPage){
 
         if(startPageIndex<=0){
@@ -143,6 +153,23 @@ public class ProductService {
 
     public int getSize(){
         return productDAO.getAllProducts().size();
+    }
+
+    public List<Product> getSortedProducts(String option){
+
+            switch (option) {
+                case "SORTPRICEUPDOWN":
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price");
+                case "SORTPRICEDOWNUP":
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC");
+                case "SORTNAMEAZ":
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name");
+                case "SORTNAMEZA":
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC");
+                default:
+                    return productDAO.getAllProducts();
+            }
+
     }
 }
 

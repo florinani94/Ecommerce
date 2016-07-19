@@ -19,4 +19,7 @@ public interface ProductDAO {
     Product getProductById(Integer id);
 
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
+
+    List<Product> getSortedProducts(String queryCommand);
+
 }

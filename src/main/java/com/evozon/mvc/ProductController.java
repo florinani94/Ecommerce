@@ -1,26 +1,22 @@
 package com.evozon.mvc;
 
-        import com.evozon.domain.Product;
-        import com.evozon.service.ProductService;
-        import org.apache.commons.fileupload.FileItem;
-        import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-        import org.apache.commons.fileupload.servlet.ServletFileUpload;
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.validation.BindingResult;
-        import org.springframework.web.bind.annotation.*;
+import com.evozon.domain.Product;
+import com.evozon.service.ProductService;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-        import javax.servlet.http.HttpServletRequest;
-        import java.io.File;
-        import java.util.Iterator;
-        import java.util.List;
-
-/**
- * Created by horatiucernean on 12/07/2016.
- */
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
 
 @Controller
@@ -34,10 +30,21 @@ public class ProductController {
 
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String getAllProducts(Model model) {
+    public String getAllProducts(HttpServletRequest request, Model model) {
 
         model.addAttribute("allProducts", productService.getAllProducts());
 
+        // Case 1
+        //model.addAttribute("allProducts", productService.getSortedProductsByPriceUpDown());
+
+        // Case 2
+        //model.addAttribute("allProducts", productService.getSortedProductsByPriceDownUp());
+
+        // Case 3
+        //model.addAttribute("allProducts", productService.getSortedProductsByNameAZ());
+
+        // Case 4
+//        model.addAttribute("allProducts", productService.getSortedProductsByNameZA());
         return "viewProducts";
     }
 
@@ -125,6 +132,7 @@ public class ProductController {
 
         return "exportProducts";
     }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editProduct(Model model, @ModelAttribute("product") Product product, BindingResult result){
         productService.updateProduct(product);
@@ -144,6 +152,14 @@ public class ProductController {
         for (Integer i : prodArray) {
             productService.deleteProduct(i);
         }
+        return "viewProducts";
+    }
+
+    @RequestMapping(value = "/sort", method = RequestMethod.GET)
+    public String getSortedProducts(@RequestParam(value = "sortValue") String sortValue, Model model) {
+
+        model.addAttribute("allProducts", productService.getSortedProducts(sortValue));
+
         return "viewProducts";
     }
 }

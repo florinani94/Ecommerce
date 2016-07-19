@@ -10,6 +10,7 @@
     <c:url var="addURL" value="/backoffice/product/add"/>
     <c:url var="listCategoryURL" value="/backoffice/category/"/>
     <c:url var="createCategoryURL" value="/backoffice/category/add"/>
+    <c:url var="sortProductsByPriceUpDown" value="/backoffice/product/sortpriceupdown"/>
 
 
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
