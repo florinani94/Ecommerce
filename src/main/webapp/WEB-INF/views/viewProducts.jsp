@@ -87,18 +87,6 @@
             </table>
         </form>
     </div>
-    <div class="col-md-3" style="margin-top: 1%">
-        <form method="get" action="/mvc/backoffice/product/sort">
-            <select name="sortValue" id="sort">
-                <option value="NONE">Sort By</option>
-                <option value="SORTPRICEUPDOWN">Price Cheap to Expensive</option>
-                <option value="SORTPRICEDOWNUP">Price Expensive to Cheap</option>
-                <option value="SORTNAMEAZ">Name A to Z</option>
-                <option value="SORTNAMEZA">Name Z to A</option>
-            </select>
-            <input type="submit" value="Sort"/></td>
-        </form>
-    </div>
 </div>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>

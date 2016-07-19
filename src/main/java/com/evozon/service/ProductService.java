@@ -3,14 +3,20 @@ package com.evozon.service;
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
 import com.mysql.jdbc.StringUtils;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,17 +166,17 @@ public class ProductService {
         return productDAO.getAllProducts().size();
     }
 
-    public List<Product> getSortedProducts(String option){
+    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer MAX_PRODUCTS_PER_PAGE){
 
             switch (option) {
                 case "SORTPRICEUPDOWN":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price");
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price", startPageIndex, MAX_PRODUCTS_PER_PAGE);
                 case "SORTPRICEDOWNUP":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC");
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC", startPageIndex, MAX_PRODUCTS_PER_PAGE);
                 case "SORTNAMEAZ":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name");
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name", startPageIndex, MAX_PRODUCTS_PER_PAGE);
                 case "SORTNAMEZA":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC");
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC", startPageIndex, MAX_PRODUCTS_PER_PAGE);
                 default:
                     return productDAO.getAllProducts();
             }
@@ -179,7 +185,7 @@ public class ProductService {
 
     /* save image to local */
     public void saveImage(String filename, MultipartFile image) {
-        File file = new File(servletContext.getRealPath("/resources/productImages") + "/" + filename);
+        File file = new File(servletContext.getRealPath("/resources/productImages" + "/" + filename));
 
         try {
             FileUtils.writeByteArrayToFile(file, image.getBytes());
@@ -195,6 +201,36 @@ public class ProductService {
         }
 
         return true;
+    }
+
+    /* delete a image based on the id */
+    public void deleteImage(int id) {
+        File image = new File(servletContext.getRealPath(productDAO.getProductById(id).getImageURL()));
+
+        image.delete();
+    }
+
+    /* execute the image save operation */
+    public Product doImageSaveOperation(Product product,  MultipartFile image) {
+        if((!image.isEmpty()) && (this.validateImage(image) == true)) {
+            this.saveImage(product.getCode() + ".jpg", image);
+            String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
+            product.setImageURL(imageURL);
+        } else {
+            File file = new File(servletContext.getRealPath("/resources/productImages/default@product.jpg"));
+            MultipartFile defaultImage = null;
+
+            try {
+                FileInputStream input = new FileInputStream(file);
+                defaultImage = new MockMultipartFile(product.getCode() + ".jpg", file.getName(), "image/jpeg", IOUtils.toByteArray(input));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            this.doImageSaveOperation(product, defaultImage);
+        }
+
+        return product;
     }
 }
 

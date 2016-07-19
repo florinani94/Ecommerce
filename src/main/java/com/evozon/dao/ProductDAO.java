@@ -20,6 +20,6 @@ public interface ProductDAO {
 
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 
-    List<Product> getSortedProducts(String queryCommand);
+    List<Product> getSortedProducts(String queryCommand, int startPageIndex, int recordsPerPage);
 
 }

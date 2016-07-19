@@ -26,5 +26,14 @@ public class CustomerProductController {
         return "customerViewProducts";
     }
 
+    @RequestMapping(value = "/sort", method = RequestMethod.GET)
+    public String getSortedProducts(@RequestParam(value = "sortValue") String sortValue, Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex) {
+
+        model.addAttribute("products", productService.getSortedProducts(sortValue, startPageIndex, MAX_PRODUCTS_PER_PAGE));
+        model.addAttribute("productSize", productService.getSize());
+        model.addAttribute("currentPage",startPageIndex);
+
+        return "customerViewProducts";
+    }
 
 }

@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: florinani
-  Date: 12/07/2016
-  Time: 16:16
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -32,8 +24,19 @@
         <div class="col-md-3 col-md-offset-5">
             <h1><b>Our Products</b></h1>
         </div>
+        <div class="col-md-2 col-md-offset-1" style="margin-top: 1%">
+            <form method="get" action="/mvc/products/sort">
+                <select name="sortValue" id="sort">
+                    <option value="NONE">Sort By</option>
+                    <option value="SORTPRICEUPDOWN">Price Cheap to Expensive</option>
+                    <option value="SORTPRICEDOWNUP">Price Expensive to Cheap</option>
+                    <option value="SORTNAMEAZ">Name A to Z</option>
+                    <option value="SORTNAMEZA">Name Z to A</option>
+                </select>
+                <input type="submit" value="Sort"/></td>
+            </form>
+        </div>
     </div>
-
     <c:if test="${not empty products}">
 
         <div class="container">
