@@ -73,7 +73,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-3 col-md-offset-3">
         <form method="post" action="${importProductas}" enctype="multipart/form-data">
             <table border="0">
                 <tr>
@@ -87,18 +87,19 @@
             </table>
         </form>
     </div>
+    <div class="col-md-3">
+        <form method="get" action="/mvc/backoffice/product/sort">
+            <select name="sortValue" id="sort">
+                <option value="NONE">Sort By</option>
+                <option value="SORTPRICEUPDOWN">Price Cheap to Expensive</option>
+                <option value="SORTPRICEDOWNUP">Price Expensive to Cheap</option>
+                <option value="SORTNAMEAZ">Name A to Z</option>
+                <option value="SORTNAMEZA">Name Z to A</option>
+            </select>
+            <input type="submit" value="Sort"/></td>
+        </form>
+    </div>
 </div>
-<form method="get" action="/mvc/backoffice/product/sort">
-    <select name="sortValue" id="sort">
-        <option value="NONE">Sort By</option>
-        <option value="SORTPRICEUPDOWN">Price Cheap to Expensive</option>
-        <option value="SORTPRICEDOWNUP">Price Expensive to Cheap</option>
-        <option value="SORTNAMEAZ">Name A to Z</option>
-        <option value="SORTNAMEZA">Name Z to A</option>
-    </select>
-    <input type="submit" value="Sort"/></td>
-
-</form>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
