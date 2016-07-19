@@ -25,6 +25,27 @@ $("#deleteButton").click(function() {
     });
 });
 
+
 $("#selectall").click(function () {
     $('.check').attr('checked', this.checked);
 });
+
+
+
+//For collapsible checkout form
+$('.panel-heading h4 a input[type=checkbox]').on('click', function(e) {
+    e.stopPropagation();
+})
+
+function billingFunction() {
+    if (document.getElementById("same").checked) {
+        document.getElementById("billingStreet").value=document.getElementById("deliveryStreet").value;
+        document.getElementById("billingNumber").value=document.getElementById("deliveryNumber").value;
+        document.getElementById("billingCity").value=document.getElementById("deliveryCity").value;
+    } else {
+        document.getElementById("billingStreet").value="";
+        document.getElementById("billingNumber").value="";
+        document.getElementById("billingCity").value="";
+    }
+}
+

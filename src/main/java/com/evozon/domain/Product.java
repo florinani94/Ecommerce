@@ -25,6 +25,9 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Integer stockLevel;
 
+    @Column
+    private String imageURL;
+
     public Product() {
     }
 
@@ -85,6 +88,14 @@ public class Product implements Serializable {
         this.stockLevel = stockLevel;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -94,6 +105,7 @@ public class Product implements Serializable {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", stockLevel=" + stockLevel +
+                ", imageURL='" + imageURL + '\'' +
                 '}';
     }
 }
