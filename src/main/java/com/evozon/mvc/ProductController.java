@@ -152,11 +152,4 @@ public class ProductController {
         return "viewProducts";
     }
 
-    @RequestMapping(value = "/sort", method = RequestMethod.GET)
-    public String getSortedProducts(@RequestParam(value = "sortValue") String sortValue, Model model) {
-
-        model.addAttribute("allProducts", productService.getSortedProducts(sortValue));
-
-        return "viewProducts";
-    }
 }
