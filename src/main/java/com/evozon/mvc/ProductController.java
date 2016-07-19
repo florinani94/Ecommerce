@@ -123,7 +123,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editProduct(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result){
+    public String editProduct(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image){
         productService.updateProduct(productService.doImageSaveOperation(product, image));
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";

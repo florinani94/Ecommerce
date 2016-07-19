@@ -8,7 +8,7 @@
 <body>
 
 <c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
-<c:url var="viewProdUrl" value="/backoffice/product"></c:url>
+<c:url var="viewProdUrl" value="/backoffice/product/"></c:url>
 
 
 <jsp:include page="backofficeHeader.jsp" />
