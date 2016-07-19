@@ -1,10 +1,12 @@
 package com.evozon.mvc;
 
 
+import com.evozon.domain.Product;
 import com.evozon.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -41,4 +43,30 @@ public class CustomerProductController {
         return "customerViewProducts";
     }
 
+    @RequestMapping(value = "/address", method = RequestMethod.GET)
+    public String gotToCheckoutPage(Model model) {
+        model.addAttribute("cart", new Product());
+        return "customerCartCheckout";
+    }
+
+    @RequestMapping(value = "/address", method = RequestMethod.POST)
+    public String checkoutAddress(Model model, @ModelAttribute("product") Product product, BindingResult data) {
+        try {
+            if (!data.hasErrors()) {
+                model.addAttribute("data", true);
+            } else if (data.hasErrors()) {
+                model.addAttribute("data", false);
+                return "customerCartCheckout";
+            }
+        } catch (Exception e) {
+            model.addAttribute("data", false);
+        }
+        return "customerCartCheckout";
+    }
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String showProductDetails(Model model, @RequestParam String productId){
+        model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
+        return "productDetailsPage";
+    }
 }

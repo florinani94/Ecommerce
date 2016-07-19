@@ -43,6 +43,10 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
+    public List<Product> getParticularProducts(int [] productIds) {
+        return productDAO.getParticularProducts(productIds);
+    }
+
 
     public boolean validateProduct(Product product) {
         String voidString="";
@@ -60,6 +64,10 @@ public class ProductService {
 
     public Product getProductById(Integer id){
        return  productDAO.getProductById(id);
+    }
+
+    public Product getProductBycode(String code){
+        return  productDAO.getProductByCode(code);
     }
 
 

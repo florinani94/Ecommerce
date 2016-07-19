@@ -35,6 +35,8 @@
 			<list>
 				<value>com.evozon.domain.Category</value>
 				<value>com.evozon.domain.Product</value>
+				<value>com.evozon.domain.Entry</value>
+				<value>com.evozon.domain.Cart</value>
 				<value>com.evozon.domain.User</value>
 			</list>
 		</property>
