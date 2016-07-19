@@ -32,6 +32,16 @@ public class User implements Serializable {
 
     private boolean active;
 
+    public String getKeyUrl() {
+        return keyUrl;
+    }
+
+    public void setKeyUrl(String keyUrl) {
+        this.keyUrl = keyUrl;
+    }
+
+    private String keyUrl;
+
     public int getId() {
         return id;
     }

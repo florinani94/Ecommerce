@@ -53,6 +53,10 @@ public class UserController {
             user.setPassword(pass1);
             user.setActive(false);
 
+            java.util.Date date= new java.util.Date();
+            String keyUrl = username + email + date.getTime();
+            user.setKeyUrl(keyUrl);
+
             userService.addUser(user);
 
             model.addAttribute("message1", "Information submitted successfully.");
