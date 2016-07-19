@@ -26,6 +26,14 @@ public class ProductDAOImpl implements ProductDAO {
         return session.createQuery("FROM Product as P").list();
     }
 
+    public List<Product> getParticularProducts(int[] productIds) {
+
+        Session session=sessionFactory.getCurrentSession();
+        Query query=session.createQuery("FROM Product WHERE productId in (:productIds)");
+        query.setParameter("productIds", productIds);
+        return query.list();
+    }
+
 
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
