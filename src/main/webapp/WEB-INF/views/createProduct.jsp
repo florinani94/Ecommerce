@@ -22,7 +22,7 @@
 <c:if test="${result == null}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <form action="add" method="post" id="addProd" class="form-inline">
+                <form action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
                     Code: <br>
                     <input type="text" name="code" maxlength="8" class="form-control"/>
                     <br><br>
@@ -37,6 +37,9 @@
                     <br><br>
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
+                    <br><br>
+                    Select a image (.jpg) <br>
+                    <input name="image" type="file" accept=".jpg"/>
                     <br><br>
                     <input type="submit" value="Save" class="btn btn-success"/>
                 </form>
