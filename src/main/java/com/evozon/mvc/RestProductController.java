@@ -21,7 +21,7 @@ public class RestProductController {
     private ProductService productService;
 
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     @ResponseBody
     public String getAllProducts() {
 
@@ -32,7 +32,7 @@ public class RestProductController {
     }
 
 
-    @RequestMapping(value = "/list/{productId}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     @ResponseBody
     public String getProduct(@PathVariable int productId) {
 
@@ -45,7 +45,7 @@ public class RestProductController {
     }
 
 
-    @RequestMapping(value = "/delete/{productId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteProduct(@PathVariable int productId) {
 
@@ -58,7 +58,7 @@ public class RestProductController {
     }
 
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
     @ResponseBody
     public String updateProduct(@RequestBody Product product) {
 
@@ -71,7 +71,7 @@ public class RestProductController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
     @ResponseBody
     public String addProduct(@RequestBody Product product) {
 
