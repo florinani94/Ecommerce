@@ -64,7 +64,21 @@ public class ProductDAOImpl implements ProductDAO {
         Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
         query.setParameter("id", id);
         List<Product> products = query.list();
-        return products.get(0);
+        if(products.size() > 0){
+            return products.get(0);
+        }
+        return null;
+    }
+
+    public Product getProductByCode(String code) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.code = :code");
+        query.setParameter("code", code);
+        List<Product> products = query.list();
+        if(products.size() > 0){
+            return products.get(0);
+        }
+        return null;
     }
 
     public void updateProduct(Product product) {

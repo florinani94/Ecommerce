@@ -62,6 +62,10 @@ public class ProductService {
        return  productDAO.getProductById(id);
     }
 
+    public Product getProductBycode(String code){
+        return  productDAO.getProductByCode(code);
+    }
+
 
     public void exportToCSV(String fileName) {
 
