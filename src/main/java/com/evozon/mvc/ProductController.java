@@ -41,6 +41,7 @@ public class ProductController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteProduct(Model model, @RequestParam("productId") int productId) {
         try {
+            productService.deleteImage(productId);
             productService.deleteProduct(productId);
 
             model.addAttribute("result", true);
