@@ -1,3 +1,5 @@
+html, body { height: 100%; width: 100%; margin: 0; }
+
 #teaLogo{
 	margin-left: 15%;
 }
@@ -25,43 +27,50 @@
 }
 
 .detailsText{
-	color: #888888;
 	text-decoration: none;
 	font-family: "Calibri";
 	font-weight: lighter;
 }
 
-.pageLayout{
-	width: 70%;
-	margin-top: 1%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#productLayout{
-	margin-top: 5%;
-}
-
 #imageCell{
-	width: 10%;
-	height: 10%;
-	
+	position: absolute;
+	max-height: 375px;
+	max-width: 500px;
+	right: 5%;
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
-#spaceCol{
-	width: 10%;
+#productInfo{
+	text-align: left;
+	max-width: 500px;
+	max-height: 375px;
+	height: 40%;
+	vertical-align: top;
+	background: rgba(255,255,255,0.5);
 }
 
 #productDetails{
-	text-align: left;
-	vertical-align: top;
+	width: 70%;
+	height: 70%;
 }
 
 #productTitle{
-	font-size: 40;
+	font-size: 40px;
+}
+
+.descriptionText{
+	color: dimgrey;
+	height: 60%;
+	vertical-align: top;
+}
+
+.priceText{
+	color: #aebd4c;
+	font-size: 30px;
+	vertical-align: top;
 }
 
 #spaceRow{
-	height: 5%;
+	height: 100%;
 }
 

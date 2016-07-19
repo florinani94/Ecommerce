@@ -6,7 +6,7 @@
     <c:url var="logoUrl" value="/resources/detailView/SizedLogo.png"></c:url>
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
 
-    <link rel="stylesheet" type="text/css" href="${cssUrl}">
+    <link rel="stylesheet" href="/resources/style/detailViewStyle.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -16,30 +16,30 @@
     <title>Tea Shop</title>
 </head>
 <body>
-    <table class="pageLayout" border="0">
-        <tr>
-            <td>
-                <a id="teaLogo" href="${homeURL}">
-                    <img src="${logoUrl}" alt="Tea House" ismap></a>
-                <a id="logoText" href="${homeURL}">
-                    <img src="${textUrl}" alt="There is always time for tea" ismap></a>
-            </td>
-            <td>
-                <div id="headerLinks">
-                    <a class="headerLink" href="${homeURL}">
-                        My cart
-                    </a>
 
-                    <a class="headerLink" href="${homeURL}">
-                        Checkout
-                    </a>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1">
+            <a id="teaLogo" href="${homeURL}">
+                <img src="${logoUrl}" alt="Tea House" ismap></a>
+            <a id="logoText" href="${homeURL}">
+                <img src="${textUrl}" alt="There is always time for tea" ismap></a>
+        </div>
+        <div class="col-sm-8">
+            <div id="headerLinks">
+                <a class="headerLink" href="${homeURL}">
+                    My cart
+                </a>
 
-                    <a class="headerLink" href="${homeURL}">
-                        Login
-                    </a>
-                </div>
-            </td>
-        </tr>
-    </table>
+                <a class="headerLink" href="${homeURL}">
+                    Checkout
+                </a>
+
+                <a class="headerLink" href="${homeURL}">
+                    Login
+                </a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
