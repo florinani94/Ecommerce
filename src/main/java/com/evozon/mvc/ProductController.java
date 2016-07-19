@@ -63,14 +63,13 @@ public class ProductController {
     public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
 
         try {
-            if(!image.isEmpty()) {
-                try {
-                    if(productService.validateImage(image) == true) {
-                        productService.saveImage(product.getCode() + ".jpg", image);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if((!image.isEmpty()) && (productService.validateImage(image) == true)) {
+                productService.saveImage(product.getCode() + ".jpg", image);
+                String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
+                product.setImageURL(imageURL);
+            } else {
+                String imageURL = "/resources/productImages/default@product.jpg";
+                product.setImageURL(imageURL);
             }
 
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
