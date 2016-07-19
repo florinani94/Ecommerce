@@ -17,21 +17,20 @@
     <script
             src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <c:url var="URL404" value="/resources/404.png"/>
 
     <title>404 Not found</title>
 </head>
-<body background="${URL404}" style="background-size: 100%">
+<body>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1 style="color: white; text-align: center">You are a little bit lost</h1>
+        <h1 style="text-align: center">You are a little bit lost</h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h3 style="color: white; text-align: center">Here are some links to guide you </h3>
+        <h3 style="text-align: center">Here are some links to guide you </h3>
     </div>
 </div>
 
