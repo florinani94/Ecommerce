@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
     <c:url var="bkgURL2" value="/resources/background2.jpg"></c:url>
+    <c:url var="productLink" value="/products/view?productId="></c:url>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
@@ -44,7 +45,6 @@
 
                         <li>Code: ${product.code} </li>
                         <li>Name: ${product.name} </li>
-                        <li>Description: ${product.description} </li>
                         <li>Price: ${product.price}</li>
                         <li>StockLevel: ${product.stockLevel}</li>
 
@@ -56,6 +56,12 @@
                         <c:if test="${product.stockLevel lt 1}">
                             <span class="label label-warning">Out of stock!</span>
                         </c:if>
+
+                        <br><br>
+
+                        <a href="${productLink}${product.productId}"/>
+                            <input type="submit" name="product" value="Details" class="btn btn-warning"/>
+                        </a>
                     </ul>
                 </div>
             </c:forEach>

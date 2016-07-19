@@ -1,0 +1,67 @@
+#teaLogo{
+	margin-left: 15%;
+}
+
+#headerLinks{
+	text-align:right;
+	vertical-align: bottom;	
+	background-color: #aebd4c;
+}
+
+.headerLink{
+	margin-left: 3%;
+	text-decoration: none;
+	font-family: "Calibri";
+	font-weight: lighter;
+	color: #ffffff;
+	font-size: 25;
+}
+
+.pageText{
+	color: #aebd4c;
+	text-decoration: none;
+	font-family: "Calibri";
+	font-weight: lighter;
+}
+
+.detailsText{
+	color: #888888;
+	text-decoration: none;
+	font-family: "Calibri";
+	font-weight: lighter;
+}
+
+.pageLayout{
+	width: 70%;
+	margin-top: 1%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#productLayout{
+	margin-top: 5%;
+}
+
+#imageCell{
+	width: 10%;
+	height: 10%;
+	
+}
+
+#spaceCol{
+	width: 10%;
+}
+
+#productDetails{
+	text-align: left;
+	vertical-align: top;
+}
+
+#productTitle{
+	font-size: 40;
+}
+
+#spaceRow{
+	height: 5%;
+}
+

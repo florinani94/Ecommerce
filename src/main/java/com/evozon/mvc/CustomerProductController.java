@@ -26,5 +26,10 @@ public class CustomerProductController {
         return "customerViewProducts";
     }
 
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String showProductDetails(Model model, @RequestParam String productId){
+        model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
+        return "productDetailsPage";
+    }
 
 }
