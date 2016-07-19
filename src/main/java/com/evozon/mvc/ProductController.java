@@ -12,6 +12,7 @@ package com.evozon.mvc;
         import org.springframework.ui.Model;
         import org.springframework.validation.BindingResult;
         import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.multipart.MultipartFile;
 
         import javax.servlet.http.HttpServletRequest;
         import java.io.File;
@@ -64,9 +65,18 @@ public class ProductController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
+    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
 
         try {
+            if(!image.isEmpty()) {
+                try {
+                    if(productService.validateImage(image) == true) {
+                        productService.saveImage(product.getCode() + ".jpg", image);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
                 productService.addProduct(product);

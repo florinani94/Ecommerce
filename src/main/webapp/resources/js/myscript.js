@@ -1,7 +1,7 @@
 /**
  * Created by dianamohanu on 14/07/2016.
  */
-
+// Functions used in viewProducts.jsp
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
@@ -25,6 +25,6 @@ $("#deleteButton").click(function() {
     });
 });
 
-$("#prodTable").on('change','#selectall',function(){
-    $(".check").prop('checked', $(this).prop("checked"));
+$("#selectall").click(function () {
+    $('.check').attr('checked', this.checked);
 });
