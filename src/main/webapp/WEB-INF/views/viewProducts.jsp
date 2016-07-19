@@ -87,7 +87,7 @@
             </table>
         </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" style="margin-top: 1%">
         <form method="get" action="/mvc/backoffice/product/sort">
             <select name="sortValue" id="sort">
                 <option value="NONE">Sort By</option>
