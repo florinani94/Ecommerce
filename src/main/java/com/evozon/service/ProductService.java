@@ -196,5 +196,19 @@ public class ProductService {
 
         return true;
     }
+
+    /* execute the image save operation */
+    public Product doImageSaveOperation(Product product,  MultipartFile image) {
+        if((!image.isEmpty()) && (this.validateImage(image) == true)) {
+            this.saveImage(product.getCode() + ".jpg", image);
+            String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
+            product.setImageURL(imageURL);
+        } else {
+            String imageURL = "/resources/productImages/default@product.jpg";
+            product.setImageURL(imageURL);
+        }
+
+        return product;
+    }
 }
 
