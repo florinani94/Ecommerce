@@ -71,4 +71,19 @@ public class ProductDAOImpl implements ProductDAO {
         Session session = sessionFactory.getCurrentSession();
         session.update(product);
     }
+
+    public List<Product> getSortedProducts(String queryCommand, int startPageIndex, int recordsPerPage) {
+        int infRange = ((startPageIndex-1 )*recordsPerPage);
+        int supRange = recordsPerPage ;
+
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(queryCommand);
+
+        query.setFirstResult(infRange);
+        query.setMaxResults(supRange);
+
+        List<Product> products = query.list();
+        return products;
+
+    }
 }

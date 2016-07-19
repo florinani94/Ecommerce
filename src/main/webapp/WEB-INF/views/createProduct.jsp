@@ -13,7 +13,7 @@
 
 <jsp:include page="backofficeHeader.jsp" />
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-3 col-md-offset-4" style="text-align: center">
         <h1> Create a new product </h1>
         <br>
     </div>
@@ -22,7 +22,7 @@
 <c:if test="${result == null}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <form action="add" method="post" id="addProd" class="form-inline">
+                <form action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
                     Code: <br>
                     <input type="text" name="code" maxlength="8" class="form-control"/>
                     <br><br>
@@ -38,6 +38,9 @@
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
                     <br><br>
+                    Select a image (.jpg) <br>
+                    <input name="image" type="file" accept=".jpg"/>
+                    <br><br>
                     <input type="submit" value="Save" class="btn btn-success"/>
                 </form>
         </div>
@@ -46,20 +49,34 @@
 
 
 <c:if test="${result == true}">
-    <h3>Product created with success!</h3>
-
-    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
-    </a>
-
-    <a href="${viewProdUrl}" class="btn btn-default" role="button">View products
-    </a>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-4">
+            <h3 style="text-align: center">Product created with success!</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-4">
+            <a href="${newProdUrl}" class="btn btn-default" role="button">New product</a>
+        </div>
+        <div class="col-md-1 col-md-offset-1">
+            <a href="${viewProdUrl}" class="btn btn-default" role="button">View products</a>
+        </div>
+    </div>
 </c:if>
 
 <c:if test="${result == false}">
-    <h3>Product was not created!</h3>
+<div class="row">
+    <div class="col-md-3 col-md-offset-4">
+        <h3 style="text-align: center">Product was not created!</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+        </a>
+    </div>
+</div>
 
-    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
-    </a>
 </c:if>
 
 </body>

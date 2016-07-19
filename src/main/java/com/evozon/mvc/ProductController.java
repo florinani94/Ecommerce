@@ -1,26 +1,22 @@
 package com.evozon.mvc;
 
-        import com.evozon.domain.Product;
-        import com.evozon.service.ProductService;
-        import org.apache.commons.fileupload.FileItem;
-        import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-        import org.apache.commons.fileupload.servlet.ServletFileUpload;
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.validation.BindingResult;
-        import org.springframework.web.bind.annotation.*;
-
-        import javax.servlet.http.HttpServletRequest;
-        import java.io.File;
-        import java.util.Iterator;
-        import java.util.List;
-
-/**
- * Created by horatiucernean on 12/07/2016.
- */
+import com.evozon.domain.Product;
+import com.evozon.service.ProductService;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
 
 @Controller
@@ -45,6 +41,7 @@ public class ProductController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteProduct(Model model, @RequestParam("productId") int productId) {
         try {
+            productService.deleteImage(productId);
             productService.deleteProduct(productId);
 
             model.addAttribute("result", true);
@@ -64,12 +61,11 @@ public class ProductController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
+    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
 
         try {
-
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
-                productService.addProduct(product);
+                productService.addProduct(productService.doImageSaveOperation(product, image));
                 model.addAttribute("result", true);
             }else if (result.hasErrors() || productService.validateProduct(product) == false) {
                 model.addAttribute("result", false);
@@ -125,9 +121,10 @@ public class ProductController {
 
         return "exportProducts";
     }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editProduct(Model model, @ModelAttribute("product") Product product, BindingResult result){
-        productService.updateProduct(product);
+    public String editProduct(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result){
+        productService.updateProduct(productService.doImageSaveOperation(product, image));
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
     }
@@ -146,4 +143,5 @@ public class ProductController {
         }
         return "viewProducts";
     }
+
 }
