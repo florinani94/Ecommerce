@@ -202,6 +202,13 @@ public class ProductService {
         return true;
     }
 
+    /* delete a image based on the id */
+    public void deleteImage(int id) {
+        File image = new File(servletContext.getRealPath(productDAO.getProductById(id).getImageURL()));
+
+        image.delete();
+    }
+
     /* execute the image save operation */
     public Product doImageSaveOperation(Product product,  MultipartFile image) {
         if((!image.isEmpty()) && (this.validateImage(image) == true)) {
