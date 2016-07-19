@@ -160,22 +160,23 @@ public class ProductService {
         return productDAO.getAllProducts().size();
     }
 
-    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer MAX_PRODUCTS_PER_PAGE){
+    public List<Product> getSortedProducts(String option){
 
             switch (option) {
                 case "SORTPRICEUPDOWN":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price", startPageIndex, MAX_PRODUCTS_PER_PAGE);
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price");
                 case "SORTPRICEDOWNUP":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC", startPageIndex, MAX_PRODUCTS_PER_PAGE);
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC");
                 case "SORTNAMEAZ":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name", startPageIndex, MAX_PRODUCTS_PER_PAGE);
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name");
                 case "SORTNAMEZA":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC", startPageIndex, MAX_PRODUCTS_PER_PAGE);
+                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC");
                 default:
                     return productDAO.getAllProducts();
             }
-
     }
+
+    //public List<Product> getPaginatedProducts()
 
     /* save image to local */
     public void saveImage(String filename, MultipartFile image) {
