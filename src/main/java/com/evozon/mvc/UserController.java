@@ -18,9 +18,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String confirmNewBackofficeUser(Model model) {
+    public String messageNewBackofficeUser(Model model) {
         model.addAttribute("message1", "Information submitted.");
         model.addAttribute("message2", "Please verify your email to confirm your account!");
         return "registerUser";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginBackofficeUser() {
+        return "loginBackoffice";
     }
 }
