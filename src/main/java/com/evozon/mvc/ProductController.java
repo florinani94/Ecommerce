@@ -30,21 +30,10 @@ public class ProductController {
 
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String getAllProducts(HttpServletRequest request, Model model) {
+    public String getAllProducts(Model model) {
 
         model.addAttribute("allProducts", productService.getAllProducts());
 
-        // Case 1
-        //model.addAttribute("allProducts", productService.getSortedProductsByPriceUpDown());
-
-        // Case 2
-        //model.addAttribute("allProducts", productService.getSortedProductsByPriceDownUp());
-
-        // Case 3
-        //model.addAttribute("allProducts", productService.getSortedProductsByNameAZ());
-
-        // Case 4
-//        model.addAttribute("allProducts", productService.getSortedProductsByNameZA());
         return "viewProducts";
     }
 
@@ -71,9 +60,18 @@ public class ProductController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String result(Model model, @ModelAttribute("product") Product product, BindingResult result) {
+    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
 
         try {
+            if(!image.isEmpty()) {
+                try {
+                    if(productService.validateImage(image) == true) {
+                        productService.saveImage(product.getCode() + ".jpg", image);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
                 productService.addProduct(product);
