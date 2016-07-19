@@ -10,4 +10,5 @@ public interface EntryDAO {
     void addEntry(Entry entry);
     void deleteEntry(int id);
     void addProductToEntry(Product product);
+    Double computeSubTotalForEntry(Integer id);
 }

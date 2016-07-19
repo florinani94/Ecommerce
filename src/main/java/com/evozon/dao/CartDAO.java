@@ -1,6 +1,7 @@
 package com.evozon.dao;
 
 import com.evozon.domain.Cart;
+import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 
 /**
@@ -9,4 +10,6 @@ import com.evozon.domain.Product;
 public interface CartDAO {
     void addCart(Cart cart);
     void deleteCart(int id) ;
+    void addEntryToCart(Entry entry);
+    Double computeTotalForCart(Integer id);
 }
