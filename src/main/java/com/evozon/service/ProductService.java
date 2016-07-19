@@ -2,10 +2,13 @@ package com.evozon.service;
 
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,9 @@ import java.util.List;
 public class ProductService {
     @Autowired
     private ProductDAO productDAO;
+
+    @Autowired
+    private ServletContext servletContext;
 
     public void addProduct(Product product) {
         this.productDAO.addProduct(product);
@@ -143,6 +149,26 @@ public class ProductService {
 
     public int getSize(){
         return productDAO.getAllProducts().size();
+    }
+
+    /* save image to local */
+    public void saveImage(String filename, MultipartFile image) {
+        File file = new File(servletContext.getRealPath("/resources/productImages") + "/" + filename);
+
+        try {
+            FileUtils.writeByteArrayToFile(file, image.getBytes());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* validation for .jpg */
+    public boolean validateImage(MultipartFile image) {
+        if (!image.getContentType().equals("image/jpeg")) {
+            return false;
+        }
+
+        return true;
     }
 }
 
