@@ -14,6 +14,13 @@
 
 <head>
     <title>Register</title>
+
+    <style>
+        .error {
+            color: #ff0000;
+        }
+    </style>
+
 </head>
 <body>
 <c:url var="signIn" value="login"/>
@@ -21,31 +28,36 @@
 <div class="col-md-6 col-md-offset-4">
     <h1>REGISTER</h1>
     <h3>Create back-office user account</h3>
-    <br> <br>
+    <br>
+
+    <p class="error">${passwordError}</p>
+
     <form action="register" method="post">
         <div class="row">
             <div class="form-group col-lg-5">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="myemail@example.com">
+                <input type="email" class="form-control" name="email" id="email" placeholder="myemail@example.com">
+                <p class="error">${emailError}</p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-lg-5">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" placeholder="user1">
+                <input type="text" class="form-control" name="username" id="username" placeholder="user1">
+                <p class="error">${usernameError}</p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-lg-5">
                 <label for="pass1">Password:</label>
-                <input type="password" class="form-control" id="pass1" placeholder="Enter password">
+                <input type="password" class="form-control" name="pass1" id="pass1" placeholder="Enter password">
                 <span class="help-block">Password must be at least 6 characters.</span>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-lg-5">
                 <label for="pass2">Confirm Password:</label>
-                <input type="password" class="form-control" id="pass2" placeholder="Confirm password">
+                <input type="password" class="form-control" name="pass2" id="pass2" placeholder="Confirm password">
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Create Account</button>

@@ -1,9 +1,13 @@
 package com.evozon.domain;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -15,16 +19,17 @@ public class User implements Serializable {
     @GeneratedValue
     private int id;
 
-    @Column(nullable = false)
+    @NotNull
+    @Email
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
     private String username;
 
-    @Column(nullable = false)
+    @NotNull
+    @Size(min = 6, max = 30)
     private String password;
 
-    @Column(nullable = false)
     private boolean active;
 
     public int getId() {

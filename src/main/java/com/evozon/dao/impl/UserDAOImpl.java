@@ -1,0 +1,53 @@
+package com.evozon.dao.impl;
+
+import com.evozon.dao.UserDAO;
+import com.evozon.domain.User;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+ * Created by dianamohanu on 19/07/2016.
+ */
+@Repository("userDAO")
+@Transactional
+public class UserDAOImpl implements UserDAO {
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    public void addUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
+    }
+
+    public boolean checkIfEmailExists(String email) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM User as U WHERE U.email = :email");
+        query.setParameter("email", email);
+        List<User> products = query.list();
+
+        if (products.size() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkIfUsernameExists(String username) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM User as U WHERE U.username = :username");
+        query.setParameter("username", username);
+        List<User> products = query.list();
+
+        if (products.size() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+}
