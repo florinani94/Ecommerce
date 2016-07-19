@@ -3,14 +3,20 @@ package com.evozon.service;
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
 import com.mysql.jdbc.StringUtils;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,7 +186,7 @@ public class ProductService {
 
     /* save image to local */
     public void saveImage(String filename, MultipartFile image) {
-        File file = new File(servletContext.getRealPath("/resources/productImages") + "/" + filename);
+        File file = new File(servletContext.getRealPath("/resources/productImages" + "/" + filename));
 
         try {
             FileUtils.writeByteArrayToFile(file, image.getBytes());
@@ -205,8 +211,17 @@ public class ProductService {
             String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
             product.setImageURL(imageURL);
         } else {
-            String imageURL = "/resources/productImages/default@product.jpg";
-            product.setImageURL(imageURL);
+            File file = new File(servletContext.getRealPath("/resources/productImages/default@product.jpg"));
+            MultipartFile defaultImage = null;
+
+            try {
+                FileInputStream input = new FileInputStream(file);
+                defaultImage = new MockMultipartFile(product.getCode() + ".jpg", file.getName(), "image/jpeg", IOUtils.toByteArray(input));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            this.doImageSaveOperation(product, defaultImage);
         }
 
         return product;
