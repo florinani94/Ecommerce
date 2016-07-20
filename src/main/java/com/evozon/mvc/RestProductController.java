@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,64 +24,75 @@ public class RestProductController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     @ResponseBody
-    public String getAllProducts() {
+    public String getAllProducts(HttpServletResponse response) {
 
         List<Product> products = productService.getAllProducts();
         String productList = new Gson().toJson(products);
-
+        if(products.size() == 0 ){
+            response.setStatus(404);
+        }
+        response.setStatus(200);
         return productList;
     }
 
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     @ResponseBody
-    public String getProduct(@PathVariable int productId) {
+    public String getProduct(@PathVariable int productId, HttpServletResponse response) {
 
         Product product = productService.getProductById(productId);
         String jsonProduct = new Gson().toJson(product);
         if (product != null) {
+            response.setStatus(200);
             return jsonProduct;
         }
-        return "{ \"Error\" : \" The product with id " + productId + " does not exists! \" }";
+        response.setStatus(404);
+        return  new Gson().toJson(" The product with id " + productId + " does not exists!");
     }
 
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteProduct(@PathVariable int productId) {
+    public String deleteProduct(@PathVariable int productId , HttpServletResponse response) {
 
         Product product = productService.getProductById(productId);
         if (product != null) {
+            response.setStatus(200);
             productService.deleteProduct(productId);
             return "The product with id " + productId + " have been deleted !";
         }
+        response.setStatus(404);
         return "The product with id " + productId + " does not exists !";
     }
 
 
     @RequestMapping(value = "", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public String updateProduct(@RequestBody Product product) {
+    public String updateProduct(@RequestBody Product product, HttpServletResponse response) {
 
         Product searchedProduct = productService.getProductById(product.getProductId());
         if (searchedProduct != null) {
+            response.setStatus(200);
             productService.updateProduct(product);
-            return "{ \"Message\" : \" The product with id " + product.getProductId() + " have been updated! \" }";
+            return new Gson().toJson(" The product with id " + product.getProductId() + " have been updated!");
         }
-        return "{ \"Error\" : \" The product with id " + product.getProductId() + " does not exists! \" }";
+        response.setStatus(404);
+        return new Gson().toJson(" The product with id " + product.getProductId() + " does not exists!");
     }
 
 
     @RequestMapping(value = "", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public String addProduct(@RequestBody Product product) {
+    public String addProduct(@RequestBody Product product, HttpServletResponse response) {
 
         Product searchedProduct = productService.getProductBycode(product.getCode());
         if (searchedProduct == null) {
+            response.setStatus(200);
             productService.addProduct(product);
-            return "{ \"Message\" : \" The product was successfully added ! \" }";
+            return new Gson().toJson(" The product was successfully added !");
         }
-        return "{ \"Error\" : \" The product with code " + product.getCode() + " already exists! \" }";
+        response.setStatus(404);
+        return new Gson().toJson(" The product with code " + product.getCode() + " already exists!");
     }
 
 }
