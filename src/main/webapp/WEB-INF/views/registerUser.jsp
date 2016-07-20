@@ -15,6 +15,9 @@
 <c:url var="detailsCSSURL" value="/resources/style/detailViewStyle.css"/>
 <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
 
+<c:url var="signIn" value="login"/>
+<c:url var="backgroundURL" value="/resources/detailView/Background2.jpg"/>
+
 <head>
     <title>Register</title>
 
@@ -26,8 +29,8 @@
 
 </head>
 <body>
-<c:url var="signIn" value="login"/>
 
+<body background="${backgroundURL}" style="background-size: 100%">
 <jsp:include page="customerHeader.jsp" />
 
 <br>
