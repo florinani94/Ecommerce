@@ -45,6 +45,36 @@ public class CartDAOImpl implements CartDAO{
         Session session = sessionFactory.getCurrentSession();
         session.save(entry);
     }
+
+    @Override
+    public void deleteEntryFromCart(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query=session.createQuery("DELETE FROM entry WHERE entryId=:id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+
+    }
+    @Override
+    public void addProductToEntry(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(product);
+    }
+
+
+    @Override
+    public Double computeSubTotalForEntry(Integer id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT (price * quantity) AS subtotal FROM product JOIN entry ON entry.product=product.code JOIN cart ON cart.cartId=entry.cart_id WHERE entry.entryId=:id");
+        query.setParameter("id", id);
+        List<Double> entries = query.list();
+        if(entries.size() > 0){
+            return entries.get(0);
+        }
+        return null;
+
+
+    }
+
     @Override
     public Double computeTotalForCart(Integer id){
         Session session = sessionFactory.getCurrentSession();

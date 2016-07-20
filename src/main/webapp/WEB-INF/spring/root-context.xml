@@ -38,6 +38,8 @@
 				<value>com.evozon.domain.Entry</value>
 				<value>com.evozon.domain.Cart</value>
 				<value>com.evozon.domain.User</value>
+				<value>com.evozon.domain.Address</value>
+
 			</list>
 		</property>
 

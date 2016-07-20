@@ -21,17 +21,29 @@ public class Cart {
     @Column
     private Double total;
 
-    @Column
-    private String deliveryAddress;
+    @AttributeOverrides({
+            @AttributeOverride(name="street",column=@Column(name="deliveryStreet")),
+            @AttributeOverride(name="number",column=@Column(name="deliveryNumber")),
+            @AttributeOverride(name="city",column=@Column(name="deliveryCity")),
+            @AttributeOverride(name="phone",column=@Column(name="deliveryPhone"))
+            })
+    @Embedded
+    private Address deliveryAddress;
 
-    @Column
-    private String billingAddress;
+    @AttributeOverrides({
+            @AttributeOverride(name="street",column=@Column(name="billingStreet")),
+            @AttributeOverride(name="number",column=@Column(name="billingNumber")),
+            @AttributeOverride(name="city",column=@Column(name="billingCity")),
+            @AttributeOverride(name="phone",column=@Column(name="billingPhone"))
+    })
+    @Embedded
+    private Address billingAddress;
 
     public Cart(){
 
     }
 
-    public Cart(int cartId, Set<Entry> entrySet, Double total, String deliveryAddress, String billingAddress) {
+    public Cart(int cartId, Set<Entry> entrySet, Double total, Address deliveryAddress, Address billingAddress) {
         this.cartId = cartId;
         this.entrySet = entrySet;
         this.total = total;
@@ -65,19 +77,19 @@ public class Cart {
         this.total = total;
     }
 
-    public String getDeliveryAddress() {
+    public Address getDeliveryAddress() {
         return deliveryAddress;
-    }
+   }
 
-    public void setDeliveryAddress(String deliveryAddress) {
+    public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public String getBillingAddress() {
+    public Address getBillingAddress() {
         return billingAddress;
     }
 
-    public void setBillingAddress(String billingAddress) {
+    public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
     }
 
@@ -87,8 +99,8 @@ public class Cart {
                 "cartId=" + cartId +
                 ", entrySet=" + entrySet +
                 ", total=" + total +
-                ", deliveryAddress='" + deliveryAddress + '\'' +
-                ", billingAddress='" + billingAddress + '\'' +
+                ", deliveryAddress='" + deliveryAddress.toString() + '\'' +
+                ", billingAddress='" + billingAddress.toString() + '\'' +
                 '}';
     }
 }
