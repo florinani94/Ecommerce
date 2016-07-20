@@ -2,21 +2,15 @@ package com.evozon.service;
 
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Product;
-import com.mysql.jdbc.StringUtils;
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +30,7 @@ public class ProductService {
     }
 
 
-    public void deleteProduct(int productId) { this.productDAO.deleteProduct(productId);}
+    public void deleteProduct(Integer productId) { this.productDAO.deleteProduct(productId);}
 
 
     public List<Product> getAllProducts() {
@@ -66,7 +60,7 @@ public class ProductService {
        return  productDAO.getProductById(id);
     }
 
-    public Product getProductBycode(String code){
+    public Product getProductByCode(String code){
         return  productDAO.getProductByCode(code);
     }
 

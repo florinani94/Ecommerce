@@ -85,7 +85,7 @@ public class RestProductController {
     @ResponseBody
     public String addProduct(@RequestBody Product product, HttpServletResponse response) {
 
-        Product searchedProduct = productService.getProductBycode(product.getCode());
+        Product searchedProduct = productService.getProductByCode(product.getCode());
         if (searchedProduct == null) {
             response.setStatus(200);
             productService.addProduct(product);
