@@ -1,13 +1,29 @@
-html, body { height: 100%; width: 100%; margin: 0; }
+html, body { height: 100%; width: 100%; margin: 0;
+	overflow: hidden; }
 
-#teaLogo{
-	margin-left: 15%;
+.header{
+	background-image: linear-gradient(to top , rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+}
+
+#teaLogo,.logoText{
+	margin-top: 3%;
+	vertical-align: bottom;
+}
+
+.logoText{
+	margin-left: 3%;
+	text-decoration: none;
+	font-family: "Calibri";
+	font-weight: lighter;
+	color: #ffffff;
+	font-size: 20;
+	text-align: left;
 }
 
 #headerLinks{
+	margin-top: 13%;
 	text-align:right;
-	vertical-align: bottom;	
-	background-color: #aebd4c;
+	vertical-align: bottom;
 }
 
 .headerLink{
@@ -34,43 +50,69 @@ html, body { height: 100%; width: 100%; margin: 0; }
 
 #imageCell{
 	position: absolute;
-	max-height: 375px;
-	max-width: 500px;
+	max-width: 650px;
+	max-height: 400px;
 	right: 5%;
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
 #productInfo{
-	text-align: left;
+	position: relative;
+	text-align: center;
+	width: 100%;
 	max-width: 500px;
-	max-height: 375px;
-	height: 40%;
+	max-height: 300px;
 	vertical-align: top;
 	background: rgba(255,255,255,0.5);
 }
 
 #productDetails{
+	margin-top: 5%;
 	width: 70%;
-	height: 70%;
+	height: 35%;
+	margin-left: 15%;
+}
+
+@font-face {
+	font-family: "TitleCustomFont";
+	src: url(/mvc/resources/style/StackyardFont.ttf) format("truetype");
 }
 
 #productTitle{
-	font-size: 40px;
+	font-family: 'TitleCustomFont';
+	font-size: 55px;
 }
 
 .descriptionText{
 	color: dimgrey;
-	height: 60%;
+	text-align: center;
+	height: 40%;
 	vertical-align: top;
 }
 
 .priceText{
 	color: #aebd4c;
-	font-size: 30px;
+	text-align: center;
+	font-size: 40px;
 	vertical-align: top;
+	margin-top: 5%;
+	margin-left: 5%;
 }
 
-#spaceRow{
-	height: 100%;
+.myHr {
+	height: 1px;
+	border: 0;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
+.addButton {
+	text-align: center;
+	margin-left: 20%;
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 10px 45px;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+}

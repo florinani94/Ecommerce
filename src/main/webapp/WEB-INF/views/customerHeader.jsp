@@ -16,30 +16,33 @@
     <title>Tea Shop</title>
 </head>
 <body>
+    <div class="row header">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                     <a href="${homeURL}">
+                        <img id="teaLogo"  src="${logoUrl}" alt="Tea House" ismap>
+                     </a>
+                </div>
+                <div class="col-sm-6">
+                    <div id="headerLinks">
+                        <a class="headerLink" href="${homeURL}">
+                            My cart
+                        </a>
 
-    <div class="row">
-        <div class="col-sm-3 col-sm-offset-1">
-            <a id="teaLogo" href="${homeURL}">
-                <img src="${logoUrl}" alt="Tea House" ismap></a>
-            <a id="logoText" href="${homeURL}">
-                <img src="${textUrl}" alt="There is always time for tea" ismap></a>
-        </div>
-        <div class="col-sm-8">
-            <div id="headerLinks">
-                <a class="headerLink" href="${homeURL}">
-                    My cart
-                </a>
+                        <a class="headerLink" href="${homeURL}">
+                            Checkout
+                        </a>
 
-                <a class="headerLink" href="${homeURL}">
-                    Checkout
-                </a>
-
-                <a class="headerLink" href="${homeURL}">
-                    Login
-                </a>
+                        <a class="headerLink" href="${homeURL}">
+                            Login
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="col-sm-3"></div>
     </div>
-
 </body>
 </html>
