@@ -29,4 +29,5 @@ public class CategoryService {
         return categoryDAO.getAllCategories();
     }
 
+    public Category getCategoryById(String id) { return categoryDAO.getCategoryById(id);}
 }
