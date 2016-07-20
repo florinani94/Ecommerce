@@ -38,14 +38,14 @@ public class Product implements Serializable {
     private Category category;
 
 
-//    public Product(String code, String name, String description, Double price, Integer stockLevel) {
-//
-//        this.code = code;
-//        this.name = name;
-//        this.description = description;
-//        this.price = price;
-//        this.stockLevel = stockLevel;
-//    }
+    public Product(String code, String name, String description, Double price, Integer stockLevel) {
+
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockLevel = stockLevel;
+    }
 
 
 
