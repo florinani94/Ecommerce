@@ -61,7 +61,7 @@ public class Cart {
     }
 
     @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    public Set<Entry> getentrySet() {
+    public Set<Entry> getEntrySet() {
         return entrySet;
     }
 
