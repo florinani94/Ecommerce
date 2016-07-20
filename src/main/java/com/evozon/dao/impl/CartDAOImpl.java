@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -76,21 +77,17 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Double computeTotalForCart(Integer id){
+    public Set<Entry> getAllEntriesForCart(Integer id){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM cart WHERE cart.cartId = :id");
         query.setParameter("id", id);
         List<Cart> carts = query.list();
-        Double total=new Double(0);
 
         if(carts.size() > 0){
-            for(Entry e:carts.get(0).getentrySet()){
-                total+=e.getSubTotal();
-            }
-            return total;
+            return carts.get(0).getentrySet();
         }
-        return null;
 
+        return null;
 
     }
 }
