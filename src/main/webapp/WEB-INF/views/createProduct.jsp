@@ -38,24 +38,15 @@
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
                     <br><br>
-                    Category : <br>
-                    <input type="text" name="category" class="form-control"/>
-                    <%--<form>--%>
-                        <select  id="category" name="category" onchange="setCategory()">
-                            <c:forEach var="category" items="${allCategories}">
-                                <%--<option value="Tea"> Green Tea</option>--%>
-                                <%--<option value="Tea">Red Tea</option>--%>
-                                <%--<option value="Tea">Black Tea</option>--%>
-                                <option value="${category}">${category.name}</option>
-
-                            </c:forEach>
-                        </select>
-                        <%--<input type="submit" value="Submit">--%>
-                    <%--</form>--%>
+                    <select id="category" name="categoryId">
+                        <c:forEach var="category" items="${allCategories}">
+                            <option value="${category.id}">${category.name}</option>
+                        </c:forEach>
+                    </select>
                     <br><br>
                     <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
-                    <script type="text/javascript" src="/mvc/resources/js/SetCategory.js"></script>
-                    <div class="setCategory" style="display: none" name="category"></div>
+                    <%--<script type="text/javascript" src="/mvc/resources/js/SetCategory.js"></script>--%>
+                    <%--<div class="setCategory" style="display: none" name="category"></div>--%>
                     <input type="submit" value="Save" class="btn btn-success"/>
                 </form>
         </div>

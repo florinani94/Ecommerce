@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-/**
- * Created by mihai on 7/12/2016.
- */
 @Repository("categoryDAO")
 @Transactional
 public class CategoryDAOImpl implements CategoryDAO{
@@ -38,6 +35,17 @@ public class CategoryDAOImpl implements CategoryDAO{
     public List<Category> getAllCategories() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("FROM Category AS c").list();
+    }
+
+    public Category getCategoryById(String id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Category as C WHERE C.id = :id");
+        query.setParameter("id", id);
+        List<Category> categories = query.list();
+        if(categories.size() > 0){
+            return categories.get(0);
+        }
+        return null;
     }
 
 }
