@@ -116,3 +116,21 @@ html, body { height: 100%; width: 100%; margin: 0;
 	display: inline-block;
 	font-size: 20px;
 }
+
+#confirmInfo{
+	position: relative;
+	text-align: center;
+	width: 100%;
+	max-width: 600px;
+	max-height: 400px;
+	vertical-align: top;
+	background: rgba(242, 242, 242, 0.5);
+	margin-top: 10%;
+}
+
+
+#confirmDetails{
+	width: 70%;
+	height: 20%;
+	margin-left: 15%;
+}
