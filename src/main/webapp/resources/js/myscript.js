@@ -1,7 +1,7 @@
 /**
  * Created by dianamohanu on 14/07/2016.
  */
-
+// Functions used in viewProducts.jsp
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
@@ -26,6 +26,26 @@ $("#deleteButton").click(function() {
 });
 
 
-$("#selectall").change(function(){
-    $(".check").prop('checked', $(this).prop("checked"));
+$("#selectall").click(function () {
+    $('.check').attr('checked', this.checked);
 });
+
+
+
+//For collapsible checkout form
+$('.panel-heading h4 a input[type=checkbox]').on('click', function(e) {
+    e.stopPropagation();
+})
+
+function billingFunction() {
+    if (document.getElementById("same").checked) {
+        document.getElementById("billingStreet").value=document.getElementById("deliveryStreet").value;
+        document.getElementById("billingNumber").value=document.getElementById("deliveryNumber").value;
+        document.getElementById("billingCity").value=document.getElementById("deliveryCity").value;
+    } else {
+        document.getElementById("billingStreet").value="";
+        document.getElementById("billingNumber").value="";
+        document.getElementById("billingCity").value="";
+    }
+}
+

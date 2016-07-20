@@ -14,7 +14,7 @@
 
     <c:url var="homePage" value="/home"></c:url>
     <c:url var="backgroundResUrl" value="/resources/background2.jpg"></c:url>
-    <c:url var="logoResUrl" value="/resources/teaLogo.png"></c:url>
+    <c:url var="logoResUrl" value="/resources/teaLogoPink.png"></c:url>
 </head>
 <body background="${backgroundResUrl}" style="background-size: 100%">
     <p class="logo">
