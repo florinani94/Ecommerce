@@ -11,5 +11,12 @@ public interface CartDAO {
     void addCart(Cart cart);
     void deleteCart(int id) ;
     void addEntryToCart(Entry entry);
+
+    void deleteEntryFromCart(int id);
+
+    void addProductToEntry(Product product);
+
+    Double computeSubTotalForEntry(Integer id);
+
     Double computeTotalForCart(Integer id);
 }

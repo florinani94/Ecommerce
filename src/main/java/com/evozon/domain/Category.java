@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "category")
 public class Category {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Integer id;
 
     @Column(nullable  = false, length = 30)

@@ -50,4 +50,41 @@ public class UserDAOImpl implements UserDAO {
 
         return false;
     }
+
+    public boolean checkKey(String keyUrl) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM User as U WHERE U.keyUrl = :keyUrl");
+        query.setParameter("keyUrl", keyUrl);
+        List<User> products = query.list();
+
+        if (products.size() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public User getUserByKey(String keyUrl) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM User as U WHERE U.keyUrl = :keyUrl");
+        query.setParameter("keyUrl", keyUrl);
+        List<User> users = query.list();
+        if(users.size() > 0){
+            return users.get(0);
+        }
+        return null;
+    }
+
+    public void activateAccount(String keyUrl) {
+        User user = this.getUserByKey(keyUrl);
+
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("UPDATE User set active = :active "  +
+                "WHERE id = :id");
+
+        query.setParameter("active", true);
+        query.setParameter("id", user.getId());
+        int result = query.executeUpdate();
+        System.out.println("Rows affected: " + result);
+    }
 }
