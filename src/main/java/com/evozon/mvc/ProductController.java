@@ -1,5 +1,6 @@
 package com.evozon.mvc;
 
+import com.evozon.domain.Category;
 import com.evozon.domain.Product;
 import com.evozon.service.CategoryService;
 import com.evozon.service.ProductService;
@@ -67,12 +68,16 @@ public class ProductController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image,
+    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product,
+                                                @RequestParam(value = "image", required = false) MultipartFile image,
+                                                @RequestParam(value = "categoryId", required = false) String categoryId,
                                                 BindingResult result) {
 
         try {
 
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
+                //Category category = categoryService.getCategoryById(categoryId);
+                //product.setCategory(category);
                 productService.addProduct(productService.doImageSaveOperation(product, image));
                 model.addAttribute("result", true);
             }else if (result.hasErrors() || productService.validateProduct(product) == false) {

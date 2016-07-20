@@ -2,12 +2,13 @@ html, body { height: 100%; width: 100%; margin: 0;
 	overflow: hidden; }
 
 .header{
-	background-image: linear-gradient(to top , rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+	background-image: linear-gradient(to top , rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5));
 }
 
 #teaLogo,.logoText{
 	margin-top: 3%;
 	vertical-align: bottom;
+	margin-bottom: 5%;
 }
 
 .logoText{
@@ -107,6 +108,7 @@ html, body { height: 100%; width: 100%; margin: 0;
 
 .addButton {
 	text-align: center;
+	margin-top: -18%;
 	margin-left: 20%;
 	background-color: #4CAF50; /* Green */
 	border: none;
@@ -115,4 +117,27 @@ html, body { height: 100%; width: 100%; margin: 0;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 20px;
+}
+
+#confirmInfo{
+	position: relative;
+	text-align: center;
+	width: 100%;
+	max-width: 600px;
+	max-height: 400px;
+	vertical-align: top;
+	background: rgba(242, 242, 242, 0.5);
+	margin-top: 10%;
+}
+
+
+#confirmDetails{
+	width: 70%;
+	height: 20%;
+	margin-left: 15%;
+}
+
+#cartIcon{
+	margin-top: -1%;
+	width: 7%;
 }
