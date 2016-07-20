@@ -14,10 +14,11 @@ public class Entry {
     private Integer entryId;
 
     @ManyToOne
-    @JoinColumn(name="cartId_FK")
+    @JoinColumn(name="cart_id", nullable = false)
     private Cart cart;
 
-    @Column(nullable = false)
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable = false)
     private Product product;
 
     @Column(nullable = false)
@@ -57,8 +58,8 @@ public class Entry {
         this.cart = cart;
     }
 
-    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="productId_FK")
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinColumn(name="productId", nullable = false)
     public Product getProduct() {
         return product;
     }
