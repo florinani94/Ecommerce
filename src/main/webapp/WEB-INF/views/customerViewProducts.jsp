@@ -7,101 +7,96 @@
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
-    <c:url var="bkgURL2" value="/resources/background2.jpg"></c:url>
-    <c:url var="productLink" value="/products/view?productId="></c:url>
+    <c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>
+    <link rel="stylesheet" href="${cssUrlHead}">
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
 
     <title>Products</title>
 </head>
 
 <body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
 
-    <div class="row">
-        <div class="col-md-3 col-md-offset-5">
-            <h1><b>Our Products</b></h1>
+    <jsp:include page="customerHeader.jsp" />
+
+    <div class="bigBox">
+            <div class="sortBox">
+                    <form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">
+                        <select name="sortValue" id="sort" class="form-control">
+                            <option value="none">Sort By</option>
+                            <option value="sortpriceupdown">Price Cheap to Expensive</option>
+                            <option value="sortpricedownup">Price Expensive to Cheap</option>
+                            <option value="sortnameaz">Name A to Z</option>
+                            <option value="sortnameza">Name Z to A</option>
+                        </select>
+                        <input type="submit" value="Sort" class="btn btn-default sortButton"/>
+                    </form>
+            </div>
+        <c:if test="${not empty products}">
+            <div class="productsContainer" class="row">
+                <c:forEach var="product" items="${products}">
+
+                    <c:url var="productLink" value="/products/view?productId=${product.productId}"></c:url>
+
+                    <div class="square">
+                        <c:url var="img" value="${product.imageURL}" />
+                        <a href="${productLink}"><img class="frontImage" src="${img}"></a>
+                        <div class="row"><h3 class="productName">${product.name}</h3></div>
+                        <div class="row"><h4 class="productPrice">Price: ${product.price} RON</h4></div>
+                        <div class="row">
+                            <div class="botT">
+                                <c:if test="${product.stockLevel gt 0}">
+                                    <span class="labelStock label label-success">In stock!</span>
+                                </c:if>
+                                <c:if test="${product.stockLevel lt 1}">
+                                    <span class="labelStock label label-warning">Out of stock!</span>
+                                </c:if>
+                            </div>
+                            <div class="inspectProductButton">
+                                <a href="${productLink}" class="btn btn-success" role="button">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+
+        </c:if>
+
+        <c:set var="nrPages" value="${productSize div 9}"/>
+        <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
+        <c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>
+
+        <c:if test="${dateParts[1]!=\"0\"}">
+            <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
+        </c:if>
+
+        <div class="paginationView">
+            <c:if test="${currentPage>1}">
+                <a href="<c:url value='/products?page=${1}&sortValue=${sortValue}'/>" methods="GET">1</a>
+            </c:if>
+            <c:if test="${currentPage-1 >1}">
+                ...
+            </c:if>
+            <c:if test="${currentPage!=1 && currentPage-1!=1}">
+                <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}'/>" methods="GET">${currentPage-1}</a>
+            </c:if>
+            <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}'/>" methods="GET">${currentPage}</a>
+
+            <c:if test="${currentPage <nrPagesInt-1}">
+                <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}'/>" methods="GET">${currentPage+1}</a>
+            </c:if>
+            <c:if test="${currentPage+1 <nrPagesInt-1}">
+                ...
+            </c:if>
+            <c:if test="${currentPage!=nrPagesInt}">
+                <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}'/>" methods="GET">${nrPagesInt}</a>
+            </c:if>
         </div>
-        <div class="col-md-2 col-md-offset-1" style="margin-top: 1%">
-            <form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">
-                <select name="sortValue" id="sort">
-                    <option value="none">Sort By</option>
-                    <option value="sortpriceupdown">Price Cheap to Expensive</option>
-                    <option value="sortpricedownup">Price Expensive to Cheap</option>
-                    <option value="sortnameaz">Name A to Z</option>
-                    <option value="sortnameza">Name Z to A</option>
-                </select>
-                <input type="submit" value="Sort"/></td>
-            </form>
-        </div>
+
+
     </div>
-    <c:if test="${not empty products}">
 
-        <div class="container">
-            <c:forEach var="product" items="${products}">
-                <div class="square">
-                    <ul>
-                        <br>
-
-                        <li>Code: ${product.code} </li>
-                        <li>Name: ${product.name} </li>
-                        <li>Price: ${product.price}</li>
-                        <li>StockLevel: ${product.stockLevel}</li>
-
-                        <br>
-
-                        <c:if test="${product.stockLevel gt 0}">
-                            <span class="label label-success">In stock!</span>
-                        </c:if>
-                        <c:if test="${product.stockLevel lt 1}">
-                            <span class="label label-warning">Out of stock!</span>
-                        </c:if>
-
-                        <br><br>
-
-                        <a href="${productLink}${product.productId}"/>
-                            <input type="submit" name="product" value="Details" class="btn btn-warning"/>
-                        </a>
-                    </ul>
-                </div>
-            </c:forEach>
-        </div>
-
-    </c:if>
-
-    <c:set var="nrPages" value="${productSize div 9}"/>
-    <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
-    <c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>
-
-    <c:if test="${dateParts[1]!=\"0\"}">
-        <c:set var="nrPagesInt" value="${nrPagesInt+1}"/>
-    </c:if>
-
-    <div class="paginationView">
-        <c:if test="${currentPage>1}">
-            <a href="<c:url value='/products?page=${1}&sortValue=${sortValue}'/>" methods="GET">1</a>
-        </c:if>
-        <c:if test="${currentPage-1 >1}">
-            ...
-        </c:if>
-        <c:if test="${currentPage!=1 && currentPage-1!=1}">
-            <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}'/>" methods="GET">${currentPage-1}</a>
-        </c:if>
-        <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}'/>" methods="GET">${currentPage}</a>
-
-        <c:if test="${currentPage <nrPagesInt-1}">
-            <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}'/>" methods="GET">${currentPage+1}</a>
-        </c:if>
-        <c:if test="${currentPage+1 <nrPagesInt-1}">
-            ...
-        </c:if>
-        <c:if test="${currentPage!=nrPagesInt}">
-            <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}'/>" methods="GET">${nrPagesInt}</a>
-        </c:if>
-    </div>
 
 </body>
 </html>

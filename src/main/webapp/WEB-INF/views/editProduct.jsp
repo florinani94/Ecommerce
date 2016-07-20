@@ -87,16 +87,14 @@
             </div>
         </div>
         <form>
-            <select name="category" onchange='this.form.submit()'>
+            <select name="category">
                 <c:forEach var="category" items="${allCategories}">
                     <%--<option value="Tea"> Green Tea</option>--%>
                     <%--<option value="Tea">Red Tea</option>--%>
                     <%--<option value="Tea">Black Tea</option>--%>
-                    <option value="${category.name}" >${category.name}</option>
+                    <option value="${category.id}" >${category.name}</option>
                 </c:forEach>
             </select>
-            <noscript><input type="submit" value="Submit"></noscript>
-                <%--<input type="submit" value="Submit">--%>
         </form>
 
         <div class="form-group">
