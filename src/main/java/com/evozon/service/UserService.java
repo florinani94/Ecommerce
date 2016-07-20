@@ -24,4 +24,8 @@ public class UserService {
     public boolean checkIfUsernameExists(String username) {
         return this.userDAO.checkIfUsernameExists(username);
     }
+
+    public boolean checkKey(String keyUrl) {
+        return this.userDAO.checkKey(keyUrl);
+    }
 }
