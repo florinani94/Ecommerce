@@ -1,6 +1,7 @@
 package com.evozon.mvc;
 
 import com.evozon.domain.Product;
+import com.evozon.service.CategoryService;
 import com.evozon.service.ProductService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 @Controller
@@ -25,6 +28,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
@@ -55,15 +60,18 @@ public class ProductController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String goToCreateProductPage(Model model) {
+        model.addAttribute("allCategories", categoryService.getAllCategories());
         model.addAttribute("product", new Product());
         return "createProduct";
     }
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image, BindingResult result) {
+    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image,
+                                                BindingResult result) {
 
         try {
+
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
                 productService.addProduct(productService.doImageSaveOperation(product, image));
                 model.addAttribute("result", true);
@@ -132,6 +140,7 @@ public class ProductController {
     @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
     public String goToCreateProductPage(@PathVariable("productId") int id, Model model) {
         Product product = productService.getProductById(id);
+        model.addAttribute("allCategories", categoryService.getAllCategories());
         model.addAttribute("product", product);
         return "editProduct";
     }

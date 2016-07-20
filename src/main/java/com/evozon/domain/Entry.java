@@ -3,6 +3,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 /**
  * Created by vladblana on 19/07/2016.
+ *
+ * Auxiliary table to solve many to many relationship
  */
 @Entity
 public class Entry {

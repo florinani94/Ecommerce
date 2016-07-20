@@ -60,6 +60,10 @@
                 <input type="password" class="form-control" name="pass2" id="pass2" placeholder="Confirm password">
             </div>
         </div>
+
+        <c:url var="path" value="/user/confirm"/>
+        <input type="hidden" name="path" value=${path}>
+
         <button type="submit" class="btn btn-warning">Create Account</button>
     </form>
 

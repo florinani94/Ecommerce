@@ -8,6 +8,8 @@ public interface ProductDAO {
 
     List<Product> getAllProducts();
 
+    List<Product> getParticularProducts( int [] productIds);
+
     void addProduct(Product product);
 
     void updateProduct(Product product);
@@ -17,6 +19,8 @@ public interface ProductDAO {
     void importFromFile(String filename);
 
     Product getProductById(Integer id);
+
+    Product getProductByCode(String code);
 
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 
