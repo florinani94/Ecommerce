@@ -20,3 +20,8 @@
     width: 100%;
     text-align: center;
 }
+
+
+a:visited {
+    color: black;
+}
