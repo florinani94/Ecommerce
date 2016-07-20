@@ -1,8 +1,7 @@
 package com.evozon.dao.impl;
 
-import com.evozon.dao.CartDAO;
+import com.evozon.dao.EntryDAO;
 import com.evozon.domain.Cart;
-import com.evozon.domain.Category;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 import org.hibernate.Query;
@@ -17,47 +16,42 @@ import java.util.List;
 /**
  * Created by vladblana on 19/07/2016.
  */
-
-@Repository("CartDAO")
+@Repository("EntryDAO")
 @Transactional
-public class CartDAOImpl implements CartDAO{
+public class EntryDAOImpl implements EntryDAO{
 
-
-   @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void addCart(Cart cart) {
+    public void addEntry(Entry entry) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(cart);
+        session.save(entry);
     }
 
     @Override
-    public void deleteCart(int id) {
+    public void deleteEntry(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("DELETE FROM Cart WHERE cartId=:id");
+        Query query=session.createQuery("DELETE FROM entry WHERE entryId=:id");
         query.setParameter("id", id);
         query.executeUpdate();
 
     }
     @Override
-    public void addEntryToCart(Entry entry) {
+    public void addProductToEntry(Product product) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(entry);
+        session.save(product);
     }
-    @Override
-    public Double computeTotalForCart(Integer id){
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM cart WHERE cart.cartId = :id");
-        query.setParameter("id", id);
-        List<Cart> carts = query.list();
-        Double total=new Double(0);
 
-        if(carts.size() > 0){
-            for(Entry e:carts.get(0).getentrySet()){
-                total+=e.getSubTotal();
-            }
-            return total;
+
+    @Override
+    public Double computeSubTotalForEntry(Integer id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select (price * quantity) as subtotal from product join entry on entry.product=product.code join cart on cart.cartId=entry.cart_id where entry.entryId=:id");
+        query.setParameter("id", id);
+        List<Double> entries = query.list();
+        if(entries.size() > 0){
+            return entries.get(0);
         }
         return null;
 
