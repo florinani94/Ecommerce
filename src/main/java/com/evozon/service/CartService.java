@@ -43,17 +43,12 @@ public class CartService {
         cartDAO.addProductToEntry(product);
     }
 
-    public Double computeSubTotalForEntry(Integer id){
-        return cartDAO.computeSubTotalForEntry(id);
+    public void computeSubTotalForEntry(Integer id){
+        cartDAO.computeSubTotalForEntry(id);
     }
 
-    public Double computeTotalForCart(Integer id){
-        Set<Entry> entrySet=cartDAO.getAllEntriesForCart(id);
-        Double total=new Double(0);
-        for(Entry e:entrySet){
-            total+=e.getSubTotal();
+    public void computeTotalForCart(Integer id){
+        cartDAO.computeTotalForCart(id);
 
-        }
-        return total;
     }
 }

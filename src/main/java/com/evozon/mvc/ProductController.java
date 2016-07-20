@@ -2,6 +2,7 @@ package com.evozon.mvc;
 
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
+import com.evozon.service.CartService;
 import com.evozon.service.CategoryService;
 import com.evozon.service.ProductService;
 import org.apache.commons.fileupload.FileItem;
@@ -31,6 +32,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
@@ -95,7 +98,6 @@ public class ProductController {
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importFromFile(Model model) {
         model.addAttribute("allProducts", productService.getAllProducts());
-
         return "viewProducts";
     }
 

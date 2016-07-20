@@ -18,7 +18,12 @@ public interface CartDAO {
 
     void addProductToEntry(Product product);
 
-    Double computeSubTotalForEntry(Integer id);
 
-    Set<Entry> getAllEntriesForCart(Integer id);
+    void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
+
+    //Set<Entry> getAllEntriesForCart(Integer id);
+
+    void computeSubTotalForEntry(Integer id);
+
+    void computeTotalForCart(Integer id);
 }

@@ -15,7 +15,7 @@ public class Cart {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartId;
 
-    @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private Set<Entry> entrySet;
 
     @Column
@@ -60,12 +60,12 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     public Set<Entry> getEntrySet() {
         return entrySet;
     }
 
-    public void setentrySet(Set<Entry> entrySet) {
+    public void setEntrySet(Set<Entry> entrySet) {
         this.entrySet = entrySet;
     }
 
