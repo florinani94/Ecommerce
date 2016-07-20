@@ -11,4 +11,10 @@ public interface UserDAO {
     boolean checkIfEmailExists(String email);
 
     boolean checkIfUsernameExists(String username);
+
+    boolean checkKey(String keyUrl);
+
+    User getUserByKey(String keyUrl);
+
+    void activateAccount(String keyUrl);
 }

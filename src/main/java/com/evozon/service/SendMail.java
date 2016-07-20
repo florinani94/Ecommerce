@@ -32,7 +32,7 @@ public class SendMail
         SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
         msg.setTo(user.getEmail());
         msg.setText(
-                "Hello " + user.getUsername() + ", please confirm your account by clicking on the following link: " + url + path);
+                "Hello " + user.getUsername() + ", please confirm your account by clicking on the following link: " + url + path + "?key=" + user.getKeyUrl() );
         try{
             this.mailSender.send(msg);
         }
