@@ -80,6 +80,7 @@ public class UserController {
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmBackofficeUser(Model model, @RequestParam("key") String key) {
         if (userService.checkKey(key) == true) {
+            userService.activateAccount(key);
             model.addAttribute("message", "Account confirmed successfully!");
         }
 
