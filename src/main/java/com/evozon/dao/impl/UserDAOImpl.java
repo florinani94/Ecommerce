@@ -74,4 +74,17 @@ public class UserDAOImpl implements UserDAO {
         }
         return null;
     }
+
+    public void activateAccount(String keyUrl) {
+        User user = this.getUserByKey(keyUrl);
+
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("UPDATE User set active = :active "  +
+                "WHERE id = :id");
+
+        query.setParameter("active", true);
+        query.setParameter("id", user.getId());
+        int result = query.executeUpdate();
+        System.out.println("Rows affected: " + result);
+    }
 }

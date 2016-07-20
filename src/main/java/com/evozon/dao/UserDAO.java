@@ -15,4 +15,6 @@ public interface UserDAO {
     boolean checkKey(String keyUrl);
 
     User getUserByKey(String keyUrl);
+
+    void activateAccount(String keyUrl);
 }

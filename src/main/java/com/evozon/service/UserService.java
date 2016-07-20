@@ -28,4 +28,8 @@ public class UserService {
     public boolean checkKey(String keyUrl) {
         return this.userDAO.checkKey(keyUrl);
     }
+
+    public void activateAccount(String keyUrl) {
+        this.userDAO.activateAccount(keyUrl);
+    }
 }
