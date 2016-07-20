@@ -37,7 +37,7 @@ public class ProductController {
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
-
+        System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
 
         return "viewProducts";
@@ -68,16 +68,14 @@ public class ProductController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String getResultForCreateProductPage(Model model, @ModelAttribute("product") Product product,
-                                                @RequestParam(value = "image", required = false) MultipartFile image,
-                                                @RequestParam(value = "categoryId", required = false) String categoryId,
-                                                BindingResult result) {
-
+    public String getResultForCreateProductPage(Model model , @ModelAttribute("product") Product product,
+                                                @RequestParam(value = "categoryId", required = false) Integer categoryId,
+                                                BindingResult result, @RequestParam(value = "image", required = false) MultipartFile image) {
+        System.out.println(product.toString() + categoryId);
         try {
-
             if(!(result.hasErrors()) && productService.validateProduct(product) == true) {
-                //Category category = categoryService.getCategoryById(categoryId);
-                //product.setCategory(category);
+                Category category = categoryService.getCategoryById(categoryId);
+                product.setCategory(category);
                 productService.addProduct(productService.doImageSaveOperation(product, image));
                 model.addAttribute("result", true);
             }else if (result.hasErrors() || productService.validateProduct(product) == false) {

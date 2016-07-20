@@ -26,17 +26,15 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Integer stockLevel;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCategory")
     private Category category;
 
+    @Column
+    private String imageURL;
+
+    public Product() {
+    }
 
     public Product(String code, String name, String description, Double price, Integer stockLevel) {
 
@@ -47,13 +45,6 @@ public class Product implements Serializable {
         this.stockLevel = stockLevel;
     }
 
-
-
-    @Column
-    private String imageURL;
-
-    public Product() {
-    }
 
     public Product(String code, String name, String description, Double price, Integer stockLevel,Category category) {
         this.code = code;
@@ -117,6 +108,14 @@ public class Product implements Serializable {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

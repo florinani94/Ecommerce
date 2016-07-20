@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page session="false" %>
 <html>
@@ -9,6 +10,7 @@
 
 <c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
 <c:url var="viewProdUrl" value="/backoffice/product"></c:url>
+<c:url var="javaScriptUrl" value="/resources/js/myscript.js"></c:url>
 
 
 <jsp:include page="backofficeHeader.jsp" />
@@ -22,7 +24,7 @@
 <c:if test="${result == null}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <form action="add" method="post" id="addProd" class="form-inline">
+                <form action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
                     Code: <br>
                     <input type="text" name="code" maxlength="8" class="form-control"/>
                     <br><br>
@@ -38,16 +40,19 @@
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
                     <br><br>
-                    <select id="category" name="categoryId">
-                        <c:forEach var="category" items="${allCategories}">
-                            <option value="${category.id}">${category.name}</option>
+                    <select name="categoryId" id="dropDown">
+                        <c:forEach var="categoryItem" items="${allCategories}">
+                            <option value="${categoryItem.id}">${categoryItem.name}</option>
                         </c:forEach>
                     </select>
                     <br><br>
-                    <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
+                    <br>
+                    <input name="image" type="file" accept=".jpg"/>
+                    <br><br>
+                    <%--<script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>--%>
                     <%--<script type="text/javascript" src="/mvc/resources/js/SetCategory.js"></script>--%>
                     <%--<div class="setCategory" style="display: none" name="category"></div>--%>
-                    <input type="submit" value="Save" class="btn btn-success"/>
+                    <input type="submit" value="Save" class="btn btn-success" id="addProductButton"/>
                 </form>
         </div>
     </div>
@@ -70,6 +75,8 @@
     <a href="${newProdUrl}" class="btn btn-default" role="button">New product
     </a>
 </c:if>
+
+<script type="application/javascript" src="${javaScriptUrl}"></script>
 
 </body>
 </html>
