@@ -8,12 +8,12 @@
 <body>
 
 <c:url var="newProdUrl" value="/backoffice/product/add"></c:url>
-<c:url var="viewProdUrl" value="/backoffice/product/"></c:url>
+<c:url var="viewProdUrl" value="/backoffice/product"></c:url>
 
 
 <jsp:include page="backofficeHeader.jsp" />
 <div class="row">
-    <div class="col-md-3 col-md-offset-4" style="text-align: center">
+    <div class="col-md-4 col-md-offset-4">
         <h1> Create a new product </h1>
         <br>
     </div>
@@ -22,7 +22,7 @@
 <c:if test="${result == null}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <form action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
+                <form action="add" method="post" id="addProd" class="form-inline">
                     Code: <br>
                     <input type="text" name="code" maxlength="8" class="form-control"/>
                     <br><br>
@@ -38,9 +38,24 @@
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
                     <br><br>
-                    Select a image (.jpg) <br>
-                    <input name="image" type="file" accept=".jpg"/>
+                    Category : <br>
+                    <input type="text" name="category" class="form-control"/>
+                    <%--<form>--%>
+                        <select  id="category" name="category" onchange="setCategory()">
+                            <c:forEach var="category" items="${allCategories}">
+                                <%--<option value="Tea"> Green Tea</option>--%>
+                                <%--<option value="Tea">Red Tea</option>--%>
+                                <%--<option value="Tea">Black Tea</option>--%>
+                                <option value="${category}">${category.name}</option>
+
+                            </c:forEach>
+                        </select>
+                        <%--<input type="submit" value="Submit">--%>
+                    <%--</form>--%>
                     <br><br>
+                    <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
+                    <script type="text/javascript" src="/mvc/resources/js/SetCategory.js"></script>
+                    <div class="setCategory" style="display: none" name="category"></div>
                     <input type="submit" value="Save" class="btn btn-success"/>
                 </form>
         </div>
@@ -49,34 +64,20 @@
 
 
 <c:if test="${result == true}">
-    <div class="row">
-        <div class="col-md-3 col-md-offset-4">
-            <h3 style="text-align: center">Product created with success!</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 col-md-offset-4">
-            <a href="${newProdUrl}" class="btn btn-default" role="button">New product</a>
-        </div>
-        <div class="col-md-1 col-md-offset-1">
-            <a href="${viewProdUrl}" class="btn btn-default" role="button">View products</a>
-        </div>
-    </div>
+    <h3>Product created with success!</h3>
+
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
+
+    <a href="${viewProdUrl}" class="btn btn-default" role="button">View products
+    </a>
 </c:if>
 
 <c:if test="${result == false}">
-<div class="row">
-    <div class="col-md-3 col-md-offset-4">
-        <h3 style="text-align: center">Product was not created!</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="${newProdUrl}" class="btn btn-default" role="button">New product
-        </a>
-    </div>
-</div>
+    <h3>Product was not created!</h3>
 
+    <a href="${newProdUrl}" class="btn btn-default" role="button">New product
+    </a>
 </c:if>
 
 </body>
