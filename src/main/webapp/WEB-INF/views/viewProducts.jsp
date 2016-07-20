@@ -1,5 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: florinani
+  Date: 12/07/2016
+  Time: 16:16
+  To change this template use File | Settings | File Templates.
+--%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
 <head>
     <title>All Products</title>
@@ -7,14 +14,12 @@
 <body>
 
 <jsp:include page="backofficeHeader.jsp" />
-
 <div class="row">
     <div class="col-md-2 col-md-offset-5">
     <c:if test="${not empty allProducts}">
         <h1>Products</h1>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
     <table id="prodTable" class="table table-striped">
@@ -73,22 +78,21 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
         <form method="post" action="${importProductas}" enctype="multipart/form-data">
             <table border="0">
                 <tr>
                     <td>Add file: </td>
                     <td><input type="file" name="filename" size="50" accept=".csv"/></td>
                 </tr>
-                <tr>
-                    <br>
-                    <td><input type="submit" id="importButton" value="Upload" class="btn btn-success"/></td>
-                </tr>
+                    <tr>
+                        <br>
+                        <td><input type="submit" id="importButton" value="Upload" class="btn btn-success"/></td>
+                    </tr>
             </table>
         </form>
     </div>
 </div>
-
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
 

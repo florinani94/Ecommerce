@@ -4,6 +4,15 @@
 <html>
 <head>
     <title>Create product</title>
+
+    <style>
+        .error
+        {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -19,24 +28,29 @@
     </div>
 </div>
 
-<c:if test="${result == null}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <form action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
+                <form  action="add" method="post" id="addProd" class="form-inline" enctype="multipart/form-data">
                     Code: <br>
                     <input type="text" name="code" maxlength="8" class="form-control"/>
+                    <spring form:errors path="code" class="error"/>
                     <br><br>
                     Name: <br>
-                    <input type="text" name="name" maxlength="20" class="form-control"/>
+                    <input id="nameId" type="text" name="name" maxlength="20" class="form-control"/>
+                    <spring form:errors path="name" class="error"/>
                     <br><br>
                     Description: <br>
-                    <textarea rows="4" cols="50" name="description" maxlength="255" form="addProd" class="form-control"></textarea>
+                    <textarea type ="text" rows="4" cols="50" name="description" maxlength="255" form="addProd" class="form-control"></textarea>
                     <br><br>
                     Price: <br>
-                    <input type="text" name="price" class="form-control"/>
+                    <input type="number" name="price" class="form-control"/>
+                    <spring form:errors path="price" class="error"/>
+                    <%--<input type="text" name="price" class="form-control"/>--%>
                     <br><br>
                     Stock level: <br>
-                    <input type="text" name="stockLevel" class="form-control"/>
+                    <input  type="number" name="stockLevel" class="form-control"/>
+                    <spring form:errors path="stockLevel" class="error" />
+                    <%--<input type="text" name="stockLevel" class="form-control"/>--%>
                     <br><br>
                     Select a image (.jpg) <br>
                     <input name="image" type="file" accept=".jpg"/>
@@ -45,39 +59,6 @@
                 </form>
         </div>
     </div>
-</c:if>
-
-
-<c:if test="${result == true}">
-    <div class="row">
-        <div class="col-md-3 col-md-offset-4">
-            <h3 style="text-align: center">Product created with success!</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 col-md-offset-4">
-            <a href="${newProdUrl}" class="btn btn-default" role="button">New product</a>
-        </div>
-        <div class="col-md-1 col-md-offset-1">
-            <a href="${viewProdUrl}" class="btn btn-default" role="button">View products</a>
-        </div>
-    </div>
-</c:if>
-
-<c:if test="${result == false}">
-<div class="row">
-    <div class="col-md-3 col-md-offset-4">
-        <h3 style="text-align: center">Product was not created!</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="${newProdUrl}" class="btn btn-default" role="button">New product
-        </a>
-    </div>
-</div>
-
-</c:if>
 
 </body>
 </html>
