@@ -165,7 +165,7 @@ public class ProductService {
         if(startPageIndex<=0){
             return null;
         }
-        return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
+         return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
     }
 
     public void updateProduct(Product product) {
@@ -240,6 +240,10 @@ public class ProductService {
         }
 
         return product;
+    }
+
+    public List<Product> getProductsByCategory(int categoryId){
+        return  productDAO.getProductsByCategory(categoryId);
     }
 }
 

@@ -26,4 +26,6 @@ public interface ProductDAO {
 
     List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage);
 
+    List<Product> getProductsByCategory(int categoryId);
+
 }
