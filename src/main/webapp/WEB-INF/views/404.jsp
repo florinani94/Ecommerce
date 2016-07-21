@@ -17,31 +17,35 @@
     <script
             src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <c:url var="URL404" value="/resources/404.jpg"/>
 
     <title>404 Not found</title>
 </head>
 <body>
-
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <h1 style="text-align: center">You are a little bit lost</h1>
+<%--<div style="background-image: url("${URL404}");--%>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h1 style="text-align: center">You are a little bit lost</h1>
+        </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <h3 style="text-align: center">Here are some links to guide you </h3>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <img src="${URL404}" alt="404Error" width="590" height="300">
+        </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-1 col-md-offset-5">
-        <a class="btn btn-default" href="/mvc/home">Home</a>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h3 style="text-align: center">Here are some links to guide you </h3>
+        </div>
     </div>
-    <div class="col-md-1">
-        <a class="btn btn-default" href="/mvc/products">Products page</a>
-    </div>
-</div>
 
+    <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+            <a class="btn btn-default" href="/mvc/home">Home</a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-default" href="/mvc/products">Products page</a>
+        </div>
+    </div>
 </body>
 </html>
