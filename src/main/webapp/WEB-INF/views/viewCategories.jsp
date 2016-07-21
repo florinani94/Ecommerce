@@ -42,7 +42,7 @@
                     <td>${category.id}</td>
                     <td>${category.name}</td>
                     <td>${category.description}</td>
-                    <td><a href="<c:url value="/backoffice/category/edit" />"><input type="submit" value="Edit" class="btn btn-primary"></a></td>
+                    <td><a href="<c:url value="/backoffice/category/edit/${category.id}" />" methods="get"><input type="submit" value="Edit" class="btn btn-primary"></a></td>
                     <%--<td><a  methods="GET"><input type="submit" value="Edit" class="btn btn-primary"></a></td>--%>
                     <td><a href="delete?id=${category.id}" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
                 </tr>

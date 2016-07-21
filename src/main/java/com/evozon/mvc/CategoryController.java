@@ -58,26 +58,39 @@ public class CategoryController {
         return "viewCategories";
     }
 
-//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-//    public String editCategory(Model model, @ModelAttribute("category") Category category){
+//        @RequestMapping(value = "/edit", method = RequestMethod.POST)
+//        public String editCategory(Model model, @ModelAttribute("category") Category category){
 //
-//         categoryService.updateCategory(category);
+//            categoryService.updateCategory(category);
 //
-//        model.addAttribute("allCategories", categoryService.getAllCategories());
-//        return "viewCategories";
-//    }
+//            model.addAttribute("allCategories", categoryService.getAllCategories());
+//            return "viewCategories";
+//        }
 //
-//    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-//    public String goToCreateCategoryPage(@RequestParam("categoryId") int categoryId, Model model) {
-//        Category category = categoryService.getCategoryById(categoryId);
-//        //model.addAttribute("allCategories", categoryService.getAllCategories());
-//        model.addAttribute("category", category);
-//        return "editCategory";
+//        @RequestMapping(value = "/edit/{categoryId}", method = RequestMethod.GET)
+//        public String goToCreateCategoryPage(@PathVariable("categoryId") int categoryId, Model model) {
+//            Category category = categoryService.getCategoryById(categoryId);
+//            //model.addAttribute("allCategories", categoryService.getAllCategories());
+//            model.addAttribute("category", category);
+//            return "editCategory";
+//        }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String editTheCategory() {
+    @RequestMapping(value = "/edit/{categoryId}", method = RequestMethod.GET)
+    public String goToCategoryEditPage(Model model, @PathVariable("categoryId") int categoryId) {
+
+        model.addAttribute("category", categoryService.getCategoryById(categoryId));
+
         return "editCategory";
     }
+
+     @RequestMapping(value = "/edit", method = RequestMethod.POST)
+     public String editCategory(Model model, @ModelAttribute("category") Category category){
+
+         categoryService.updateCategory(category);
+
+         model.addAttribute("allCategories", categoryService.getAllCategories());
+         return "viewCategories";
+     }
 
 
 }
