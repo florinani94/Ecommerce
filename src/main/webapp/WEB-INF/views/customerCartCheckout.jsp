@@ -11,7 +11,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${cssUrl}">
+<%--    <link rel="stylesheet" type="text/css" href="${cssUrl}">
     <link rel="stylesheet"
           href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -24,12 +24,23 @@
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
     <script
-            src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+            src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>--%>
+
+    <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}">
+
+    <c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>
+    <link rel="stylesheet" href="${cssUrlHead}">
+
+
+    <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
 
     <title>Cart Checkout</title>
 </head>
-<body>
 
+<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
+
+<jsp:include page="customerHeader.jsp" />
 <c:url var="addressUrl" value="/products/address"></c:url>
 <c:url var="backUrl" value="/products"></c:url>
 
@@ -104,12 +115,12 @@
 </c:if>
 
 <c:if test="${data == true}">
-    <a href="addressUrl" class="btn btn-default" role="button"> New Address </a>
+    <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
 </c:if>
 
 <c:if test="${data == false}">
     <h3>Incorrect</h3>
-    <a href="addressUrl" class="btn btn-default" role="button"> New Address </a>
+    <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
 </c:if>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>

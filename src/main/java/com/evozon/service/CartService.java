@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,21 +33,25 @@ public class CartService {
     }
 
     public void addProductToCart(Integer productId,Integer cartId) {
-        cartDAO.addProductToCart(productId,cartId);
+        List<Entry> entryList=cartDAO.getEntriesFromCart(productId,cartId);
+        if(entryList.size()>0){
+            for(Entry e:entryList){
+                e.setQuantity(e.getQuantity()+1);
+                cartDAO.updateEntry(e);
+                cartDAO.computeSubTotalForEntry(e.getEntryId(),cartId);
+                cartDAO.computeTotalForCart(cartId);
+            }
+        }
+        else{
+            cartDAO.addEntryToCart(productId,cartId);
+            addProductToCart(productId,cartId);
+
+        }
     }
 
-    public void deleteEntryFromCart(int id) {
-        cartDAO.deleteEntryFromCart(id);
+    public void deleteEntryFromCart(Integer entryId) {
+        cartDAO.deleteEntryFromCart(entryId);
     }
 
 
-
-    public void computeSubTotalForEntry(Integer id){
-        cartDAO.computeSubTotalForEntry(id);
-    }
-
-    public void computeTotalForCart(Integer id){
-        cartDAO.computeTotalForCart(id);
-
-    }
 }
