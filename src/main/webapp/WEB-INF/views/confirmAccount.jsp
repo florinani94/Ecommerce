@@ -20,7 +20,7 @@
 <head>
     <title>Confirm Account</title>
 </head>
-<body>
+
 <body background="${backgroundURL}" style="background-size: 100%">
 <jsp:include page="customerHeader.jsp" />
 
