@@ -1,6 +1,8 @@
 package com.evozon.service;
 
+import com.evozon.dao.CategoryDAO;
 import com.evozon.dao.ProductDAO;
+import com.evozon.domain.Category;
 import com.evozon.domain.Product;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -20,6 +22,9 @@ public class ProductService {
 
     @Autowired
     private ProductDAO productDAO;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
 
 
     @Autowired
@@ -42,15 +47,6 @@ public class ProductService {
     }
 
 
-    public boolean validateProduct(Product product) {
-        String voidString="";
-        if ( (!voidString.equals(product.getCode()) && (!voidString.equals(product.getName()) && (0 <= product.getPrice()) && (0 <= product.getStockLevel()))) ) {
-            return true;
-        }
-        return false;
-    }
-
-
     public void importFromFile(String filename) {
         productDAO.importFromFile(filename);
     }
@@ -69,14 +65,13 @@ public class ProductService {
 
         List<Product> products = productDAO.getAllProducts();
 
+
         FileWriter writer = null;
 
 
             try {
                 writer = new FileWriter(fileName + ".csv");
                 for (Product product : products) {
-                    writer.append(String.valueOf(product.getProductId()));
-                    writer.append(",");
                     writer.append(product.getCode());
                     writer.append(",");
                     writer.append(product.getName());
@@ -86,6 +81,10 @@ public class ProductService {
                     writer.append(String.valueOf(product.getPrice()));
                     writer.append(",");
                     writer.append(String.valueOf(product.getStockLevel()));
+                    writer.append(",");
+                    writer.append(String.valueOf(categoryDAO.getCategoryById(product.getCategory().getId()).getId()));
+                    writer.append(",");
+                    writer.append(product.getImageURL());
                     writer.append("\n");
                 }
 
@@ -123,12 +122,21 @@ public class ProductService {
 
                 String[] product = line.split(csvSplitBy);
                 Product newProduct = new Product();
-                newProduct.setProductId(Integer.valueOf(product[0]));
-                newProduct.setCode(product[1]);
-                newProduct.setName(product[2]);
-                newProduct.setDescription(product[3]);
-                newProduct.setPrice(Double.valueOf(product[4]));
-                newProduct.setStockLevel(Integer.valueOf(product[5]));
+                newProduct.setCode(product[0]);
+                newProduct.setName(product[1]);
+                newProduct.setDescription(product[2]);
+                newProduct.setPrice(Double.valueOf(product[3]));
+                newProduct.setStockLevel(Integer.valueOf(product[4]));
+                Integer categoryId = Integer.valueOf(product[5]);
+                Category category=null;
+               try{
+                   category=categoryDAO.getCategoryById(categoryId);
+               }
+               catch(Exception e){
+                   e.printStackTrace();
+               }
+                newProduct.setCategory(category);
+                newProduct.setImageURL(product[6]);
 
                 list.add(newProduct);
 
