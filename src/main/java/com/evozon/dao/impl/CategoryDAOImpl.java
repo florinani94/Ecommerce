@@ -37,7 +37,7 @@ public class CategoryDAOImpl implements CategoryDAO{
         return session.createQuery("FROM Category AS c").list();
     }
 
-    public Category getCategoryById(String id){
+    public Category getCategoryById(Integer id){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Category as C WHERE C.id = :id");
         query.setParameter("id", id);

@@ -49,3 +49,25 @@ function billingFunction() {
     }
 }
 
+
+// //used in product creation
+// $("#addProductButton").click(function() {
+//     alert("hello");
+//     var e = $("#dropDown");
+//     var strUser = e.options[e.selectedIndex].text;
+//     console.log(strUser);
+//
+//     $.ajax({
+//         type : "POST",
+//         url : "../product/add",
+//         data : {
+//             categoryId: strUser
+//         },
+//         success : function(response) {
+//             alert("good job");
+//         },
+//         error : function(e) {
+//             alert('Error: ' + e);
+//         }
+//     });
+// });

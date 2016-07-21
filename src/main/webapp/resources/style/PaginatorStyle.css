@@ -1,66 +1,59 @@
-.productsContainer {
-    width:50%;
-    height:50%;
-    margin: 0 auto;
-}
 
 .square {
-    padding-bottom: 20%;
     height: 320px;
-    width: 250px;
-    margin: 1%;
-    float:left;
-    display:block;
+    margin-top: 3%;
     background-color: white;
     border-radius: 10px;
 }
 
 .paginationView {
-    background-color: white;
-    position: absolute;
-    bottom: 5%;
+    position: relative;
+    margin-top: 2%;
     width: 100%;
     text-align: center;
 }
 
-.bigBox {
-    padding-top: 50px;
+.paginationView a {
+    font-size: 25px;
+    color: green;
+}
+
+.paginationView a:hover {
+    color: black;
 }
 
 .productName {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .productPrice {
-    margin-left: 30px;
+    margin-left: 10px;
     margin-top: -1px;
 }
 
 .botT {
-    margin-top: 10px;
-    margin-left: 30px;
+    margin-left: 23px;
+    margin-top: 20px;
 }
 
 .inspectProductButton {
-    margin-left: 185px;
+    margin-left: 200px;
     margin-top: -20px;
 }
 
 .sortBox {
-    float: left;
-    width: 190px;
-    margin-left: 5%;
-    margin-top: 1%;
+    margin-top: 2%;
+    margin-left: 40%;
 }
 
 .sortButton {
-    margin-left: 195px;
-    margin-top: -34;
+    margin-left: 110%;
+    margin-top: -34px;
 }
 
 .frontImage {
     height: 180px;
-    width: 250px;
+    width: 263px;
     border-radius: 10px 10px 0px 0px;
 }
 
