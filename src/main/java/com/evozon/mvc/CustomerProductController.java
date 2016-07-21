@@ -17,7 +17,7 @@ import org.springframework.web.client.HttpServerErrorException;
 @RequestMapping(value = "products")
 public class CustomerProductController {
 
-    public static final int MAX_PRODUCTS_PER_PAGE= 9;
+    public static final int MAX_PRODUCTS_PER_PAGE= 12;
 
     @Autowired
     private ProductService productService;

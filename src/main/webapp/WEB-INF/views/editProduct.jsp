@@ -37,6 +37,15 @@
         }
     </style>
 
+
+    <style>
+        .error
+        {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -49,58 +58,60 @@
 <div class="layout-edit">
 
     <form:form commandName="product" method="POST" action="${editUrl}" cssClass="form-horizontal registrationForm" enctype="multipart/form-data">
-
         <div class="form-group">
             <label for="productId" class="control-label col-xs-2">ID: </label>
             <div class="col-sm-10">
-                <form:input path="productId" cssClass="form-control"/>
+                <form:input readonly="true" path="productId" cssClass="form-control"/>
             </div>
         </div>
         <div class="form-group">
             <label for="code" class="control-label col-xs-2">Code: </label>
             <div class="col-xs-10">
-                <form:input path="code" cssClass="form-control"/>
+                <form:input  path="code"  cssClass="form-control"/>
+                <form:errors path="code" cssClass="error" />
             </div>
         </div>
         <div class="form-group">
             <label for="name" class="control-label col-xs-2">Name: </label>
             <div class="col-xs-10">
-                <form:input path="name" cssClass="form-control"/>
+                <form:input  path="name" cssClass="form-control"/>
+                <form:errors path="name"  cssClass="error" />
             </div>
         </div>
         <div class="form-group">
             <label for="description" class="control-label col-xs-2">Description: </label>
             <div class="col-xs-10">
-                <form:input path="description" cssClass="form-control"/>
+                <form:input  path="description" cssClass="form-control"/>
             </div>
         </div>
         <div class="form-group">
             <label for="price" class="control-label col-xs-2">Price: </label>
             <div class="col-xs-10">
-                <form:input path="price" cssClass="form-control"/>
+                <form:input type="number" path="price" cssClass="form-control"/>
+                <form:errors path="price"  cssClass="error" />
             </div>
         </div>
         <div class="form-group">
             <label for="stockLevel" class="col-sm-2 control-label">Stock: </label>
             <div class="col-xs-10">
-                <form:input path="stockLevel" cssClass="form-control"/>
+                <form:input type="number" path="stockLevel" cssClass="form-control"/>
+                <form:errors path="stockLevel" cssClass="error" />
             </div>
         </div>
-        <form>
-            <select name="category">
-                <c:forEach var="category" items="${allCategories}">
-                    <%--<option value="Tea"> Green Tea</option>--%>
-                    <%--<option value="Tea">Red Tea</option>--%>
-                    <%--<option value="Tea">Black Tea</option>--%>
-                    <option value="${category.id}" >${category.name}</option>
-                </c:forEach>
-            </select>
-        </form>
-
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <b> Choose a category: </b> <br><br>
+                <select name="categoryId" id="dropDown">
+                    <c:forEach var="categoryItem" items="${allCategories}">
+                        <option value="${categoryItem.id}">${categoryItem.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
                 <b>Select a image (.jpg)</b> <br><br>
-                <input name="image" type="file" accept=".jpg"/>
+                <input  name="image" type="file" accept=".jpg"/>
             </div>
         </div>
 
@@ -111,6 +122,7 @@
         </div>
     </form:form>
 </div>
+
 
 </body>
 </html>
