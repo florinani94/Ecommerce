@@ -1,3 +1,4 @@
+<%@ page import="com.evozon.dao.impl.ProductDAOImpl" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -29,16 +30,16 @@
                 </div>
                 <div class="col-sm-6">
                     <div id="headerLinks">
-                        <a class="headerLink">
-                            <img src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
-
                         <a class="headerLink" href="${homeURL}">
-                            Checkout
-                        </a>
-
+                            Checkout</a>
                         <a class="headerLink" href="${homeURL}">
-                            Login
-                        </a>
+                            Login</a>
+                        <a>
+                            <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
+
+                        <div id="cartPanel">
+                            A<br>B<br>C<br>D<br>E
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +47,8 @@
         <div class="col-sm-3"></div>
     </div>
 
-<script type="application/javascript" src="${cartJavaScriptUrl}"></script>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script type="application/javascript" src="${cartJavaScriptUrl}"></script>
 
 </body>
 </html>

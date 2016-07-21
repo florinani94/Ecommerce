@@ -135,9 +135,24 @@ public class ProductController {
         return "exportProducts";
     }
 
+//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+//    public String editProduct(Model model, @ModelAttribute("product") Product product,@RequestParam(value = "categoryId", required = false) Integer categoryId, @RequestParam(value = "image",required = false) MultipartFile image){
+//        System.out.println(product.toString() + categoryId);
+//        productService.updateProduct(productService.doImageSaveOperation(product, image));
+//        Category category = categoryService.getCategoryById(categoryId);
+//        product.setCategory(category);
+//        model.addAttribute("allProducts", productService.getAllProducts());
+//        return "viewProducts";
+//    }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editProduct(Model model, @ModelAttribute("product") Product product, @RequestParam(value = "image") MultipartFile image){
-        productService.updateProduct(productService.doImageSaveOperation(product, image));
+    public String editProduct(Model model , @ModelAttribute("product") Product product,
+                                                @RequestParam(value = "categoryId", required = false) Integer categoryId,
+                                                BindingResult result, @RequestParam(value = "image", required = false) MultipartFile image) {
+        System.out.println(product.toString() + categoryId);
+                Category category = categoryService.getCategoryById(categoryId);
+                product.setCategory(category);
+                productService.updateProduct(productService.doImageSaveOperation(product, image));
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
     }

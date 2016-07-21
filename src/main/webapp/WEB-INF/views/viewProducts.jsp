@@ -64,17 +64,6 @@
 
         </c:forEach>
 
-            <%--<form>--%>
-                <%--<select name="category">--%>
-                    <%--<c:forEach var="category" items="${allCategories}">--%>
-                    <%--&lt;%&ndash;<option value="Tea"> Green Tea</option>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<option value="Tea">Red Tea</option>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<option value="Tea">Black Tea</option>&ndash;%&gt;--%>
-                    <%--<option value="${category.name}">${category.name}</option>--%>
-                    <%--</c:forEach>--%>
-                <%--</select>--%>
-                <%--<input type="submit" value="Submit">--%>
-            <%--</form>--%>
 
         </tbody>
     </table>

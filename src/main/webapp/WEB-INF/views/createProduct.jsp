@@ -40,6 +40,7 @@
                     Stock level: <br>
                     <input type="text" name="stockLevel" class="form-control"/>
                     <br><br>
+                    <p><b>Choose a category:</b></p>
                     <select name="categoryId" id="dropDown">
                         <c:forEach var="categoryItem" items="${allCategories}">
                             <option value="${categoryItem.id}">${categoryItem.name}</option>
