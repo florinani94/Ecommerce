@@ -4,6 +4,7 @@ import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,7 +25,7 @@ public interface CartDAO {
     void deleteEntryFromCart(Integer id);
 
 
-    void addProductToCart(Integer productId, Integer cartId);
+    List<Entry> addProductToCart(Integer productId, Integer cartId);
 
     Set<Entry> getAllEntriesFromCart(Integer id);
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
@@ -32,4 +33,6 @@ public interface CartDAO {
     void computeSubTotalForEntry(Integer id,Integer cartId);
 
     void computeTotalForCart(Integer id);
+
+    void updateEntry(Entry e);
 }
