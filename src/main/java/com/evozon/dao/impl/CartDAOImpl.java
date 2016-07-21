@@ -58,6 +58,7 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
+    //doesn't work
     public void deleteCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("DELETE FROM Cart as C WHERE C.cartId=:id");
@@ -65,6 +66,16 @@ public class CartDAOImpl implements CartDAO{
         query.executeUpdate();
 
     }
+
+    @Override
+    public void deleteEntry(Integer entryId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query=session.createQuery("DELETE FROM Entry as E WHERE E.entryId=:id");
+        query.setParameter("id", entryId);
+        query.executeUpdate();
+
+    }
+
     @Override
     public void updateEntryDetails(Entry entry){
         Session session = sessionFactory.getCurrentSession();
@@ -92,6 +103,12 @@ public class CartDAOImpl implements CartDAO{
 
     }
 
+    @Override
+    public void updateQuantity(Entry entry) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(entry);
+    }
+
 
     @Override
     public List<Entry> getEntriesFromCart(Integer productId, Integer cartId) {
@@ -112,7 +129,6 @@ public class CartDAOImpl implements CartDAO{
         query.setParameter("id", cartId);
         return (Set<Entry>)query.list();
     }
-    //// TODO: 20/07/2016 deleteProductFromEntry 
 
     @Override
     public void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId){

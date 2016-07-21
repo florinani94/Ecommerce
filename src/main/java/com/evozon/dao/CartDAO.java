@@ -18,12 +18,14 @@ public interface CartDAO {
     void addCart(Cart cart);
     void deleteCart(Integer id) ;
 
+    void deleteEntry(Integer entryId);
+
     void updateEntryDetails(Entry entry);
 
     void addEntryToCart(Integer productId, Integer cartId);
 
     void deleteEntryFromCart(Integer id);
-
+    void updateQuantity(Entry entry);
 
     List<Entry> getEntriesFromCart(Integer productId, Integer cartId);
 
@@ -32,7 +34,7 @@ public interface CartDAO {
 
     void computeSubTotalForEntry(Integer id,Integer cartId);
 
-    void computeTotalForCart(Integer id);
+    void computeTotalForCart(Integer cartId);
 
     void updateEntry(Entry e);
 }

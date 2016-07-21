@@ -32,6 +32,18 @@ public class CartService {
 
     }
 
+    public void editEntry(Entry entry,Integer cartId){
+        if(entry.getQuantity()<=0){
+            cartDAO.deleteEntry(entry.getEntryId());
+        }
+        else if(entry.getProduct().getStockLevel()>entry.getQuantity()){
+            entry.setQuantity(entry.getProduct().getStockLevel());
+            //send a message to say requested quantity is greater than stock level
+            cartDAO.updateQuantity(entry);
+            cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
+        }
+    }
+
     public void addProductToCart(Integer productId,Integer cartId) {
         List<Entry> entryList=cartDAO.getEntriesFromCart(productId,cartId);
         if(entryList.size()>0){
@@ -39,7 +51,7 @@ public class CartService {
                 e.setQuantity(e.getQuantity()+1);
                 cartDAO.updateEntry(e);
                 cartDAO.computeSubTotalForEntry(e.getEntryId(),cartId);
-                cartDAO.computeTotalForCart(cartId);
+                //cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
@@ -49,8 +61,9 @@ public class CartService {
         }
     }
 
-    public void deleteEntryFromCart(Integer entryId) {
-        cartDAO.deleteEntryFromCart(entryId);
+    public void deleteEntryFromCart(Entry entry, Integer cartId) {
+        cartDAO.deleteEntryFromCart(entry.getEntryId());
+        cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
     }
 
 
