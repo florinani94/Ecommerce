@@ -8,8 +8,8 @@ $('#cartIcon').hover(function () {
 })
 
 var clicks = 0;
-//var arr = ["one", "two", "three", "four", "five"];
-var arr = <%=new ProductDAOImpl().getAllProducts()%>;
+var arr = ["one", "two", "three", "four", "five"];
+// var arr = <%=new ProductDAOImpl().getAllProducts()%>;
 //console.log(cart);
 
 $('#cartIcon').click(function () {
