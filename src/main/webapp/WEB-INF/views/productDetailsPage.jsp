@@ -36,7 +36,11 @@
                     <h1 class="pageText" id="productTitle">${theProduct.name}</h1>
                     <div class="myHr"></div>
                     <table class="detailsText" id="productDetails">
-                        <tr><td class="descriptionText">${theProduct.description}</td>
+                        <tr><td class="descriptionText">
+                                <div class="categoryName">${theProduct.category.name}
+                                </div>
+                                ${theProduct.description}
+                            </td>
                         </tr>
                         <tr><td class="priceText">${theProduct.price}$</td>
                         </tr>
