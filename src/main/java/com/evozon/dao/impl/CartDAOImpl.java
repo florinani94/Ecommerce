@@ -2,7 +2,6 @@ package com.evozon.dao.impl;
 
 import com.evozon.dao.CartDAO;
 import com.evozon.domain.Cart;
-import com.evozon.domain.Category;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 import org.hibernate.Query;
@@ -25,9 +24,32 @@ import java.util.Set;
 public class CartDAOImpl implements CartDAO{
 
 
-   @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
+    public Product getProductById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
+        query.setParameter("id", id);
+        List<Product> products = query.list();
+        if(products.size() > 0){
+            return products.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Cart getCartById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Cart as C WHERE C.cartId = :id");
+        query.setParameter("id", id);
+        List<Cart> carts = query.list();
+        if(carts.size() > 0){
+            return carts.get(0);
+        }
+        return null;
+    }
     @Override
     public void addCart(Cart cart) {
         Session session = sessionFactory.getCurrentSession();
@@ -43,6 +65,22 @@ public class CartDAOImpl implements CartDAO{
         query.executeUpdate();
 
     }
+    @Override
+    public void updateEntryDetails(Entry entry){
+        Session session = sessionFactory.getCurrentSession();
+        Product product=entry.getProduct();
+        entry.setProductCode(product.getCode());
+        entry.setProductName(product.getName());
+        entry.setProductPrice(product.getPrice());
+        session.save(entry);
+    }
+
+    @Override
+    public void addEntryToCart(Integer productId, Integer cartId){
+        Session session = sessionFactory.getCurrentSession();
+        Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
+        updateEntryDetails(entry);
+    }
 
     @Override
     public void deleteEntryFromCart(Integer id) {
@@ -54,21 +92,26 @@ public class CartDAOImpl implements CartDAO{
     }
 
 
-
     @Override
-    public void addProductToCart(Product product,Integer cartId) {
+    public void addProductToCart(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(product);
         Query query=session.createQuery("FROM Entry as E WHERE E.cart=:id AND E.product=:prodId");
         query.setParameter("id", cartId);
+        query.setParameter("prodId", productId);
         Set<Entry> entrySet=(Set<Entry>)query.list();
         if(entrySet.size()>0){
             for(Entry e:entrySet){
+                e.setQuantity(e.getQuantity()+1);
                 session.saveOrUpdate(e);
+                computeSubTotalForEntry(e.getEntryId());
             }
         }
-        query=session.createQuery("FROM Cart as C WHERE C.cartId:=id");
-        query.setParameter("ïd",cartId);
+        else{
+            addEntryToCart(productId,cartId);
+            addProductToCart(productId,cartId);
+
+        }
+
     }
 
     @Override

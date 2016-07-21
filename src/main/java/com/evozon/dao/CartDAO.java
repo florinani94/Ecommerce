@@ -10,13 +10,21 @@ import java.util.Set;
  * Created by vladblana on 19/07/2016.
  */
 public interface CartDAO {
+    Product getProductById(Integer id);
+
+    Cart getCartById(Integer id);
+
     void addCart(Cart cart);
     void deleteCart(Integer id) ;
-    void addEntryToCart(Entry entry);
+
+    void updateEntryDetails(Entry entry);
+
+    void addEntryToCart(Integer productId, Integer cartId);
 
     void deleteEntryFromCart(Integer id);
 
-    void addProductToEntry(Product product);
+
+    void addProductToCart(Integer productId, Integer cartId);
 
     Set<Entry> getAllEntriesFromCart(Integer id);
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
