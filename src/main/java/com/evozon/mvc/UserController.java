@@ -84,6 +84,8 @@ public class UserController {
             model.addAttribute("message", "Account confirmed successfully!");
         }
 
+        model.addAttribute("message", "Account confirmed successfully!");
+
         return "confirmAccount";
     }
 }

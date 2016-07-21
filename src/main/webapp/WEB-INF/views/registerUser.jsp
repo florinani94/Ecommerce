@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+<c:url var="detailsCSSURL" value="/resources/style/detailViewStyle.css"/>
+<link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
+
+<c:url var="signIn" value="login"/>
+<c:url var="backgroundURL" value="/resources/detailView/Background2.jpg"/>
+
 <head>
     <title>Register</title>
 
@@ -23,7 +29,11 @@
 
 </head>
 <body>
-<c:url var="signIn" value="login"/>
+
+<body background="${backgroundURL}" style="background-size: 100%">
+<jsp:include page="customerHeader.jsp" />
+
+<br>
 
 <div class="col-md-6 col-md-offset-4">
     <h1>REGISTER</h1>
@@ -64,7 +74,7 @@
         <c:url var="path" value="/user/confirm"/>
         <input type="hidden" name="path" value=${path}>
 
-        <button type="submit" class="btn btn-warning">Create Account</button>
+        <button type="submit" class="btn btn-success">Create Account</button>
     </form>
 
     <br>
@@ -72,8 +82,8 @@
         Already a back-office user? <a href="${signIn}">Sign In.</a>
     </p>
 
-    <h4 style="color: #FFA500;">${message1}</h4>
-    <h4 style="color: #FFA500;">${message2}</h4>
+    <h4 style="color: #32CD32;">${message1}</h4>
+    <h4 style="color: #32CD32;">${message2}</h4>
 </div>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
@@ -81,5 +91,7 @@
 
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
+
 </body>
+
 </html>

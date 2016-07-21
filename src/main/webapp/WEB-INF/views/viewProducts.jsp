@@ -57,24 +57,13 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.stockLevel}</td>
-                <td>${product.category}</td>
+                <td>${product.category.name}</td>
                 <td><a href="<c:url value='edit/${product.productId}' />" ><input type="submit" value="Edit" class="btn btn-primary"></a></td>
                 <td><a href="<c:url value='/backoffice/product/delete?productId=${product.productId}'/>" methods="GET"><input type="submit" value="Delete" id="delete"+${product.productId} class="btn btn-danger"></a></td>
             </tr>
 
         </c:forEach>
 
-            <%--<form>--%>
-                <%--<select name="category">--%>
-                    <%--<c:forEach var="category" items="${allCategories}">--%>
-                    <%--&lt;%&ndash;<option value="Tea"> Green Tea</option>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<option value="Tea">Red Tea</option>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<option value="Tea">Black Tea</option>&ndash;%&gt;--%>
-                    <%--<option value="${category.name}">${category.name}</option>--%>
-                    <%--</c:forEach>--%>
-                <%--</select>--%>
-                <%--<input type="submit" value="Submit">--%>
-            <%--</form>--%>
 
         </tbody>
     </table>

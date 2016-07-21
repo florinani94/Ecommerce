@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by mihai on 7/12/2016.
- */
 @Entity
 @Table(name = "category")
 public class Category {
@@ -20,19 +17,9 @@ public class Category {
     @Column(nullable  = false, length = 30)
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private Set<Product> products = new HashSet<Product>();
 
-
-
-    public Set<Product> getProducts() {
-        return products;
-
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
 
     public Category() {
     }
@@ -48,6 +35,7 @@ public class Category {
         this.products = products;
         this.description = description;
     }
+
     public Integer getId() {
         return id;
     }
@@ -71,4 +59,11 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<Product> getProducts() {return products;}
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
 }
