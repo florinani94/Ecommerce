@@ -34,25 +34,25 @@
         <table  class="table table-striped">
             <thead>
             <tr>
-                <th>Product ID</th>
                 <th>Code </th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Stock Level</th>
+                <th>Category</th>
+                <th>ImageUrl</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="product" items="${export}">
                 <tr>
-
-                    <td>${product.productId}</td>
                     <td>${product.code}</td>
                     <td>${product.name}</td>
                     <td>${product.description}</td>
                     <td>${product.price}</td>
                     <td>${product.stockLevel}</td>
-
+                    <td>${product.category.name}</td>
+                    <td>${product.imageURL}</td>
                 </tr>
             </c:forEach>
             </tbody>
