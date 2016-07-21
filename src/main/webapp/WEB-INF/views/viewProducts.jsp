@@ -67,7 +67,10 @@
 
     <a href="${addProduct}" methods="GET"><input type="submit" value="Create new product" class="btn btn-default"></a>
 
-    <a href="${exportProductas}" methods="GET"><input type= "submit" value="Export Products to CSV" class="btn btn-default"></a>
+    <input type= "submit" id="exportButton" value="Export Selected Products" class="btn btn-default"/>
+
+
+        <p id="mesageExport" style="color:white; margin-left: 283px">message</p>
 
     <br> <br>
     <c:if test="${result == true}">
