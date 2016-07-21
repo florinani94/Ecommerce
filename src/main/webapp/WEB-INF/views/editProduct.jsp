@@ -84,18 +84,17 @@
             <label for="stockLevel" class="col-sm-2 control-label">Stock: </label>
             <div class="col-xs-10">
                 <form:input path="stockLevel" cssClass="form-control"/>
+                </div>
             </div>
-        </div>
-        <form>
-            <select name="category">
-                <c:forEach var="category" items="${allCategories}">
-                    <%--<option value="Tea"> Green Tea</option>--%>
-                    <%--<option value="Tea">Red Tea</option>--%>
-                    <%--<option value="Tea">Black Tea</option>--%>
-                    <option value="${category.id}" >${category.name}</option>
-                </c:forEach>
-            </select>
-        </form>
+        <br><br>
+        <p><b> Choose a category: </b></p>
+        <select name="categoryId" id="dropDown">
+            <c:forEach var="categoryItem" items="${allCategories}">
+                <option value="${categoryItem.id}">${categoryItem.name}</option>
+            </c:forEach>
+        </select>
+        <br><br>
+        <br>
 
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
