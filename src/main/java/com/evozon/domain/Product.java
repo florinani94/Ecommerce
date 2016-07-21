@@ -2,7 +2,6 @@ package com.evozon.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -18,11 +17,7 @@ public class Product implements Serializable {
     @Column(nullable = false, length = 20)
     private String name;
 
-    @OneToMany(targetEntity=Entry.class,mappedBy="product",fetch=FetchType.LAZY)
-    private Set<Entry> entrySet;
-
     @Column
-
     private String description;
 
     @Column(nullable = false)
@@ -31,35 +26,25 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Integer stockLevel;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCategory")
     private Category category;
-
-
-    public Product(Integer productId, String code, String name, Set<Entry> entrySet, String description, Double price, Integer stockLevel, Category category, String imageURL) {
-        this.productId = productId;
-        this.code = code;
-        this.name = name;
-        this.entrySet = entrySet;
-        this.description = description;
-        this.price = price;
-        this.stockLevel = stockLevel;
-        this.category = category;
-        this.imageURL = imageURL;
-    }
 
     @Column
     private String imageURL;
 
     public Product() {
     }
+
+    public Product(String code, String name, String description, Double price, Integer stockLevel) {
+
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockLevel = stockLevel;
+    }
+
 
     public Product(String code, String name, String description, Double price, Integer stockLevel,Category category) {
         this.code = code;
@@ -84,13 +69,7 @@ public class Product implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-    public Set<Entry> getEntrySet() {
-        return entrySet;
-    }
 
-    public void setEntrySet(Set<Entry> entrySet) {
-        this.entrySet = entrySet;
-    }
     public String getName() {
         return name;
     }
@@ -131,17 +110,23 @@ public class Product implements Serializable {
         this.imageURL = imageURL;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", entrySet=" + entrySet +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", stockLevel=" + stockLevel +
-                ", category=" + category +
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }

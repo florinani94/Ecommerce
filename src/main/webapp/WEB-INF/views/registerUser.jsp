@@ -91,5 +91,7 @@
 
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
+
 </body>
+
 </html>
