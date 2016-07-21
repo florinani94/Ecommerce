@@ -2,6 +2,7 @@ package com.evozon.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -16,6 +17,12 @@ public class Product implements Serializable {
 
     @Column(nullable = false, length = 20)
     private String name;
+
+
+    @OneToMany(targetEntity=Entry.class,mappedBy="product",fetch=FetchType.LAZY)
+    //// TODO: 21/07/2016 Review cascade type when testing
+    private Set<Entry> entrySet;
+
 
     @Column
     private String description;
