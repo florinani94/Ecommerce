@@ -35,18 +35,18 @@ public class CartService {
         cartDAO.addProductToCart(productId,cartId);
     }
 
-    public void deleteEntryFromCart(int id) {
-        cartDAO.deleteEntryFromCart(id);
+    public void deleteEntryFromCart(Integer entryId) {
+        cartDAO.deleteEntryFromCart(entryId);
     }
 
 
 
-    public void computeSubTotalForEntry(Integer id){
-        cartDAO.computeSubTotalForEntry(id);
-    }
+   // public void computeSubTotalForEntry(Integer entryId){
+      //  cartDAO.computeSubTotalForEntry(entryId);
+   // }
 
-    public void computeTotalForCart(Integer id){
-        cartDAO.computeTotalForCart(id);
+    public void computeTotalForCart(Integer cartId){
+        cartDAO.computeTotalForCart(cartId);
 
     }
 }

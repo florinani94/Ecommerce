@@ -29,7 +29,7 @@ public interface CartDAO {
     Set<Entry> getAllEntriesFromCart(Integer id);
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
 
-    void computeSubTotalForEntry(Integer id);
+    void computeSubTotalForEntry(Integer id,Integer cartId);
 
     void computeTotalForCart(Integer id);
 }
