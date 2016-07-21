@@ -2,6 +2,7 @@ package com.evozon.mvc;
 
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
+import com.evozon.service.CartService;
 import com.evozon.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public String showAddCategory(Model model){
@@ -57,23 +59,6 @@ public class CategoryController {
 
         return "viewCategories";
     }
-
-//        @RequestMapping(value = "/edit", method = RequestMethod.POST)
-//        public String editCategory(Model model, @ModelAttribute("category") Category category){
-//
-//            categoryService.updateCategory(category);
-//
-//            model.addAttribute("allCategories", categoryService.getAllCategories());
-//            return "viewCategories";
-//        }
-//
-//        @RequestMapping(value = "/edit/{categoryId}", method = RequestMethod.GET)
-//        public String goToCreateCategoryPage(@PathVariable("categoryId") int categoryId, Model model) {
-//            Category category = categoryService.getCategoryById(categoryId);
-//            //model.addAttribute("allCategories", categoryService.getAllCategories());
-//            model.addAttribute("category", category);
-//            return "editCategory";
-//        }
 
     @RequestMapping(value = "/edit/{categoryId}", method = RequestMethod.GET)
     public String goToCategoryEditPage(Model model, @PathVariable("categoryId") int categoryId) {
