@@ -55,7 +55,7 @@ public class UserController {
             user.setEmail(email);
             user.setUsername(username);
             user.setPassword(pass1);
-            user.setActive(false);
+            user.setEnabled(false);
             String keyUrl = username + UUID.randomUUID().toString();
             user.setKeyUrl(keyUrl);
 

@@ -1,6 +1,7 @@
 package com.evozon.dao.impl;
 
 import com.evozon.dao.UserDAO;
+import com.evozon.domain.Authority;
 import com.evozon.domain.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,11 +80,17 @@ public class UserDAOImpl implements UserDAO {
         User user = this.getUserByKey(keyUrl);
 
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("UPDATE User set active = :active "  +
-                "WHERE id = :id");
 
-        query.setParameter("active", true);
-        query.setParameter("id", user.getId());
+        Authority authority = new Authority();
+        authority.setUser(user);
+        authority.setAuthority("ROLE_ADMIN");
+        session.save(authority);
+
+        Query query = session.createQuery("UPDATE User set enabled = :enabled "  +
+                "WHERE username = :username");
+
+        query.setParameter("enabled", true);
+        query.setParameter("username", user.getUsername());
         int result = query.executeUpdate();
         System.out.println("Rows affected: " + result);
     }
