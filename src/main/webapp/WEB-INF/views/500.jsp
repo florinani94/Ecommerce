@@ -17,6 +17,7 @@
     <script
             src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <c:url var="URL500" value="/resources/500.png"/>
 
     <title>404 Not found</title>
 </head>
@@ -24,13 +25,19 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1 style="text-align: center">We apologise. A server error appeared</h1>
+        <h1 style="text-align: center">We apologise</h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h3 style="text-align: center">Try again. Here are some useful links</h3>
+        <img src="${URL500}" alt="500Error" width="590" height="300">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h3 style="text-align: center">Here are some useful links</h3>
     </div>
 </div>
 

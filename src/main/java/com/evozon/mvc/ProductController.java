@@ -11,15 +11,19 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.http.HTTPException;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -42,6 +46,8 @@ public class ProductController {
     public String getAllProducts(Model model) {
         System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
+
+        if (true==true) throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
 
         return "viewProducts";
     }
