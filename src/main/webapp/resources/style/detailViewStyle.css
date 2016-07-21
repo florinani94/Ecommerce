@@ -3,6 +3,7 @@ html, body { height: 100%; width: 100%; margin: 0;
 
 .header{
 	background-image: linear-gradient(to top , rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5));
+	max-height: 15%;
 }
 
 #teaLogo,.logoText{
@@ -140,4 +141,12 @@ html, body { height: 100%; width: 100%; margin: 0;
 #cartIcon{
 	margin-top: -1%;
 	width: 7%;
+}
+
+#cartPanel{
+	visibility: hidden;
+	margin-left: 70%;
+	width: 30%;
+	height: 0%;
+	background: rgba(242, 242, 242, 0.5);
 }
