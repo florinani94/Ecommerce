@@ -89,6 +89,11 @@ public class UserController {
         return "loginBackoffice";
     }
 
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logoutBackoffice(Model model) {
+        return "logoutBackoffice";
+    }
+
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmBackofficeUser(Model model, @RequestParam("key") String key) {
         if (userService.checkKey(key) == true) {
