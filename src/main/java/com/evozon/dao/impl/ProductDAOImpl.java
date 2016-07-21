@@ -95,10 +95,12 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     public List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage) {
+
         Integer infRange = ((startPageIndex-1 )*recordsPerPage);
         Integer supRange = recordsPerPage ;
 
         Session session = sessionFactory.getCurrentSession();
+
         Query query = session.createQuery(queryCommand);
 
         query.setFirstResult(infRange);
@@ -106,4 +108,17 @@ public class ProductDAOImpl implements ProductDAO {
         List<Product> products = query.list();
         return products;
     }
+
+    public List<Product> getProductsByCategory(int categoryId) {
+        if (categoryId<=0){
+            return getAllProducts();
+        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.category_id = :categoryId");
+        query.setParameter("categoryId", categoryId);
+        List<Product> products = query.list();
+        return products;
+    }
+
+
 }

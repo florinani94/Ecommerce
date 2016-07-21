@@ -48,5 +48,6 @@
         </div>
         <div class="col-sm-1"></div>
     </div>
+<jsp:include page="customerFooter.jsp"/>
 </body>
 </html>
