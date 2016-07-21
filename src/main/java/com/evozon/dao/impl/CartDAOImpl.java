@@ -117,11 +117,11 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Set<Entry> getAllEntriesFromCart(Integer cartId) {
+    public List<Entry> getAllEntriesFromCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("FROM Entry as E WHERE E.cart=:id");
         query.setParameter("id", cartId);
-        return (Set<Entry>)query.list();
+        return query.list();
     }
 
     @Override
@@ -160,7 +160,7 @@ public class CartDAOImpl implements CartDAO{
 
         if(carts.size() > 0){
             Double total=new Double(0);
-            for(Entry e:carts.get(0).getEntrySet()){
+            for(Entry e:carts.get(0).getEntryList()){
                 total+=e.getSubTotal();
 
             }
@@ -171,8 +171,8 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public void updateEntry(Entry e) {
+    public void updateEntry(Entry entry) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(e);
+        session.saveOrUpdate(entry);
     }
 }

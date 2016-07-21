@@ -26,10 +26,14 @@ public class CartService {
         cartDAO.addCart(cart);
     }
 
+    public void updateCart(Integer cartId){
+
+    }
+
     public void deleteCart(Integer id){
         cartDAO.deleteCart(id);
     }
-
+/*
     public void testEditEntry(Entry entry,Integer cartId){
         if(entry.getQuantity()<0){
             //cannot accept negative values
@@ -44,7 +48,7 @@ public class CartService {
             cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
         }
     }
-
+*/
     public void editEntry(Entry entry,Integer cartId){
         if(entry.getQuantity()==0){
             cartDAO.deleteEntry(entry.getEntryId());
