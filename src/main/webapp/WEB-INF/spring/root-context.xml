@@ -39,7 +39,7 @@
 				<value>com.evozon.domain.Cart</value>
 				<value>com.evozon.domain.User</value>
 				<value>com.evozon.domain.Address</value>
-
+				<value>com.evozon.domain.Authority</value>
 			</list>
 		</property>
 
