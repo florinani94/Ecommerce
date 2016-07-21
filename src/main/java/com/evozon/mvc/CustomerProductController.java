@@ -1,7 +1,11 @@
 package com.evozon.mvc;
 
 
+import com.evozon.domain.Address;
+import com.evozon.domain.AddressDTO;
+import com.evozon.domain.Cart;
 import com.evozon.domain.Product;
+import com.evozon.service.CartService;
 import com.evozon.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,9 @@ public class CustomerProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAllProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
@@ -50,11 +57,24 @@ public class CustomerProductController {
     }
 
     @RequestMapping(value = "/address", method = RequestMethod.POST)
-    public String checkoutAddress(Model model, @ModelAttribute("product") Product product, BindingResult data) {
+    public String checkoutAddress(Model model, @ModelAttribute("address") AddressDTO address, BindingResult data) {
         try {
-            if (!data.hasErrors()) {
-                model.addAttribute("data", true);
-            } else if (data.hasErrors()) {
+            model.addAttribute("address", address);
+            Address deliveryAddress = new Address();
+            Address billingAddress = new Address();
+            deliveryAddress.setCity(address.getDeliveryCity());
+            deliveryAddress.setNumber(address.getDeliveryNumber());
+            deliveryAddress.setStreetName(address.getDeliveryStreet());
+            deliveryAddress.setPhone(address.getDeliveryPhone());
+            billingAddress.setCity(address.getBillingCity());
+            billingAddress.setNumber(address.getBillingNumber());
+            billingAddress.setPhone(address.getBillingPhone());
+            Cart cart = new Cart();
+            cart.setDeliveryAddress(deliveryAddress);
+            cart.setBillingAddress(billingAddress);
+            cartService.addCart(cart);
+            model.addAttribute("data", true);
+            if (data.hasErrors()) {
                 model.addAttribute("data", false);
                 return "customerCartCheckout";
             }

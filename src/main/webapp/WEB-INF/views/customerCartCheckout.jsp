@@ -80,10 +80,10 @@
                     <input type="text" id="billingStreet" name="billingStreet" maxlength="30" class="form-control"/>
                     <br><br>
                     Number: <br>
-                    <input type="text" id="billingNumber" maxlength="5" class="form-control"/>
+                    <input type="text" id="billingNumber" name="billingNumber" maxlength="5" class="form-control"/>
                     <br><br>
                     City: <br>
-                    <input type="text" id="billingCity" maxlength="10" class="form-control"/>
+                    <input type="text" id="billingCity" name="billingCity" maxlength="10" class="form-control"/>
                     <br><br>
                     Phone <br>
                     <input type="text" id="billingPhone" name="billingPhone" maxlength="10" class="form-control"/>
