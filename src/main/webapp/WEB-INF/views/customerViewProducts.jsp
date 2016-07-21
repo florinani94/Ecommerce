@@ -16,7 +16,7 @@
     <title>Products</title>
 </head>
 
-<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 125%; )">
+<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 130%; )">
 
     <jsp:include page="customerHeader.jsp" />
 
@@ -71,7 +71,7 @@
             </c:if>
 
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 10%">
             <div class="col-md-12">
                 <c:set var="nrPages" value="${productSize div 12}"/>
                 <c:set var="dateParts" value="${fn:split(nrPages, '.')}" />
@@ -128,7 +128,6 @@
             </c:if>
 
             <br><br>
-
 
             <c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>
             <link rel="stylesheet" type="text/css" href="${filterCss}">
