@@ -21,28 +21,30 @@
 
 <jsp:include page="customerHeader.jsp" />
 
-<div class="row-fluid">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-        <div class="row-fluid" style="margin-top: 5%">
-            <div class="col-sm-7" >
-                <img src="${imageTileURL}" class="img-responsive" alt="Picture not available" width="650" height="400" id="imageCell"></img>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row" style="margin-top: 5%">
+            <div class="col-md-7" >
+                <img src="${imageTileURL}" class="img-responsive" alt="Picture not available" width="650" height="400" id="imageCell"/>
             </div>
-            <div class="col-sm-5" id="productInfo">
+            <div class="col-md-5" id="productInfo">
                 <h1 class="pageText" id="productTitle">${theProduct.name}</h1>
-                <div class="myHr"></div>
-                <table class="detailsText" id="productDetails">
-                    <tr><td class="descriptionText">${theProduct.description}</td>
-                    </tr>
-                    <tr><td class="priceText">${theProduct.price}$</td>
-                    </tr>
-                    <tr><td><input type="submit" class="addButton" value="Add to cart"></td>
-                    </tr>
-                </table>
+                <%--<div class="myHr"></div>--%>
+                    <table class="detailsText" id="productDetails">
+                        <tr>
+                            <td class="descriptionText">${theProduct.description}</td>
+                        </tr>
+                        <tr>
+                            <td class="priceText">${theProduct.price}$</td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" class="addButton" value="Add to cart"></td>
+                        </tr>
+                    </table>
             </div>
         </div>
     </div>
-    <div class="col-sm-1"></div>
+
 </div>
 
 <jsp:include page="customerFooter.jsp"/>
