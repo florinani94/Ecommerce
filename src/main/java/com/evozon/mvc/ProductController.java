@@ -6,6 +6,10 @@ import com.evozon.mvc.validator.ProductValidator;
 import com.evozon.service.CartService;
 import com.evozon.service.CategoryService;
 import com.evozon.service.ProductService;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -23,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.http.HTTPException;
+import javax.xml.transform.sax.SAXSource;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -54,6 +59,7 @@ public class ProductController {
     public String getAllProducts(Model model) {
         System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
+
 
         return "viewProducts";
     }
@@ -141,13 +147,19 @@ public class ProductController {
         return "viewProducts";
     }
 
+    @RequestMapping(value = "/export", method = RequestMethod.POST)
+    public String export(Model model, @RequestBody JsonArray prodArray) {
+        List<Integer> productsIds = new Gson().fromJson(prodArray, new TypeToken< List<Integer>>(){}.getType());
+        String fileName = "exportProducts";
+        List<Product> products = productService.getParticularProducts(productsIds);
+        productService.exportToCSV(fileName, products);
+//        model.addAttribute("export", productService.validateExport("exportProducts"));
+        return "exportProducts";
+    }
+
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public String export(Model model) {
-
-        String fileName = "exportProducts";
-        productService.exportToCSV(fileName);
-        model.addAttribute("export", productService.validateExport(fileName));
-
+        model.addAttribute("export", productService.validateExport("exportProducts"));
         return "exportProducts";
     }
 

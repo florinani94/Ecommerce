@@ -42,8 +42,13 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-    public List<Product> getParticularProducts(int [] productIds) {
-        return productDAO.getParticularProducts(productIds);
+
+    public boolean validateProduct(Product product) {
+        String voidString="";
+        if ( (!voidString.equals(product.getCode()) && (!voidString.equals(product.getName()) && (0 <= product.getPrice()) && (0 <= product.getStockLevel()))) ) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -60,10 +65,12 @@ public class ProductService {
         return  productDAO.getProductByCode(code);
     }
 
+    public List<Product>  getParticularProducts(List<Integer> prodArray){
+        List<Product> products = productDAO.getParticularProducts(prodArray);
+        return products;
+     }
 
-    public void exportToCSV(String fileName) {
-
-        List<Product> products = productDAO.getAllProducts();
+    public void exportToCSV(String fileName, List<Product> products) {
 
 
         FileWriter writer = null;
@@ -165,7 +172,7 @@ public class ProductService {
         if(startPageIndex<=0){
             return null;
         }
-         return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
+        return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
     }
 
     public void updateProduct(Product product) {

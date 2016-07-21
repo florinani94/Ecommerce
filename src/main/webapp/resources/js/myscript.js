@@ -25,6 +25,43 @@ $("#deleteButton").click(function() {
     });
 });
 
+$("#exportButton").click(function() {
+    var arr = new Array();
+    $('input[id="idProd"]:checked').each(function() {
+        var toInt = parseInt(this.value);
+        arr.push(toInt);
+        console.log(arr);
+    });
+
+
+        if(arr.length > 0) {
+            $.ajax({
+                url: "../product/export",
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(arr),
+
+                error : function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '../product/export',
+                        success: function(data) {
+                            document.write(data);
+
+                        }
+                    });
+                }
+            });
+
+    }else{
+        document.getElementById("mesageExport").style.color = "red";
+        document.getElementById("mesageExport").innerHTML = "Please select some products !";
+    }
+
+});
+
+
 
 $("#selectall").click(function () {
     $('.check').attr('checked', this.checked);
