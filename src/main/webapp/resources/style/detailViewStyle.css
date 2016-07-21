@@ -11,10 +11,12 @@ html, body {
 
 .footer{
 	background-image: linear-gradient(to bottom , rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.35));
-	max-height: 10%;
+	max-height: 15%;
 }
 
 .footerText{
+	text-align: center;
+
 	font-family: "Calibri";
 	font-weight: lighter;
 	color: #ffffff;

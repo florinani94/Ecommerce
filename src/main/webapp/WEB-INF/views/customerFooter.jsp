@@ -14,13 +14,15 @@
 
     <footer class="footer">
         <div class="row">
-            <div class="col-md-2 col-md-offset-2">
-                <p class="footerText">Java Internship Summer 2016</p>
-            </div>
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-3 col-md-offset-5">
                 <a class="footerLink" href="/mvc/products"> Products </a>
                 <a class="footerLink"> Terms and Conditions </a>
                 <a class="footerLink"> Contact </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <p class="footerText">@Java Internship Summer 2016</p>
             </div>
         </div>
     </footer>
