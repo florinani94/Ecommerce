@@ -49,7 +49,6 @@ public class CartService {
                 e.setQuantity(e.getQuantity()+1);
                 cartDAO.updateEntry(e);
                 cartDAO.computeSubTotalForEntry(e.getEntryId(),cartId);
-                //cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
