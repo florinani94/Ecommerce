@@ -51,10 +51,13 @@
                 <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" class="form-control"/>
                 <br><br>
                 Number: <br>
-                <input type="text" id="deliveryNumber" maxlength="5" class="form-control"/>
+                <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" class="form-control"/>
                 <br><br>
                 City: <br>
-                <input type="text" id="deliveryCity" maxlength="10" class="form-control"/>
+                <input type="text" id="deliveryCity" name="deliveryCity" maxlength="15" class="form-control"/>
+                <br><br>
+                Phone <br>
+                <input type="text" id="deliveryPhone" name="deliveryPhone" maxlength="10" class="form-control"/>
                 <br><br>
 
         </div>
@@ -81,6 +84,9 @@
                     <br><br>
                     City: <br>
                     <input type="text" id="billingCity" maxlength="10" class="form-control"/>
+                    <br><br>
+                    Phone <br>
+                    <input type="text" id="billingPhone" name="billingPhone" maxlength="10" class="form-control"/>
                     <br><br>
 
                     </div>
