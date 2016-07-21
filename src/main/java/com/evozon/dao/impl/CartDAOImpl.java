@@ -130,6 +130,7 @@ public class CartDAOImpl implements CartDAO{
         Query query=session.createQuery("FROM Entry as E WHERE E.entryId=:id");
         query.setParameter("id", entryId);
         List<Entry> entries=query.list();
+
         if(entries.size()>0){
             entries.get(0).setSubTotal(value);
         }
