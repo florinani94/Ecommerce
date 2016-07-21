@@ -17,20 +17,39 @@ public class Entry {
     @JoinColumn(name="cart_id", nullable = false)
     private Cart cart;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
+    //// TODO: 21/07/2016 Review cascade type when testing
+    //// TODO: 21/07/2016 make a copy of price, code and name
     @JoinColumn(name="product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false)
+   @Column
+    private String productCode;
+
+
+
+    @Column
+   private String productName;
+
+   @Column
+    private Double productPrice;
+
+    @Column
     private Integer quantity;
 
-    @Column(nullable = false)
+    @Column
     private Double subTotal;
+
 
     public Entry(){
 
     }
-
+    public Entry( Cart cart, Product product, Integer quantity, Double subTotal) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+        this.subTotal = subTotal;
+    }
     public Entry(Integer entryId, Cart cart, Product product, Integer quantity, Double subTotal) {
         this.entryId = entryId;
         this.cart = cart;
@@ -67,7 +86,29 @@ public class Entry {
     public void setProduct(Product product) {
         this.product = product;
     }
+    public String getProductCode() {
+        return productCode;
+    }
 
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
     public Integer getQuantity() {
         return quantity;
     }

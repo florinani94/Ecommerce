@@ -13,7 +13,7 @@ public class Cart {
 
     @Column(nullable = false)
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cartId;
+    private Integer cartId;
 
     @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private Set<Entry> entrySet;
@@ -56,7 +56,7 @@ public class Cart {
         return cartId;
     }
 
-    public void setCartId(int cartId) {
+    public void setCartId(Integer cartId) {
         this.cartId = cartId;
     }
 
