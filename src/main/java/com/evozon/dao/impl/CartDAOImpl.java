@@ -94,7 +94,7 @@ public class CartDAOImpl implements CartDAO{
 
 
     @Override
-    public List<Entry> addProductToCart(Integer productId, Integer cartId) {
+    public List<Entry> getEntriesFromCart(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("Select E FROM Entry as E, Product as P, Cart as C WHERE E.cart=C.cartId AND P.productId=E.product AND C.cartId=:id AND P.productId=:prodId");
         query.setParameter("id", cartId);

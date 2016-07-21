@@ -33,13 +33,13 @@ public class CartService {
     }
 
     public void addProductToCart(Integer productId,Integer cartId) {
-        List<Entry> entryList=cartDAO.addProductToCart(productId,cartId);
+        List<Entry> entryList=cartDAO.getEntriesFromCart(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 e.setQuantity(e.getQuantity()+1);
                 cartDAO.updateEntry(e);
                 cartDAO.computeSubTotalForEntry(e.getEntryId(),cartId);
-                computeTotalForCart(cartId);
+                cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
@@ -54,9 +54,4 @@ public class CartService {
     }
 
 
-
-    public void computeTotalForCart(Integer cartId){
-        cartDAO.computeTotalForCart(cartId);
-
-    }
 }
