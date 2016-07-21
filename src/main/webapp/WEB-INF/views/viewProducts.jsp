@@ -5,19 +5,6 @@
     <title>All Products</title>
 </head>
 <body>
-
-<%--<form>--%>
-    <%--<select name="products">--%>
-        <%--<option value="Tea"> Green Tea</option>--%>
-        <%--<option value="Tea">Red Tea</option>--%>
-        <%--<option value="Tea">Black Tea</option>--%>
-    <%--</select>--%>
-    <%--<input type="submit" value="Submit">--%>
-<%--</form>--%>
-
-<%--<p>Choose a tea brand , and click the "Submit" button to send input to the server.</p>--%>
-
-
 <jsp:include page="backofficeHeader.jsp" />
 
 <div class="row">

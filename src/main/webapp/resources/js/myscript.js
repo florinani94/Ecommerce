@@ -39,13 +39,15 @@ $('.panel-heading h4 a input[type=checkbox]').on('click', function(e) {
 
 function billingFunction() {
     if (document.getElementById("same").checked) {
-        document.getElementById("billingStreet").value=document.getElementById("deliveryStreet").value;
-        document.getElementById("billingNumber").value=document.getElementById("deliveryNumber").value;
-        document.getElementById("billingCity").value=document.getElementById("deliveryCity").value;
+        document.getElementById("billingStreet").value = document.getElementById("deliveryStreet").value;
+        document.getElementById("billingNumber").value = document.getElementById("deliveryNumber").value;
+        document.getElementById("billingCity").value = document.getElementById("deliveryCity").value;
+        document.getElementById("billingPhone").value = document.getElementById("deliveryPhone").value;
     } else {
-        document.getElementById("billingStreet").value="";
-        document.getElementById("billingNumber").value="";
-        document.getElementById("billingCity").value="";
+        document.getElementById("billingStreet").value = "";
+        document.getElementById("billingNumber").value = "";
+        document.getElementById("billingCity").value = "";
+        document.getElementById("billingPhone").value = "";
     }
 }
 

@@ -2,7 +2,6 @@ package com.evozon.dao.impl;
 
 import com.evozon.dao.CartDAO;
 import com.evozon.domain.Cart;
-import com.evozon.domain.Category;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
 import org.hibernate.Query;
@@ -25,17 +24,41 @@ import java.util.Set;
 public class CartDAOImpl implements CartDAO{
 
 
-   @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
+    public Product getProductById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
+        query.setParameter("id", id);
+        List<Product> products = query.list();
+        if(products.size() > 0){
+            return products.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Cart getCartById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Cart as C WHERE C.cartId = :id");
+        query.setParameter("id", id);
+        List<Cart> carts = query.list();
+        if(carts.size() > 0){
+            return carts.get(0);
+        }
+        return null;
+    }
     @Override
     public void addCart(Cart cart) {
         Session session = sessionFactory.getCurrentSession();
         session.save(cart);
+
     }
 
     @Override
-    public void deleteCart(int id) {
+    public void deleteCart(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("DELETE FROM Cart as C WHERE C.cartId=:id");
         query.setParameter("id", id);
@@ -43,25 +66,62 @@ public class CartDAOImpl implements CartDAO{
 
     }
     @Override
-    public void addEntryToCart(Entry entry) {
+    public void updateEntryDetails(Entry entry){
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(entry);
+        Product product=entry.getProduct();
+        entry.setProductCode(product.getCode());
+        entry.setProductName(product.getName());
+        entry.setProductPrice(product.getPrice());
+        session.save(entry);
     }
 
     @Override
-    public void deleteEntryFromCart(int id) {
+    public void addEntryToCart(Integer productId, Integer cartId){
+        Session session = sessionFactory.getCurrentSession();
+        Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
+        updateEntryDetails(entry);
+    }
+
+    @Override
+    public void deleteEntryFromCart(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("DELETE FROM Entry as E WHERE E.entryId=:id");
         query.setParameter("id", id);
         query.executeUpdate();
 
     }
+
+
     @Override
-    public void addProductToEntry(Product product) {
+    public void addProductToCart(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(product);
+        Query query=session.createQuery("Select E FROM Entry as E, Product as P, Cart as C WHERE E.cart=C.cartId AND P.productId=E.product AND C.cartId=:id AND P.productId=:prodId");
+        query.setParameter("id", cartId);
+        query.setParameter("prodId", productId);
+        List<Entry> entryList=query.list();
+        if(entryList.size()>0){
+            for(Entry e:entryList){
+                e.setQuantity(e.getQuantity()+1);
+                session.saveOrUpdate(e);
+                computeSubTotalForEntry(e.getEntryId());
+            }
+        }
+        else{
+            addEntryToCart(productId,cartId);
+            addProductToCart(productId,cartId);
+
+        }
+
     }
 
+    @Override
+    public Set<Entry> getAllEntriesFromCart(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query=session.createQuery("FROM Entry as E WHERE E.cart=:id");
+        query.setParameter("id", id);
+        return (Set<Entry>)query.list();
+    }
+    //// TODO: 20/07/2016 deleteProductFromEntry 
 
     @Override
     public void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId){

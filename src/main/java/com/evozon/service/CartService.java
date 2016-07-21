@@ -31,17 +31,15 @@ public class CartService {
 
     }
 
-    public void addEntryToCart(Entry entry) {
-        cartDAO.addEntryToCart(entry);
+    public void addProductToCart(Integer productId,Integer cartId) {
+        cartDAO.addProductToCart(productId,cartId);
     }
 
     public void deleteEntryFromCart(int id) {
         cartDAO.deleteEntryFromCart(id);
     }
 
-    public void addProductToEntry(Product product) {
-        cartDAO.addProductToEntry(product);
-    }
+
 
     public void computeSubTotalForEntry(Integer id){
         cartDAO.computeSubTotalForEntry(id);
