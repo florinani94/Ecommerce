@@ -49,21 +49,17 @@ function applySelectedFilter($selectedCheckboxCategory) {
             $url=$url.replace("&category="+$valueInput,'');
         }
         $("#selectedCategories").find("."+$valueInput).remove();
-        if(arr.index($valueInput)>=0){
-            arr.remove($valueInput);
+        if(jQuery.inArray( $valueInput, arr )){
+            arr.splice($.inArray($valueInput, arr),1);
+
         }
     }
-    var state = {
-        "canBeAnything": true
-    };
-    history.pushState("", "View product", $url);
-    // window.location.href=$url;
 
     alert(arr);
-    
+
     $.ajax({
         type:'POST',
-        url: "../products",
+        url: "products",
         data : {
             selectedCategoriesArray: arr
         },
@@ -72,7 +68,7 @@ function applySelectedFilter($selectedCheckboxCategory) {
             console.log("success");
         },
         error: function (result) {
-            alert("error"+result);
+            alert("error"+result.responseText);
         }
     });
 
@@ -85,4 +81,3 @@ function deleteFilter($selectedValue) {
     applySelectedFilter($checkBox);
 
 }
-

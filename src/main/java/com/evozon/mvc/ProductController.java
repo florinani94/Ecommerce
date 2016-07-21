@@ -60,6 +60,7 @@ public class ProductController {
         System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
 
+
         return "viewProducts";
     }
 
@@ -201,5 +202,7 @@ public class ProductController {
         }
         return "viewProducts";
     }
+
+
 
 }

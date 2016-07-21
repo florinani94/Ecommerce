@@ -16,5 +16,7 @@ public interface CategoryDAO {
 
     Category getCategoryById(Integer id);
 
+
+    void updateCategory(Category category);
 }
 
