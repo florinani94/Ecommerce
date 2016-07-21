@@ -54,7 +54,6 @@ public class CartDAOImpl implements CartDAO{
     public void addCart(Cart cart) {
         Session session = sessionFactory.getCurrentSession();
         session.save(cart);
-
     }
 
     @Override
@@ -64,7 +63,6 @@ public class CartDAOImpl implements CartDAO{
         Query query=session.createQuery("DELETE FROM Cart as C WHERE C.cartId=:id");
         query.setParameter("id", cartId);
         query.executeUpdate();
-
     }
 
     @Override
@@ -73,7 +71,6 @@ public class CartDAOImpl implements CartDAO{
         Query query=session.createQuery("DELETE FROM Entry as E WHERE E.entryId=:id");
         query.setParameter("id", entryId);
         query.executeUpdate();
-
     }
 
     @Override
@@ -100,7 +97,6 @@ public class CartDAOImpl implements CartDAO{
         Query query=session.createQuery("DELETE FROM Entry as E WHERE E.entryId=:id");
         query.setParameter("id", entryId);
         query.executeUpdate();
-
     }
 
     @Override
@@ -118,8 +114,6 @@ public class CartDAOImpl implements CartDAO{
         query.setParameter("prodId", productId);
         List<Entry> entryList=query.list();
         return entryList;
-
-
     }
 
     @Override
