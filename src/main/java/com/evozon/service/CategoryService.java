@@ -28,6 +28,9 @@ public class CategoryService {
     public List<Category> getAllCategories(){
         return categoryDAO.getAllCategories();
     }
+    public List<Category> getCategoriesWithAtLeastOneProduct(){
+        return  categoryDAO.getCategoriesWithAtLeastOneProduct();
+    }
 
     public Category getCategoryById(Integer id) { return categoryDAO.getCategoryById(id);}
 

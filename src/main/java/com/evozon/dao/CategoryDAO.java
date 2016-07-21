@@ -12,7 +12,11 @@ public interface CategoryDAO {
 
     List<Category> getAllCategories();
 
+    List<Category> getCategoriesWithAtLeastOneProduct();
+
     Category getCategoryById(Integer id);
+
 
     void updateCategory(Category category);
 }
+

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,12 +27,14 @@ public class ProductDAOImpl implements ProductDAO {
         return session.createQuery("FROM Product as P").list();
     }
 
-    public List<Product> getParticularProducts(int[] productIds) {
-
-        Session session=sessionFactory.getCurrentSession();
-        Query query=session.createQuery("FROM Product WHERE productId in (:productIds)");
-        query.setParameter("productIds", productIds);
-        return query.list();
+    public List<Product> getParticularProducts(List<Integer> productIds) {
+        int i = 0;
+        List<Product> products = new ArrayList<>();
+        while(i != productIds.size()){
+            products.add(getProductById(productIds.get(i)));
+            i++;
+        }
+        return products;
     }
 
 
@@ -95,10 +98,12 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     public List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage) {
+
         Integer infRange = ((startPageIndex-1 )*recordsPerPage);
         Integer supRange = recordsPerPage ;
 
         Session session = sessionFactory.getCurrentSession();
+
         Query query = session.createQuery(queryCommand);
 
         query.setFirstResult(infRange);
@@ -106,4 +111,17 @@ public class ProductDAOImpl implements ProductDAO {
         List<Product> products = query.list();
         return products;
     }
+
+    public List<Product> getProductsByCategory(int categoryId) {
+        if (categoryId<=0){
+            return getAllProducts();
+        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Product as P WHERE P.category_id = :categoryId");
+        query.setParameter("categoryId", categoryId);
+        List<Product> products = query.list();
+        return products;
+    }
+
+
 }

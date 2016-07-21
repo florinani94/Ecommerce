@@ -1,4 +1,3 @@
-<%@ page import="com.evozon.dao.impl.ProductDAOImpl" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -9,7 +8,7 @@
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
     <c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
 
-    <link rel="stylesheet" href="/resources/style/detailViewStyle.css">
+    <%--<link rel="stylesheet" href="/resources/style/detailViewStyle.css">--%>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -47,7 +46,7 @@
         <div class="col-sm-3"></div>
     </div>
 
-    <script src="jquery-1.12.4.min.js"></script>
+    <script src="/mvc/resources/jquery-1.8.3.js"></script>
     <script type="application/javascript" src="${cartJavaScriptUrl}"></script>
 
 </body>

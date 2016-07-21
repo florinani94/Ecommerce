@@ -8,7 +8,7 @@ public interface ProductDAO {
 
     List<Product> getAllProducts();
 
-    List<Product> getParticularProducts( int [] productIds);
+    List<Product> getParticularProducts( List<Integer> productIds);
 
     void addProduct(Product product);
 
@@ -25,5 +25,7 @@ public interface ProductDAO {
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 
     List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage);
+
+    List<Product> getProductsByCategory(int categoryId);
 
 }

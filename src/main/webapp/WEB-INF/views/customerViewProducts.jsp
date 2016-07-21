@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
 
     <c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>
-    <link rel="stylesheet" href="${cssUrlHead}">
+    <link rel="stylesheet" type="text/css" href="${cssUrlHead}">
 
 
     <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
@@ -16,10 +16,12 @@
     <title>Products</title>
 </head>
 
-<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
+<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 125%; )">
 
     <jsp:include page="customerHeader.jsp" />
-    <div class="container">
+
+<div class="container">
+    <div class="rigthDiv">
         <div class = "sortBox">
             <div class="row">
                 <div class="col-md-4">
@@ -49,7 +51,7 @@
                             <c:url var="image" value="${product.imageURL}"></c:url>
                             <a href="${productLink}"><img class="frontImage" src="${image}"></a>
                             <div><h3 class="productName">${product.name}</h3></div>
-                            <div><h4 class="productPrice">Price: ${product.price} $</h4></div>
+                            <div><h4 class="productPrice">Price: ${product.price} RON</h4></div>
                             <div class="row">
                                 <div class="botT">
                                     <c:if test="${product.stockLevel gt 0}">
@@ -101,11 +103,190 @@
                         <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}'/>" methods="GET">${nrPagesInt}</a>
                     </c:if>
                 </div>
+
+
+
+
+
+
+
             </div>
+            </div>
+
+
         </div>
 
+    <div class="leftDiv" >
+
+        <div class="filter">
+            <br><br><br>
+            <b>Filter by category</b>
+
+            <br><br>
+            <c:if test="${not empty categories}">
+                <div id="allCategories">
+                <form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">
+                    <c:forEach var="category" items="${categories}">
+                        <input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>${category.name}<br>
+                    </c:forEach>
+                </form>
+                </div>
+            </c:if>
+
+            <br><br>
+
+
+            <c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>
+            <link rel="stylesheet" type="text/css" href="${filterCss}">
+
+            <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
+            <script type="text/javascript" src="/mvc/resources/js/productFilters.js"></script>
+
+            <div id="selectedCategories"></div>
+        </div>
     </div>
+    <jsp:include page="customerFooter.jsp"/>
+
+</div>
+
+
+
 
 
 </body>
 </html>
+
+
+
+
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
+
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<html>--%>
+<%--<head>--%>
+    <%--<c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>--%>
+    <%--<link rel="stylesheet" type="text/css" href="${cssUrl}">--%>
+
+    <%--<c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>--%>
+    <%--<link rel="stylesheet" href="${cssUrlHead}">--%>
+
+
+    <%--<c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>--%>
+
+    <%--<title>Products</title>--%>
+<%--</head>--%>
+
+<%--<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">--%>
+
+<%--<jsp:include page="customerHeader.jsp" />--%>
+<%--<div class="rigthDiv">--%>
+<%--<div class="bigBox">--%>
+    <%--<div class="sortBox">--%>
+        <%--<form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">--%>
+            <%--<select name="sortValue" id="sort" class="form-control">--%>
+                <%--<option value="none">Sort By</option>--%>
+                <%--<option value="sortpriceupdown">Price Cheap to Expensive</option>--%>
+                <%--<option value="sortpricedownup">Price Expensive to Cheap</option>--%>
+                <%--<option value="sortnameaz">Name A to Z</option>--%>
+                <%--<option value="sortnameza">Name Z to A</option>--%>
+            <%--</select>--%>
+            <%--<input type="submit" value="Sort" class="btn btn-default sortButton"/>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+    <%--<c:if test="${not empty products}">--%>
+        <%--<div class="productsContainer" class="row">--%>
+            <%--<c:forEach var="product" items="${products}">--%>
+
+                <%--<c:url var="productLink" value="/products/view?productId=${product.productId}"></c:url>--%>
+
+                <%--<div class="square">--%>
+                    <%--<c:url var="img" value="${product.imageURL}" />--%>
+                    <%--<a href="${productLink}"><img class="frontImage" src="${img}"></a>--%>
+                    <%--<div class="row"><h3 class="productName">${product.name}</h3></div>--%>
+                    <%--<div class="row"><h4 class="productPrice">Price: ${product.price} RON</h4></div>--%>
+                    <%--<div class="row">--%>
+                        <%--<div class="botT">--%>
+                            <%--<c:if test="${product.stockLevel gt 0}">--%>
+                                <%--<span class="labelStock label label-success">In stock!</span>--%>
+                            <%--</c:if>--%>
+                            <%--<c:if test="${product.stockLevel lt 1}">--%>
+                                <%--<span class="labelStock label label-warning">Out of stock!</span>--%>
+                            <%--</c:if>--%>
+                        <%--</div>--%>
+                        <%--<div class="inspectProductButton">--%>
+                            <%--<a href="${productLink}" class="btn btn-success" role="button">Details</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</c:forEach>--%>
+        <%--</div>--%>
+
+    <%--</c:if>--%>
+
+    <%--<c:set var="nrPages" value="${productSize div 9}"/>--%>
+    <%--<c:set var="dateParts" value="${fn:split(nrPages, '.')}" />--%>
+    <%--<c:set var="nrPagesInt" value="${dateParts[0]}" ></c:set>--%>
+
+    <%--<c:if test="${dateParts[1]!=\"0\"}">--%>
+        <%--<c:set var="nrPagesInt" value="${nrPagesInt+1}"/>--%>
+    <%--</c:if>--%>
+
+    <%--<div class="paginationView">--%>
+        <%--<c:if test="${currentPage>1}">--%>
+            <%--<a href="<c:url value='/products?page=${1}&sortValue=${sortValue}'/>" methods="GET">1</a>--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${currentPage-1 >1}">--%>
+            <%--...--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${currentPage!=1 && currentPage-1!=1}">--%>
+            <%--<a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}'/>" methods="GET">${currentPage-1}</a>--%>
+        <%--</c:if>--%>
+        <%--<a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}'/>" methods="GET">${currentPage}</a>--%>
+
+        <%--<c:if test="${currentPage <nrPagesInt-1}">--%>
+            <%--<a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}'/>" methods="GET">${currentPage+1}</a>--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${currentPage+1 <nrPagesInt-1}">--%>
+            <%--...--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${currentPage!=nrPagesInt}">--%>
+            <%--<a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}'/>" methods="GET">${nrPagesInt}</a>--%>
+        <%--</c:if>--%>
+    <%--</div>--%>
+
+
+<%--</div>--%>
+<%--</div>--%>
+    <%--<div class="leftDiv" >--%>
+
+        <%--<div class="filter">--%>
+        <%--<br><br><br>--%>
+        <%--<b>Filter by category</b>--%>
+
+        <%--<br><br>--%>
+        <%--<c:if test="${not empty categories}">--%>
+            <%--<form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">--%>
+                <%--<c:forEach var="category" items="${categories}">--%>
+                    <%--<input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>${category.name}<br>--%>
+                <%--</c:forEach>--%>
+            <%--</form>--%>
+        <%--</c:if>--%>
+
+        <%--<br><br>--%>
+
+
+        <%--<c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>--%>
+        <%--<link rel="stylesheet" type="text/css" href="${filterCss}">--%>
+
+        <%--<script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>--%>
+        <%--<script type="text/javascript" src="/mvc/resources/js/productFilters.js"></script>--%>
+
+        <%--<div id="selectedCategories"></div>--%>
+    <%--</div>--%>
+
+    <%--</div>--%>
+
+
+<%--</body>--%>
+<%--</html>--%>
