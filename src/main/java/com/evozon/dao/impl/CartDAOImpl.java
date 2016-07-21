@@ -84,11 +84,11 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public void addEntryToCart(Integer productId, Integer cartId){
+    public Entry addEntryToCart(Integer productId, Integer cartId){
         Session session = sessionFactory.getCurrentSession();
         Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
         session.save(entry);
-        updateEntryDetails(entry);
+        return entry;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class CartDAOImpl implements CartDAO{
             entries.get(0).setSubTotal(value);
         }
         session.saveOrUpdate(entries.get(0));
-        computeTotalForCart(cartId);
+
     }
 
     @Override
@@ -148,7 +148,6 @@ public class CartDAOImpl implements CartDAO{
 
         Double value=new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
         updateSubTotalForEntry(value,entryId,cartId);
-
 
     }
 

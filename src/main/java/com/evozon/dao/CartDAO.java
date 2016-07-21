@@ -22,7 +22,7 @@ public interface CartDAO {
 
     void updateEntryDetails(Entry entry);
 
-    void addEntryToCart(Integer productId, Integer cartId);
+    Entry addEntryToCart(Integer productId, Integer cartId);
 
     void deleteEntryFromCart(Integer id);
     void updateQuantity(Entry entry);
