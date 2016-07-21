@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -8,15 +9,16 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <beans:import resource="database-config.xml"/>
+
     <http auto-config="true">
-        <intercept-url pattern="/backoffice/**" access="ROLE_USER"/>
+        <intercept-url pattern="/backoffice/**" access="ROLE_ADMIN"/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
-            <user-service>
-                <user name="diana" password="secret" authorities="ROLE_USER"/>
-            </user-service>
+            <password-encoder hash="bcrypt"/>
+            <jdbc-user-service data-source-ref="evozonDataSource"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

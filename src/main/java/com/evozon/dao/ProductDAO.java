@@ -8,7 +8,7 @@ public interface ProductDAO {
 
     List<Product> getAllProducts();
 
-    List<Product> getParticularProducts( int [] productIds);
+    List<Product> getParticularProducts( List<Integer> productIds);
 
     void addProduct(Product product);
 

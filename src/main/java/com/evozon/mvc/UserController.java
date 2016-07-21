@@ -6,6 +6,7 @@ import com.evozon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +55,12 @@ public class UserController {
             User user = new User();
             user.setEmail(email);
             user.setUsername(username);
-            user.setPassword(pass1);
-            user.setActive(false);
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(pass1);
+
+            user.setPassword(hashedPassword);
+            user.setEnabled(false);
             String keyUrl = username + UUID.randomUUID().toString();
             user.setKeyUrl(keyUrl);
 

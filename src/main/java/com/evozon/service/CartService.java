@@ -24,12 +24,10 @@ public class CartService {
 
     public void addCart(Cart cart){
         cartDAO.addCart(cart);
-
     }
 
     public void deleteCart(Integer id){
         cartDAO.deleteCart(id);
-
     }
 
     public void editEntry(Entry entry,Integer cartId){
@@ -51,13 +49,11 @@ public class CartService {
                 e.setQuantity(e.getQuantity()+1);
                 cartDAO.updateEntry(e);
                 cartDAO.computeSubTotalForEntry(e.getEntryId(),cartId);
-                //cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
             cartDAO.addEntryToCart(productId,cartId);
             addProductToCart(productId,cartId);
-
         }
     }
 

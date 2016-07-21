@@ -87,14 +87,14 @@
         <div class="form-group">
             <label for="price" class="control-label col-xs-2">Price: </label>
             <div class="col-xs-10">
-                <form:input type="number" path="price" cssClass="form-control"/>
+                <form:input type="text" path="price" cssClass="form-control"/>
                 <form:errors path="price"  cssClass="error" />
             </div>
         </div>
         <div class="form-group">
             <label for="stockLevel" class="col-sm-2 control-label">Stock: </label>
             <div class="col-xs-10">
-                <form:input type="number" path="stockLevel" cssClass="form-control"/>
+                <form:input type="text" path="stockLevel" cssClass="form-control"/>
                 <form:errors path="stockLevel" cssClass="error" />
             </div>
         </div>

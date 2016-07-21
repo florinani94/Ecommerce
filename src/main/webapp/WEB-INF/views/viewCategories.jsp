@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>View categories</title>
+
 </head>
 <body>
 
@@ -31,7 +32,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <%--<th>Edit</th>--%>
+                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -41,8 +42,8 @@
                     <td>${category.id}</td>
                     <td>${category.name}</td>
                     <td>${category.description}</td>
-                    <%--<td><a href="edit?id=${category.id}" methods="GET"><input type="submit" value="Edit" class="btn btn-primary"></a></td>--%>
-                    <td><a href="delete?id=${category.id}" methods="GET"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
+                    <td><a href="<c:url value="/backoffice/category/edit/${category.id}" />" methods="get"><input type="submit" value="Edit" class="btn btn-primary"></a></td>
+                    <td><a href="<c:url value="/backoffice/category/delete?id=${category.id}" />" methods="get"><input type="submit" value="Delete" class="btn btn-danger"></a></td>
                 </tr>
             </c:forEach>
             </tbody>
