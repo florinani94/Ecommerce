@@ -1,7 +1,6 @@
 package com.evozon.mvc.validator;
 
 import com.evozon.domain.Product;
-import com.evozon.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -22,14 +21,21 @@ public class ProductValidator implements Validator {
 
         ValidationUtils.rejectIfEmpty(e, "code","error.code","Code is required");
         ValidationUtils.rejectIfEmpty(e, "name","error.name","Name is required");
+        ValidationUtils.rejectIfEmpty(e, "price","error.price","Price is required");
+        ValidationUtils.rejectIfEmpty(e, "stockLevel","error.stockLevel","Stock is required");
 
-        Product product=(Product) obj;
+        try{
+            Product product=(Product) obj;
+            if(product.getPrice()<0.0){
+                e.rejectValue("price","error.price","Wrong input: enter a positive value");
+            }
+            if(product.getStockLevel()<0){
+                e.rejectValue("stockLevel","error.stockLevel","Wrong input: enter a positive value");
+            }
+        }
+        catch(Exception error){
+            error.printStackTrace();
+        }
 
-        if(Double.valueOf(product.getPrice())<0.0){
-            e.rejectValue("price","error.price","Wrong input: enter a positive value");
-        }
-        if(Integer.valueOf(product.getStockLevel())<0){
-            e.rejectValue("stockLevel","error.stockLevel","Wrong input: enter a positive value");
-        }
     }
 }

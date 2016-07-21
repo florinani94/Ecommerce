@@ -43,6 +43,15 @@ public class ProductService {
     }
 
 
+    public boolean validateProduct(Product product) {
+        String voidString="";
+        if ( (!voidString.equals(product.getCode()) && (!voidString.equals(product.getName()) && (0 <= product.getPrice()) && (0 <= product.getStockLevel()))) ) {
+            return true;
+        }
+        return false;
+    }
+
+
     public void importFromFile(String filename) {
         productDAO.importFromFile(filename);
     }
@@ -61,12 +70,10 @@ public class ProductService {
         return products;
      }
 
-
     public void exportToCSV(String fileName, List<Product> products) {
 
 
         FileWriter writer = null;
-
 
 
             try {
@@ -84,7 +91,6 @@ public class ProductService {
                     writer.append(",");
                     writer.append(String.valueOf(categoryDAO.getCategoryById(product.getCategory().getId()).getId()));
                     writer.append(",");
-                    writer.append("");
                     writer.append(product.getImageURL());
                     writer.append("\n");
                 }
@@ -166,7 +172,7 @@ public class ProductService {
         if(startPageIndex<=0){
             return null;
         }
-         return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
+        return productDAO.getProductsForPage(startPageIndex,recordsPerPage);
     }
 
     public void updateProduct(Product product) {
