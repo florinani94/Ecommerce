@@ -16,7 +16,7 @@
     <title>Products</title>
 </head>
 
-<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
+<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 125%; )">
 
     <jsp:include page="customerHeader.jsp" />
     <div class="container">
