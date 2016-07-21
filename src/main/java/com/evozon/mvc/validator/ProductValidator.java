@@ -25,10 +25,10 @@ public class ProductValidator implements Validator {
 
         Product product=(Product) obj;
 
-        if(product.getPrice()<=0){
+        if(Double.valueOf(product.getPrice())<0.0){
             e.rejectValue("price","error.price","Wrong input: enter a positive value");
         }
-        if(product.getStockLevel()<=0){
+        if(Integer.valueOf(product.getStockLevel())<0){
             e.rejectValue("stockLevel","error.stockLevel","Wrong input: enter a positive value");
         }
     }

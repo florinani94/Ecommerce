@@ -1,6 +1,7 @@
 package com.evozon.mvc;
 
 import com.evozon.domain.Category;
+import com.evozon.service.CartService;
 import com.evozon.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public String showAddCategory(Model model){
