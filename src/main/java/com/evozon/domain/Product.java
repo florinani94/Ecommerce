@@ -131,9 +131,11 @@ public class Product implements Serializable {
                 "productId=" + productId +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
+                ", entrySet=" + entrySet +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", stockLevel=" + stockLevel +
+                ", category=" + category.getName() +
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
