@@ -13,4 +13,6 @@ public interface CategoryDAO {
     List<Category> getAllCategories();
 
     Category getCategoryById(Integer id);
+
+    void updateCategory(Category category);
 }

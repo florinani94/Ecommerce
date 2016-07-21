@@ -55,7 +55,6 @@ public class ProductController {
         System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
 
-        if (true==true) throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
 
         return "viewProducts";
     }

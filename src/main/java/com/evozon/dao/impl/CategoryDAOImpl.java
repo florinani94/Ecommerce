@@ -47,5 +47,9 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return null;
     }
-
+    public void updateCategory(Category category) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(category);
+    }
 }
+
