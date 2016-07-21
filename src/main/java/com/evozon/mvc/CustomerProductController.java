@@ -98,17 +98,10 @@ public class CustomerProductController {
         return "productDetailsPage";
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
-    public String getProductByCategories(@RequestParam(value = "sortValue") String sortValue, Model model,
-                                    @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
-                                    @RequestParam(value="category") List<Integer> categoriesIds) {
-
-
-        model.addAttribute("products", productService.getSortedProducts(sortValue,startPageIndex, MAX_PRODUCTS_PER_PAGE));
-        model.addAttribute("productSize", productService.getSize());
-        model.addAttribute("currentPage",startPageIndex);
-
-
+    @RequestMapping(method = RequestMethod.POST)
+    public String deleteAll(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
+                            Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
+                            @RequestParam(value = "selectedCategoriesArray[]") List<Integer> categoriesArray) {
 
 
         return "customerViewProducts";
