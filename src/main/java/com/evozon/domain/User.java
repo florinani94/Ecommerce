@@ -29,7 +29,7 @@ public class User implements Serializable {
     private String username;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 6)
     private String password;
 
     @NotNull
