@@ -22,14 +22,14 @@ public interface CartDAO {
 
     void updateEntryDetails(Entry entry);
 
-    void addEntryToCart(Integer productId, Integer cartId);
+    Entry addEntryToCart(Integer productId, Integer cartId);
 
     void deleteEntryFromCart(Integer id);
     void updateQuantity(Entry entry);
 
     List<Entry> getEntriesFromCart(Integer productId, Integer cartId);
 
-    Set<Entry> getAllEntriesFromCart(Integer id);
+    List<Entry> getAllEntriesFromCart(Integer id);
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
 
     void computeSubTotalForEntry(Integer id,Integer cartId);

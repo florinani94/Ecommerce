@@ -3,7 +3,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -16,7 +16,7 @@ public class Cart {
     private Integer cartId;
 
     @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-    private Set<Entry> entrySet;
+    private List<Entry> entryList;
 
     @Column
     private Double total;
@@ -43,9 +43,9 @@ public class Cart {
 
     }
 
-    public Cart(int cartId, Set<Entry> entrySet, Double total, Address deliveryAddress, Address billingAddress) {
+    public Cart(int cartId, List<Entry> entryList, Double total, Address deliveryAddress, Address billingAddress) {
         this.cartId = cartId;
-        this.entrySet = entrySet;
+        this.entryList = entryList;
         this.total = total;
         this.deliveryAddress = deliveryAddress;
         this.billingAddress = billingAddress;
@@ -61,12 +61,12 @@ public class Cart {
     }
 
     @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-    public Set<Entry> getEntrySet() {
-        return entrySet;
+    public List<Entry> getEntryList() {
+        return entryList;
     }
 
-    public void setEntrySet(Set<Entry> entrySet) {
-        this.entrySet = entrySet;
+    public void settEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
     }
 
     public Double getTotal() {
@@ -97,7 +97,7 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "cartId=" + cartId +
-                ", entrySet=" + entrySet +
+                ", entryList=" + entryList +
                 ", total=" + total +
                 ", deliveryAddress='" + deliveryAddress.toString() + '\'' +
                 ", billingAddress='" + billingAddress.toString() + '\'' +
