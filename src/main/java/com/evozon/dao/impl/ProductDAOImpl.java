@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,12 +27,14 @@ public class ProductDAOImpl implements ProductDAO {
         return session.createQuery("FROM Product as P").list();
     }
 
-    public List<Product> getParticularProducts(int[] productIds) {
-
-        Session session=sessionFactory.getCurrentSession();
-        Query query=session.createQuery("FROM Product WHERE productId in (:productIds)");
-        query.setParameter("productIds", productIds);
-        return query.list();
+    public List<Product> getParticularProducts(List<Integer> productIds) {
+        int i = 0;
+        List<Product> products = new ArrayList<>();
+        while(i != productIds.size()){
+            products.add(getProductById(productIds.get(i)));
+            i++;
+        }
+        return products;
     }
 
 

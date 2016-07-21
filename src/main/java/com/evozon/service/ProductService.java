@@ -42,10 +42,6 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-    public List<Product> getParticularProducts(int [] productIds) {
-        return productDAO.getParticularProducts(productIds);
-    }
-
 
     public void importFromFile(String filename) {
         productDAO.importFromFile(filename);
@@ -60,13 +56,17 @@ public class ProductService {
         return  productDAO.getProductByCode(code);
     }
 
+    public List<Product>  getParticularProducts(List<Integer> prodArray){
+        List<Product> products = productDAO.getParticularProducts(prodArray);
+        return products;
+     }
 
-    public void exportToCSV(String fileName) {
 
-        List<Product> products = productDAO.getAllProducts();
+    public void exportToCSV(String fileName, List<Product> products) {
 
 
         FileWriter writer = null;
+
 
 
             try {
@@ -84,6 +84,7 @@ public class ProductService {
                     writer.append(",");
                     writer.append(String.valueOf(categoryDAO.getCategoryById(product.getCategory().getId()).getId()));
                     writer.append(",");
+                    writer.append("");
                     writer.append(product.getImageURL());
                     writer.append("\n");
                 }
