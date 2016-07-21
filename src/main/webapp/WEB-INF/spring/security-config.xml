@@ -13,6 +13,7 @@
 
     <http auto-config="true">
         <intercept-url pattern="/backoffice/**" access="ROLE_ADMIN"/>
+        <form-login login-page="/login" authentication-failure-url="/loginFailed"/>
     </http>
 
     <authentication-manager>
