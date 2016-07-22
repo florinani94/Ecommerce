@@ -42,12 +42,12 @@
 
         <div class = "col-md-6">
             <ul>
+                <li><a href="${logoutUrl}">Logout</a> </li>
                 <li><a href="${createCategoryURL}">Create category</a></li>
                 <li><a href="${listCategoryURL}">View categories</a></li>
                 <li><a href="${exportURL}">Export teas to file</a></li>
                 <li><a href="${addURL}">Create product</a></li>
                 <li><a href="${listURL}">View products</a></li>
-                <li><a href="${logoutUrl}">Logout</a> </li>
             </ul>
         </div>
     </div>

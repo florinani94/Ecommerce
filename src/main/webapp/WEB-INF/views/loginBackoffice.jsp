@@ -9,6 +9,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <c:url var="backgroundURL" value="/resources/detailView/Background2.jpg"/>
+
+    <c:url var="detailsCSSURL" value="/resources/style/detailViewStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
+
+    <c:url var="registerNow" value="/register"/>
 <head>
     <title>Login</title>
     <style type="text/css">
@@ -22,33 +31,53 @@
     </style>
 </head>
 
-<body onload='document.f.j_username.focus();'>
-<h3>Login Page</h3>
-<c:if test="${not empty error}">
-    <div class="errorblock">
-        Your login was unsuccessful. <br />
-        Caused: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }
-    </div>
-</c:if>
+<body  background="${backgroundURL}" style="background-size: 100%" onload='document.f.j_username.focus();'>
+<jsp:include page="customerHeader.jsp" />
 
-<form action="j_spring_security_check" name="f" method="post">
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type="text" name="j_username" value=""></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" name="j_password" ></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" name="Submit" value="Submit"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="reset" name="reset" > </td>
-        </tr>
-    </table>
-</form>
+<br>
+
+<div class="row-fluid">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+        <h1>Login as back-office user</h1>
+
+        <c:if test="${not empty error}">
+            <div class="errorblock">
+                Your login was unsuccessful. <br/>
+                Caused: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }
+            </div>
+        </c:if>
+
+        <form action="j_spring_security_check" name="f" method="post">
+            <div class="row">
+                <div class="form-group col-lg-5">
+                    <label>Username:</label>
+                    <input type="text" name="j_username" value="" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-5">
+                    <label>Password:</label>
+                    <input input type="password" name="j_password" class="form-control">
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-success" name="Submit" value="Submit">
+            <input type="reset" class="btn btn-success" name="reset">
+        </form>
+
+        <br>
+        <p>
+            Not a back-office user? <a href="${registerNow}">Create account now!</a>
+        </p>
+    </div>
+
+    <div class="col-sm-4"></div>
+</div>
+
+<jsp:include page="customerFooter.jsp"/>
+
 </body>
 
 
