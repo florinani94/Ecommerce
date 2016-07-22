@@ -19,7 +19,7 @@ import java.util.UUID;
  * Created by dianamohanu on 18/07/2016.
  */
 @Controller
-@RequestMapping(value = "/user")
+//@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -80,6 +80,18 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginBackofficeUser() {
         return "loginBackoffice";
+    }
+
+    @RequestMapping(value = "loginFailed", method = RequestMethod.GET)
+    public String loginBackofficeFailed(Model model) {
+        model.addAttribute("error", "true");
+
+        return "loginBackoffice";
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logoutBackoffice(Model model) {
+        return "logoutBackoffice";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)

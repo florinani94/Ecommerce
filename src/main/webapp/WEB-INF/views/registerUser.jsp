@@ -15,7 +15,7 @@
 <c:url var="detailsCSSURL" value="/resources/style/detailViewStyle.css"/>
 <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
 
-<c:url var="signIn" value="login"/>
+<c:url var="signIn" value="/login"/>
 <c:url var="backgroundURL" value="/resources/detailView/Background2.jpg"/>
 
 <head>
@@ -28,7 +28,6 @@
     </style>
 
 </head>
-<body>
 
 <body background="${backgroundURL}" style="background-size: 100%">
 <jsp:include page="customerHeader.jsp" />
@@ -71,7 +70,7 @@
             </div>
         </div>
 
-        <c:url var="path" value="/user/confirm"/>
+        <c:url var="path" value="/confirm"/>
         <input type="hidden" name="path" value=${path}>
 
         <button type="submit" class="btn btn-success">Create Account</button>
@@ -92,6 +91,8 @@
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
 
-</body>
+<jsp:include page="customerFooter.jsp"/>
 
+</body>
 </html>
+

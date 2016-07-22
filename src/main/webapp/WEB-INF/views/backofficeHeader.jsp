@@ -12,6 +12,8 @@
     <c:url var="createCategoryURL" value="/backoffice/category/add"/>
     <c:url var="sortProductsByPriceUpDown" value="/backoffice/product/sortpriceupdown"/>
 
+    <c:url var="logoutUrl" value="/j_spring_security_logout"/>
+
 
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
     <link rel="stylesheet"
@@ -40,6 +42,7 @@
 
         <div class = "col-md-6">
             <ul>
+                <li><a href="${logoutUrl}">Logout</a> </li>
                 <li><a href="${createCategoryURL}">Create category</a></li>
                 <li><a href="${listCategoryURL}">View categories</a></li>
                 <li><a href="${exportURL}">Export teas to file</a></li>

@@ -15,10 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-//    @Id
-//    @GeneratedValue
-//    private int id;
-
     @NotNull
     @Email
     private String email;

@@ -84,11 +84,12 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Entry addEntryToCart(Integer productId, Integer cartId){
+    public void addEntryToCart(Integer productId, Integer cartId){
         Session session = sessionFactory.getCurrentSession();
         Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
         session.save(entry);
-        return entry;
+        updateEntryDetails(entry);
+        //return entry;
     }
 
     @Override
@@ -107,7 +108,7 @@ public class CartDAOImpl implements CartDAO{
 
 
     @Override
-    public List<Entry> getEntriesFromCart(Integer productId, Integer cartId) {
+    public List<Entry> getEntryForAdding(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("Select E FROM Entry as E, Product as P, Cart as C WHERE E.cart=C.cartId AND P.productId=E.product AND C.cartId=:id AND P.productId=:prodId");
         query.setParameter("id", cartId);
@@ -149,7 +150,6 @@ public class CartDAOImpl implements CartDAO{
 
         Double value=new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
         updateSubTotalForEntry(value,entryId,cartId);
-
     }
 
     @Override

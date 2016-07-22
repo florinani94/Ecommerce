@@ -61,7 +61,7 @@ public class CartService {
     }
 
     public void addProductToCart(Integer productId,Integer cartId) {
-        List<Entry> entryList=cartDAO.getEntriesFromCart(productId,cartId);
+        List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 e.setQuantity(e.getQuantity()+1);
@@ -71,8 +71,9 @@ public class CartService {
             }
         }
         else{
-            Entry entry=cartDAO.addEntryToCart(productId,cartId);
-            cartDAO.updateEntryDetails(entry);
+            //Entry entry=cartDAO.addEntryToCart(productId,cartId);
+            cartDAO.addEntryToCart(productId,cartId);
+            //cartDAO.updateEntryDetails(entry);
             addProductToCart(productId,cartId);
         }
     }
