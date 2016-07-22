@@ -2,6 +2,7 @@ package com.evozon.mvc;
 
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
+import com.evozon.mvc.validator.CategoryValidator;
 import com.evozon.service.CartService;
 import com.evozon.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CategoryController {
     private CategoryService categoryService;
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private CategoryValidator validator;
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public String showAddCategory(Model model){
@@ -69,8 +73,17 @@ public class CategoryController {
     }
 
      @RequestMapping(value = "/edit", method = RequestMethod.POST)
-     public String editCategory(Model model, @ModelAttribute("category") Category category){
+     public String editCategory(Model model, @ModelAttribute("category") Category category,BindingResult result,SessionStatus status){
 
+         //validation
+         validator.validate(category,result);
+
+         //check validation errors
+         if(result.hasErrors()){
+             return "editCategory";
+         }
+
+         //update category in database
          categoryService.updateCategory(category);
 
          model.addAttribute("allCategories", categoryService.getAllCategories());
