@@ -9,6 +9,7 @@
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
     <c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
+    <c:url var="checkoutURL" value="/products/address"></c:url>
 
     <%--<link rel="stylesheet" href="/resources/style/detailViewStyle.css">--%>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -31,7 +32,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div id="headerLinks">
-                        <a class="headerLink" href="${homeURL}">
+                        <a class="headerLink" href="${checkoutURL}">
                             Checkout</a>
                         <a class="headerLink" href="${loginURL}">
                             Login</a>
@@ -39,7 +40,14 @@
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
                         <div id="cartPanel">
-                            A<br>B<br>C<br>D<br>E
+                            <div>
+                                total:
+                                <span id="total-value"></span>
+                                 $
+                                <div id="entry-data">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

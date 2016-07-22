@@ -19,8 +19,7 @@ public class Product implements Serializable {
     private String name;
 
 
-    @OneToMany(targetEntity=Entry.class,mappedBy="product",fetch=FetchType.LAZY)
-    //// TODO: 21/07/2016 Review cascade type when testing
+    @OneToMany(targetEntity=Entry.class,mappedBy="product",fetch=FetchType.EAGER)
     private Set<Entry> entrySet;
 
 

@@ -1,5 +1,6 @@
 package com.evozon.mvc;
 
+import com.evozon.mvc.validator.UserValidator;
 import com.evozon.service.SendMail;
 import com.evozon.domain.User;
 import com.evozon.service.UserService;
@@ -9,9 +10,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.UUID;
 
@@ -28,15 +32,32 @@ public class UserController {
     @Autowired
     private SendMail orderManager;
 
+    @Autowired
+    private UserValidator validator;
+
     @RequestMapping(value = "register", method = RequestMethod.GET)
-    public String registerNewBackofficeUser() {
+    public String registerNewBackofficeUser(Model model) {
+        model.addAttribute("user", new User());
         return "registerUser";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String messageNewBackofficeUser(Model model, @RequestParam("email") String email, @RequestParam("username") String username, @RequestParam("pass1") String pass1, @RequestParam("pass2") String pass2, @RequestParam("path") String path) {
+    public String messageNewBackofficeUser(Model model, @RequestParam("email") String email, @RequestParam("username") String username, @RequestParam("password") String pass1, @RequestParam("pass2") String pass2, @RequestParam("path") String path, @ModelAttribute("user") User newUser, BindingResult result) {
+
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(pass1);
+
+        //validation
+        validator.validate(newUser, result);
+
+        //check validation errors
+        if (result.hasErrors()) {
+            return "registerUser";
+        }
+
         int errors = 0;
-        if (! pass1.equals(pass2)) {
+        if (!pass1.equals(pass2)) {
             model.addAttribute("passwordError", "Passwords don't match!");
             errors++;
         }
@@ -51,7 +72,7 @@ public class UserController {
             errors++;
         }
 
-        if(errors == 0) {
+        if (errors == 0) {
             User user = new User();
             user.setEmail(email);
             user.setUsername(username);
@@ -69,8 +90,7 @@ public class UserController {
 
             model.addAttribute("message1", "Information submitted successfully.");
             model.addAttribute("message2", "Please verify your email to confirm your account!");
-        }
-        else {
+        } else {
             model.addAttribute("message1", "Information NOT submitted.");
         }
 

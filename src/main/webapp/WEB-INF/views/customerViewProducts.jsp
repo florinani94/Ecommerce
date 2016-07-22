@@ -110,34 +110,34 @@
 
         </div>
 
-    <div class="leftDiv" >
+    <%--<div class="leftDiv" >--%>
 
-        <div class="filter">
-            <br><br><br>
-            <b>Filter by category</b>
+        <%--<div class="filter">--%>
+            <%--<br><br><br>--%>
+            <%--<b>Filter by category</b>--%>
 
-            <br><br>
-            <c:if test="${not empty categories}">
-                <div id="allCategories">
-                <form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">
-                    <c:forEach var="category" items="${categories}">
-                        <input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>${category.name}<br>
-                    </c:forEach>
-                </form>
-                </div>
-            </c:if>
+            <%--<br><br>--%>
+            <%--<c:if test="${not empty categories}">--%>
+                <%--<div id="allCategories">--%>
+                <%--<form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">--%>
+                    <%--<c:forEach var="category" items="${categories}">--%>
+                        <%--<input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>${category.name}<br>--%>
+                    <%--</c:forEach>--%>
+                <%--</form>--%>
+                <%--</div>--%>
+            <%--</c:if>--%>
 
-            <br><br>
+            <%--<br><br>--%>
 
-            <c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>
-            <link rel="stylesheet" type="text/css" href="${filterCss}">
+            <%--<c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>--%>
+            <%--<link rel="stylesheet" type="text/css" href="${filterCss}">--%>
 
-            <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
-            <script type="text/javascript" src="/mvc/resources/js/productFilters.js"></script>
+            <%--<script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>--%>
+            <%--<script type="text/javascript" src="/mvc/resources/js/productFilters.js"></script>--%>
 
-            <div id="selectedCategories"></div>
-        </div>
-    </div>
+            <%--<div id="selectedCategories"></div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
 </div>
 

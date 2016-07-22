@@ -7,19 +7,48 @@ $('#cartIcon').hover(function () {
     $(this).css('width','7%');
 })
 
-var clicks = 0;
-var arr = ["one", "two", "three", "four", "five"];
-// var arr = <%=new ProductDAOImpl().getAllProducts()%>;
-//console.log(cart);
+var toggleMenu = false;
+var idCart=1;
 
 $('#cartIcon').click(function () {
-    if(clicks===0){
-        clicks++;
-        $('#cartPanel').css("visibility", "visible");
-        $('#cartPanel').animate({height: (arr.length*5).toString() + '%'}, 500);
+
+    var entriesNo = 0;
+
+    if(!toggleMenu){
+        toggleMenu = true;
+        $.ajax({
+            type : "POST",
+            url : "/mvc/cart/entries",
+            data : {cartId: idCart},
+            success : function(result) {
+
+                $("#entry-data").html("");
+
+                $("#total-value").text(result.total);
+                $.each(result.entries, function (index, entry) {
+                        $("#entry-data").html($("#entry-data").html() +
+                            "<div class='entry-line'>" +
+                                "<span class='entry-name'>" + entry.name + "</span>" +
+                                "<span class='entry-price'>" + entry.price + "</span>" +
+                                "<span class='entry-quantity'>" + entry.quantity + "</span>" +
+                            "</div>"
+                        );
+                    entriesNo++;
+                    }
+                );
+
+                $('#cartPanel').css("position","absolute");
+                $('#cartPanel').css("visibility", "visible");
+                $('#cartPanel').animate({height: (entriesNo*25).toString() + '%'}, 200);
+            },
+            error : function(e) {
+                console.log('Error: ', e);
+            }
+        });
     }else{
-        clicks--;
-        $('#cartPanel').animate({height: '0%'}, 500);
+        toggleMenu = false;
+        $('#cartPanel').animate({height: '0%'}, 200);
+        $('#cartPanel').delay(200);
         $('#cartPanel').css("visibility", "hidden");
     }
     }
