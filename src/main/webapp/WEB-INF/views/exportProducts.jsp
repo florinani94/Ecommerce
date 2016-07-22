@@ -25,7 +25,7 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <h3>All the products were exported to CSV</h3>
+        <h3>All the selected products were exported to CSV</h3>
     </div>
 </div>
 
