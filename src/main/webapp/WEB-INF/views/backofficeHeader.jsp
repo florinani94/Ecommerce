@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page session="false" %>
 <html>
@@ -38,6 +39,7 @@
     <div class="row back">
         <div class = "col-md-6">
             <h2 class = "bigTitle">Tea Shop Back Office</h2>
+            <h4 style="color: #FFFFFF; padding-left: 1%; font-family: 'Calibri';"> Logged in as: <sec:authentication property="name"/> | <a href="${logoutUrl}">Logout</a> </h4>
         </div>
 
         <div class = "col-md-6">
@@ -47,11 +49,12 @@
                 <li><a href="${exportURL}">Export teas to file</a></li>
                 <li><a href="${addURL}">Create product</a></li>
                 <li><a href="${listURL}">View products</a></li>
-                <li><a href="${logoutUrl}">Logout</a> </li>
             </ul>
+
+
+
         </div>
     </div>
-
 
 </header>
 </body>

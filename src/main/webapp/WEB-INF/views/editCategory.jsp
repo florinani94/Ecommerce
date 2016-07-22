@@ -45,6 +45,14 @@
         }
     </style>
 
+    <style>
+        .error
+        {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -52,7 +60,11 @@
 
 <c:url var="editUrl" value="/backoffice/category/edit"/>
 
-<div class="page-header"><h1> Update Category </h1></div>
+<div class="row">
+    <div class="col-md-3 col-md-offset-5">
+        <h1>Update Category</h1>
+    </div>
+</div>
 
 <div class="layout-edit">
 
@@ -60,29 +72,31 @@
 
     <form:form commandName="category" method="POST" action="${editUrl}" cssClass="form-horizontal registrationForm">
         <div class="form-group">
-            <label for="id" class="control-label col-xs-2">ID: </label>
-            <div class="col-sm-10">
+            <label for="id" class="control-label col-xs-2" style = "margin-left: 400px">ID: </label>
+            <div class="col-sm-3 ">
                 <form:input readonly="true" path="id" cssClass="form-control"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="name" class="control-label col-xs-2">Name: </label>
-            <div class="col-sm-10">
+            <label for="name" class="control-label col-xs-2" style = "margin-left: 400px">Name: </label>
+            <div class="col-sm-3">
                 <form:input path="name" cssClass="form-control"/>
+                <form:errors path="name"  cssClass="error" />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="description" class="control-label col-xs-2">Description: </label>
-            <div class="col-sm-10">
+            <label for="description" class="control-label col-xs-2" style = "margin-left: 400px">Description: </label>
+            <div class="col-sm-3">
                 <form:input path="description" cssClass="form-control"/>
+                <form:errors path="description"  cssClass="error" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
-                <input type="submit" value="Save" class="btn btn-lg btn-primary"/>
+                <input type="submit" value="Save" class="btn btn-lg btn-primary" style = "margin-left: 400px"/>
             </div>
         </div>
     </form:form>

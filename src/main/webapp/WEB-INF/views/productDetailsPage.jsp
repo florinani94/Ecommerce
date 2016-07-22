@@ -32,7 +32,11 @@
                 <%--<div class="myHr"></div>--%>
                     <table class="detailsText" id="productDetails">
                         <tr>
-                            <td class="descriptionText">${theProduct.description}</td>
+                            <td class="descriptionText">
+                                <div class="categoryName">${theProduct.category.name}
+                                </div>
+                                ${theProduct.description}
+                            </td>
                         </tr>
                         <tr>
                             <td class="priceText">${theProduct.price}$</td>
