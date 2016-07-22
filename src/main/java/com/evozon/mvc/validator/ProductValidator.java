@@ -7,11 +7,12 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+
 /**
  * Created by mihaelarotarescu on 7/19/2016.
  */
 @Component
-public class ProductValidator implements Validator {
+public class ProductValidator  implements Validator {
 
     public boolean supports(Class clazz) {
         return Product.class.equals(clazz);
@@ -24,18 +25,17 @@ public class ProductValidator implements Validator {
         ValidationUtils.rejectIfEmpty(e, "price","error.price","Price is required");
         ValidationUtils.rejectIfEmpty(e, "stockLevel","error.stockLevel","Stock is required");
 
-        try{
-            Product product=(Product) obj;
-            if(product.getPrice()<0.0){
-                e.rejectValue("price","error.price","Wrong input: enter a positive value");
+        try {
+            Product product = (Product) obj;
+            if (product.getPrice() < 0.0) {
+                e.rejectValue("price", "error.price", "Wrong input: enter a positive value");
             }
-            if(product.getStockLevel()<0){
-                e.rejectValue("stockLevel","error.stockLevel","Wrong input: enter a positive value");
+            if (product.getStockLevel() < 0) {
+                e.rejectValue("stockLevel", "error.stockLevel", "Wrong input: enter a positive value");
             }
         }
         catch(Exception error){
             error.printStackTrace();
         }
-
     }
 }
