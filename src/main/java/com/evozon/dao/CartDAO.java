@@ -13,19 +13,21 @@ import java.util.Set;
 public interface CartDAO {
     Product getProductById(Integer id);
 
+    Entry getEntryById(Integer entryId);
+
     Cart getCartById(Integer id);
 
     void addCart(Cart cart);
 
-    void deleteCart(Integer id) ;
+    void updateCart(Cart cart);
 
-    void deleteEntry(Integer entryId);
+    void deleteCart(Integer id) ;
 
     void updateEntryDetails(Entry entry);
 
-    void addEntryToCart(Integer productId, Integer cartId);//entry was here
+    Entry addEntryToCart(Integer productId, Integer cartId);//entry was here
 
-    void deleteEntryFromCart(Integer id);
+    void deleteEntryFromCart(Integer entryId);
 
     void updateQuantity(Entry entry);
 
@@ -35,7 +37,7 @@ public interface CartDAO {
 
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
 
-    void computeSubTotalForEntry(Integer id,Integer cartId);
+    Double computeSubTotalForEntry(Integer id,Integer cartId);
 
     void computeTotalForCart(Integer cartId);
 
