@@ -39,12 +39,14 @@
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
                         <div id="cartPanel">
-                            <div>
-                                total:
-                                <span id="total-value"></span>
-                                 $
+                            <div id="allCartData">
                                 <div id="entry-data">
 
+                                </div>
+                                <div id = "totalTag">
+                                    total:
+                                    <span id="total-value"></span>
+                                    $
                                 </div>
                             </div>
                         </div>

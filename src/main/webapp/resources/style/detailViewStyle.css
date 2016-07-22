@@ -187,7 +187,46 @@ html, body {
 #cartPanel{
 	visibility: hidden;
 	margin-left: 70%;
-	width: 30%;
+	width: 40%;
 	height: 0%;
+	text-align: left;
 	background: rgba(242, 242, 242, 0.5);
 }
+
+#allCartData{
+	margin-top: 10px;
+	font-family: Calibri;
+	margin-left: 15px;
+}
+
+
+.entry-name{
+	color: #4B8A08;
+	font-style: italic;
+	font-size: 18px;
+}
+
+.entry-price{
+	position: absolute;
+	right: 15px;
+	font-style: italic;
+	font-size: 15px;
+}
+
+.entry-quantity{
+	font-style: italic;
+	font-size: 13px;
+	color: #808080;
+}
+
+#totalTag{
+	margin-top: 1%;
+	font-style: italic;
+	position: absolute;
+	right: 15px;
+}
+
+#total-value{
+	font-size: 15px;
+}
+
