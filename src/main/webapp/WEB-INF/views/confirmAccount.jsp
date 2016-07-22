@@ -49,5 +49,7 @@
     <div class="col-sm-4"></div>
 </div>
 
+<jsp:include page="customerFooter.jsp"/>
+
 </body>
 </html>

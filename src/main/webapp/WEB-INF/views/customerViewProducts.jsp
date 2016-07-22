@@ -51,7 +51,7 @@
                             <c:url var="image" value="${product.imageURL}"></c:url>
                             <a href="${productLink}"><img class="frontImage" src="${image}"></a>
                             <div><h3 class="productName">${product.name}</h3></div>
-                            <div><h4 class="productPrice">Price: ${product.price} RON</h4></div>
+                            <div><h4 class="productPrice">Price: ${product.price} $</h4></div>
                             <div class="row">
                                 <div class="botT">
                                     <c:if test="${product.stockLevel gt 0}">
