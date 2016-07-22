@@ -45,6 +45,14 @@
         }
     </style>
 
+    <style>
+        .error
+        {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -70,6 +78,7 @@
             <label for="name" class="control-label col-xs-2">Name: </label>
             <div class="col-sm-10">
                 <form:input path="name" cssClass="form-control"/>
+                <form:errors path="name"  cssClass="error" />
             </div>
         </div>
 
@@ -77,6 +86,7 @@
             <label for="description" class="control-label col-xs-2">Description: </label>
             <div class="col-sm-10">
                 <form:input path="description" cssClass="form-control"/>
+                <form:errors path="description"  cssClass="error" />
             </div>
         </div>
 
