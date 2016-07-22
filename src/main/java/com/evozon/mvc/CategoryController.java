@@ -34,6 +34,7 @@ public class CategoryController {
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String addCategory(Model model, @ModelAttribute("category") Category category, BindingResult result){
 
+        validator.validate(category,result);
         try {
             categoryService.addCategory(category);
             model.addAttribute("result", true);
@@ -42,10 +43,11 @@ public class CategoryController {
                 model.addAttribute("category",category);
                 return "createCategory";
             }
+
         }catch (Exception e){
             model.addAttribute("result", false);
+            return "createCategory";
         }
-
         model.addAttribute("allCategories", categoryService.getAllCategories());
         return "viewCategories";
     }
