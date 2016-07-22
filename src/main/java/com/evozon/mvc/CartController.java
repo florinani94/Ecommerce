@@ -1,6 +1,7 @@
 package com.evozon.mvc;
 
 import com.evozon.domain.Entry;
+import com.evozon.domain.dtos.MiniCartDTO;
 import com.evozon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,10 +28,10 @@ public class CartController {
 
     @RequestMapping(value="/entries", method = RequestMethod.POST)
     @ResponseBody
-    public Set<Entry> getCartProducts(Model model, @RequestParam("cartId") int cartId){
-        System.out.println(cartId+"/////");
-        Set<Entry> entries = cartService.getEntriesFromCart(cartId);
-        return entries;
+    public MiniCartDTO getCartProducts(Model model, @RequestParam("cartId") int cartId){
+        MiniCartDTO minicart = cartService.getEntriesFromCart(cartId);
+
+        return minicart;
     }
 
 

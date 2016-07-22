@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -120,9 +121,10 @@ public class CartDAOImpl implements CartDAO{
     @Override
     public List<Entry> getAllEntriesFromCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("FROM Entry as E WHERE E.cart=:id");
+        Query query = session.createQuery("FROM Entry as E WHERE E.cart.id=:id");
         query.setParameter("id", cartId);
-        return query.list();
+        List entryList = query.list();
+        return entryList;
     }
 
     @Override
