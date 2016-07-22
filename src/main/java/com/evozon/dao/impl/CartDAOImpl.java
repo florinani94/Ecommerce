@@ -1,9 +1,7 @@
 package com.evozon.dao.impl;
 
 import com.evozon.dao.CartDAO;
-import com.evozon.domain.Cart;
-import com.evozon.domain.Entry;
-import com.evozon.domain.Product;
+import com.evozon.domain.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -175,5 +173,12 @@ public class CartDAOImpl implements CartDAO{
     public void updateEntry(Entry entry) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(entry);
+    }
+
+    @Override
+    public void updateAddress(Cart cart) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(cart);
+
     }
 }

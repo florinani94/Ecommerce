@@ -83,5 +83,9 @@ public class CartService {
         cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
     }
 
+    public void updateAddress(Cart cart) {
+        cartDAO.updateAddress(cart);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.evozon.dao;
 
+import com.evozon.domain.AddressDTO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
@@ -40,4 +41,6 @@ public interface CartDAO {
     void computeTotalForCart(Integer cartId);
 
     void updateEntry(Entry e);
+
+    void updateAddress(Cart cart);
 }
