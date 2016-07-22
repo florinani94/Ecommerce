@@ -3,14 +3,13 @@ package com.evozon.service;
 import com.evozon.dao.CartDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
-import com.evozon.domain.dtos.EntryDTO;
-import com.evozon.domain.dtos.MiniCartDTO;
+import com.evozon.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -103,25 +102,4 @@ public class CartService {
     }
 
 
-    public MiniCartDTO getEntriesFromCart(Integer cartId){
-        Cart cartModel = cartDAO.getCartById(cartId);
-
-        MiniCartDTO minicart = new MiniCartDTO();
-        minicart.setTotal(cartModel.getTotal());
-
-        List<Entry> entryList = cartModel.getEntryList();
-        ArrayList<EntryDTO> entryDTOList = new ArrayList<>();
-        for(Entry entryModel : entryList) {
-            EntryDTO entryDTO = new EntryDTO();
-            entryDTO.setName(entryModel.getProductName());
-            entryDTO.setPrice(entryModel.getProductPrice());
-            entryDTO.setQuantity(entryModel.getQuantity());
-
-            entryDTOList.add(entryDTO);
-        }
-
-        minicart.setEntries(entryDTOList);
-
-        return minicart;
-    }
 }
