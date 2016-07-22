@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -10,6 +11,8 @@
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
     <c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
     <c:url var="checkoutURL" value="/products/address"></c:url>
+
+    <c:url var="logoutUrl" value="/j_spring_security_logout"/>
 
     <%--<link rel="stylesheet" href="/resources/style/detailViewStyle.css">--%>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -32,10 +35,18 @@
                 </div>
                 <div class="col-sm-6">
                     <div id="headerLinks">
+                        <sec:authorize access="hasRole('ROLE_ADMIN') and isAuthenticated()">
+                            <h4 style="color: #FFFFFF; padding-left: 1%; font-family: 'Calibri';"> Logged in as: <sec:authentication property="name"/> | <a href="${logoutUrl}">Logout</a> </h4>
+                        </sec:authorize>
+
                         <a class="headerLink" href="${checkoutURL}">
                             Checkout</a>
-                        <a class="headerLink" href="${loginURL}">
-                            Login</a>
+
+                        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+                            <a class="headerLink" href="${loginURL}">
+                                Login</a>
+                        </sec:authorize>
+
                         <a>
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
