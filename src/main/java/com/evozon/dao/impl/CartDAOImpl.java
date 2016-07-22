@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +39,17 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
+    public Entry getEntryById(Integer entryId){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Entry as E WHERE E.entryId = :id");
+        query.setParameter("id", entryId);
+        List<Entry> entries = query.list();
+        if(entries.size() > 0){
+            return entries.get(0);
+        }
+        return null;
+    }
+    @Override
     public Cart getCartById(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Cart as C WHERE C.cartId = :id");
@@ -55,7 +67,12 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    //doesn't work
+    public void updateCart(Cart cart){
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(cart);
+    }
+
+    @Override
     public void deleteCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("DELETE FROM Cart as C WHERE C.cartId=:id");
@@ -63,13 +80,6 @@ public class CartDAOImpl implements CartDAO{
         query.executeUpdate();
     }
 
-    @Override
-    public void deleteEntry(Integer entryId) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("DELETE FROM Entry as E WHERE E.entryId=:id");
-        query.setParameter("id", entryId);
-        query.executeUpdate();
-    }
 
     @Override
     public void updateEntryDetails(Entry entry){
@@ -82,12 +92,11 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public void addEntryToCart(Integer productId, Integer cartId){
+    public Entry addEntryToCart(Integer productId, Integer cartId){
         Session session = sessionFactory.getCurrentSession();
         Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
         session.save(entry);
-        updateEntryDetails(entry);
-        //return entry;
+        return entry;
     }
 
     @Override
@@ -118,9 +127,10 @@ public class CartDAOImpl implements CartDAO{
     @Override
     public List<Entry> getAllEntriesFromCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("FROM Entry as E WHERE E.cart=:id");
+        Query query = session.createQuery("FROM Entry as E WHERE E.cart.id=:id");
         query.setParameter("id", cartId);
-        return query.list();
+        List entryList = query.list();
+        return entryList;
     }
 
     @Override
@@ -138,7 +148,7 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public void computeSubTotalForEntry(Integer entryId,Integer cartId){
+    public Double computeSubTotalForEntry(Integer entryId,Integer cartId){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT E FROM Entry as E, Product as P,Cart as C WHERE E.entryId=:id AND C.cartId=:cId AND E.cart=C.cartId");
         query.setParameter("id", entryId);
@@ -146,8 +156,7 @@ public class CartDAOImpl implements CartDAO{
 
         ArrayList<Entry> result = (ArrayList)query.list();
 
-        Double value=new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
-        updateSubTotalForEntry(value,entryId,cartId);
+        return new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
     }
 
     @Override

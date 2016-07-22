@@ -26,12 +26,10 @@ public class Entry {
    @Column
     private String productCode;
 
-
+    @Column
+    private String productName;
 
     @Column
-   private String productName;
-
-   @Column
     private Double productPrice;
 
     @Column
@@ -129,7 +127,7 @@ public class Entry {
     public String toString() {
         return "Entry{" +
                 "entryId=" + entryId +
-                ", product=" + product +
+                ", product=" + product.getName() +
                 ", quantity=" + quantity +
                 '}';
     }

@@ -40,7 +40,14 @@
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
                         <div id="cartPanel">
-                            A<br>B<br>C<br>D<br>E
+                            <div>
+                                total:
+                                <span id="total-value"></span>
+                                 $
+                                <div id="entry-data">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
