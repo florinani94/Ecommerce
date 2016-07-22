@@ -17,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -59,14 +61,22 @@ public class CustomerProductController {
     }
 
     @RequestMapping(value = "/address", method = RequestMethod.GET)
-    public String gotToCheckoutPage(Model model) {
-        model.addAttribute("cart", new Product());
+    public String gotToCheckoutPage(Model model, HttpServletRequest request) {
+        Cart shoppingCart;
+        HttpSession session = request.getSession();
+        shoppingCart = (Cart) session.getAttribute("cart");
+        if (shoppingCart == null) {
+            shoppingCart = new Cart();
+            session.setAttribute("cart", shoppingCart);
+        }
+        model.addAttribute("cart", shoppingCart);
         return "customerCartCheckout";
     }
 
     @RequestMapping(value = "/address", method = RequestMethod.POST)
-    public String checkoutAddress(Model model, @ModelAttribute("address") AddressDTO address, BindingResult data) {
+    public String checkoutAddress(HttpServletRequest request, Model model, @ModelAttribute("address") AddressDTO address, BindingResult data, @ModelAttribute("cart") Cart cart) {
         try {
+
             model.addAttribute("address", address);
             Address deliveryAddress = new Address();
             Address billingAddress = new Address();
@@ -77,11 +87,16 @@ public class CustomerProductController {
             billingAddress.setCity(address.getBillingCity());
             billingAddress.setNumber(address.getBillingNumber());
             billingAddress.setPhone(address.getBillingPhone());
-            Cart cart = new Cart();
+            billingAddress.setStreetName(address.getBillingStreet());
             cart.setDeliveryAddress(deliveryAddress);
             cart.setBillingAddress(billingAddress);
-            cartService.addCart(cart);
+
             model.addAttribute("data", true);
+            HttpSession session = request.getSession();
+            session.setAttribute("cart", cart);
+            if (!data.hasErrors()) {
+                cartService.updateAddress(cart);
+            }
             if (data.hasErrors()) {
                 model.addAttribute("data", false);
                 return "customerCartCheckout";

@@ -12,13 +12,13 @@
         }
     </style>
 
-    <c:url var="homePage" value="/home"></c:url>
+    <c:url var="homeCustomer" value="/products"></c:url>
     <c:url var="backgroundResUrl" value="/resources/background2.jpg"></c:url>
     <c:url var="logoResUrl" value="/resources/teaLogoPink.png"></c:url>
 </head>
 <body background="${backgroundResUrl}" style="background-size: 100%">
     <p class="logo">
-    <a href="${homePage}">
+    <a href="${homeCustomer}">
         <img align="middle" src="${logoResUrl}" alt="Welcome!"> </img>
     </a>
     </p>

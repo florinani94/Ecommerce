@@ -38,7 +38,7 @@
     <title>Cart Checkout</title>
 </head>
 
-<body style="background-image:url(${bkgURL2});background-repeat: no-repeat; background-size: 100%; )">
+<body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
 
 <jsp:include page="customerHeader.jsp" />
 <c:url var="addressUrl" value="/products/address"></c:url>
@@ -50,25 +50,25 @@
     </div>
 </div>
 
-<c:if test="${data == null}">
+<c:if test="${data == null || data==false}">
 
 <form action="address" method="post" id="checkoutAddress" class="form-inline">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-                <b>Delivery Address:</b>
+                <b>Delivery Address </b>
                 <br><br>
                 Street: <br>
-                <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" class="form-control"/>
+                <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" required class="form-control"/>
                 <br><br>
                 Number: <br>
-                <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" class="form-control"/>
+                <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" required class="form-control"/>
                 <br><br>
                 City: <br>
-                <input type="text" id="deliveryCity" name="deliveryCity" maxlength="15" class="form-control"/>
+                <input type="text" id="deliveryCity" name="deliveryCity" maxlength="15" required class="form-control"/>
                 <br><br>
                 Phone <br>
-                <input type="text" id="deliveryPhone" name="deliveryPhone" maxlength="10" class="form-control"/>
+                <input type="text" id="deliveryPhone" name="deliveryPhone" maxlength="10" required class="form-control"/>
                 <br><br>
 
         </div>
@@ -88,16 +88,16 @@
                     </div>
                     <div class="collapse" id="collapseAddress">
                     Street: <br>
-                    <input type="text" id="billingStreet" name="billingStreet" maxlength="30" class="form-control"/>
+                    <input type="text" id="billingStreet" name="billingStreet" maxlength="30" required class="form-control"/>
                     <br><br>
                     Number: <br>
-                    <input type="text" id="billingNumber" name="billingNumber" maxlength="5" class="form-control"/>
+                    <input type="text" id="billingNumber" name="billingNumber" maxlength="5" required class="form-control"/>
                     <br><br>
                     City: <br>
-                    <input type="text" id="billingCity" name="billingCity" maxlength="10" class="form-control"/>
+                    <input type="text" id="billingCity" name="billingCity" maxlength="10" required class="form-control"/>
                     <br><br>
                     Phone <br>
-                    <input type="text" id="billingPhone" name="billingPhone" maxlength="10" class="form-control"/>
+                    <input type="text" id="billingPhone" name="billingPhone" maxlength="10" required class="form-control"/>
                     <br><br>
 
                     </div>
@@ -107,7 +107,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <input type="submit" value="Continue" class="btn btn-success">
-            <a href="backUrl" class="btn btn-default" role="button"> Cancel </a>
+            <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>
         </div>
     </div>
     </form>
@@ -115,12 +115,20 @@
 </c:if>
 
 <c:if test="${data == true}">
-    <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+    <a href="${addressUrl}" class="btn btn-default" role="button"> Next </a>
+    </div>
+</div>
 </c:if>
 
 <c:if test="${data == false}">
     <h3>Incorrect</h3>
+    <div class="row">
+    <div class="col-md-4 col-md-offset-4">
     <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
+    </div>
+    </div>
 </c:if>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
