@@ -120,4 +120,8 @@ public class CartService {
     public List<Entry> getAllEntriesFromCart(Integer cartId) {
         return cartDAO.getAllEntriesFromCart(cartId);
     }
+
+    public Cart getCartById(int id) {
+        return cartDAO.getCartById(id);
+    }
 }

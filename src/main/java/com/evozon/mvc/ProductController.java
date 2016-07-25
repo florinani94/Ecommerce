@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
@@ -27,9 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.http.HTTPException;
 import javax.xml.transform.sax.SAXSource;
-import java.io.File;
+import java.io.*;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,12 +52,10 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private CartService cartService;
-
     @Autowired
     private ProductValidator validator;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
@@ -200,6 +202,36 @@ public class ProductController {
         return "viewProducts";
     }
 
+    @RequestMapping(value = "/downloadCSV", method = RequestMethod.GET)
+    public void downloadCSV(HttpServletResponse response) throws IOException {
 
+        String filePath = "../bin/exportProducts.csv";
+        File file = new File(filePath).getAbsoluteFile();
+
+        if(!file.exists()){
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            mimeType = "application/octet-stream";
+        }
+
+        response.setContentType(mimeType);
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setContentLength((int)file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        OutputStream outputStream = response.getOutputStream();
+
+        FileCopyUtils.copy(inputStream, outputStream);
+
+        inputStream.close();
+        outputStream.close();
+        file.delete();
+    }
 
 }
