@@ -9,30 +9,14 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-<%--    <link rel="stylesheet" type="text/css" href="${cssUrl}">
-    <link rel="stylesheet"
-          href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-    <link rel="stylesheet"
-          href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-
-    <script type="text/javascript"
-            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
-    <script
-            src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>--%>
 
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
-
     <c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>
     <link rel="stylesheet" href="${cssUrlHead}">
-
-
     <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
 
     <title>Cart Checkout</title>
@@ -41,7 +25,7 @@
 <body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
 
 <jsp:include page="customerHeader.jsp" />
-<c:url var="addressUrl" value="/products/address"></c:url>
+<c:url var="addressUrl" value="/products/checkout"></c:url>
 <c:url var="backUrl" value="/products"></c:url>
 
 <div class="row">
@@ -50,17 +34,17 @@
     </div>
 </div>
 
-<c:if test="${data == null || data==false}">
+<%--<c:if test="${data == null || data==false}">
 
-<form action="address" method="post" id="checkoutAddress" class="form-inline">
+<form action="address" method="post" id="checkoutAddress" class="form-inline" action="${addressUrl}" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
                 <b>Delivery Address </b>
                 <br><br>
-                Street: <br>
+ &lt;%&ndash;               Street: <br>
                 <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" required class="form-control"/>
-                <br><br>
+                <br><br>&ndash;%&gt;
                 Number: <br>
                 <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" required class="form-control"/>
                 <br><br>
@@ -129,7 +113,134 @@
     <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
     </div>
     </div>
-</c:if>
+</c:if>--%>
+
+
+
+
+<form:form commandName="address" method="POST" action="${addressUrl}" id="checkoutAddress" class="form-inline" ><%--cssClass="form-horizontal registrationForm" enctype="multipart/form-data"--%>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+
+            <b>Delivery Address </b>
+            <br><br>
+
+            <label for="deliveryStreet">ID : </label>
+            <br>
+            <form:input readonly="true" path="cartId" cssClass="form-control" maxlength="10" required="true" />
+            <br><br>
+
+        <label for="deliveryStreet">Street : </label>
+            <br>
+        <form:input path="deliveryStreet" id="deliveryStreet" cssClass="form-control" maxlength="10" required="true" />
+        <br><br>
+        <label for="deliveryNumber">Number : </label>
+            <br>
+        <form:input path="deliveryNumber" id="deliveryNumber" cssClass="form-control" maxlength="5" required="true" />
+        <br><br>
+        <label for="deliveryCity">City : </label>
+            <br>
+        <form:input path="deliveryCity" id="deliveryCity" cssClass="form-control" maxlength="5" required="true" />
+        <br><br>
+        <label for="deliveryPhone">Phone : </label>
+            <br>
+        <form:input path="deliveryPhone" id="deliveryPhone" cssClass="form-control" maxlength="5" required="true" />
+        <br><br>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+
+            <b>Billing Address:</b>
+            <br><br>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseAddress">
+                        <input type="checkbox" id="same" name="same" onchange="billingFunction()"> Use the same address
+                    </a>
+                </h4>
+            </div>
+            <div class="collapse" id="collapseAddress">
+                Street: <br>
+                <form:input path="billingStreet" id="billingStreet" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+                Number: <br>
+                <form:input path="billingNumber" id="billingNumber" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+                City: <br>
+                <form:input path="billingCity" id="billingCity" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+                Phone <br>
+                <form:input path="billingPhone" id="billingPhone" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<%--        </div>--%>
+   <%-- <div class="form-group">
+        <label for="deliveryNumber" class="control-label col-xs-2">deliveryNumber: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="deliveryNumber"  cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="deliveryCity" class="control-label col-xs-2">deliveryCity: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="deliveryCity" cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="deliveryPhone" class="control-label col-xs-2">deliveryPhone: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="deliveryPhone" cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="billingStreet" class="control-label col-xs-2">billingStreet: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="billingStreet" cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="billingNumber" class="col-sm-2 control-label">billingNumber: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="billingNumber" cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="billingCity" class="col-sm-2 control-label">billingCity: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="billingCity" cssClass="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="billingPhone" class="col-sm-2 control-label">billingPhone: </label>
+        <div class="col-xs-10">
+            <form:input type="text" path="billingPhone" cssClass="form-control"/>
+        </div>
+    </div>--%>
+
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <input type="submit" value="Save" class="btn btn-lg btn-primary"/>
+        </div>
+    </div>
+</form:form>
+
+
+
+
+
+
+
+
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>

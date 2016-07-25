@@ -1,9 +1,13 @@
 package com.evozon.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by iuliacodau on 21/07/2016.
  */
 public class AddressDTO {
+
+    private int cartId;
 
     private String deliveryStreet;
 
@@ -84,4 +88,14 @@ public class AddressDTO {
     public void setBillingPhone(String billingPhone) {
         this.billingPhone = billingPhone;
     }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+
 }

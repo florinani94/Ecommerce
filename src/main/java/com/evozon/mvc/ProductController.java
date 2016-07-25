@@ -26,6 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.http.HTTPException;
@@ -58,10 +59,7 @@ public class ProductController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
-        System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
-
-
         return "viewProducts";
     }
 
