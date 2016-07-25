@@ -117,7 +117,7 @@ public class CartDAOImpl implements CartDAO{
     @Override
     public List<Entry> getEntryForAdding(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query=session.createQuery("Select E FROM Entry as E, Product as P, Cart as C WHERE E.cart=C.cartId AND P.productId=E.product AND C.cartId=:id AND P.productId=:prodId");
+        Query query=session.createQuery("SELECT E FROM Entry as E, Product as P, Cart as C WHERE E.cart=C.cartId AND P.productId=E.product AND C.cartId=:id AND P.productId=:prodId");
         query.setParameter("id", cartId);
         query.setParameter("prodId", productId);
         List<Entry> entryList=query.list();
@@ -188,6 +188,5 @@ public class CartDAOImpl implements CartDAO{
     public void updateAddress(Cart cart) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(cart);
-
     }
 }

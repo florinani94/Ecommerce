@@ -1,5 +1,7 @@
 package com.evozon.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by iuliacodau on 21/07/2016.
  */
@@ -84,4 +86,6 @@ public class AddressDTO {
     public void setBillingPhone(String billingPhone) {
         this.billingPhone = billingPhone;
     }
+
+
 }

@@ -52,7 +52,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     public void importFromFile(String filename) {
         Session session=sessionFactory.getCurrentSession();
-        Query query = session.createSQLQuery("LOAD DATA LOCAL INFILE :filename INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (code, description, name, price, stockLevel)").setString("filename", filename);
+        Query query = session.createSQLQuery("LOAD DATA LOCAL INFILE :filename INTO TABLE product FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (code, description, imageURL, name, price, stockLevel,idCategory)").setString("filename", filename);
         query.executeUpdate();
     }
 

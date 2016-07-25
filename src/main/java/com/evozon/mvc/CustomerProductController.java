@@ -88,8 +88,8 @@ public class CustomerProductController {
             billingAddress.setNumber(address.getBillingNumber());
             billingAddress.setPhone(address.getBillingPhone());
             billingAddress.setStreetName(address.getBillingStreet());
-            cart.setDeliveryAddress(deliveryAddress);
-            cart.setBillingAddress(billingAddress);
+           // cart.setDeliveryAddress(deliveryAddress);
+           // cart.setBillingAddress(billingAddress);
 
             model.addAttribute("data", true);
             HttpSession session = request.getSession();
@@ -120,5 +120,13 @@ public class CustomerProductController {
 
 
         return "customerViewProducts";
+    }
+
+    /* Order details page */
+
+    @RequestMapping(value = "details", method = RequestMethod.GET)
+    public String getOrderDetailsPage(@RequestParam("cartId") int cartId, Model model) {
+        model.addAttribute("id", cartId);
+        return "orderDetails";
     }
 }

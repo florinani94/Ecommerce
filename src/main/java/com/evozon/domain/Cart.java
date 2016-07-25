@@ -21,34 +21,17 @@ public class Cart {
     @Column
     private Double total;
 
-    @AttributeOverrides({
-            @AttributeOverride(name="street",column=@Column(name="deliveryStreet")),
-            @AttributeOverride(name="number",column=@Column(name="deliveryNumber")),
-            @AttributeOverride(name="city",column=@Column(name="deliveryCity")),
-            @AttributeOverride(name="phone",column=@Column(name="deliveryPhone"))
-            })
-    @Embedded
-    private Address deliveryAddress;
 
-    @AttributeOverrides({
-            @AttributeOverride(name="street",column=@Column(name="billingStreet")),
-            @AttributeOverride(name="number",column=@Column(name="billingNumber")),
-            @AttributeOverride(name="city",column=@Column(name="billingCity")),
-            @AttributeOverride(name="phone",column=@Column(name="billingPhone"))
-    })
-    @Embedded
-    private Address billingAddress;
 
     public Cart(){
 
     }
 
-    public Cart(int cartId, List<Entry> entryList, Double total, Address deliveryAddress, Address billingAddress) {
+    public Cart(int cartId, List<Entry> entryList, Double total) {
         this.cartId = cartId;
         this.entryList = entryList;
         this.total = total;
-        this.deliveryAddress = deliveryAddress;
-        this.billingAddress = billingAddress;
+
     }
 
     public int getCartId() {
@@ -77,21 +60,6 @@ public class Cart {
         this.total = total;
     }
 
-    public Address getDeliveryAddress() {
-        return deliveryAddress;
-   }
-
-    public void setDeliveryAddress(Address deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public Address getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
-    }
 
     @Override
     public String toString() {
@@ -99,8 +67,6 @@ public class Cart {
                 "cartId=" + cartId +
                 ", entryList=" + entryList +
                 ", total=" + total +
-                ", deliveryAddress='" + deliveryAddress.toString() + '\'' +
-                ", billingAddress='" + billingAddress.toString() + '\'' +
                 '}';
     }
 }
