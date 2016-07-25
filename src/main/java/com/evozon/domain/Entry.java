@@ -23,7 +23,7 @@ public class Entry {
     @JoinColumn(name="product_id", nullable = false)
     private Product product;
 
-   @Column
+    @Column
     private String productCode;
 
     @Column

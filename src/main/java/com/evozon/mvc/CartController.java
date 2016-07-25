@@ -46,4 +46,11 @@ public class CartController {
         return "splashPage";
     }
 
+    @RequestMapping(value="/view", method = RequestMethod.GET)
+    public String viewDataFromCart(Model model){
+        // get cart id here from cookie
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
+        return "viewCart";
+    }
+
 }

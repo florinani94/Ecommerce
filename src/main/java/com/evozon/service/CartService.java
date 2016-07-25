@@ -124,4 +124,8 @@ public class CartService {
 
         return minicart;
     }
+
+    public List<Entry> getAllEntriesFromCart(Integer cartId) {
+        return cartDAO.getAllEntriesFromCart(cartId);
+    }
 }

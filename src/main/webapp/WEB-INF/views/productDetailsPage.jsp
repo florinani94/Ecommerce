@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-5" id="productInfo">
                 <h1 class="pageText" id="productTitle">${theProduct.name}</h1>
-                <%--<div class="myHr"></div>--%>
+                <div class="myHr"></div>
                     <table class="detailsText" id="productDetails">
                         <tr>
                             <td class="descriptionText">

@@ -57,10 +57,7 @@ public class ProductController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
-        System.out.println("get products controller");
         model.addAttribute("allProducts", productService.getAllProducts());
-
-
         return "viewProducts";
     }
 
