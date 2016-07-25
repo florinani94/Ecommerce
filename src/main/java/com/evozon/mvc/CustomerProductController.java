@@ -6,9 +6,7 @@ import com.evozon.domain.Address;
 import com.evozon.domain.AddressDTO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Product;
-import com.evozon.service.CartService;
-import com.evozon.service.CategoryService;
-import com.evozon.service.ProductService;
+import com.evozon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -36,6 +34,9 @@ public class CustomerProductController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private SendOrderMail orderManager;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAllProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
@@ -103,6 +104,7 @@ public class CustomerProductController {
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
         System.out.println("This is the cart id " + cart.getCartId());
+        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", cart.getCartId(), "randomPath");
         return "customerOrderPlaced";
     }
 
