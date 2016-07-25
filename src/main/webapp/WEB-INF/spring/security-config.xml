@@ -17,6 +17,8 @@
         <logout logout-success-url="/logout"/>
     </http>
 
+    <beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
     <authentication-manager>
         <authentication-provider>
             <password-encoder hash="bcrypt"/>

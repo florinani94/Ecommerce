@@ -28,9 +28,9 @@ $('#cartIcon').click(function () {
                 $.each(result.entries, function (index, entry) {
                         $("#entry-data").html($("#entry-data").html() +
                             "<div class='entry-line'>" +
-                                "<span class='entry-name'>" + entry.name + "</span>" +
-                                "<span class='entry-price'>" + entry.price + "</span>" +
-                                "<span class='entry-quantity'>" + entry.quantity + "</span>" +
+                                "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
+                                "<span class='entry-name'>" + entry.name + "   " + "</span>" +
+                                "<span class='entry-price'>" + entry.price + "$" + "</span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -39,7 +39,7 @@ $('#cartIcon').click(function () {
 
                 $('#cartPanel').css("position","absolute");
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*25).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*20 + 48).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
