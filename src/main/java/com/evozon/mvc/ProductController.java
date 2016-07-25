@@ -25,6 +25,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.http.HTTPException;
 import javax.xml.transform.sax.SAXSource;
@@ -50,7 +51,6 @@ public class ProductController {
 
     @Autowired
     private ProductValidator validator;
-
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 

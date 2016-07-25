@@ -121,4 +121,12 @@ public class CustomerProductController {
 
         return "customerViewProducts";
     }
+
+    /* Order details page */
+
+    @RequestMapping(value = "details", method = RequestMethod.GET)
+    public String getOrderDetailsPage(@RequestParam("cartId") int cartId, Model model) {
+        model.addAttribute("id", cartId);
+        return "orderDetails";
+    }
 }
