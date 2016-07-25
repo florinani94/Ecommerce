@@ -88,8 +88,8 @@ public class CustomerProductController {
             billingAddress.setNumber(address.getBillingNumber());
             billingAddress.setPhone(address.getBillingPhone());
             billingAddress.setStreetName(address.getBillingStreet());
-            cart.setDeliveryAddress(deliveryAddress);
-            cart.setBillingAddress(billingAddress);
+           // cart.setDeliveryAddress(deliveryAddress);
+           // cart.setBillingAddress(billingAddress);
 
             model.addAttribute("data", true);
             HttpSession session = request.getSession();

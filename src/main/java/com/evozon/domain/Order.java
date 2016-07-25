@@ -3,6 +3,7 @@ package com.evozon.domain;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by vladblana on 25/07/2016.
@@ -42,13 +43,7 @@ public class Order {
     private String status;
 
     @Column
-    private String productName;
-
-    @Column
-    private Integer quantity;
-
-    @Column
-    private Double subTotal;
+    private List<Entry> entryList;
 
     @Column
     private Double total;
@@ -88,30 +83,6 @@ public class Order {
         this.status = status;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Double getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(Double subTotal) {
-        this.subTotal = subTotal;
-    }
-
     public Double getTotal() {
         return total;
     }
@@ -119,10 +90,6 @@ public class Order {
     public void setTotal(Double total) {
         this.total = total;
     }
-
-
-
-
 
     public Address getDeliveryAddress() {
         return deliveryAddress;
@@ -140,4 +107,11 @@ public class Order {
         this.billingAddress = billingAddress;
     }
 
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
+    }
 }
