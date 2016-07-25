@@ -28,4 +28,9 @@ public class OrderDAOImpl implements OrderDAO {
         return orders.get(0);
     }
 
+    public void addOrder(Order order) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(order);
+    }
+
 }

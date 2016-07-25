@@ -48,8 +48,7 @@ public class Order {
     @Column
     private Double total;
 
-    public Order(){
-    }
+    public Order(){}
 
     public Integer getOrderId() {
         return orderId;

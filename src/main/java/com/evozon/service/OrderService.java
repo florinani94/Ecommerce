@@ -15,4 +15,8 @@ public class OrderService {
         return orderDAO.getOrderById(id);
     }
 
+    public void addOrder(Order order) {
+        orderDAO.addOrder(order);
+    }
+
 }
