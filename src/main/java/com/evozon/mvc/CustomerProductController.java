@@ -60,52 +60,6 @@ public class CustomerProductController {
         return "customerViewProducts";
     }
 
-/*    @RequestMapping(value = "/address", method = RequestMethod.GET)
-    public String gotToCheckoutPage(Model model, HttpServletRequest request) {
-        Cart shoppingCart;
-        HttpSession session = request.getSession();
-        shoppingCart = (Cart) session.getAttribute("cart");
-        if (shoppingCart == null) {
-            shoppingCart = new Cart();
-            session.setAttribute("cart", shoppingCart);
-        }
-        model.addAttribute("cart", shoppingCart);
-        return "customerCartCheckout";
-    }
-
-    @RequestMapping(value = "/address", method = RequestMethod.POST)
-    public String checkoutAddress(HttpServletRequest request, Model model, @ModelAttribute("address") AddressDTO address, BindingResult data, @ModelAttribute("cart") Cart cart) {
-        try {
-
-            model.addAttribute("address", address);
-            Address deliveryAddress = new Address();
-            Address billingAddress = new Address();
-            deliveryAddress.setCity(address.getDeliveryCity());
-            deliveryAddress.setNumber(address.getDeliveryNumber());
-            deliveryAddress.setStreetName(address.getDeliveryStreet());
-            deliveryAddress.setPhone(address.getDeliveryPhone());
-            billingAddress.setCity(address.getBillingCity());
-            billingAddress.setNumber(address.getBillingNumber());
-            billingAddress.setPhone(address.getBillingPhone());
-            billingAddress.setStreetName(address.getBillingStreet());
-           // cart.setDeliveryAddress(deliveryAddress);
-           // cart.setBillingAddress(billingAddress);
-
-            model.addAttribute("data", true);
-            HttpSession session = request.getSession();
-            session.setAttribute("cart", cart);
-            if (!data.hasErrors()) {
-                cartService.updateAddress(cart);
-            }
-            if (data.hasErrors()) {
-                model.addAttribute("data", false);
-                return "customerCartCheckout";
-            }
-        } catch (Exception e) {
-            model.addAttribute("data", false);
-        }
-        return "customerCartCheckout";
-    }*/
 
     @RequestMapping(value = "/checkout/{cartId}", method = RequestMethod.GET)
     public String goToCheckout(@PathVariable("cartId") int cartId, Model model) {
@@ -113,14 +67,14 @@ public class CustomerProductController {
         model.addAttribute("cart", cart);
         System.out.println("THE ID" + cart.getCartId());
         AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setDeliveryCity(cart.getDeliveryAddress().getCity());
+/*        addressDTO.setDeliveryCity(cart.getDeliveryAddress().getCity());
         addressDTO.setDeliveryNumber(cart.getDeliveryAddress().getNumber());
         addressDTO.setDeliveryStreet(cart.getDeliveryAddress().getStreetName());
         addressDTO.setDeliveryPhone(cart.getDeliveryAddress().getPhone());
         addressDTO.setBillingCity(cart.getBillingAddress().getCity());
         addressDTO.setBillingNumber(cart.getBillingAddress().getNumber());
         addressDTO.setBillingStreet(cart.getBillingAddress().getStreetName());
-        addressDTO.setBillingPhone(cart.getBillingAddress().getPhone());
+        addressDTO.setBillingPhone(cart.getBillingAddress().getPhone());*/
         addressDTO.setCartId(cartId);
         model.addAttribute("address", addressDTO);
         System.out.println("This is the street" + addressDTO.getDeliveryStreet());
@@ -144,8 +98,8 @@ public class CustomerProductController {
         billingAddress.setNumber(address.getBillingNumber());
         billingAddress.setPhone(address.getBillingPhone());
         billingAddress.setStreetName(address.getBillingStreet());
-        cart.setDeliveryAddress(deliveryAddress);
-        cart.setBillingAddress(billingAddress);
+/*        cart.setDeliveryAddress(deliveryAddress);
+        cart.setBillingAddress(billingAddress);*/
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
         System.out.println("This is the cart id " + cart.getCartId());
