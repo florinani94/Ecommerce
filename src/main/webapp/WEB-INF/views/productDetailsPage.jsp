@@ -42,7 +42,7 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" value="Add to cart"></td>
+                            <td><input type="submit" onclick="location.href='/register.htm'" class="addButton" value="Add to cart"></td>
                         </tr>
                     </table>
             </div>

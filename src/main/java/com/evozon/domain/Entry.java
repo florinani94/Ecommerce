@@ -18,8 +18,6 @@ public class Entry {
     private Cart cart;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    //// TODO: 21/07/2016 Review cascade type when testing
-    //// TODO: 21/07/2016 make a copy of price, code and name
     @JoinColumn(name="product_id", nullable = false)
     private Product product;
 
