@@ -1,6 +1,7 @@
 package com.evozon.mvc;
 
 import com.evozon.domain.Entry;
+import com.evozon.domain.Product;
 import com.evozon.domain.dtos.MiniCartDTO;
 import com.evozon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +51,37 @@ public class CartController {
     @RequestMapping(value="/view", method = RequestMethod.GET)
     public String viewDataFromCart(Model model){
         // get cart id here from cookie
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
+
+//        Product p = new Product();
+//        p.setProductId(1);
+//        p.setImageURL("/resources/productImages/default@product.jpg");
+//
+//        Entry e = new Entry();
+//        e.setProductName("Super Good Tea");
+//        e.setProductCode("123456");
+//        e.setProductPrice(5.43);
+//        e.setQuantity(2);
+//        e.setSubTotal(345.3);
+//        e.setProduct(p);
+//
+//
+//        Product p2 = new Product();
+//        p2.setProductId(2);
+//        p2.setImageURL("/resources/productImages/default@product.jpg");
+//
+//        Entry e2 = new Entry();
+//        e2.setProductName("Super Good Tea2");
+//        e2.setProductCode("364");
+//        e2.setProductPrice(5.43);
+//        e2.setQuantity(9);
+//        e2.setSubTotal(345.3);
+//        e2.setProduct(p2);
+//
+//        List<Entry> entries = new ArrayList<Entry>();
+//        entries.add(e);
+//        entries.add(e2);
+//
+//        model.addAttribute("entries", entries);
         return "viewCart";
     }
 
