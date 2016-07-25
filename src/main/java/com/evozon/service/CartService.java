@@ -66,7 +66,7 @@ public class CartService {
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
-                    if(e.getProduct().getStockLevel() > e.getQuantity() + 1) {
+                    if(e.getProduct().getStockLevel() > e.getQuantity()) {
                         e.setQuantity(e.getQuantity() + 1);
                     }
                     else{
@@ -76,6 +76,9 @@ public class CartService {
                     Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
                     cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
                     cartDAO.computeTotalForCart(cartId);
+                }
+                else{
+                    cartDAO.deleteEntryFromCart(e.getEntryId());
                 }
             }
         }
@@ -115,5 +118,15 @@ public class CartService {
         miniCart.setEntries(entryDTOList);
 
         return miniCart;
+    }
+
+    public Integer getNumberOfProductsInCart(Integer cartId)
+    {
+        Integer result=new Integer(0);
+        List<Entry> entryList=cartDAO.getAllEntriesFromCart(cartId);
+        for(Entry e:entryList){
+            result+=e.getQuantity();
+        }
+        return result;
     }
 }

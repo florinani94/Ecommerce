@@ -14,6 +14,12 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
+    <script type="text/javascript" src="${jqueyUrl}"></script>
+
+    <c:url var="jsUrl" value="/resources/js/myscript.js"/>
+    <script type="text/javascript" src="${jsUrl}"></script>
+
     <title>${theProduct.name}</title>
 
 </head>
@@ -42,7 +48,7 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" onclick="location.href='/register.htm'" class="addButton" value="Add to cart"></td>
+                            <td><input type="submit" class="addButton" id="addButton2" value="Add to cart"></td>
                         </tr>
                     </table>
             </div>

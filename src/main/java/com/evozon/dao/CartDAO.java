@@ -12,17 +12,17 @@ import java.util.Set;
  * Created by vladblana on 19/07/2016.
  */
 public interface CartDAO {
-    Product getProductById(Integer id);
+    Product getProductById(Integer productId);
 
     Entry getEntryById(Integer entryId);
 
-    Cart getCartById(Integer id);
+    Cart getCartById(Integer cartId);
 
     void addCart(Cart cart);
 
     void updateCart(Cart cart);
 
-    void deleteCart(Integer id) ;
+    void deleteCart(Integer cartId) ;
 
     void updateEntryDetails(Entry entry);
 
@@ -34,7 +34,7 @@ public interface CartDAO {
 
     List<Entry> getEntryForAdding(Integer productId, Integer cartId);
 
-    List<Entry> getAllEntriesFromCart(Integer id);
+    List<Entry> getAllEntriesFromCart(Integer cartId);
 
     void updateSubTotalForEntry(Double value, Integer entryId,Integer cartId);
 

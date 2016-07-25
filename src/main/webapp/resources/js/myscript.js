@@ -2,6 +2,32 @@
  * Created by dianamohanu on 14/07/2016.
  */
 // Functions used in viewProducts.jsp
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+
+$("#addButton2").click(function() {
+        console.log( "ready!" );
+//        var toInt = $('#addButton2').data('product-id');
+//
+//        $.ajax({
+//            type : "POST",
+//            url : "../view?productId=",
+//            data : {
+//                productId: toInt
+//            },
+//            success : function(response) {
+////                $("#buttonId").data( "#product-id" );
+//                console.log("success");
+//            },
+//            error : function(e) {
+//                alert('Error: ' + e);
+//            }
+//        });
+
+});
+
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
