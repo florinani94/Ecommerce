@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-5" id="productInfo">
                 <h1 class="pageText" id="productTitle">${theProduct.name}</h1>
-                <%--<div class="myHr"></div>--%>
+                <div class="myHr"></div>
                     <table class="detailsText" id="productDetails">
                         <tr>
                             <td class="descriptionText">
@@ -42,7 +42,7 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" value="Add to cart"></td>
+                            <td><input type="submit" onclick="location.href='/register.htm'" class="addButton" value="Add to cart"></td>
                         </tr>
                     </table>
             </div>

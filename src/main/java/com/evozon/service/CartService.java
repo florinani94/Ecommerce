@@ -3,6 +3,7 @@ package com.evozon.service;
 import com.evozon.dao.CartDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
+import com.evozon.domain.Product;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -50,6 +52,7 @@ public class CartService {
         else {
             if (entry.getProduct().getStockLevel() < entry.getQuantity()) {
                 entry.setQuantity(entry.getProduct().getStockLevel());
+                //send not enough stock message
             }
             cartDAO.updateQuantity(entry);
             Double subTotal = cartDAO.computeSubTotalForEntry(entry.getEntryId(), cartId);
@@ -58,24 +61,17 @@ public class CartService {
         }
 
     }
-/*
-    public void editEntry(Entry entry,Integer cartId){
-        if(entry.getQuantity()==0){
-            cartDAO.deleteEntryFromCart(entry.getEntryId());
-        }
-        else if(entry.getProduct().getStockLevel()>entry.getQuantity()){
-            entry.setQuantity(entry.getProduct().getStockLevel());
-            cartDAO.updateQuantity(entry);
-            cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
-        }
-    }
-*/
     public void addProductToCart(Integer productId,Integer cartId) {
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
-                    e.setQuantity(e.getQuantity() + 1);
+                    if(e.getProduct().getStockLevel() > e.getQuantity() + 1) {
+                        e.setQuantity(e.getQuantity() + 1);
+                    }
+                    else{
+                        //send not enough stock message
+                    }
                     cartDAO.updateEntry(e);
                     Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
                     cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
@@ -86,9 +82,6 @@ public class CartService {
         else{
             Entry entry=cartDAO.addEntryToCart(productId,cartId);
             cartDAO.updateEntryDetails(entry);
-//            Double subTotal=cartDAO.computeSubTotalForEntry(entry.getEntryId(),cartId);
-//            cartDAO.updateSubTotalForEntry(subTotal,entry.getEntryId(),cartId);
-//            cartDAO.computeTotalForCart(cartId);
             addProductToCart(productId,cartId);
         }
     }
@@ -102,12 +95,11 @@ public class CartService {
         cartDAO.updateAddress(cart);
     }
 
-
     public MiniCartDTO getEntriesFromCart(Integer cartId){
         Cart cartModel = cartDAO.getCartById(cartId);
 
-        MiniCartDTO minicart = new MiniCartDTO();
-        minicart.setTotal(cartModel.getTotal());
+        MiniCartDTO miniCart = new MiniCartDTO();
+        miniCart.setTotal(cartModel.getTotal());
 
         List<Entry> entryList = cartModel.getEntryList();
         ArrayList<EntryDTO> entryDTOList = new ArrayList<>();
@@ -120,9 +112,13 @@ public class CartService {
             entryDTOList.add(entryDTO);
         }
 
-        minicart.setEntries(entryDTOList);
+        miniCart.setEntries(entryDTOList);
 
-        return minicart;
+        return miniCart;
+    }
+
+    public List<Entry> getAllEntriesFromCart(Integer cartId) {
+        return cartDAO.getAllEntriesFromCart(cartId);
     }
 
     public Cart getCartById(int id) {
