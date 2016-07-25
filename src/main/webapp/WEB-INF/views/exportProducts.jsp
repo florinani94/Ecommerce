@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<jsp:include page="backofficeHeader.jsp" />
+<jsp:include page="backofficeHeader.jsp"/>
 
 <div class="row">
     <div class="col-md-3 col-md-offset-5">
@@ -31,10 +31,10 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <table  id="exportTable" class="table table-striped">
+        <table id="exportTable" class="table table-striped">
             <thead>
             <tr>
-                <th>Code </th>
+                <th>Code</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -59,5 +59,12 @@
         </table>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <a href="<c:url value='/backoffice/product/downloadCSV' />">Download This File</a>
+    </div>
+</div>
+
 </body>
 </html>
