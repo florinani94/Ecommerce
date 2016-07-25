@@ -60,7 +60,7 @@ public class CustomerProductController {
         return "customerViewProducts";
     }
 
-    @RequestMapping(value = "/address", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/address", method = RequestMethod.GET)
     public String gotToCheckoutPage(Model model, HttpServletRequest request) {
         Cart shoppingCart;
         HttpSession session = request.getSession();
@@ -105,6 +105,51 @@ public class CustomerProductController {
             model.addAttribute("data", false);
         }
         return "customerCartCheckout";
+    }*/
+
+    @RequestMapping(value = "/checkout/{cartId}", method = RequestMethod.GET)
+    public String goToCheckout(@PathVariable("cartId") int cartId, Model model) {
+        Cart cart = cartService.getCartById(cartId);
+        model.addAttribute("cart", cart);
+        System.out.println("THE ID" + cart.getCartId());
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setDeliveryCity(cart.getDeliveryAddress().getCity());
+        addressDTO.setDeliveryNumber(cart.getDeliveryAddress().getNumber());
+        addressDTO.setDeliveryStreet(cart.getDeliveryAddress().getStreetName());
+        addressDTO.setDeliveryPhone(cart.getDeliveryAddress().getPhone());
+        addressDTO.setBillingCity(cart.getBillingAddress().getCity());
+        addressDTO.setBillingNumber(cart.getBillingAddress().getNumber());
+        addressDTO.setBillingStreet(cart.getBillingAddress().getStreetName());
+        addressDTO.setBillingPhone(cart.getBillingAddress().getPhone());
+        addressDTO.setCartId(cartId);
+        model.addAttribute("address", addressDTO);
+        System.out.println("This is the street" + addressDTO.getDeliveryStreet());
+        return "customerCartCheckout";
+    }
+
+    @RequestMapping(value = "checkout", method = RequestMethod.POST)
+    public String checkout(Model model, @ModelAttribute("address") AddressDTO address, BindingResult data) {
+        model.addAttribute("address", address);
+        if(data.hasErrors()){
+            return "customerCartCheckout";
+        }
+        Cart cart = cartService.getCartById(address.getCartId());
+        Address deliveryAddress = new Address();
+        Address billingAddress = new Address();
+        deliveryAddress.setCity(address.getDeliveryCity());
+        deliveryAddress.setNumber(address.getDeliveryNumber());
+        deliveryAddress.setStreetName(address.getDeliveryStreet());
+        deliveryAddress.setPhone(address.getDeliveryPhone());
+        billingAddress.setCity(address.getBillingCity());
+        billingAddress.setNumber(address.getBillingNumber());
+        billingAddress.setPhone(address.getBillingPhone());
+        billingAddress.setStreetName(address.getBillingStreet());
+        cart.setDeliveryAddress(deliveryAddress);
+        cart.setBillingAddress(billingAddress);
+        cartService.updateAddress(cart);
+        model.addAttribute("cart", cart);
+        System.out.println("This is the cart id " + cart.getCartId());
+        return "customerOrderPlaced";
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)

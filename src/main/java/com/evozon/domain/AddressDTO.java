@@ -5,6 +5,8 @@ package com.evozon.domain;
  */
 public class AddressDTO {
 
+    private int cartId;
+
     private String deliveryStreet;
 
     private int deliveryNumber;
@@ -83,5 +85,13 @@ public class AddressDTO {
 
     public void setBillingPhone(String billingPhone) {
         this.billingPhone = billingPhone;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 }

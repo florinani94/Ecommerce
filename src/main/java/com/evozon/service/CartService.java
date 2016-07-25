@@ -124,4 +124,8 @@ public class CartService {
 
         return minicart;
     }
+
+    public Cart getCartById(int id) {
+        return cartDAO.getCartById(id);
+    }
 }

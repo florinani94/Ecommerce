@@ -187,7 +187,7 @@ public class CartDAOImpl implements CartDAO{
     @Override
     public void updateAddress(Cart cart) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(cart);
+        session.update(cart);
 
     }
 }
