@@ -114,13 +114,6 @@ public class CustomerProductController {
         return "productDetailsPage";
     }
 
-    @RequestMapping(value = "/view/{productId}", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId){
-        System.out.println(productId);
-       // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-//        cartService.addProductToCart(Integer.parseInt(productId),1);
-        return "productAddedToCartConfirmationPage";
-    }
 
     @RequestMapping(method = RequestMethod.POST)
     public String deleteAll(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,

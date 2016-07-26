@@ -58,7 +58,7 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
+                            <td><input type="submit" class="addButton" id="addButtonID" data-product-id="${theProduct.productId}" value="Add to cart"> </td>
                         </tr>
                         <tr>
                             <td>

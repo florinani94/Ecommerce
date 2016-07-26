@@ -92,9 +92,9 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Entry addEntryToCart(Integer productId, Integer cartId){
+    public Entry addEntryToCart(Product product,Cart cart,Orders orders){
         Session session = sessionFactory.getCurrentSession();
-        Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
+        Entry entry=new Entry(cart,orders,product,new Integer(0),new Double(0.0));//remove hardcoding
         session.save(entry);
         return entry;
     }

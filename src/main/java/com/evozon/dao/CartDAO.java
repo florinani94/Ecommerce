@@ -1,9 +1,6 @@
 package com.evozon.dao;
 
-import com.evozon.domain.AddressDTO;
-import com.evozon.domain.Cart;
-import com.evozon.domain.Entry;
-import com.evozon.domain.Product;
+import com.evozon.domain.*;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +23,7 @@ public interface CartDAO {
 
     void updateEntryDetails(Entry entry);
 
-    Entry addEntryToCart(Integer productId, Integer cartId);//entry was here
+    Entry addEntryToCart(Product product, Cart cart, Orders orders);
 
     void deleteEntryFromCart(Integer entryId);
 
