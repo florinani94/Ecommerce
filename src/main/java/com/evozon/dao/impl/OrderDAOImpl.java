@@ -3,6 +3,7 @@ package com.evozon.dao.impl;
 import com.evozon.dao.OrderDAO;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Orders;
+import com.evozon.service.SendMail;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

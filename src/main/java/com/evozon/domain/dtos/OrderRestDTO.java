@@ -3,7 +3,7 @@ package com.evozon.domain.dtos;
 /**
  * Created by florinani on 26/07/2016.
  */
-public class OrderDTO {
+public class OrderRestDTO {
 
     private Integer ordersId;
     private String status;

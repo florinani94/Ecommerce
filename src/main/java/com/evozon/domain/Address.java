@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Pattern;
 
-/**
- * Created by vladblana on 20/07/2016.
- */
+
 @Embeddable
 public class Address {
     @Column(insertable=false,updatable=false)
@@ -33,12 +31,12 @@ public class Address {
         this.phone = phone;
     }
 
-    public String getStreetName() {
+    public String getStreet() {
         return street;
     }
 
-    public void setStreetName(String streetName) {
-        this.street = streetName;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public Integer getNumber() {

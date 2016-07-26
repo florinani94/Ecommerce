@@ -13,6 +13,7 @@
 <html>
 <head>
 
+    <c:url var="paymentUrl" value="/resources/secure.png"></c:url>
     <c:url var="cssUrl" value="/resources/style/PaginatorStyle.css"></c:url>
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
     <c:url var="cssUrlHead" value="/resources/style/detailViewStyle.css"></c:url>
@@ -34,95 +35,114 @@
     </div>
 </div>
 
-<%--<c:if test="${data == null || data==false}">
-
-<form action="address" method="post" id="checkoutAddress" class="form-inline" action="${addressUrl}" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-
-                <b>Delivery Address </b>
-                <br><br>
- &lt;%&ndash;               Street: <br>
-                <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" required class="form-control"/>
-                <br><br>&ndash;%&gt;
-                Number: <br>
-                <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" required class="form-control"/>
-                <br><br>
-                City: <br>
-                <input type="text" id="deliveryCity" name="deliveryCity" maxlength="15" required class="form-control"/>
-                <br><br>
-                Phone <br>
-                <input type="text" id="deliveryPhone" name="deliveryPhone" maxlength="10" required class="form-control"/>
-                <br><br>
-
-        </div>
-    </div>
-
+<c:if test="${data == null || data==false}">
+    <%--
+    <form action="address" method="post" id="checkoutAddress" class="form-inline" action="${addressUrl}" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
 
-                    <b>Billing Address:</b>
+                    <b>Delivery Address </b>
                     <br><br>
-                    <div class="panel-heading">
-                    <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapseAddress">
-                        <input type="checkbox" id="same" name="same" onchange="billingFunction()"> Use the same address
-                    </a>
-                    </h4>
-                    </div>
-                    <div class="collapse" id="collapseAddress">
-                    Street: <br>
-                    <input type="text" id="billingStreet" name="billingStreet" maxlength="30" required class="form-control"/>
-                    <br><br>
+     &lt;%&ndash;               Street: <br>
+                    <input type="text" id="deliveryStreet" name="deliveryStreet" maxlength="30" required class="form-control"/>
+                    <br><br>&ndash;%&gt;
                     Number: <br>
-                    <input type="text" id="billingNumber" name="billingNumber" maxlength="5" required class="form-control"/>
+                    <input type="text" id="deliveryNumber" name="deliveryNumber" maxlength="5" required class="form-control"/>
                     <br><br>
                     City: <br>
-                    <input type="text" id="billingCity" name="billingCity" maxlength="10" required class="form-control"/>
+                    <input type="text" id="deliveryCity" name="deliveryCity" maxlength="15" required class="form-control"/>
                     <br><br>
                     Phone <br>
-                    <input type="text" id="billingPhone" name="billingPhone" maxlength="10" required class="form-control"/>
+                    <input type="text" id="deliveryPhone" name="deliveryPhone" maxlength="10" required class="form-control"/>
                     <br><br>
-
-                    </div>
 
             </div>
         </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+
+                        <b>Billing Address:</b>
+                        <br><br>
+                        <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseAddress">
+                            <input type="checkbox" id="same" name="same" onchange="billingFunction()"> Use the same address
+                        </a>
+                        </h4>
+                        </div>
+                        <div class="collapse" id="collapseAddress">
+                        Street: <br>
+                        <input type="text" id="billingStreet" name="billingStreet" maxlength="30" required class="form-control"/>
+                        <br><br>
+                        Number: <br>
+                        <input type="text" id="billingNumber" name="billingNumber" maxlength="5" required class="form-control"/>
+                        <br><br>
+                        City: <br>
+                        <input type="text" id="billingCity" name="billingCity" maxlength="10" required class="form-control"/>
+                        <br><br>
+                        Phone <br>
+                        <input type="text" id="billingPhone" name="billingPhone" maxlength="10" required class="form-control"/>
+                        <br><br>
+
+                        </div>
+
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <input type="submit" value="Continue" class="btn btn-success">
+                <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>
+            </div>
+        </div>
+        </form>
+
+    </c:if>
+
+    <c:if test="${data == true}">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <input type="submit" value="Continue" class="btn btn-success">
-            <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>
+        <a href="${addressUrl}" class="btn btn-default" role="button"> Next </a>
         </div>
     </div>
-    </form>
+    </c:if>
 
-</c:if>
-
-<c:if test="${data == true}">
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-    <a href="${addressUrl}" class="btn btn-default" role="button"> Next </a>
-    </div>
-</div>
-</c:if>
-
-<c:if test="${data == false}">
-    <h3>Incorrect</h3>
-    <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-    <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
-    </div>
-    </div>
-</c:if>--%>
+    <c:if test="${data == false}">
+        <h3>Incorrect</h3>
+        <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+        <a href="${addressUrl}" class="btn btn-default" role="button"> New Address </a>
+        </div>
+        </div>
+    </c:if>--%>
 
 
 
 
-<form:form commandName="address" method="POST" action="${addressUrl}" id="checkoutAddress" class="form-inline" ><%--cssClass="form-horizontal registrationForm" enctype="multipart/form-data"--%>
+<form:form commandName="order" method="POST" action="${addressUrl}" id="checkoutAddress" class="form-inline" ><%--cssClass="form-horizontal registrationForm" enctype="multipart/form-data"--%>
+
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-            <b>Delivery Address </b>
+            <b>1. Contact Details </b>
+            <br><br>
+
+<%--            <label for="name">Name : </label>
+            <br>
+            <form:input path="name" id="name" cssClass="form-control" maxlength="10" required="true" />
+            <br><br>--%>
+            <label for="email">E-mail Address : </label>
+            <br>
+            <form:input path="email" id="email" cssClass="form-control" maxlength="10" required="true" />
+            <br><br>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+
+            <b>2. Delivery Address </b>
             <br><br>
 
             <label for="deliveryStreet">ID : </label>
@@ -153,7 +173,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-            <b>Billing Address:</b>
+            <b>3. Billing Address:</b>
             <br><br>
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -182,49 +202,27 @@
     </div>
 
 
-<%--        </div>--%>
-   <%-- <div class="form-group">
-        <label for="deliveryNumber" class="control-label col-xs-2">deliveryNumber: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="deliveryNumber"  cssClass="form-control"/>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <img src="${paymentUrl}" />
+                <br><br>
+                <b>4. Payment Details</b>
+                <br><br>
+
+                <label for="paymentMethod">Payment Method : </label>
+                <br>
+                <form:input path="paymentMethod" id="paymentMethod" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+                <label for="cardNumber">Card Number : </label>
+                <br>
+                <form:input path="cardNumber" id="deliveryStreet" cssClass="form-control" maxlength="10" required="true" />
+                <br><br>
+                <label for="cardCode">Card Code : </label>
+                <br>
+                <form:input path="cardCode" id="cardCode" cssClass="form-control" maxlength="5" required="true" />
+                <br><br>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="deliveryCity" class="control-label col-xs-2">deliveryCity: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="deliveryCity" cssClass="form-control"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="deliveryPhone" class="control-label col-xs-2">deliveryPhone: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="deliveryPhone" cssClass="form-control"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="billingStreet" class="control-label col-xs-2">billingStreet: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="billingStreet" cssClass="form-control"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="billingNumber" class="col-sm-2 control-label">billingNumber: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="billingNumber" cssClass="form-control"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="billingCity" class="col-sm-2 control-label">billingCity: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="billingCity" cssClass="form-control"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="billingPhone" class="col-sm-2 control-label">billingPhone: </label>
-        <div class="col-xs-10">
-            <form:input type="text" path="billingPhone" cssClass="form-control"/>
-        </div>
-    </div>--%>
 
 
     <div class="form-group">
@@ -235,6 +233,7 @@
 </form:form>
 
 
+</c:if>
 
 
 

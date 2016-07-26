@@ -10,7 +10,7 @@ $('#cartIcon').hover(function () {
 var toggleMenu = false;
 var idCart=1;
 
-$('#cartIcon').click(function () {
+$('#cartIcon, #prodNr').click(function () {
 
     var entriesNo = 0;
 

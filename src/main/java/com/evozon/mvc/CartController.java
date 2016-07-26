@@ -68,7 +68,12 @@ public class CartController {
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
         System.out.println("//Prod id://"+productId);
         // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-        cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
+
+        }
+        else{
+
+        }
         return "productDetailsPage";
     }
 

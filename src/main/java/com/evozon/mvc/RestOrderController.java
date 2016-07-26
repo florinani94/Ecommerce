@@ -1,9 +1,7 @@
 package com.evozon.mvc;
 
-import com.evozon.domain.Category;
 import com.evozon.domain.Orders;
-import com.evozon.domain.Product;
-import com.evozon.domain.dtos.OrderDTO;
+import com.evozon.domain.dtos.OrderRestDTO;
 import com.evozon.service.OrderService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -31,7 +29,7 @@ public class RestOrderController {
     @ResponseBody
     public String updateOrderStatus(@RequestBody JsonObject orderInfo, HttpServletResponse response) {
 
-        OrderDTO orderDTO = new Gson().fromJson(orderInfo, OrderDTO.class);
+        OrderRestDTO orderDTO = new Gson().fromJson(orderInfo, OrderRestDTO.class);
         Orders order =  orderService.getOrderById(orderDTO.getOrdersId());
         String status = orderDTO.getStatus();
         if(order != null){
