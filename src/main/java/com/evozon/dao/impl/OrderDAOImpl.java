@@ -52,6 +52,11 @@ public class OrderDAOImpl implements OrderDAO {
         session.save(order);
     }
 
+    public void updateOrder(Orders order){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(order);
+    }
+
     public List<Entry> getAllEntries(Integer orderId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Entry as E WHERE E.order.ordersId = :id");

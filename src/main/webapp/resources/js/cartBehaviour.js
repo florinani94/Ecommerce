@@ -55,12 +55,10 @@ $('#cartIcon').click(function () {
 )
 
 
-
 $("#addButtonID").click(function() {
-       alert("Click working!");
       // var toInt = $('#addButton2').data('product-id');
-       var cartIdentifier=3;    //replace data with cartId value from cookie
-       var productIdentifier=4;    //replace data with cartId value from cookie
+       var cartIdentifier=1;    //replace data with cartId value from cookie
+       var productIdentifier=$('#addButtonID').data('product-id');
 
        $.ajax({
            type : "POST",
@@ -71,10 +69,11 @@ $("#addButtonID").click(function() {
            },
            success : function(response) {
 //                $("#buttonId").data( "#product-id" );
+               alert("Product successfully added with quantity 1");
                console.log("success");
            },
            error : function(e) {
-               alert('Error: ' + e);
+               alert('An error occurred while trying to add the product to the cart. Please try again later. ');
            }
        });
 

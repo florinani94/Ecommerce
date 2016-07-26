@@ -1,11 +1,14 @@
 package com.evozon.service;
 
 import com.evozon.dao.CartDAO;
+import com.evozon.dao.OrderDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
+import com.evozon.domain.Orders;
 import com.evozon.domain.Product;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ import java.util.Set;
 public class CartService {
     @Autowired
     private CartDAO cartDAO;
+
+    @Autowired
+    private OrderDAO orderDAO;
 
     @Autowired
     private ServletContext servletContext;
@@ -66,7 +72,7 @@ public class CartService {
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
-                    if(e.getProduct().getStockLevel() > e.getQuantity() + 1) {
+                    if(e.getProduct().getStockLevel() > e.getQuantity()) {
                         e.setQuantity(e.getQuantity() + 1);
                     }
                     else{
@@ -77,10 +83,16 @@ public class CartService {
                     cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
                     cartDAO.computeTotalForCart(cartId);
                 }
+                else{
+                    cartDAO.deleteEntryFromCart(e.getEntryId());
+                }
             }
         }
         else{
-            Entry entry=cartDAO.addEntryToCart(productId,cartId);
+            Cart cart=cartDAO.getCartById(cartId);
+            Product product=cartDAO.getProductById(productId);
+            Orders orders=orderDAO.getOrderById(1);//remove hardcoding
+            Entry entry=cartDAO.addEntryToCart(product,cart,orders);
             cartDAO.updateEntryDetails(entry);
             addProductToCart(productId,cartId);
         }
@@ -123,5 +135,15 @@ public class CartService {
 
     public Cart getCartById(int id) {
         return cartDAO.getCartById(id);
+    }
+
+    public Integer getNumberOfProductsInCart(Integer cartId)
+    {
+        Integer result=new Integer(0);
+        List<Entry> entryList=cartDAO.getAllEntriesFromCart(cartId);
+        for(Entry e:entryList){
+            result+=e.getQuantity();
+        }
+        return result;
     }
 }

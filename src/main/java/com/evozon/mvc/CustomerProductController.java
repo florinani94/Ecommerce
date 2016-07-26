@@ -114,6 +114,7 @@ public class CustomerProductController {
         return "productDetailsPage";
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public String deleteAll(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
                             Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,

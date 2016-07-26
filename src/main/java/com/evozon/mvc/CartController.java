@@ -89,7 +89,7 @@ public class CartController {
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId){
         System.out.println("//Prod id://"+productId);
         // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-//        cartService.addProductToCart(Integer.parseInt(productId),1);
+        cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId));
         return "productDetailsPage";
     }
 

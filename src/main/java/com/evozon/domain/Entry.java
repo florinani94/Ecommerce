@@ -40,12 +40,15 @@ public class Entry {
     public Entry(){
 
     }
-    public Entry( Cart cart, Product product, Integer quantity, Double subTotal) {
+
+    public Entry(Cart cart, Orders order, Product product, Integer quantity, Double subTotal) {
         this.cart = cart;
+        this.order = order;
         this.product = product;
         this.quantity = quantity;
         this.subTotal = subTotal;
     }
+
     public Entry(Integer entryId, Cart cart, Product product, Integer quantity, Double subTotal) {
         this.entryId = entryId;
         this.cart = cart;
