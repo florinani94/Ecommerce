@@ -1,11 +1,11 @@
 package com.evozon.dao;
 
-import com.evozon.domain.Order;
+import com.evozon.domain.Orders;
 
 public interface OrderDAO {
 
-    public Order getOrderById(int id);
+    public Orders getOrderByKey(String orderKey);
 
-    public void addOrder(Order order);
+    public void addOrder(Orders order);
 
 }

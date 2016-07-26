@@ -1,7 +1,7 @@
 package com.evozon.dao.impl;
 
 import com.evozon.dao.OrderDAO;
-import com.evozon.domain.Order;
+import com.evozon.domain.Orders;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,17 +18,17 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Order getOrderById(int id) {
+    public Orders getOrderByKey(String orderKey) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Order as O WHERE orderId = :id");
-        query.setParameter("id", id);
+        Query query = session.createQuery("FROM Order as O WHERE orderKey = :orderKey");
+        query.setParameter("orderKey", orderKey);
 
-        List<Order> orders = query.list();
+        List<Orders> orders = query.list();
 
         return orders.get(0);
     }
 
-    public void addOrder(Order order) {
+    public void addOrder(Orders order) {
         Session session = sessionFactory.getCurrentSession();
         session.save(order);
     }

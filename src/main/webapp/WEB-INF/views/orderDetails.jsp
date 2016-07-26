@@ -6,7 +6,7 @@
     <title>Order Details</title>
 </head>
 <body>
-    <h1>This is the products order page!</h1>
-    ${id}
+    <h1>The Orders</h1>
+
 </body>
 </html>

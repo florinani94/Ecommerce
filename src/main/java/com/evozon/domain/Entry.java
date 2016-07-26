@@ -1,11 +1,7 @@
 package com.evozon.domain;
 import javax.persistence.*;
 import java.io.Serializable;
-/**
- * Created by vladblana on 19/07/2016.
- *
- * Auxiliary table to solve many to many relationship
- */
+
 @Entity
 public class Entry {
 
@@ -16,6 +12,10 @@ public class Entry {
     @ManyToOne
     @JoinColumn(name="cart_id", nullable = false)
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name="order_id", nullable = false)
+    private Orders order;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="product_id", nullable = false)
