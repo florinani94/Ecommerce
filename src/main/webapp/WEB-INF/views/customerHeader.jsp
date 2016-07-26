@@ -39,13 +39,13 @@
                             <h4 style="color: #FFFFFF; padding-left: 1%; font-family: 'Calibri';"> Logged in as: <sec:authentication property="name"/> | <a href="${logoutUrl}">Logout</a> </h4>
                         </sec:authorize>
 
-                        <a class="headerLink" href="${checkoutURL}">
-                            Checkout</a>
-
                         <sec:authorize access="!hasRole('ROLE_ADMIN')">
                             <a class="headerLink" href="${loginURL}">
                                 Login</a>
                         </sec:authorize>
+
+                        <a class="headerLink" href="${checkoutURL}">
+                            Checkout</a>
 
                         <a>
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
