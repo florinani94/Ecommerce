@@ -67,13 +67,13 @@ public class CartService {
         }
 
     }
-    public void addProductToCart(Integer productId,Integer cartId) {
+    public void addProductToCart(Integer productId,Integer cartId,Integer quantity) {
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
                     if(e.getProduct().getStockLevel() > e.getQuantity()) {
-                        e.setQuantity(e.getQuantity() + 1);
+                        e.setQuantity(e.getQuantity() + quantity);
                     }
                     else{
                         //send not enough stock message
@@ -94,7 +94,7 @@ public class CartService {
             Orders orders=orderDAO.getOrderById(1);//remove hardcoding
             Entry entry=cartDAO.addEntryToCart(product,cart,orders);
             cartDAO.updateEntryDetails(entry);
-            addProductToCart(productId,cartId);
+            addProductToCart(productId,cartId,quantity);
         }
     }
 
