@@ -57,13 +57,10 @@ public class CartController {
     @RequestMapping(value="/view", method = RequestMethod.POST)
     public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
         // get cart id here from cookie
+        cartService.editEntry(id, 1, 0);
 
-        System.out.println(id);
-
-//        cartService.editEntry(id, 1, 0);
-//
-//        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-//        model.addAttribute("total", cartService.getCartById(1).getTotal());
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
+        model.addAttribute("total", cartService.getCartById(1).getTotal());
         return "viewCart";
     }
 
