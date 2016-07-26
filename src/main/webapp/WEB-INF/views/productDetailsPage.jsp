@@ -15,6 +15,20 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <title>${theProduct.name}</title>
+    <style>
+        .quantity {
+            text-align:center;
+            width: 80%;
+            margin-top: -18%;
+            margin-left: 20%;
+            padding: 6px 5px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
 
 </head>
 <body background="${backgroundURL}" style="background-size: 100%">
@@ -42,6 +56,11 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
+                            <td>
+                            <b>Quantity: </b>
+                            <td><input type="number" min="1" class="quantity"></td>
+                            <%--<td><input type="submit" class="addButton" value="Add to cart"> </td>--%>
+
                             <td><input type="submit" onclick="location.href='/register.htm'" class="addButton" value="Add to cart"></td>
                         </tr>
                     </table>
