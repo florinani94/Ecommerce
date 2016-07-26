@@ -18,6 +18,8 @@ public interface OrderDAO {
 
     public void addOrder(Orders order);
 
+    public void updateOrder(Orders order);
+
     public List<Entry> getAllEntries(Integer orderId);
 
 }
