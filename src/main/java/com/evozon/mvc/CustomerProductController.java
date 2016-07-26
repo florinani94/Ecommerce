@@ -2,10 +2,8 @@ package com.evozon.mvc;
 
 
 import com.evozon.dao.CartDAO;
-import com.evozon.domain.Address;
-import com.evozon.domain.AddressDTO;
-import com.evozon.domain.Cart;
-import com.evozon.domain.Product;
+import com.evozon.domain.*;
+import com.evozon.domain.dtos.OrdersDTO;
 import com.evozon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +34,9 @@ public class CustomerProductController {
     private CartService cartService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
     private SendOrderMail orderManager;
 
     @RequestMapping(method = RequestMethod.GET)
@@ -64,46 +65,44 @@ public class CustomerProductController {
 
     @RequestMapping(value = "/checkout/{cartId}", method = RequestMethod.GET)
     public String goToCheckout(@PathVariable("cartId") int cartId, Model model) {
-        Cart cart = cartService.getCartById(cartId);
+        Cart cart = new Cart();
+        if (cartService.getCartById(cartId) != null) {
+            cart = cartService.getCartById(cartId);
+        }
         model.addAttribute("cart", cart);
-        System.out.println("THE ID" + cart.getCartId());
-        AddressDTO addressDTO = new AddressDTO();
-/*        addressDTO.setDeliveryCity(cart.getDeliveryAddress().getCity());
-        addressDTO.setDeliveryNumber(cart.getDeliveryAddress().getNumber());
-        addressDTO.setDeliveryStreet(cart.getDeliveryAddress().getStreetName());
-        addressDTO.setDeliveryPhone(cart.getDeliveryAddress().getPhone());
-        addressDTO.setBillingCity(cart.getBillingAddress().getCity());
-        addressDTO.setBillingNumber(cart.getBillingAddress().getNumber());
-        addressDTO.setBillingStreet(cart.getBillingAddress().getStreetName());
-        addressDTO.setBillingPhone(cart.getBillingAddress().getPhone());*/
-        addressDTO.setCartId(cartId);
-        model.addAttribute("address", addressDTO);
-        System.out.println("This is the street" + addressDTO.getDeliveryStreet());
+        OrdersDTO ordersDTO = new OrdersDTO();
+        ordersDTO.getDataFromCart(cart);
+        model.addAttribute("order", ordersDTO);
         return "customerCartCheckout";
     }
 
     @RequestMapping(value = "checkout", method = RequestMethod.POST)
-    public String checkout(Model model, @ModelAttribute("address") AddressDTO address, BindingResult data) {
-        model.addAttribute("address", address);
+    public String checkout(Model model, @ModelAttribute("order") OrdersDTO order, BindingResult data) {
+        model.addAttribute("order", order);
         if(data.hasErrors()){
             return "customerCartCheckout";
         }
-        Cart cart = cartService.getCartById(address.getCartId());
+        Cart cart = cartService.getCartById(order.getCartId());
         Address deliveryAddress = new Address();
         Address billingAddress = new Address();
-        deliveryAddress.setCity(address.getDeliveryCity());
-        deliveryAddress.setNumber(address.getDeliveryNumber());
-        deliveryAddress.setStreetName(address.getDeliveryStreet());
-        deliveryAddress.setPhone(address.getDeliveryPhone());
-        billingAddress.setCity(address.getBillingCity());
-        billingAddress.setNumber(address.getBillingNumber());
-        billingAddress.setPhone(address.getBillingPhone());
-        billingAddress.setStreetName(address.getBillingStreet());
-/*        cart.setDeliveryAddress(deliveryAddress);
-        cart.setBillingAddress(billingAddress);*/
+        Payment payment = new Payment();
+        deliveryAddress.setCity(order.getDeliveryCity());
+        deliveryAddress.setNumber(order.getDeliveryNumber());
+        deliveryAddress.setStreetName(order.getDeliveryStreet());
+        deliveryAddress.setPhone(order.getDeliveryPhone());
+        billingAddress.setCity(order.getBillingCity());
+        billingAddress.setNumber(order.getBillingNumber());
+        billingAddress.setPhone(order.getBillingPhone());
+        billingAddress.setStreetName(order.getBillingStreet());
+        payment.setPaymentMethod(order.getPaymentMethod());
+        payment.setCardNumber(order.getCardNumber());
+        payment.setCardCode(order.getCardCode());
+        cart.setDeliveryAddress(deliveryAddress);
+        cart.setBillingAddress(billingAddress);
+        cart.setPayment(payment);
+        cart.setEmail(order.getEmail());
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
-        System.out.println("This is the cart id " + cart.getCartId());
         orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", cart.getCartId(), "randomPath");
         return "customerOrderPlaced";
     }

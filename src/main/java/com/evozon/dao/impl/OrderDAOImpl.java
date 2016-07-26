@@ -2,6 +2,7 @@ package com.evozon.dao.impl;
 
 import com.evozon.dao.OrderDAO;
 import com.evozon.domain.Orders;
+import com.evozon.service.SendMail;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,7 +21,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     public Orders getOrderByKey(String orderKey) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Order as O WHERE orderKey = :orderKey");
+        Query query = session.createQuery("FROM Order as O WHERE ordersKey = :orderKey");
         query.setParameter("orderKey", orderKey);
 
         List<Orders> orders = query.list();
@@ -31,6 +32,12 @@ public class OrderDAOImpl implements OrderDAO {
     public void addOrder(Orders order) {
         Session session = sessionFactory.getCurrentSession();
         session.save(order);
+    }
+
+    @Override
+    public void updateOrder(Orders order) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(order);
     }
 
 }
