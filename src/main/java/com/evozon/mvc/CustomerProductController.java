@@ -4,6 +4,7 @@ package com.evozon.mvc;
 import com.evozon.dao.CartDAO;
 import com.evozon.domain.*;
 import com.evozon.domain.dtos.OrdersDTO;
+import com.evozon.domain.*;
 import com.evozon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,6 +77,7 @@ public class CustomerProductController {
         return "customerCartCheckout";
     }
 
+
     @RequestMapping(value = "checkout", method = RequestMethod.POST)
     public String checkout(Model model, @ModelAttribute("order") OrdersDTO order, BindingResult data) {
         model.addAttribute("order", order);
@@ -125,8 +127,12 @@ public class CustomerProductController {
     /* Order details page */
 
     @RequestMapping(value = "details", method = RequestMethod.GET)
-    public String getOrderDetailsPage(@RequestParam("cartId") int cartId, Model model) {
-        model.addAttribute("id", cartId);
+    public String getOrderDetailsPage(@RequestParam("orderKey") String orderKey, Model model) {
+        Orders orderDetails = orderService.getOrderByKey(orderKey);
+        List<Entry> entries = orderService.getAllEntries(orderDetails.getOrdersId());
+        model.addAttribute("orderDetails", orderDetails);
+        model.addAttribute("entries", entries);
+
         return "orderDetails";
     }
 }
