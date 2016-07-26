@@ -12,6 +12,14 @@ import java.util.Set;
 /**
  * Created by dianamohanu on 19/07/2016.
  */
+
+/**
+ * TODO Remove commented out code
+ * Commented code adds confusion without any real benefit.
+ * You can rely on git's tracking system to investigate an old version of the code, if required.
+ *
+ * TODO Remove unused imports
+ */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
