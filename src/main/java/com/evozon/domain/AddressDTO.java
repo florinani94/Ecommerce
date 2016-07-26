@@ -5,6 +5,14 @@ import javax.persistence.*;
 /**
  * Created by iuliacodau on 21/07/2016.
  */
+/**
+    TODO Move DTO to the dtos package (com.evozon.domain.dtos)
+
+    TODO: Remove unused imports
+
+    TODO: Remove the "created by" section - it can be done from Settings -> File and Code Templates
+    This is a personal preference - I believe that the "created by" section doesn't bring any value, it just clutters the code
+ */
 public class AddressDTO {
 
     private int cartId;
