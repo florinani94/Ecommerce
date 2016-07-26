@@ -58,6 +58,34 @@
                         </tr>
                     </c:forEach>
                 </table>
+
+                <h3>Delivery Address</h3>
+                <table class="table" style="background-color: white">
+                    <tr>
+                        <th>City</th>
+                        <th>Street</th>
+                        <th>Number</th>
+                    </tr>
+                    <tr>
+                        <td>${orderDetails.deliveryAddress.city}</td>
+                        <td>${orderDetails.deliveryAddress.street}</td>
+                        <td>${orderDetails.deliveryAddress.number}</td>
+                    </tr>
+                </table>
+
+                <h3>Billing Address</h3>
+                <table class="table" style="background-color: white">
+                    <tr>
+                        <th>City</th>
+                        <th>Street</th>
+                        <th>Number</th>
+                    </tr>
+                    <tr>
+                        <td>${orderDetails.billingAddress.city}</td>
+                        <td>${orderDetails.billingAddress.street}</td>
+                        <td>${orderDetails.billingAddress.number}</td>
+                    </tr>
+                </table>
             </div>
 
     </div>

@@ -93,12 +93,12 @@ public class CustomerProductController {
         Address billingAddress = new Address();
         deliveryAddress.setCity(address.getDeliveryCity());
         deliveryAddress.setNumber(address.getDeliveryNumber());
-        deliveryAddress.setStreetName(address.getDeliveryStreet());
+        deliveryAddress.setStreet(address.getDeliveryStreet());
         deliveryAddress.setPhone(address.getDeliveryPhone());
         billingAddress.setCity(address.getBillingCity());
         billingAddress.setNumber(address.getBillingNumber());
         billingAddress.setPhone(address.getBillingPhone());
-        billingAddress.setStreetName(address.getBillingStreet());
+        billingAddress.setStreet(address.getBillingStreet());
 /*        cart.setDeliveryAddress(deliveryAddress);
         cart.setBillingAddress(billingAddress);*/
         cartService.updateAddress(cart);
