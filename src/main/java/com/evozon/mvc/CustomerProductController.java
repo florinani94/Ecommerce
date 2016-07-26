@@ -17,6 +17,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -105,7 +106,8 @@ public class CustomerProductController {
         cart.setEmail(order.getEmail());
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
-        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", cart.getCartId(), "randomPath");
+        String keyUrl = UUID.randomUUID().toString();
+        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", keyUrl, "order");
         return "customerOrderPlaced";
     }
 
