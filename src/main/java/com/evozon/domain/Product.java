@@ -124,6 +124,14 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    public Set<Entry> getEntrySet() {
+        return entrySet;
+    }
+
+    public void setEntrySet(Set<Entry> entrySet) {
+        this.entrySet = entrySet;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

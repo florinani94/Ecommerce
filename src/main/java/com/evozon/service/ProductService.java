@@ -4,6 +4,7 @@ import com.evozon.dao.CategoryDAO;
 import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
+import com.evozon.domain.dtos.ProductDTO;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -251,6 +252,35 @@ public class ProductService {
 
     public List<Product> getProductsByCategory(int categoryId){
         return  productDAO.getProductsByCategory(categoryId);
+    }
+
+    public ProductDTO populateProductDTO(Product product){
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setProductId(product.getProductId());
+        productDTO.setCode(product.getCode());
+        productDTO.setName(product.getName());
+        productDTO.setEntrySet(product.getEntrySet());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setStockLevel(product.getStockLevel());
+        if(product.getCategory() != null){
+        productDTO.setIdCategory(product.getCategory().getId());
+        }else{
+            productDTO.setIdCategory(0);
+        }
+        productDTO.setImageURL(product.getImageURL());
+        return productDTO;
+    }
+
+
+    public List<ProductDTO> getAllDTOProducts(){
+        List<Product> products = getAllProducts();
+        List<ProductDTO> DTOproducts = new ArrayList<>();
+        for(Product product: products){
+            ProductDTO productDTO = populateProductDTO(product);
+            DTOproducts.add(productDTO);
+        }
+        return DTOproducts;
     }
 }
 

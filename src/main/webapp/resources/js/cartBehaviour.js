@@ -53,3 +53,30 @@ $('#cartIcon').click(function () {
     }
     }
 )
+
+
+
+$("#addButtonID").click(function() {
+       alert("Click working!");
+      // var toInt = $('#addButton2').data('product-id');
+       var cartIdentifier=3;    //replace data with cartId value from cookie
+       var productIdentifier=4;    //replace data with cartId value from cookie
+
+       $.ajax({
+           type : "POST",
+           url : "/mvc/cart/addToCart",
+           data : {
+               productId: productIdentifier,
+               cartId: cartIdentifier
+           },
+           success : function(response) {
+//                $("#buttonId").data( "#product-id" );
+               console.log("success");
+           },
+           error : function(e) {
+               alert('Error: ' + e);
+           }
+       });
+
+});
+

@@ -1,15 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html>
-<head>
+<%--todo: create a css.tag and js. tag and move these files--%>
+
     <c:url var="homeURL" value="/products"/>
     <c:url var="loginURL" value="/login"/>
 
     <c:url var="logoUrl" value="/resources/detailView/SizedLogo.png"></c:url>
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
-    <c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
     <c:url var="checkoutURL" value="/products/address"></c:url>
 
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
@@ -22,8 +21,6 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <title>Tea Shop</title>
-</head>
-<body>
     <div class="row header">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
@@ -68,9 +65,3 @@
         </div>
         <div class="col-sm-3"></div>
     </div>
-
-    <script src="/mvc/resources/jquery-1.8.3.js"></script>
-    <script type="application/javascript" src="${cartJavaScriptUrl}"></script>
-
-</body>
-</html>
