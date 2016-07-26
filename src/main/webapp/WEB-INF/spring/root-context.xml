@@ -55,6 +55,4 @@
 		<property name="url" value="http://localhost:8080"/>
 	</bean>
 
-
-
 </beans>

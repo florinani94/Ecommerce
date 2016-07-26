@@ -20,6 +20,8 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <jsp:include page="variables.jsp"/>
+
     <title>Tea Shop</title>
     <div class="row header">
         <div class="col-sm-3"></div>
