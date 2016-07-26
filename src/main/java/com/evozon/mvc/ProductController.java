@@ -120,6 +120,12 @@ public class ProductController {
         return "viewProducts";
     }
 
+    /*
+     * TODO Move file processing logic from controller to dedicated service
+     *
+     * TODO Use a logger instead of System.out.println
+     * A dedicated logger will allow you to control the log level, besides other advantages.
+     */
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
         File file;
