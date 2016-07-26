@@ -37,11 +37,11 @@ public class CartController {
     @RequestMapping(value="/populate", method = RequestMethod.GET)
     public String insertEntryProducts(Model model){
         System.out.println("Populated");
-        cartService.addProductToCart(1,1);
-        cartService.addProductToCart(2,1);
-        cartService.addProductToCart(3,1);
-        cartService.addProductToCart(5,2);
-        cartService.addProductToCart(6,2);
+        //cartService.addProductToCart(1,1);
+      //  cartService.addProductToCart(2,1);
+      //  cartService.addProductToCart(3,1);
+      //  cartService.addProductToCart(5,2);
+      //  cartService.addProductToCart(6,2);
         return "splashPage";
     }
 
@@ -65,6 +65,14 @@ public class CartController {
 //        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
 //        model.addAttribute("total", cartService.getCartById(1).getTotal());
         return "viewCart";
+    }
+
+    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+        System.out.println("//Prod id://"+productId);
+        // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
+        cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        return "productDetailsPage";
     }
 
 }

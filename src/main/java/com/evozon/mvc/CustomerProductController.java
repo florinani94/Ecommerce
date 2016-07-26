@@ -2,10 +2,7 @@ package com.evozon.mvc;
 
 
 import com.evozon.dao.CartDAO;
-import com.evozon.domain.Address;
-import com.evozon.domain.AddressDTO;
-import com.evozon.domain.Cart;
-import com.evozon.domain.Product;
+import com.evozon.domain.*;
 import com.evozon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +34,9 @@ public class CustomerProductController {
 
     @Autowired
     private SendOrderMail orderManager;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAllProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
@@ -114,6 +114,7 @@ public class CustomerProductController {
         return "productDetailsPage";
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public String deleteAll(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
                             Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
@@ -124,10 +125,13 @@ public class CustomerProductController {
     }
 
     /* Order details page */
-
     @RequestMapping(value = "details", method = RequestMethod.GET)
-    public String getOrderDetailsPage(@RequestParam("cartId") int cartId, Model model) {
-        model.addAttribute("id", cartId);
+    public String getOrderDetailsPage(@RequestParam("orderKey") String orderKey, Model model) {
+        Orders orderDetails = orderService.getOrderByKey(orderKey);
+        List<Entry> entries = orderService.getAllEntries(orderDetails.getOrdersId());
+        model.addAttribute("orderDetails", orderDetails);
+        model.addAttribute("entries", entries);
+
         return "orderDetails";
     }
 }

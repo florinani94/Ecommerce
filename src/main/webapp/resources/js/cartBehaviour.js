@@ -53,3 +53,25 @@ $('#cartIcon').click(function () {
     }
     }
 )
+
+
+$("#addButtonID").click(function() {
+        $.ajax({
+            type : "POST",
+            url : "/mvc/cart/addToCart",
+            data : {
+                quantity: $("#quantityFieldID").val(),
+                productId: $('#product-id').val(),
+                cartId: 1 //temporary!
+            },
+            success : function(response) {
+                alert("Product successfully added with quantity " + $("#quantityFieldID").val());
+                console.log("success");
+            },
+            error : function(e) {
+                alert('An error occurred while trying to add the product to the cart. Please try again later. ');
+            }
+       });
+
+});
+

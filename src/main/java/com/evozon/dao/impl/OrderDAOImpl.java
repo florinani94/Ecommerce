@@ -1,7 +1,8 @@
 package com.evozon.dao.impl;
 
 import com.evozon.dao.OrderDAO;
-import com.evozon.domain.Order;
+import com.evozon.domain.Entry;
+import com.evozon.domain.Orders;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,19 +19,51 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Order getOrderById(int id) {
+    public Orders getOrderByKey(String orderKey) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Order as O WHERE orderId = :id");
-        query.setParameter("id", id);
+        Query query = session.createQuery("FROM Orders as O WHERE ordersKey = :orderKey");
+        query.setParameter("orderKey", orderKey);
 
-        List<Order> orders = query.list();
+        List<Orders> orders = query.list();
 
-        return orders.get(0);
+        if(orders.size() > 0) {
+            return orders.get(0);
+        }
+
+        return null;
     }
 
-    public void addOrder(Order order) {
+    public Orders getOrderById(Integer orderId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Orders as O WHERE ordersId = :orderId");
+        query.setParameter("orderId", orderId);
+
+        List<Orders> orders = query.list();
+
+        if(orders.size() > 0) {
+            return orders.get(0);
+        }
+
+        return null;
+    }
+
+    public void addOrder(Orders order) {
         Session session = sessionFactory.getCurrentSession();
         session.save(order);
+    }
+
+    public void updateOrder(Orders order){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(order);
+    }
+
+    public List<Entry> getAllEntries(Integer orderId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Entry as E WHERE E.order.ordersId = :id");
+        query.setParameter("id", orderId);
+
+        List<Entry> entryList = query.list();
+        return entryList;
     }
 
 }

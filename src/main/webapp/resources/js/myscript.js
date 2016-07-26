@@ -2,6 +2,11 @@
  * Created by dianamohanu on 14/07/2016.
  */
 // Functions used in viewProducts.jsp
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
