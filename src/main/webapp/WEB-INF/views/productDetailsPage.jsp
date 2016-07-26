@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <%--todo: create a css.tag and js. tag and move these files--%>
     <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
@@ -15,6 +16,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <title>${theProduct.name}</title>
+    <%--todo: move to a ccs file--%>
     <style>
         .quantity {
             text-align:center;
@@ -56,12 +58,12 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
+                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
+                        </tr>
+                        <tr>
                             <td>
                             <b>Quantity: </b>
                             <td><input type="number" min="1" class="quantity"></td>
-                            <%--<td><input type="submit" class="addButton" value="Add to cart"> </td>--%>
-
-                            <td><input type="submit" onclick="location.href='/register.htm'" class="addButton" value="Add to cart"></td>
                         </tr>
                     </table>
             </div>
