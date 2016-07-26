@@ -5,14 +5,31 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by vladblana on 25/07/2016.
- */
 @Entity
-public class Order {
+public class Orders {
+
     @Column(nullable = false)
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
+    private Integer ordersId;
+
+    @Column
+    private String ordersKey;
+
+    @Column
+    private String status;
+
+    @Column
+    @Email
+    private String email;
+
+    @Column
+    private Payment payment;
+
+    @Column
+    private Double total;
+
+    @OneToMany(targetEntity=Entry.class,mappedBy="order",cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
+    private List<Entry> entryList;
 
     @AttributeOverrides({
             @AttributeOverride(name="street",column=@Column(name="deliveryStreet")),
@@ -32,47 +49,20 @@ public class Order {
     @Embedded
     private Address billingAddress;
 
-    @Column
-    private Payment payment;//vezi tu cum faci aici poate trebuie cu embedded
-
-    @Column
-    @Email
-    private String email;
-
-    @Column
-    private String status;
-
-    @Column
-    private List<Entry> entryList;
-
-    @Column
-    private Double total;
-
-    public Order(){
+    public Integer getOrdersId() {
+        return ordersId;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public void setOrdersId(Integer ordersId) {
+        this.ordersId = ordersId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public String getOrdersKey() {
+        return ordersKey;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setOrdersKey(String ordersKey) {
+        this.ordersKey = ordersKey;
     }
 
     public String getStatus() {
@@ -83,12 +73,36 @@ public class Order {
         this.status = status;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public Double getTotal() {
         return total;
     }
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
     }
 
     public Address getDeliveryAddress() {
@@ -105,13 +119,5 @@ public class Order {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
-    }
-
-    public List<Entry> getEntryList() {
-        return entryList;
-    }
-
-    public void setEntryList(List<Entry> entryList) {
-        this.entryList = entryList;
     }
 }

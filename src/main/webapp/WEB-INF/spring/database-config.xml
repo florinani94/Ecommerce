@@ -21,6 +21,8 @@
                 <value>com.evozon.domain.User</value>
                 <value>com.evozon.domain.Address</value>
                 <value>com.evozon.domain.Authority</value>
+                <value>com.evozon.domain.Orders</value>
+                <value>com.evozon.domain.Payment</value>
             </list>
         </property>
 

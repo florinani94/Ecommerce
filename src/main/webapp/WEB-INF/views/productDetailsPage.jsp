@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <%--todo: create a css.tag and js. tag and move these files--%>
     <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
@@ -14,13 +15,22 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
-    <script type="text/javascript" src="${jqueyUrl}"></script>
-
-    <c:url var="jsUrl" value="/resources/js/myscript.js"/>
-    <script type="text/javascript" src="${jsUrl}"></script>
-
     <title>${theProduct.name}</title>
+    <%--todo: move to a ccs file--%>
+    <style>
+        .quantity {
+            text-align:center;
+            width: 80%;
+            margin-top: -18%;
+            margin-left: 20%;
+            padding: 6px 5px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
 
 </head>
 <body background="${backgroundURL}" style="background-size: 100%">
@@ -35,7 +45,7 @@
             </div>
             <div class="col-md-5" id="productInfo">
                 <h1 class="pageText" id="productTitle">${theProduct.name}</h1>
-                <%--<div class="myHr"></div>--%>
+                <div class="myHr"></div>
                     <table class="detailsText" id="productDetails">
                         <tr>
                             <td class="descriptionText">
@@ -48,7 +58,12 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" id="addButton2" value="Add to cart"></td>
+                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <b>Quantity: </b>
+                            <td><input type="number" min="1" class="quantity"></td>
                         </tr>
                     </table>
             </div>
