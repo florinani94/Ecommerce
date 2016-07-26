@@ -90,12 +90,12 @@ public class CustomerProductController {
         Payment payment = new Payment();
         deliveryAddress.setCity(order.getDeliveryCity());
         deliveryAddress.setNumber(order.getDeliveryNumber());
-        deliveryAddress.setStreetName(order.getDeliveryStreet());
+        deliveryAddress.setStreet(order.getDeliveryStreet());
         deliveryAddress.setPhone(order.getDeliveryPhone());
         billingAddress.setCity(order.getBillingCity());
         billingAddress.setNumber(order.getBillingNumber());
         billingAddress.setPhone(order.getBillingPhone());
-        billingAddress.setStreetName(order.getBillingStreet());
+        billingAddress.setStreet(order.getBillingStreet());
         payment.setPaymentMethod(order.getPaymentMethod());
         payment.setCardNumber(order.getCardNumber());
         payment.setCardCode(order.getCardCode());

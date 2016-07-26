@@ -145,13 +145,13 @@ public class OrdersDTO {
             this.cartId = cart.getCartId();
         }
         if (cart.getDeliveryAddress() != null) {
-            this.deliveryStreet = cart.getDeliveryAddress().getStreetName();
+            this.deliveryStreet = cart.getDeliveryAddress().getStreet();
             this.deliveryNumber = cart.getDeliveryAddress().getNumber();
             this.deliveryCity = cart.getDeliveryAddress().getCity();
             this.deliveryPhone = cart.getDeliveryAddress().getPhone();
         }
         if (cart.getBillingAddress() != null) {
-            this.billingStreet = cart.getBillingAddress().getStreetName();
+            this.billingStreet = cart.getBillingAddress().getStreet();
             this.billingNumber = cart.getBillingAddress().getNumber();
             this.billingCity = cart.getBillingAddress().getCity();
             this.billingPhone = cart.getBillingAddress().getPhone();
