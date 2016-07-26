@@ -10,7 +10,7 @@ $('#cartIcon').hover(function () {
 var toggleMenu = false;
 var idCart=1;
 
-$('#cartIcon').click(function () {
+$('#cartIcon, #prodNr').click(function () {
 
     var entriesNo = 0;
 
@@ -56,25 +56,21 @@ $('#cartIcon').click(function () {
 
 
 $("#addButtonID").click(function() {
-      // var toInt = $('#addButton2').data('product-id');
-       var cartIdentifier=1;    //replace data with cartId value from cookie
-       var productIdentifier=$('#addButtonID').data('product-id');
-
-       $.ajax({
-           type : "POST",
-           url : "/mvc/cart/addToCart",
-           data : {
-               productId: productIdentifier,
-               cartId: cartIdentifier
-           },
-           success : function(response) {
-//                $("#buttonId").data( "#product-id" );
-               alert("Product successfully added with quantity 1");
-               console.log("success");
-           },
-           error : function(e) {
-               alert('An error occurred while trying to add the product to the cart. Please try again later. ');
-           }
+        $.ajax({
+            type : "POST",
+            url : "/mvc/cart/addToCart",
+            data : {
+                quantity: $("#quantityFieldID").val(),
+                productId: $('#product-id').val(),
+                cartId: 1 //temporary!
+            },
+            success : function(response) {
+                alert("Product successfully added with quantity " + $("#quantityFieldID").val());
+                console.log("success");
+            },
+            error : function(e) {
+                alert('An error occurred while trying to add the product to the cart. Please try again later. ');
+            }
        });
 
 });

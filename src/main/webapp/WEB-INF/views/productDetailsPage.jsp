@@ -37,6 +37,8 @@
 
 <jsp:include page="customerHeader.jsp" />
 
+<input type="hidden" id="product-id" value="${theProduct.productId}"/>
+
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="row" style="margin-top: 5%">
@@ -58,12 +60,12 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" id="addButtonID" data-product-id="${theProduct.productId}" value="Add to cart"> </td>
+                            <td><input type="submit" class="addButton" id="addButtonID" nicholas-cage="${theProduct.productId}" value="Add to cart"> </td>
                         </tr>
                         <tr>
                             <td>
                             <b>Quantity: </b>
-                            <td><input type="number" min="1" class="quantity"></td>
+                            <td><input type="number" min="1" value="1" id="quantityFieldID" class="quantity"></td>
                         </tr>
                     </table>
             </div>
