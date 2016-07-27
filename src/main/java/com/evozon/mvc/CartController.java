@@ -49,7 +49,7 @@ public class CartController {
         cartService.editEntry(id, 1, 0);
         return "viewCart";
     }
-
+/*
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
         //System.out.println("//Prod id://"+productId);
@@ -63,10 +63,20 @@ public class CartController {
         else{
             successMessage.message="Not enough products in stock. Maximum available quantity added in cart.";
         }
-        model.addAttribute("successMessage",successMessage);
+        model.addAttribute("successMessage",successMessage.message);
         return "productDetailsPage";
     }
+*/
+@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+    //System.out.println("//Prod id://"+productId);
 
+    if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
+
+
+        }
+    return "productDetailsPage";
+}
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
         // get cart id here from cookie

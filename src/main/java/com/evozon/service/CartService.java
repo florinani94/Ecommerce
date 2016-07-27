@@ -95,8 +95,8 @@ public class CartService {
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
-            Orders orders=orderDAO.getOrderById(1);//remove hardcoding
-            Entry entry=cartDAO.addEntryToCart(product,cart,orders);
+           // Orders orders=orderDAO.getOrderById(1);//remove hardcoding
+            Entry entry=cartDAO.addEntryToCart(product,cart);
 
             cartDAO.updateEntryDetails(entry);
             addProductToCart(productId,cartId,quantity);
