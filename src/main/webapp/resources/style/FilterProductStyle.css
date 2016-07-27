@@ -3,8 +3,11 @@
     width: 20%;
     margin-left: -40%;
     margin-top: -90%;
-    position: relative;
 
+}
+
+.filter{
+    margin: inherit;
 }
 
 .rightDiv {
