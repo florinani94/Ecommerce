@@ -6,6 +6,7 @@ import com.evozon.domain.*;
 import com.evozon.domain.dtos.OrdersDTO;
 import com.evozon.domain.*;
 import com.evozon.service.*;
+import com.evozon.util.CreateUrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,9 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 
 @Controller
@@ -41,26 +43,30 @@ public class CustomerProductController {
     @Autowired
     private SendOrderMail orderManager;
 
+    @Autowired
+    private CreateUrlUtils createUrlUtils;
+
     @RequestMapping(method = RequestMethod.GET)
-    public String getAllProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
-                                 Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex) {
-        model.addAttribute("products", productService.getSortedProducts(sortValue,startPageIndex, MAX_PRODUCTS_PER_PAGE));
-        model.addAttribute("productSize", productService.getSize());
-        model.addAttribute("currentPage",startPageIndex);
-        model.addAttribute("sortValue",sortValue);
-        model.addAttribute("categories",categoryService.getCategoriesWithAtLeastOneProduct());
-        return "customerViewProducts";
-    }
+    public String getProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
+                                 Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
+                                 @RequestParam(value = "category", defaultValue = "") Integer[] categoriesArray) {
 
-    @RequestMapping(value = "/sort", method = RequestMethod.GET)
-    public String getSortedProducts(@RequestParam(value = "sortValue") String sortValue, Model model,
-                                    @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
-                                    @RequestParam(value="category", defaultValue = "none") Integer categoriesIds) {
 
-        model.addAttribute("products", productService.getSortedProducts(sortValue,startPageIndex, MAX_PRODUCTS_PER_PAGE));
-        model.addAttribute("productSize", productService.getSize());
-        model.addAttribute("currentPage",startPageIndex);
-
+        List<Integer> categoriesList;
+        if(categoriesArray.length != 0) {
+            categoriesList = new ArrayList<>(Arrays.asList(categoriesArray));
+            for (Integer categoryValue : categoriesArray) {
+            }
+        }
+        else {
+            categoriesList = new ArrayList<>();
+        }
+        model.addAttribute("products", productService.getSortedProducts(sortValue,startPageIndex, MAX_PRODUCTS_PER_PAGE,categoriesList));
+        model.addAttribute("productSize", productService.getSize(categoriesList));
+        model.addAttribute("currentPage", startPageIndex);
+        model.addAttribute("sortValue", sortValue);
+        model.addAttribute("categories", categoryService.getCategoriesWithAtLeastOneProduct());
+        model.addAttribute("selectedCategoriesUrl", createUrlUtils.CreateUrlForFilter(categoriesArray));
         return "customerViewProducts";
     }
 
@@ -106,8 +112,7 @@ public class CustomerProductController {
         cart.setEmail(order.getEmail());
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
-        String keyUrl = UUID.randomUUID().toString();
-        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", keyUrl, "order");
+//        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", cart.getCartId(), "randomPath");
         return "customerOrderPlaced";
     }
 
