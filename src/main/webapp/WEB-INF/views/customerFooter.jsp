@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-md-3 col-md-offset-5">
                 <a class="footerLink" href="/mvc/products"> Products </a>
-                <a class="footerLink"> Terms and Conditions </a>
-                <a class="footerLink"> Contact </a>
+                <a class="footerLink" href="#"> Terms and Conditions </a>
+                <a class="footerLink" href="#"> Contact </a>
             </div>
         </div>
         <div class="row">
