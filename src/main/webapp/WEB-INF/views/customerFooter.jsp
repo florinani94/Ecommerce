@@ -10,7 +10,6 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-
     <footer class="footer">
         <div class="row">
             <div class="col-md-3 col-md-offset-5">

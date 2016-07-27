@@ -33,7 +33,7 @@ public class Orders {
     @Column
     private Double total;
 
-    @OneToMany(targetEntity=Entry.class,mappedBy="order",cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
+    @OneToMany(targetEntity=Entry.class,mappedBy="cart",cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
     private List<Entry> entryList;
 
     @AttributeOverrides({
