@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -104,16 +105,24 @@ public class CustomerProductController {
         cart.setBillingAddress(billingAddress);
         cart.setPayment(payment);
         cart.setEmail(order.getEmail());
+        String keyUrl = UUID.randomUUID().toString();
+        cart.setOrdersKey(keyUrl);
+        cart.setStatus("processing");
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
-        String keyUrl = UUID.randomUUID().toString();
-        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", keyUrl, "order");
+
+        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", keyUrl, "/mvc/products/details");
+
         return "customerOrderPlaced";
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String showProductDetails(Model model, @RequestParam String productId){
         model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
+        Orders order = new Orders();
+        //orderService.addOrder(order);
+        Cart cart = new Cart();
+        cartService.addCart(cart);
         return "productDetailsPage";
     }
 
@@ -131,7 +140,7 @@ public class CustomerProductController {
     @RequestMapping(value = "details", method = RequestMethod.GET)
     public String getOrderDetailsPage(@RequestParam("orderKey") String orderKey, Model model) {
         Orders orderDetails = orderService.getOrderByKey(orderKey);
-        List<Entry> entries = orderService.getAllEntries(orderDetails.getOrdersId());
+        List<Entry> entries = orderService.getAllEntries(orderDetails.getCartId());
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("entries", entries);
 
