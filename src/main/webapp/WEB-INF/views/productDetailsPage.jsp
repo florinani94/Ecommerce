@@ -7,37 +7,17 @@
 
 <html>
 <head>
-    <%--todo: create a css.tag and js. tag and move these files--%>
     <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <title>${theProduct.name}</title>
-    <%--todo: move to a ccs file--%>
-    <style>
-        .quantity {
-            text-align:center;
-            width: 80%;
-            margin-top: -18%;
-            margin-left: 20%;
-            padding: 6px 5px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-    </style>
-
 </head>
+
 <body background="${backgroundURL}" style="background-size: 100%">
 
 <jsp:include page="customerHeader.jsp" />
 
 <input type="hidden" id="product-id" value="${theProduct.productId}"/>
+<input type="hidden" id="successMessageId" value="${successMessage.message}"/>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -60,12 +40,12 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" id="addButtonID" nicholas-cage="${theProduct.productId}" value="Add to cart"> </td>
+                            <td> <span class="qtyInput">
+                                    Quantity: <input type="number" min="1" value="1" id="quantityFieldID" class="quantity">
+                                </span> </td>
                         </tr>
                         <tr>
-                            <td>
-                            <b>Quantity: </b>
-                            <td><input type="number" min="1" value="1" id="quantityFieldID" class="quantity"></td>
+                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
                         </tr>
                     </table>
             </div>

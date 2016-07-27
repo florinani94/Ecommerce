@@ -2,11 +2,6 @@
  * Created by dianamohanu on 14/07/2016.
  */
 // Functions used in viewProducts.jsp
-
-$( document ).ready(function() {
-    console.log( "ready!" );
-});
-
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
@@ -71,8 +66,6 @@ $("#exportButton").click(function() {
 $("#selectall").click(function () {
     $('.check').attr('checked', this.checked);
 });
-
-
 
 //For collapsible checkout form
 $('.panel-heading h4 a input[type=checkbox]').on('click', function(e) {

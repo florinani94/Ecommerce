@@ -11,6 +11,7 @@ public class EntryDTO {
 
     private Integer quantity;
 
+    private Double subtotal;
 
     public String getName() {
         return name;
@@ -34,5 +35,13 @@ public class EntryDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }

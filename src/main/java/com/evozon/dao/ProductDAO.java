@@ -24,8 +24,10 @@ public interface ProductDAO {
 
     List<Product> getProductsForPage(int startPageIndex, int recordsPerPage);
 
-    List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage);
+    List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage,List<Integer> selectedCategoriesIds);
 
     List<Product> getProductsByCategory(int categoryId);
+
+    List<Product> getProductsFilteredByCategories(Integer startPageIndex, int maxProductsPerPage, List<Integer> categoriesList);
 
 }

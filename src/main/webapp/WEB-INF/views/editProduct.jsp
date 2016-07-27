@@ -1,50 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html>
 <head>
+
+    <c:url var="cssUrlBootstrapStyleModified" value="/resources/style/bootstrapStyleModified.css"></c:url>
+    <link rel="stylesheet" type="text/css" href="${cssUrlBootstrapStyleModified}">
+
     <title>Update product</title>
-
-    <%--TODO put this into a file and include it here--%>
-
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
-    <link rel="stylesheet"
-          href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-    <link rel="stylesheet"
-          href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-
-    <script type="text/javascript"
-            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
-    <script
-            src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-    <style type="text/css">
-        .layout-edit {
-            margin: 40px;
-        }
-
-        .form-control {
-            width: 800px;
-        }
-
-        .page-header {
-            text-align: left;
-            margin: 40px;
-        }
-    </style>
-
-
-    <style>
-        .error
-        {
-            color: #ff0000;
-            font-weight: bold;
-        }
-    </style>
 
 </head>
 <body>

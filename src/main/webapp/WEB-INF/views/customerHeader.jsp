@@ -1,25 +1,19 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-<%--todo: create a css.tag and js. tag and move these files--%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
     <c:url var="homeURL" value="/products"/>
     <c:url var="loginURL" value="/login"/>
+    <c:url var="checkoutURL" value="/products/address"></c:url>
 
     <c:url var="logoUrl" value="/resources/detailView/SizedLogo.png"></c:url>
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
-    <c:url var="checkoutURL" value="/products/address"></c:url>
+    <c:url var="checkoutURL" value="/cart"></c:url>
 
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
 
-    <%--<link rel="stylesheet" href="/resources/style/detailViewStyle.css">--%>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+    <jsp:include page="bootstrapImports.jsp" />
     <jsp:include page="variables.jsp"/>
 
     <title>Tea Shop</title>
@@ -43,8 +37,8 @@
                                 Login</a>
                         </sec:authorize>
 
-                        <a class="headerLink" href="${checkoutURL}">
-                            Checkout</a>
+                        <%--<a class="headerLink" href="${checkoutURL}">--%>
+                            <%--Checkout</a>--%>
 
                         <a>
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
@@ -61,8 +55,10 @@
                                     total:
                                     <span id="total-value"></span>
                                     $
+                                        <%--<input type="submit" id="checkoutButtonID" value="Checkout">--%>
                                 </div>
                             </div>
+                            <a href="${checkoutURL}" id="checkoutButtonID">Checkout</a>
                         </div>
                     </div>
                 </div>

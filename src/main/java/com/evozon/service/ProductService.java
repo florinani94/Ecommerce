@@ -57,6 +57,12 @@ public class ProductService {
         return false;
     }
 
+
+    public void importFromFile(String filename) {
+        productDAO.importFromFile(filename);
+    }
+
+
     public Product getProductById(Integer id){
        return  productDAO.getProductById(id);
     }
@@ -179,23 +185,46 @@ public class ProductService {
         productDAO.updateProduct(product);
     }
 
-    public int getSize(){
-        return productDAO.getAllProducts().size();
+    public int getSize(List<Integer> categoriesListIds){
+        Integer maxSize=productDAO.getAllProducts().size();
+        Integer categoriesSize=0;
+        if (categoriesListIds.size()>0) {
+            for (Integer categoryId : categoriesListIds) {
+                categoriesSize += productDAO.getProductsByCategory(categoryId).size();
+            }
+            return categoriesSize;
+        }
+        else {
+            return maxSize;
+        }
+
     }
 
-    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer recordsPerPage){
+    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer recordsPerPage,List<Integer> selectedCategoriesIds){
+        String filterByCategories;
+        if (selectedCategoriesIds.size()==0)
+        {
+            filterByCategories="";
+        }
+        else {
+            filterByCategories=" WHERE P.category.id in (:categoriesIds) ";
+        }
 
             switch (option) {
                 case "sortpriceupdown":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.price", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortpricedownup":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.price DESC", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortnameaz":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.name", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortnameza":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P " + filterByCategories + " ORDER BY P.name DESC", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 default:
-                    return productDAO.getProductsForPage(startPageIndex, recordsPerPage);
+                    if (selectedCategoriesIds.size() == 0) {
+                        return productDAO.getProductsForPage(startPageIndex, recordsPerPage);
+                    } else {
+                        return productDAO.getProductsFilteredByCategories(startPageIndex, recordsPerPage, selectedCategoriesIds);
+                    }
             }
     }
 
@@ -280,6 +309,13 @@ public class ProductService {
             DTOproducts.add(productDTO);
         }
         return DTOproducts;
+    }
+
+    public List<Product> getProductsByCategories(Integer startPageIndex, int maxProductsPerPage, List<Integer> categoriesList) {
+        if(startPageIndex<=0){
+            return null;
+        }
+        return productDAO.getProductsFilteredByCategories(startPageIndex,maxProductsPerPage,categoriesList);
     }
 
 
