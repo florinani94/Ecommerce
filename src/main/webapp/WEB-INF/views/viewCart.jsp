@@ -32,7 +32,7 @@
 
         a:not([href]) {
             font-family: Calibri;
-            color: rgb(179, 60, 0);
+            color: rgb(204, 102, 0);
             text-decoration: underline;
             font-size: 20px;
         }
@@ -40,13 +40,13 @@
         a:not([href]):hover {
             font-family: Calibri;
             cursor: pointer;
-            color: rgb(153, 38, 0);
+            color: rgb(153, 77, 0);
             font-size: 20px;
         }
 
         #stockLabel {
             font-family: Calibri;
-            color: rgb(0, 128, 0);
+            color: rgb(102, 153, 0);
         }
 
         th, td {
@@ -55,6 +55,11 @@
             font-size: 18px;
         }
 
+        .row-buffer {
+            margin-top: 20px;
+            background-color: #FFFFFF;
+            height: 25%;
+        }
     </style>
 
 </head>
@@ -65,12 +70,12 @@
 <div class="row-fluid">
     <div class="col-md-3"></div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
         <h1 id="productTitle">My Cart</h1>
         <div class="myHr"></div>
 
         <c:forEach var="entry" items="${entries}">
-            <div class="row">
+            <div class="row row-buffer">
                 <h4 class="entryTitle">${entry.productName}</h4>
                 <br>
                 <div class="col-md-3">
@@ -79,7 +84,7 @@
                 </div>
 
                 <div class="col-md-9">
-                    <table style="width: 55%">
+                    <table style="width: 70%">
                         <tr>
                             <th>CODE</th>
                             <th>PRICE</th>
@@ -122,8 +127,6 @@
                     </table>
                 </div>
             </div>
-            <br>
-            <div class="myHr"></div>
         </c:forEach>
 
         <div id="totalCartPrice">
@@ -131,7 +134,7 @@
         </div>
     </div>
 
-    <div class="col-md-3"></div>
+    <div class="col-md-4"></div>
 </div>
 
 <script type="text/javascript">

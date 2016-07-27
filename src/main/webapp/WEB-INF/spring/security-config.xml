@@ -12,7 +12,7 @@
     <beans:import resource="database-config.xml"/>
 
     <http auto-config="true">
-        <intercept-url pattern="/backoffice/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/abc/**" access="ROLE_ADMIN"/>
         <form-login login-page="/login" authentication-failure-url="/loginFailed" default-target-url="/backoffice/product/" always-use-default-target="true" />
         <logout logout-success-url="/logout"/>
     </http>
