@@ -13,10 +13,6 @@ public class Entry {
     @JoinColumn(name="cart_id", nullable = false)
     private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    private Orders order;
-
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="product_id", nullable = false)
     private Product product;
