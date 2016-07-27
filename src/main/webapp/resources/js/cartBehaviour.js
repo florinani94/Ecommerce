@@ -68,7 +68,7 @@ $("#addButtonID").click(function() {
                  console.log("success");
              },
              error : function(e) {
-                alert($("#successMessageId").val());
+                alert($("#successMessageId"));
                 // alert('An error occurred while trying to add the product to the cart. Please try again later. ');
              }
         });
