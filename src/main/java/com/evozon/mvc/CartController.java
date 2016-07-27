@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,17 +35,6 @@ public class CartController {
         return minicart;
     }
 
-    @RequestMapping(value="/populate", method = RequestMethod.GET)
-    public String insertEntryProducts(Model model){
-        System.out.println("Populated");
-        //cartService.addProductToCart(1,1);
-      //  cartService.addProductToCart(2,1);
-      //  cartService.addProductToCart(3,1);
-      //  cartService.addProductToCart(5,2);
-      //  cartService.addProductToCart(6,2);
-        return "splashPage";
-    }
-
     @RequestMapping(value="", method = RequestMethod.GET)
     public String viewDataFromCart(Model model){
         // get cart id here from cookie
@@ -62,21 +52,14 @@ public class CartController {
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        //System.out.println("//Prod id://"+productId);
-        class SuccessMessage{
-            String message;
-        }
-        SuccessMessage successMessage=new SuccessMessage();
-        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
-            successMessage.message="Product successfully added with quantity: " + quantity;
-        }
-        else{
-            successMessage.message="Not enough products in stock. Maximum available quantity added in cart.";
-        }
-        model.addAttribute("successMessage",successMessage);
+    public String addToCart(ModelMap model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+        String message;
+        message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        model.addAttribute("successMessage",message);
+       // return message;
         return "productDetailsPage";
     }
+
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
@@ -84,4 +67,11 @@ public class CartController {
         cartService.editEntry(entryId, 1, quantity);
         return "viewCart";
     }
+
+    @RequestMapping(value = "/getProductsNumber", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCartProductsNumber(@RequestParam(value = "cartId") int cartId){
+        return cartService.getNumberOfProductsInCart(cartId);
+    }
+
 }

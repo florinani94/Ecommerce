@@ -10,7 +10,11 @@ import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
@@ -67,20 +71,20 @@ public class CartService {
         }
 
     }
-    public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
-        if(quantity<0)return false;
-        boolean status = false;
+    public String addProductToCart(Integer productId,Integer cartId,Integer quantity) {
+        if(quantity<0)return "Invalid quantity!";
+        String status = "";
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
                     if(e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
                         e.setQuantity(e.getQuantity() + quantity);
+                        status="Product successfully added with quantity: " + quantity;
                     }
                     else{
                         e.setQuantity(e.getProduct().getStockLevel());
-                        status= true;
-                        //send not enough stock message
+                        status= "Not enough products in stock. Maximum available quantity added in cart.";
                     }
                     cartDAO.updateEntry(e);
                     Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
@@ -89,18 +93,16 @@ public class CartService {
                 }
                 else{
                     cartDAO.deleteEntryFromCart(e.getEntryId());
+                    status="Product successfully deleted!";
                 }
             }
         }
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
-            Orders orders=orderDAO.getOrderById(1);//remove hardcoding
-            Entry entry=cartDAO.addEntryToCart(product,cart,orders);
-
+            Entry entry=cartDAO.addEntryToCart(product,cart);
             cartDAO.updateEntryDetails(entry);
-            addProductToCart(productId,cartId,quantity);
-
+            status=addProductToCart(productId,cartId,quantity);
         }
         return status;
     }

@@ -9,6 +9,7 @@
     <c:url var="logoUrl" value="/resources/detailView/SizedLogo.png"></c:url>
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
+    <c:url var="checkoutURL" value="/cart"></c:url>
 
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
 
@@ -36,9 +37,6 @@
                                 Login</a>
                         </sec:authorize>
 
-                        <%--<a class="headerLink" href="${checkoutURL}">--%>
-                            <%--Checkout</a>--%>
-
                         <a>
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
@@ -54,7 +52,6 @@
                                     total:
                                     <span id="total-value"></span>
                                     $
-                                        <%--<input type="submit" id="checkoutButtonID" value="Checkout">--%>
                                 </div>
                             </div>
                             <a href="${checkoutURL}" id="checkoutButtonID">Checkout</a>

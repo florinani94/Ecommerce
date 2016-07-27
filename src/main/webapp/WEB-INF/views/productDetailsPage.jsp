@@ -17,7 +17,7 @@
 <jsp:include page="customerHeader.jsp" />
 
 <input type="hidden" id="product-id" value="${theProduct.productId}"/>
-<input type="hidden" id="successMessageId" value="${successMessage.message}"/>
+<input type="hidden" id="successMessageId" value="${successMessage}"/>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -53,6 +53,21 @@
     </div>
 
 </div>
+
+ <%--The cookie value is ${cookie.cookieCartId.value}--%>
+
+<%
+    String cartId = null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null){
+        for (Cookie cookie : cookies){
+            System.out.println();
+            System.out.println(cookie.getValue());
+        }
+    }
+%>
+
+<%--coooookir <%= cartId %>--%>
 
 <jsp:include page="customerFooter.jsp"/>
 

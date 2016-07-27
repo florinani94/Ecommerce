@@ -2,7 +2,7 @@
 
     <footer class="footer">
         <div class="row">
-            <div class="col-md-3 col-md-offset-5">
+            <div id="footerLinks" class="col-md-4 col-md-offset-4">
                 <a class="footerLink" href="/mvc/products"> Products </a>
                 <a class="footerLink" href="#"> Terms and Conditions </a>
                 <a class="footerLink" href="#"> Contact </a>
@@ -16,4 +16,4 @@
     </footer>
 
 <script src="/mvc/resources/jquery-1.8.3.js"></script>
-<script type="application/javascript" src="${cartJavaScriptUrl}"></script>
+<script type="application/javascript" src="/mvc/resources/js/cartBehaviour.js"></script>

@@ -85,7 +85,7 @@ public class RestProductController {
         Category searchedCategory = categoryService.getCategoryById(idCategory);
         if (searchedCategory != null) {
             if (searchedProduct != null) {
-                if(product.getPrice()>0&&product.getStockLevel()>0) {
+                if(product.getPrice()>=0&&product.getStockLevel()>=0) {
                     response.setStatus(200);
                     productService.updateProduct(product);
                     return " The product with code " + product.getCode() + " have been updated!";
@@ -113,7 +113,7 @@ public class RestProductController {
         Category searchedCategory = categoryService.getCategoryById(idCategory);
         if (searchedCategory != null) {
             if (searchedProduct == null) {
-                if(product.getPrice()>0&&product.getStockLevel()>0) {
+                if(product.getPrice()>=0&&product.getStockLevel()>=0) {
                     response.setStatus(200);
                     productService.addProduct(product);
                     return " The product was successfully added !";

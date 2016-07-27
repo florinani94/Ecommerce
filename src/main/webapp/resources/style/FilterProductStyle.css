@@ -1,15 +1,12 @@
 .leftDiv{
     float: left;
-    width: 35%;
-    margin-left: -32%;
+    width: 20%;
+    margin-left: -40%;
     margin-top: -90%;
-    /*background: #658C00;*/
-
-    /*position: relative;*/
-    /*width: 1000px;*/
-    /*height: 400px;*/
+    position: relative;
 
 }
+
 .rightDiv {
     float: left;
     width: 90%;
@@ -17,12 +14,7 @@
     margin-top: 0;
     padding-left: 80px;
 
-}
 
-#sumbitFilters{
-    position: relative;
-    top: -30px;
-    left: 25px;
 }
 #rectangle {
     width: 170px;
