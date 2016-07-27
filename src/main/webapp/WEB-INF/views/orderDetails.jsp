@@ -54,9 +54,15 @@
                             <td>${entry.quantity}</td>
                             <td>${entry.productCode}</td>
                             <td>${entry.productName}</td>
-                            <td>${entry.subTotal}</td>
+                            <td>${entry.subTotal}$</td>
                         </tr>
                     </c:forEach>
+                        <tr>
+                            <th> </th>
+                            <th> </th>
+                            <th>Total</th>
+                            <th>${orderDetails.total}$</th>
+                        </tr>
                 </table>
 
                 <h3>Delivery Address</h3>
@@ -86,6 +92,8 @@
                         <td>${orderDetails.billingAddress.number}</td>
                     </tr>
                 </table>
+
+                <h3>Payment method: ${orderDetails.payment.paymentMethod}</h3>
             </div>
 
     </div>

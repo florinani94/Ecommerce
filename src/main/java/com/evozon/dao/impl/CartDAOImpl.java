@@ -10,20 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
-/**
- * Created by vladblana on 19/07/2016.
- */
-/**
- TODO: Remove unused imports
-
- TODO: Remove the "created by" section - it can be done from Settings -> File and Code Templates
- This is a personal preference - I believe that the "created by" section doesn't bring any value, it just clutters the code.
- The refactoring can be performed for every class that contains this section.
- */
 @Repository("CartDAO")
 @Transactional
 public class CartDAOImpl implements CartDAO{

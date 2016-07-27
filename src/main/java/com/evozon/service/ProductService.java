@@ -5,6 +5,9 @@ import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
 import com.evozon.domain.dtos.ProductDTO;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -51,12 +56,6 @@ public class ProductService {
         }
         return false;
     }
-
-
-    public void importFromFile(String filename) {
-        productDAO.importFromFile(filename);
-    }
-
 
     public Product getProductById(Integer id){
        return  productDAO.getProductById(id);
@@ -281,6 +280,29 @@ public class ProductService {
             DTOproducts.add(productDTO);
         }
         return DTOproducts;
+    }
+
+
+    /* import from file */
+    public void importFromCSV(HttpServletRequest request) {
+        File file;
+        String contentType = request.getContentType();
+        if ((contentType.indexOf("multipart/form-data") >= 0)) {
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            try {
+                List fileItems = upload.parseRequest(request);
+                Iterator i = fileItems.iterator();
+                while (i.hasNext()) {
+                    FileItem fi = (FileItem) i.next();
+                    if (!fi.isFormField()) {
+                        file = new File("temp.csv");
+                        fi.write(file);
+                    }
+                }
+            } catch (Exception ex) { /* put the error message in the logger after the method is redone */ }
+        }
+        productDAO.importFromFile("temp.csv");
     }
 }
 

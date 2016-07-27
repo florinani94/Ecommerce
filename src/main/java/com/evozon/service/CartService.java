@@ -124,6 +124,7 @@ public class CartService {
             entryDTO.setName(entryModel.getProductName());
             entryDTO.setPrice(entryModel.getProductPrice());
             entryDTO.setQuantity(entryModel.getQuantity());
+            entryDTO.setSubtotal(entryModel.getSubTotal());
 
             entryDTOList.add(entryDTO);
         }
