@@ -16,4 +16,4 @@
     </footer>
 
 <script src="/mvc/resources/jquery-1.8.3.js"></script>
-<script type="application/javascript" src="${cartJavaScriptUrl}"></script>
+<script type="application/javascript" src="/mvc/resources/js/cartBehaviour.js"></script>

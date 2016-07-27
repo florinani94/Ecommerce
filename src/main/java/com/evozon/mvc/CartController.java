@@ -67,20 +67,23 @@ public class CartController {
         return "productDetailsPage";
     }
 */
-@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-    //System.out.println("//Prod id://"+productId);
-
-    if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
-
-
+    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
+            }
+        return "productDetailsPage";
         }
-    return "productDetailsPage";
-}
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
         // get cart id here from cookie
         cartService.editEntry(entryId, 1, quantity);
         return "viewCart";
     }
+
+    @RequestMapping(value = "/getProductsNumber", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCartProductsNumber(@RequestParam(value = "cartId") int cartId){
+        return cartService.getNumberOfProductsInCart(cartId);
+    }
+
 }
