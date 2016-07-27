@@ -24,10 +24,10 @@ public class SendOrderMail {
         this.url = url;
     }
 
-    public void sendOrderPlacementMail(String email, String name, Integer cartId, String path) {
+    public void sendOrderPlacementMail(String email, String name, String keyUrl, String path) {
         SimpleMailMessage msg = new SimpleMailMessage(this.placementMessage);
         msg.setTo(email);
-        msg.setText("Hello " + name + ", thank you for buying from us. If you want to see the details of your orders, please follow the link: "+ url + path + "?key="+ cartId);
+        msg.setText("Hello " + name + ", thank you for buying from us. If you want to see the details of your orders, please follow the link: "+ url + path + "?key="+ keyUrl);
         try {
             this.mailSender.send(msg);
         } catch (MailException ex) {

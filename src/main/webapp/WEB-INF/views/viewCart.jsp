@@ -66,7 +66,7 @@
                             <td>${entry.subTotal}</td>
                         </tr>
                         <tr>
-                            <a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a>
+                            <th><a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a></th>
                         </tr>
                     </table>
                 </div>
@@ -81,12 +81,8 @@
     <div class="col-md-3"></div>
 </div>
 
-<jsp:include page="customerFooter.jsp"/>
-
 <script type="text/javascript">
     function myfunction (val) {
-        console.log(val);
-
         $.ajax({
             type : "POST",
             url : contextURL + "cart/view",
@@ -94,7 +90,7 @@
                 entryId: val
             },
             success : function(response) {
-                $("#removeEntryBtn" + val).parent().remove();
+                $("#removeEntryBtn" + val).parent().parent().remove();
                 console.log("success");
             },
             error : function(e) {
@@ -102,8 +98,9 @@
             }
         });
     }
-
 </script>
+
+<jsp:include page="customerFooter.jsp"/>
 
 </body>
 </html>

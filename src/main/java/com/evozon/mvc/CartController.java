@@ -57,13 +57,10 @@ public class CartController {
     @RequestMapping(value="/view", method = RequestMethod.POST)
     public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
         // get cart id here from cookie
+        cartService.editEntry(id, 1, 0);
 
-        System.out.println(id);
-
-//        cartService.editEntry(id, 1, 0);
-//
-//        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-//        model.addAttribute("total", cartService.getCartById(1).getTotal());
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
+        model.addAttribute("total", cartService.getCartById(1).getTotal());
         return "viewCart";
     }
 
@@ -71,7 +68,12 @@ public class CartController {
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
         System.out.println("//Prod id://"+productId);
         // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-        cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
+
+        }
+        else{
+
+        }
         return "productDetailsPage";
     }
 

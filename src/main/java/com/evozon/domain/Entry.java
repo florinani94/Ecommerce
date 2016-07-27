@@ -13,10 +13,6 @@ public class Entry {
     @JoinColumn(name="cart_id", nullable = false)
     private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name="order_id", nullable = false)
-    private Orders order;
-
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="product_id", nullable = false)
     private Product product;
@@ -41,9 +37,8 @@ public class Entry {
 
     }
 
-    public Entry(Cart cart, Orders order, Product product, Integer quantity, Double subTotal) {
+    public Entry(Cart cart, Product product, Integer quantity, Double subTotal) {
         this.cart = cart;
-        this.order = order;
         this.product = product;
         this.quantity = quantity;
         this.subTotal = subTotal;
