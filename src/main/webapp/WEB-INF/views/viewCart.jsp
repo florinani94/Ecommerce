@@ -27,6 +27,11 @@
             width:50%;
             margin-top: 5%;
         }
+
+        a:hover {
+            cursor:pointer;
+        }
+
     </style>
 
 </head>
@@ -45,7 +50,6 @@
             <div class="row">
             <h4 class="text-uppercase"><strong>${entry.productName}</strong></h4>
             <br>
-
                 <div class="col-md-3">
                     <c:url var="img" value="${entry.product.imageURL}"/>
                     <img src="${img}" style="height: 120px; width: 175px;">
@@ -62,11 +66,25 @@
                         <tr>
                             <td>${entry.productCode}</td>
                             <td>${entry.productPrice} $</td>
-                            <td>${entry.quantity}</td>
+
+                            <td><select>
+                            <c:forEach begin="1" end="${entry.product.stockLevel}" var="val">
+                                <c:if test="${val == entry.quantity}">
+                                    <option selected>${val}</option>
+                                </c:if>
+
+                                <c:if test="${val != entry.quantity}">
+                                    <option>${val}</option>
+                                </c:if>
+                            </c:forEach>
+                            </select></td>
+
                             <td>${entry.subTotal}</td>
                         </tr>
                         <tr>
                             <th><a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a></th>
+                            <th></th>
+                            <th><a id="editEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Edit</a></th>
                         </tr>
                     </table>
                 </div>
@@ -75,7 +93,9 @@
             <div class="myHr"></div>
         </c:forEach>
 
-        <h1>CART TOTAL: ${total}</h1>
+        <div id="totalCartPrice">
+            <h1>CART TOTAL: ${total}</h1>
+        </div>
     </div>
 
     <div class="col-md-3"></div>
@@ -90,7 +110,9 @@
                 entryId: val
             },
             success : function(response) {
-                $("#removeEntryBtn" + val).parent().parent().remove();
+                $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
+                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+
                 console.log("success");
             },
             error : function(e) {
