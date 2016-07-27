@@ -49,18 +49,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<filter>
-		<filter-name>SessionFilter</filter-name> <!-- mandatory -->
-		<filter-class>com.evozon.servlet.SessionFilter</filter-class> <!-- mandatory -->
-		<init-param> <!-- optional -->
-			<param-name>test</param-name>
-			<param-value>testValue</param-value>
-		</init-param>
-	</filter>
 
-	<filter-mapping>
-		<filter-name>SessionFilter</filter-name> <!-- mandatory -->
-		<url-pattern>/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
-	</filter-mapping>
 
 </web-app>

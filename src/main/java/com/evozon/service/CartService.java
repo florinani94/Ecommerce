@@ -10,7 +10,11 @@ import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
