@@ -4,22 +4,11 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by dianamohanu on 19/07/2016.
- */
 
-/**
- * TODO Remove commented out code
- * Commented code adds confusion without any real benefit.
- * You can rely on git's tracking system to investigate an old version of the code, if required.
- *
- * TODO Remove unused imports
- */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -33,7 +22,6 @@ public class User implements Serializable {
     private String username;
 
     @NotNull
-//    @Size(min = 6)
     private String password;
 
     @NotNull
@@ -51,14 +39,6 @@ public class User implements Serializable {
     }
 
     private String keyUrl;
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getEmail() {
         return email;
