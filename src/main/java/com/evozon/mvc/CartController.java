@@ -34,17 +34,6 @@ public class CartController {
         return minicart;
     }
 
-    @RequestMapping(value="/populate", method = RequestMethod.GET)
-    public String insertEntryProducts(Model model){
-        System.out.println("Populated");
-        //cartService.addProductToCart(1,1);
-      //  cartService.addProductToCart(2,1);
-      //  cartService.addProductToCart(3,1);
-      //  cartService.addProductToCart(5,2);
-      //  cartService.addProductToCart(6,2);
-        return "splashPage";
-    }
-
     @RequestMapping(value="", method = RequestMethod.GET)
     public String viewDataFromCart(Model model){
         // get cart id here from cookie

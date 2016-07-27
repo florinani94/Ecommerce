@@ -2,7 +2,7 @@
 
     <footer class="footer">
         <div class="row">
-            <div class="col-md-3 col-md-offset-5">
+            <div id="footerLinks" class="col-md-4 col-md-offset-4">
                 <a class="footerLink" href="/mvc/products"> Products </a>
                 <a class="footerLink"> Terms and Conditions </a>
                 <a class="footerLink"> Contact </a>
