@@ -25,7 +25,7 @@
         <div class = "sortBox">
             <div class="row">
                 <div class="col-md-4">
-                    <form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">
+                    <form>
                         <select name="sortValue" id="sort" class="form-control">
                             <option value="none">Sort By</option>
                             <option value="sortpriceupdown">Price Cheap to Expensive</option>
@@ -33,12 +33,14 @@
                             <option value="sortnameaz">Name A to Z</option>
                             <option value="sortnameza">Name Z to A</option>
                         </select>
-                        <input type="submit" value="Sort" class="btn btn-default sortButton"/>
+
+                         <input type="button" value="Sort" onclick="sortProduct()" class="btn btn-default sortButton"/>
                     </form>
                 </div>
             </div>
         </div>
         <div class="row">
+            <div id="products">
             <c:if test="${not empty products}">
                 <c:forEach var="product" items="${products}">
 
@@ -69,6 +71,7 @@
                     </div>
                 </c:forEach>
             </c:if>
+        </div>
 
         </div>
         <div class="row" style="margin-bottom: 10%">
@@ -82,25 +85,25 @@
                 </c:if>
 
                 <div class="paginationView">
-                    <c:if test="${currentPage>1}">
-                        <a href="<c:url value='/products?page=${1}&sortValue=${sortValue}'/>" methods="GET">1</a>
+                    <c:if test="${currentPage > 1}">
+                        <a href="<c:url value='/products?page=1&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">1</a>
                     </c:if>
-                    <c:if test="${currentPage-1 >1}">
+                    <c:if test="${currentPage-1 > 2}">
                         ...
                     </c:if>
-                    <c:if test="${currentPage!=1 && currentPage-1!=1}">
-                        <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}'/>" methods="GET">${currentPage-1}</a>
+                    <c:if test="${currentPage != 1 && currentPage-1 != 1}">
+                        <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage-1}</a>
                     </c:if>
-                    <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}'/>" methods="GET">${currentPage}</a>
+                    <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage}</a>
 
-                    <c:if test="${currentPage <nrPagesInt-1}">
-                        <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}'/>" methods="GET">${currentPage+1}</a>
+                    <c:if test="${currentPage < nrPagesInt-1}">
+                        <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage+1}</a>
                     </c:if>
-                    <c:if test="${currentPage+1 <nrPagesInt-1}">
+                    <c:if test="${currentPage+1 < nrPagesInt-1}">
                         ...
                     </c:if>
-                    <c:if test="${currentPage!=nrPagesInt}">
-                        <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}'/>" methods="GET">${nrPagesInt}</a>
+                    <c:if test="${currentPage != nrPagesInt}">
+                        <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${nrPagesInt}</a>
                     </c:if>
                 </div>
 
@@ -110,37 +113,38 @@
 
         </div>
 
-    <%--<div class="leftDiv" >--%>
+    <div class="leftDiv" >
 
-        <%--<div class="filter">--%>
-            <%--<br><br><br>--%>
-            <%--<b>Filter by category</b>--%>
+        <div class="filter">
+            <br><br><br>
+            <b>Filter by category</b>
 
-            <%--<br><br>--%>
-            <%--<c:if test="${not empty categories}">--%>
-                <%--<div id="allCategories">--%>
-                <%--<form method="get" action="/mvc/products?page=${currentPage-1}&sortValue=${sortValue}">--%>
-                    <%--<c:forEach var="category" items="${categories}">--%>
-                        <%--<input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>${category.name}<br>--%>
-                    <%--</c:forEach>--%>
-                <%--</form>--%>
-                <%--</div>--%>
-            <%--</c:if>--%>
+            <br><br>
+            <c:if test="${not empty categories}">
+                <div id="allCategories">
+                    <c:forEach var="category" items="${categories}">
+                        <input type="checkbox" name="category" value=${category.id} id="${category.name}" onchange="applySelectedFilter(this)"/>
+                        <label for="${category.name}">${category.name}</label>
+                        <br>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <%--<br><br>--%>
+            <br><br>
 
-            <%--<c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>--%>
-            <%--<link rel="stylesheet" type="text/css" href="${filterCss}">--%>
+            <c:url var="filterCss" value="/resources/style/FilterProductStyle.css"></c:url>
+            <link rel="stylesheet" type="text/css" href="${filterCss}">
 
-            <%--<script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>--%>
-            <%--<script type="text/javascript" src="/mvc/resources/js/productFilters.js"></script>--%>
 
-            <%--<div id="selectedCategories"></div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+
+            <div id="selectedCategories"></div>
+        </div>
+    </div>
 
 </div>
-
+    <script type="text/javascript" src="/mvc/resources/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="/mvc/resources/js/productSort.js"></script>
+    <script type="text/javascript" src="/mvc/resources/js/productFilter.js"></script>
     <jsp:include page="customerFooter.jsp"/>
 
 </body>

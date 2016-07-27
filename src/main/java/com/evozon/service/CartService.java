@@ -72,16 +72,18 @@ public class CartService {
 
     }
     public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
+        if(quantity<0)return false;
+        boolean status = false;
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
-                    if(e.getProduct().getStockLevel() > e.getQuantity() + quantity) {
+                    if(e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
                         e.setQuantity(e.getQuantity() + quantity);
                     }
                     else{
                         e.setQuantity(e.getProduct().getStockLevel());
-                        return false;
+                        status= true;
                         //send not enough stock message
                     }
                     cartDAO.updateEntry(e);
@@ -97,13 +99,14 @@ public class CartService {
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
-            //Orders orders=orderDAO.getOrderById(1);//remove hardcoding
-            Entry entry=cartDAO.addEntryToCart(product,cart);
+            Orders orders=orderDAO.getOrderById(1);//remove hardcoding
+            Entry entry=cartDAO.addEntryToCart(product,cart,orders);
 
             cartDAO.updateEntryDetails(entry);
             addProductToCart(productId,cartId,quantity);
+
         }
-        return true;
+        return status;
     }
 
     public void deleteEntryFromCart(Integer entryId, Integer cartId) {
