@@ -11,9 +11,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
 <c:url var="detailsCSSURL" value="/resources/style/detailViewStyle.css"/>
 <link rel="stylesheet" type="text/css" href="${detailsCSSURL}">
 
