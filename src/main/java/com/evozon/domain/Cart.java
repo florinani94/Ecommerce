@@ -1,4 +1,5 @@
 package com.evozon.domain;
+import org.hibernate.annotations.Parent;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -10,7 +11,10 @@ import java.util.List;
 /**
  * Created by vladblana on 19/07/2016.
  */
+
 @Entity
+@Table(name = "cart")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cart {
 
     @Column(nullable = false)
@@ -22,6 +26,12 @@ public class Cart {
 
     @Column
     private Double total;
+
+    @Column
+    private String ordersKey;
+
+    @Column
+    private String status;
 
     @Column
     @Email
@@ -136,5 +146,25 @@ public class Cart {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
+    }
+
+    public String getOrdersKey() {
+        return ordersKey;
+    }
+
+    public void setOrdersKey(String ordersKey) {
+        this.ordersKey = ordersKey;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
