@@ -1,25 +1,16 @@
 package com.evozon.mvc;
 
-import com.evozon.domain.Entry;
-import com.evozon.domain.Product;
 import com.evozon.domain.dtos.MiniCartDTO;
 import com.evozon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by mateimihai on 7/21/2016.
- */
+
 
 @Controller
 @RequestMapping(value = "/cart")
@@ -86,11 +77,21 @@ public class CartController {
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId){
-        System.out.println("//Prod id://"+productId);
-        // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-//        cartService.addProductToCart(Integer.parseInt(productId),1);
-        return "productDetailsPage";
+    @ResponseBody
+    public String addToCart(@CookieValue(value = "cartId", defaultValue = "0") Integer cookieCartId, Model model,
+                            @RequestParam String productId, @RequestParam String cartId, HttpServletResponse response){
+
+        cookieCartId = Integer.parseInt(cartId);
+
+        Cookie cookie = new Cookie("cartId", cookieCartId.toString());
+        cookie.setMaxAge(43200); //The time the cookie can be eaten is 12 hours
+        response.addCookie(cookie);
+
+//        System.out.println("//Cart id://"+cartId);
+//        System.out.println("//Cookie value://"+cookie.getValue());
+
+
+        return "home";
     }
 
 }
