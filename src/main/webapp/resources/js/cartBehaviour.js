@@ -65,7 +65,7 @@ $("#addButtonID").click(function() {
                 cartId: 1 //temporary!
             },
             success : function(response) {
-                alert("Product successfully added with quantity " + $("#quantityFieldID").val());
+                alert($("#successMessageId").val());
                 console.log("success");
             },
             error : function(e) {
