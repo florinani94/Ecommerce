@@ -10,7 +10,11 @@ import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
@@ -69,7 +73,7 @@ public class CartService {
     }
     public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
         if(quantity<0)return false;
-        boolean status = false;
+        boolean status = true;
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
@@ -95,8 +99,8 @@ public class CartService {
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
-            Orders orders=orderDAO.getOrderById(1);//remove hardcoding
-            Entry entry=cartDAO.addEntryToCart(product,cart,orders);
+           // Orders orders=orderDAO.getOrderById(1);//remove hardcoding
+            Entry entry=cartDAO.addEntryToCart(product,cart);
 
             cartDAO.updateEntryDetails(entry);
             addProductToCart(productId,cartId,quantity);
