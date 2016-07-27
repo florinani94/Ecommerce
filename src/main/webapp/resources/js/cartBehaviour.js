@@ -30,7 +30,7 @@ $('#cartIcon, #prodNr').click(function () {
                             "<div class='entry-line'>" +
                                 "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
                                 "<span class='entry-name'>" + entry.name + "   " + "</span>" +
-                                "<span class='entry-price'>" + entry.price + "$" + "</span>" +
+                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "</span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -39,7 +39,7 @@ $('#cartIcon, #prodNr').click(function () {
 
                 $('#cartPanel').css("position","absolute");
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*20 + 48).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*20 + 85).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
