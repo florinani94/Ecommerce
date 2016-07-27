@@ -37,6 +37,8 @@
 
 <jsp:include page="customerHeader.jsp" />
 
+<input type="hidden" id="product-id" value="${theProduct.productId}"/>
+
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="row" style="margin-top: 5%">
@@ -58,12 +60,12 @@
                             <td class="priceText">${theProduct.price}$</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
+                            <td> <span class="qtyInput">
+                                    Quantity: <input type="number" min="1" value="1" id="quantityFieldID" class="quantity">
+                                </span> </td>
                         </tr>
                         <tr>
-                            <td>
-                            <b>Quantity: </b>
-                            <td><input type="number" min="1" class="quantity"></td>
+                            <td><input type="submit" class="addButton" id="addButtonID" value="Add to cart"> </td>
                         </tr>
                     </table>
             </div>

@@ -10,7 +10,7 @@ $('#cartIcon').hover(function () {
 var toggleMenu = false;
 var idCart=1;
 
-$('#cartIcon').click(function () {
+$('#cartIcon, #prodNr').click(function () {
 
     var entriesNo = 0;
 
@@ -30,7 +30,7 @@ $('#cartIcon').click(function () {
                             "<div class='entry-line'>" +
                                 "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
                                 "<span class='entry-name'>" + entry.name + "   " + "</span>" +
-                                "<span class='entry-price'>" + entry.price + "$" + "</span>" +
+                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "</span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -39,7 +39,7 @@ $('#cartIcon').click(function () {
 
                 $('#cartPanel').css("position","absolute");
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*20 + 48).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*20 + 85).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
@@ -55,27 +55,22 @@ $('#cartIcon').click(function () {
 )
 
 
-
 $("#addButtonID").click(function() {
-       alert("Click working!");
-      // var toInt = $('#addButton2').data('product-id');
-       var cartIdentifier=3;    //replace data with cartId value from cookie
-       var productIdentifier=4;    //replace data with cartId value from cookie
-
-       $.ajax({
-           type : "POST",
-           url : "/mvc/cart/addToCart",
-           data : {
-               productId: productIdentifier,
-               cartId: cartIdentifier
-           },
-           success : function(response) {
-//                $("#buttonId").data( "#product-id" );
-               console.log("success");
-           },
-           error : function(e) {
-               alert('Error: ' + e);
-           }
+        $.ajax({
+            type : "POST",
+            url : "/mvc/cart/addToCart",
+            data : {
+                quantity: $("#quantityFieldID").val(),
+                productId: $('#product-id').val(),
+                cartId: 1 //temporary!
+            },
+            success : function(response) {
+                alert("Product successfully added with quantity " + $("#quantityFieldID").val());
+                console.log("success");
+            },
+            error : function(e) {
+                alert('An error occurred while trying to add the product to the cart. Please try again later. ');
+            }
        });
 
 });

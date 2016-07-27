@@ -1,11 +1,21 @@
 package com.evozon.dao;
 
+import com.evozon.domain.Entry;
 import com.evozon.domain.Orders;
+
+import java.util.List;
+
 
 public interface OrderDAO {
 
-    public Orders getOrderByKey(String orderKey);
+    Orders getOrderByKey(String orderKey);
 
-    public void addOrder(Orders order);
+    Orders getOrderById(Integer orderId);
+
+    void addOrder(Orders order);
+
+    void updateOrder(Orders order);
+
+    List<Entry> getAllEntries(Integer orderId);
 
 }

@@ -65,16 +65,42 @@
                             <td>${entry.quantity}</td>
                             <td>${entry.subTotal}</td>
                         </tr>
+                        <tr>
+                            <th><a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a></th>
+                        </tr>
                     </table>
                 </div>
             </div>
             <br>
             <div class="myHr"></div>
         </c:forEach>
+
+        <h1>CART TOTAL: ${total}</h1>
     </div>
 
     <div class="col-md-3"></div>
 </div>
+
+<script type="text/javascript">
+    function myfunction (val) {
+        $.ajax({
+            type : "POST",
+            url : contextURL + "cart/view",
+            data : {
+                entryId: val
+            },
+            success : function(response) {
+                $("#removeEntryBtn" + val).parent().parent().remove();
+                console.log("success");
+            },
+            error : function(e) {
+                alert('Error: ' + e);
+            }
+        });
+    }
+</script>
+
+<jsp:include page="customerFooter.jsp"/>
 
 </body>
 </html>

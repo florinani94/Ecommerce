@@ -2,6 +2,11 @@
  * Created by dianamohanu on 14/07/2016.
  */
 // Functions used in viewProducts.jsp
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
         var arr = new Array();
@@ -87,26 +92,3 @@ function billingFunction() {
         document.getElementById("billingPhone").value = "";
     }
 }
-
-
-// //used in product creation
-// $("#addProductButton").click(function() {
-//     alert("hello");
-//     var e = $("#dropDown");
-//     var strUser = e.options[e.selectedIndex].text;
-//     console.log(strUser);
-//
-//     $.ajax({
-//         type : "POST",
-//         url : "../product/add",
-//         data : {
-//             categoryId: strUser
-//         },
-//         success : function(response) {
-//             alert("good job");
-//         },
-//         error : function(e) {
-//             alert('Error: ' + e);
-//         }
-//     });
-// });

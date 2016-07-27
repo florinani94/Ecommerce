@@ -10,13 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
-/**
- * Created by vladblana on 19/07/2016.
- */
 
 @Repository("CartDAO")
 @Transactional
@@ -92,9 +86,9 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Entry addEntryToCart(Integer productId, Integer cartId){
+    public Entry addEntryToCart(Product product,Cart cart){
         Session session = sessionFactory.getCurrentSession();
-        Entry entry=new Entry(getCartById(cartId),getProductById(productId),new Integer(0),new Double(0.0));
+        Entry entry=new Entry(cart,product,new Integer(0),new Double(0.0));//remove hardcoding
         session.save(entry);
         return entry;
     }

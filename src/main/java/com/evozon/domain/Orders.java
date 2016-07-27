@@ -22,7 +22,12 @@ public class Orders {
     @Email
     private String email;
 
-    @Column
+    @AttributeOverrides({
+            @AttributeOverride(name="paymentMethod",column=@Column(name="paymentMethod")),
+            @AttributeOverride(name="cardNumber",column=@Column(name="cardNumber")),
+            @AttributeOverride(name="cardCode",column=@Column(name="cardCode")),
+    })
+    @Embedded
     private Payment payment;
 
     @Column
