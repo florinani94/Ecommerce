@@ -69,7 +69,7 @@ public class CartService {
     }
     public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
         if(quantity<0)return false;
-        boolean status = false;
+        boolean status = true;
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
