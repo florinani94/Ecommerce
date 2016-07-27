@@ -67,7 +67,7 @@
                             <td>${entry.productCode}</td>
                             <td>${entry.productPrice} $</td>
 
-                            <td><select>
+                            <td><select id="quantityOptions${entry.entryId}">
                             <c:forEach begin="1" end="${entry.product.stockLevel}" var="val">
                                 <c:if test="${val == entry.quantity}">
                                     <option selected>${val}</option>
@@ -82,9 +82,9 @@
                             <td>${entry.subTotal}</td>
                         </tr>
                         <tr>
-                            <th><a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a></th>
+                            <th><a id="removeEntryBtn${entry.entryId}" onclick="deletefunction(${entry.entryId})">Remove</a></th>
                             <th></th>
-                            <th><a id="editEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Edit</a></th>
+                            <th><a id="editEntryBtn${entry.entryId}" onclick="editfunction(${entry.entryId})">Edit</a></th>
                         </tr>
                     </table>
                 </div>
@@ -102,7 +102,7 @@
 </div>
 
 <script type="text/javascript">
-    function myfunction (val) {
+    function deletefunction (val) {
         $.ajax({
             type : "POST",
             url : contextURL + "cart/view",
@@ -119,6 +119,27 @@
                 alert('Error: ' + e);
             }
         });
+    }
+
+    function editfunction (val) {
+        var quantity = $('#quantityOptions' + val).find(":selected").text();
+
+        $.ajax({
+            type : "POST",
+            url : contextURL + "cart/edit",
+            data : {
+                entryId: val,
+                newQuantity: quantity
+            },
+            success : function(response) {
+                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                console.log("success");
+            },
+            error : function(e) {
+                alert('Error: ' + e);
+            }
+        });
+
     }
 </script>
 

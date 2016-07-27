@@ -33,7 +33,6 @@ public class CartController {
         return minicart;
     }
 
-
     @RequestMapping(value="/populate", method = RequestMethod.GET)
     public String insertEntryProducts(Model model){
         System.out.println("Populated");
@@ -74,4 +73,10 @@ public class CartController {
         return "productDetailsPage";
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
+        // get cart id here from cookie
+        cartService.editEntry(entryId, 1, quantity);
+        return "viewCart";
+    }
 }
