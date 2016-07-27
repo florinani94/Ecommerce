@@ -39,7 +39,7 @@ $('#cartIcon, #prodNr').click(function () {
 
                 $('#cartPanel').css("position","absolute");
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*20 + 85).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*20 + 70).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
