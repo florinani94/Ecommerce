@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,14 +52,11 @@ public class CartController {
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        class SuccessMessage{
-            String message;
-        }
-        SuccessMessage successMessage=new SuccessMessage();
-        successMessage.message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
-        model.addAttribute("successMessage",successMessage.message);
-        return "productDetailsPage";
+    @ResponseBody
+    public String addToCart(ModelMap model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+        String message;
+        message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        return message;
     }
 
 
@@ -68,4 +66,11 @@ public class CartController {
         cartService.editEntry(entryId, 1, quantity);
         return "viewCart";
     }
+
+    @RequestMapping(value = "/getProductsNumber", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCartProductsNumber(@RequestParam(value = "cartId") int cartId){
+        return cartService.getNumberOfProductsInCart(cartId);
+    }
+
 }
