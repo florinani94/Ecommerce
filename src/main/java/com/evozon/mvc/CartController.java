@@ -52,7 +52,6 @@ public class CartController {
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        //System.out.println("//Prod id://"+productId);
         class SuccessMessage{
             String message;
         }
