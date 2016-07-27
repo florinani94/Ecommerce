@@ -85,7 +85,6 @@ public class CartService {
                     else{
                         e.setQuantity(e.getProduct().getStockLevel());
                         status= "Not enough products in stock. Maximum available quantity added in cart.";
-                        //send not enough stock message
                     }
                     cartDAO.updateEntry(e);
                     Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
@@ -102,10 +101,8 @@ public class CartService {
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
             Entry entry=cartDAO.addEntryToCart(product,cart);
-
             cartDAO.updateEntryDetails(entry);
             status=addProductToCart(productId,cartId,quantity);
-
         }
         return status;
     }

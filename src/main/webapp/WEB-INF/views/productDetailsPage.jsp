@@ -17,7 +17,7 @@
 <jsp:include page="customerHeader.jsp" />
 
 <input type="hidden" id="product-id" value="${theProduct.productId}"/>
-<input type="hidden" id="successMessageId" value="${successMessage.message}"/>
+<input type="hidden" id="successMessageId" value="${successMessage}"/>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
