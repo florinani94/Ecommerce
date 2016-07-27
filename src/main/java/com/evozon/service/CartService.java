@@ -71,19 +71,20 @@ public class CartService {
         }
 
     }
-    public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
-        if(quantity<0)return false;
-        boolean status = true;
+    public String addProductToCart(Integer productId,Integer cartId,Integer quantity) {
+        if(quantity<0)return "Invalid quantity!";
+        String status = "";
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
                 if(e.getProductCode()!=null) {
                     if(e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
                         e.setQuantity(e.getQuantity() + quantity);
+                        status="Product successfully added with quantity: " + quantity;
                     }
                     else{
                         e.setQuantity(e.getProduct().getStockLevel());
-                        status= true;
+                        status= "Not enough products in stock. Maximum available quantity added in cart.";
                         //send not enough stock message
                     }
                     cartDAO.updateEntry(e);
@@ -93,17 +94,17 @@ public class CartService {
                 }
                 else{
                     cartDAO.deleteEntryFromCart(e.getEntryId());
+                    status="Product successfully deleted!";
                 }
             }
         }
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=cartDAO.getProductById(productId);
-           // Orders orders=orderDAO.getOrderById(1);//remove hardcoding
             Entry entry=cartDAO.addEntryToCart(product,cart);
 
             cartDAO.updateEntryDetails(entry);
-            addProductToCart(productId,cartId,quantity);
+            status=addProductToCart(productId,cartId,quantity);
 
         }
         return status;

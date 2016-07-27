@@ -49,30 +49,19 @@ public class CartController {
         cartService.editEntry(id, 1, 0);
         return "viewCart";
     }
-/*
+
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        //System.out.println("//Prod id://"+productId);
         class SuccessMessage{
             String message;
         }
         SuccessMessage successMessage=new SuccessMessage();
-        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
-            successMessage.message="Product successfully added with quantity: " + quantity;
-        }
-        else{
-            successMessage.message="Not enough products in stock. Maximum available quantity added in cart.";
-        }
+        successMessage.message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
         model.addAttribute("successMessage",successMessage.message);
         return "productDetailsPage";
     }
-*/
-    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
-            }
-        return "productDetailsPage";
-        }
+
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
         // get cart id here from cookie
