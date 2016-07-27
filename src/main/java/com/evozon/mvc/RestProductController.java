@@ -81,15 +81,20 @@ public class RestProductController {
         Product product = new Gson().fromJson(jsonProduct, Product.class);
         product.setCategory(cat);
         Product searchedProduct = productService.getProductByCode(product.getCode());
+        product.setProductId(searchedProduct.getProductId());
         Category searchedCategory = categoryService.getCategoryById(idCategory);
         if (searchedCategory != null) {
             if (searchedProduct != null) {
-                response.setStatus(200);
-                productService.updateProduct(product);
-                return " The product with code " + product.getCode() + " have been updated!";
+                if(product.getPrice()>0&&product.getStockLevel()>0) {
+                    response.setStatus(200);
+                    productService.updateProduct(product);
+                    return " The product with code " + product.getCode() + " have been updated!";
+                }
+                response.setStatus(400);
+                return " The product price and the stockLevel must be positive !";
             }
-            response.setStatus(404);
-            return " The product with code " + product.getCode() + " already exists!";
+            response.setStatus(400);
+            return " The product with code " + product.getCode() + " does not exists!";
         }
         response.setStatus(404);
         return "The category with this id does not exists!";
@@ -108,13 +113,18 @@ public class RestProductController {
         Category searchedCategory = categoryService.getCategoryById(idCategory);
         if (searchedCategory != null) {
             if (searchedProduct == null) {
-                response.setStatus(200);
-                productService.addProduct(product);
-                return " The product was successfully added !";
+                if(product.getPrice()>0&&product.getStockLevel()>0) {
+                    response.setStatus(200);
+                    productService.addProduct(product);
+                    return " The product was successfully added !";
+                }
+                response.setStatus(400);
+                return " The product price and the stockLevel must be positive !";
             }
-            response.setStatus(404);
+            response.setStatus(400);
             return " The product with code " + product.getCode() + " already exists!";
         }
+        response.setStatus(404);
         return " The category with this id does not exists!";
     }
 
