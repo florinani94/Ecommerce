@@ -89,14 +89,13 @@ $("#addButtonID").click(function() {
              data : {
                  quantity: $("#quantityFieldID").val(),
                  productId: $('#product-id').val(),
-                 cartId: idCart //temporary!
+                 cartId: idCart
              },
              success : function(response) {
-                 alert("Great success!!");
+                 alert(response);
                  console.log("success");
              },
              error : function(e) {
-             //alert(e);
                 alert('An error occurred while trying to add the product to the cart. Please try again later. ');
              }
         });
