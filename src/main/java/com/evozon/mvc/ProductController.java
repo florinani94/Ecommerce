@@ -8,15 +8,15 @@ import com.evozon.service.CategoryService;
 import com.evozon.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -26,20 +26,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.http.HTTPException;
-import javax.xml.transform.sax.SAXSource;
 import java.io.*;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.multipart.MultipartFile;
-
 
 
 @Controller
@@ -57,9 +50,13 @@ public class ProductController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
+    @Autowired
+    private SchedulerFactoryBean schedulerFactory;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllProducts(Model model) {
         model.addAttribute("allProducts", productService.getAllProducts());
+
         return "viewProducts";
     }
 
@@ -120,9 +117,13 @@ public class ProductController {
         return "viewProducts";
     }
 
+
+
+
+    // import post method -- HttpServletRequest request,
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public String importFromFile(HttpServletRequest request, Model model) {
-        productService.importFromCSV(request);
+    public String importFromFile(@RequestParam(value = "filename", required = false) MultipartFile filename, Model model) {
+       productService.importFromCSV(filename);
 
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
@@ -214,6 +215,41 @@ public class ProductController {
         inputStream.close();
         outputStream.close();
         file.delete();
+    }
+
+    @RequestMapping(value= "job")
+    public String showForm(Model model) {
+        if (schedulerFactory.isRunning())
+        {
+            model.addAttribute("msg", " JOB STARTED");
+        }
+        else {
+            model.addAttribute("msg", "JOB STOPPED");
+        }
+
+        return "job";
+    }
+
+    @RequestMapping(value = "job", method = RequestMethod.POST)
+    public String runJob(Model model) {
+
+        if (schedulerFactory.isRunning())
+        {
+            try {
+                schedulerFactory.getScheduler().getContext().put("test","string");
+            } catch (SchedulerException e) {
+                e.printStackTrace();
+            }
+            schedulerFactory.stop();
+            model.addAttribute("msg", "JOB STOPPED");
+        }
+        else
+        {
+            schedulerFactory.start();
+            model.addAttribute("msg", "JOB STARTED");
+        }
+
+        return "job";
     }
 
 }

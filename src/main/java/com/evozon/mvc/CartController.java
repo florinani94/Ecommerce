@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mateimihai on 7/21/2016.
@@ -35,17 +36,12 @@ public class CartController {
     }
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String viewDataFromCart(Model model){
-        // get cart id here from cookie
-
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-        model.addAttribute("total", cartService.getCartById(1).getTotal());
+    public String viewDataFromCart(Model model, @RequestParam("cartId") Integer cartId){
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(cartId));
+        model.addAttribute("total", cartService.getCartById(cartId).getTotal());
         return "viewCart";
     }
 
-    @RequestMapping(value="", method = RequestMethod.POST)
-    public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
-        cartService.deleteEntryFromCart(id, 1);
     @RequestMapping(value="/removeFromCart", method = RequestMethod.POST)
     public String removeDataFromCart(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "cartId") int cartId){
         cartService.deleteEntryFromCart(entryId, cartId);

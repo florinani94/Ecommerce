@@ -1,6 +1,7 @@
 package com.evozon.dao.impl;
 
 import com.evozon.dao.OrderDAO;
+import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Orders;
 import com.evozon.service.SendMail;
@@ -20,7 +21,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Orders getOrderByKey(String orderKey) {
+    public Cart getOrderByKey(String orderKey) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Cart as O WHERE ordersKey = :orderKey");
         query.setParameter("orderKey", orderKey);
