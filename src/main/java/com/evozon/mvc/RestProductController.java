@@ -36,8 +36,9 @@ public class RestProductController {
         List<ProductDTO> products = productService.getAllDTOProducts();
         if (products.size() == 0) {
             response.setStatus(404);
+        }else {
+            response.setStatus(200);
         }
-        response.setStatus(200);
         return products;
 
     }
