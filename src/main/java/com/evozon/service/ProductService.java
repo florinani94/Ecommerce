@@ -130,29 +130,32 @@ public class ProductService {
 
         try {
 
-            br = new BufferedReader(new FileReader((fileName + ".csv")));
-            while ((line = br.readLine()) != null) {
+            File f = new File(fileName + ".csv");
+            if(f.exists()) {
+                br = new BufferedReader(new FileReader((fileName + ".csv")));
+                while ((line = br.readLine()) != null) {
 
-                String[] product = line.split(csvSplitBy);
-                Product newProduct = new Product();
-                newProduct.setCode(product[0]);
-                newProduct.setName(product[1]);
-                newProduct.setDescription(product[2]);
-                newProduct.setPrice(Double.valueOf(product[3]));
-                newProduct.setStockLevel(Integer.valueOf(product[4]));
-                Integer categoryId = Integer.valueOf(product[5]);
-                Category category=null;
-               try{
-                   category=categoryDAO.getCategoryById(categoryId);
-               }
-               catch(Exception e){
-                   e.printStackTrace();
-               }
-                newProduct.setCategory(category);
-                newProduct.setImageURL(product[6]);
+                    String[] product = line.split(csvSplitBy);
+                    Product newProduct = new Product();
+                    newProduct.setCode(product[0]);
+                    newProduct.setName(product[1]);
+                    newProduct.setDescription(product[2]);
+                    newProduct.setPrice(Double.valueOf(product[3]));
+                    newProduct.setStockLevel(Integer.valueOf(product[4]));
+                    Integer categoryId = Integer.valueOf(product[5]);
+                    Category category = null;
 
-                list.add(newProduct);
+                    try {
+                        category = categoryDAO.getCategoryById(categoryId);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    newProduct.setCategory(category);
+                    newProduct.setImageURL(product[6]);
 
+                    list.add(newProduct);
+
+                }
             }
 
         } catch (FileNotFoundException e) {

@@ -2,24 +2,18 @@ package com.evozon.service;
 
 import com.evozon.dao.CartDAO;
 import com.evozon.dao.OrderDAO;
+import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
-import com.evozon.domain.Orders;
 import com.evozon.domain.Product;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -31,6 +25,9 @@ public class CartService {
 
     @Autowired
     private OrderDAO orderDAO;
+
+    @Autowired
+    private ProductDAO productDAO;
 
     @Autowired
     private ServletContext servletContext;
@@ -64,7 +61,7 @@ public class CartService {
                 entry.setQuantity(entry.getProduct().getStockLevel());
                 //send not enough stock message
             }
-            cartDAO.updateQuantity(entry);
+            cartDAO.updateEntry(entry);
             Double subTotal = cartDAO.computeSubTotalForEntry(entry.getEntryId(), cartId);
             cartDAO.updateSubTotalForEntry(subTotal, entry.getEntryId(), cartId);
             cartDAO.computeTotalForCart(cartId);
@@ -77,33 +74,27 @@ public class CartService {
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
-                if(e.getProductCode()!=null) {
-                    if(quantity==0){
-                        cartDAO.deleteEntryFromCart(e.getEntryId());
-                        status="Product successfully deleted!";
-                    }else {
-                        if (e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
-                            e.setQuantity(e.getQuantity() + quantity);
-                            status = "Product successfully added with quantity: " + quantity;
-                        } else {
-                            e.setQuantity(e.getProduct().getStockLevel());
-                            status = "Not enough products in stock. Maximum available quantity added in cart.";
-                        }
-                        cartDAO.updateEntry(e);
-                        Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
-                        cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
-                    }
-                    cartDAO.computeTotalForCart(cartId);
-                }
-                else{
+                if(quantity==0){
                     cartDAO.deleteEntryFromCart(e.getEntryId());
-                    status="Product successfully deleted!";
+                    status="Product successfully deleted from cart!";
+                }else {
+                    if (e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
+                        e.setQuantity(e.getQuantity() + quantity);
+                        status = "Product successfully added to cart with quantity: " + quantity;
+                    } else {
+                        e.setQuantity(e.getProduct().getStockLevel());
+                        status = "Insufficient stock. Maximum available quantity added in cart.";
+                    }
+                    cartDAO.updateEntry(e);
+                    Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
+                    cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
                 }
+                cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
             Cart cart=cartDAO.getCartById(cartId);
-            Product product=cartDAO.getProductById(productId);
+            Product product=productDAO.getProductById(productId);
             Entry entry=cartDAO.addEntryToCart(product,cart);
             cartDAO.updateEntryDetails(entry);
             status=addProductToCart(productId,cartId,quantity);
@@ -153,7 +144,7 @@ public class CartService {
 
     public Integer getNumberOfProductsInCart(Integer cartId)
     {
-        Integer result=new Integer(0);
+        Integer result = 0;
         List<Entry> entryList=cartDAO.getAllEntriesFromCart(cartId);
         for(Entry e:entryList){
             result+=e.getQuantity();

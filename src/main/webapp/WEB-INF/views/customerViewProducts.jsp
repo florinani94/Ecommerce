@@ -40,13 +40,13 @@
             </div>
         </div>
         <div class="row">
-            <div id="products">
+            <div class="squareContainer" id="products">
             <c:if test="${not empty products}">
                 <c:forEach var="product" items="${products}">
 
                     <c:url var="productLink" value="/products/view?productId=${product.productId}"></c:url>
 
-                    <div class="col-sm-3">
+                    <div class="col-md-3">
                         <div class="square">
                             <c:url var="img" value="${product.imageURL}" />
 
@@ -115,7 +115,7 @@
 
         </div>
 
-    <div class="leftDiv" >
+    <div class="leftDiv">
 
         <div class="filter">
             <br><br><br>
