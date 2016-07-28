@@ -4,7 +4,6 @@
 
     <c:url var="homeURL" value="/products"/>
     <c:url var="loginURL" value="/login"/>
-    <c:url var="checkoutURL" value="/products/address"></c:url>
 
     <c:url var="logoUrl" value="/resources/detailView/SizedLogo.png"></c:url>
     <c:url var="textUrl" value="/resources/detailView/SizedText.png"></c:url>
@@ -15,6 +14,12 @@
 
     <jsp:include page="bootstrapImports.jsp" />
     <jsp:include page="variables.jsp"/>
+
+    <style>
+        a:not([href]):hover {
+            cursor: pointer;
+        }
+    </style>
 
     <title>Tea Shop</title>
     <div class="row header">
@@ -54,7 +59,8 @@
                                     $
                                 </div>
                             </div>
-                            <a href="${checkoutURL}" id="checkoutButtonID">Checkout</a>
+
+                            <a id="checkoutButtonID">Checkout</a>
                         </div>
                     </div>
                 </div>

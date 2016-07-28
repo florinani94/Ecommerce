@@ -39,7 +39,7 @@ public class RestOrderController {
                 response.setStatus(200);
                 return "Order successfully updated !";
             }
-            response.setStatus(404);
+            response.setStatus(400);
             return "Invalid status ! Please select one of the following:\"processing\", \"delivered\",\"rejected\" !";
 
         }

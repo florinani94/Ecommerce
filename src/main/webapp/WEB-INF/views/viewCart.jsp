@@ -23,11 +23,12 @@
     <title>My Cart</title>
 
     <style>
-        .entryTitle {
+        #entryTitle {
             font-family: Calibri;
             color: rgb(114, 114, 114);
             font-size: 22px;
             text-decoration: underline;
+            margin-bottom: 13px;
         }
 
         a:not([href]) {
@@ -56,35 +57,55 @@
         }
 
         .row-buffer {
-            margin-top: 20px;
+            margin-top: 15px;
             background-color: #FFFFFF;
-            height: 25%;
+            height: 22%;
+        }
+
+        .row-bottom {
+            margin-top: 15px;
+            height: 6%;
+            font-family: Impact;
+            text-align: right;
+            padding-right: 5%;
+            background-color: rgb(242, 242, 242);
+        }
+
+        .finishButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 45px;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 15%;
         }
     </style>
 
 </head>
-<body background="${backgroundURL}" style="background-size: 100%; ">
+<body background="${backgroundURL}" style="background-size: 100%;">
 <jsp:include page="customerHeader.jsp"/>
 
 <br>
 <div class="row-fluid">
     <div class="col-md-3"></div>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
         <h1 id="productTitle">My Cart</h1>
         <div class="myHr"></div>
 
         <c:forEach var="entry" items="${entries}">
             <div class="row row-buffer">
-                <h4 class="entryTitle">${entry.productName}</h4>
-                <br>
+                <h4 id="entryTitle" style="margin-left: 5%">${entry.productName}</h4>
+
                 <div class="col-md-3">
                     <c:url var="img" value="${entry.product.imageURL}"/>
                     <img src="${img}" style="height: 140px; width: 204px;">
                 </div>
 
                 <div class="col-md-9">
-                    <table style="width: 70%">
+                    <table style="width: 70%; margin-left: 15%;">
                         <tr>
                             <th>CODE</th>
                             <th>PRICE</th>
@@ -129,26 +150,31 @@
             </div>
         </c:forEach>
 
-        <div id="totalCartPrice">
-            <h1>CART TOTAL: ${total}</h1>
+        <div class="row row-bottom">
+            <h2 id="totalCartPrice">Cart total: ${total}$</h2>
+        </div>
+
+        <div class="row">
+            <input type="submit" class="finishButton" value="SUBMIT ORDER">
         </div>
     </div>
 
-    <div class="col-md-4"></div>
+    <div class="col-md-5"></div>
 </div>
 
 <script type="text/javascript">
     function deletefunction(val) {
         $.ajax({
             type: "POST",
-            url: contextURL + "cart/view",
+            url: contextURL + "cart/removeFromCart",
             data: {
-                entryId: val
+                entryId: val,
+                cartId: idCart
             },
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
-
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart +" #totalCartPrice");
+                refreshCartProductsNumber(idCart);
                 console.log("success");
             },
             error: function (e) {
@@ -165,11 +191,13 @@
             url: contextURL + "cart/edit",
             data: {
                 entryId: val,
+                cartId: idCart,
                 newQuantity: quantity
             },
             success: function (response) {
-                $("#subTotal" + val).load(contextURL + "cart/ #subTotal" + val);
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                $("#subTotal" + val).load(contextURL + "cart/?cartId=" + idCart + " #subTotal" + val);
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart + " #totalCartPrice");
+                refreshCartProductsNumber(idCart);
                 console.log("success");
             },
             error: function (e) {

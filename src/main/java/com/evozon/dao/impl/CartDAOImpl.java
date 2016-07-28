@@ -16,21 +16,8 @@ import java.util.List;
 @Transactional
 public class CartDAOImpl implements CartDAO{
 
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    public Product getProductById(Integer productId) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
-        query.setParameter("id", productId);
-        List<Product> products = query.list();
-        if(products.size() > 0){
-            return products.get(0);
-        }
-        return null;
-    }
 
     @Override
     public Entry getEntryById(Integer entryId){
@@ -82,14 +69,13 @@ public class CartDAOImpl implements CartDAO{
         entry.setProductCode(product.getCode());
         entry.setProductName(product.getName());
         entry.setProductPrice(product.getPrice());
-        session.save(entry);
+        session.update(entry);
     }
 
     @Override
     public Entry addEntryToCart(Product product,Cart cart){
         Session session = sessionFactory.getCurrentSession();
-        Entry entry=new Entry(cart,product,new Integer(0),new Double(0.0));
-        //entry.setOrder(orders);//remove hardcoding
+        Entry entry=new Entry(cart,product,0,0.0);
         session.save(entry);
         return entry;
     }
@@ -101,13 +87,6 @@ public class CartDAOImpl implements CartDAO{
         query.setParameter("id", entryId);
         query.executeUpdate();
     }
-
-    @Override
-    public void updateQuantity(Entry entry) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(entry);
-    }
-
 
     @Override
     public List<Entry> getEntryForAdding(Integer productId, Integer cartId) {
@@ -151,7 +130,7 @@ public class CartDAOImpl implements CartDAO{
 
         ArrayList<Entry> result = (ArrayList)query.list();
 
-        return new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
+        return result.get(0).getQuantity()*result.get(0).getProductPrice();
     }
 
     @Override
@@ -162,7 +141,7 @@ public class CartDAOImpl implements CartDAO{
         List<Cart> carts = query.list();
 
         if(carts.size() > 0){
-            Double total=new Double(0);
+            Double total=0.0;
             for(Entry e:carts.get(0).getEntryList()){
                 total+=e.getSubTotal();
 

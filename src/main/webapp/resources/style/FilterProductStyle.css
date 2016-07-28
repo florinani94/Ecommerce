@@ -1,19 +1,25 @@
-.leftDiv{
+.container{
+    position: relative;
+}
+
+.leftDiv {
     float: left;
-    width: 20%;
-    margin-left: -40%;
+    width: 30%;
+    margin-left: -32%;
     margin-top: -90%;
-
+    position: absolute;
+    /*top:50px;*/
+    /*left: -20px;*/
+    /*}*/
 }
-
 .filter{
-    margin: inherit;
+    margin-left: 50%;
+    margin-top: 5%;
 }
-
 .rightDiv {
     float: left;
     width: 90%;
-    margin-left: 50%;
+    margin-left: 60%;
     margin-top: 0;
     padding-left: 80px;
 

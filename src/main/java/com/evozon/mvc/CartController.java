@@ -36,34 +36,29 @@ public class CartController {
     }
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String viewDataFromCart(Model model){
-        // get cart id here from cookie
-
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-        model.addAttribute("total", cartService.getCartById(1).getTotal());
+    public String viewDataFromCart(Model model, @RequestParam("cartId") Integer cartId){
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(cartId));
+        model.addAttribute("total", cartService.getCartById(cartId).getTotal());
         return "viewCart";
     }
 
-    @RequestMapping(value="/view", method = RequestMethod.POST)
-    public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
-        // get cart id here from cookie
-        cartService.editEntry(id, 1, 0);
+    @RequestMapping(value="/removeFromCart", method = RequestMethod.POST)
+    public String removeDataFromCart(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "cartId") int cartId){
+        cartService.deleteEntryFromCart(entryId, cartId);
         return "viewCart";
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     @ResponseBody
-    public String addToCart(ModelMap model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+    public String addToCart(@RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
         String message;
         message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
         return message;
     }
 
-
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
-        // get cart id here from cookie
-        cartService.editEntry(entryId, 1, quantity);
+    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, @RequestParam(value = "cartId") int cartId){
+        cartService.editEntry(entryId, cartId, quantity);
         return "viewCart";
     }
 

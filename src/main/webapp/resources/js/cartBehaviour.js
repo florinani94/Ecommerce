@@ -57,7 +57,7 @@ $('#cartIcon, #prodNr').click(function () {
                             "<div class='entry-line'>" +
                                 "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
                                 "<span class='entry-name'>" + entry.name + "   " + "</span>" +
-                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "</span>" +
+                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "X"+"</span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -93,6 +93,7 @@ $("#addButtonID").click(function() {
              },
              success : function(response) {
                  alert(response);
+                 refreshCartProductsNumber(idCart);
                  console.log("success");
              },
              error : function(e) {
@@ -100,4 +101,8 @@ $("#addButtonID").click(function() {
              }
         });
 });
+
+$("#checkoutButtonID").click(function () {
+    window.location.href = contextURL + "cart/?cartId=" + idCart;
+})
 

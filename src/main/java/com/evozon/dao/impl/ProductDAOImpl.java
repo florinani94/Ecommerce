@@ -38,7 +38,6 @@ public class ProductDAOImpl implements ProductDAO {
         return products;
     }
 
-
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
         session.save(product);
@@ -144,6 +143,5 @@ public class ProductDAOImpl implements ProductDAO {
 
         }
         return products;
-
     }
 }
