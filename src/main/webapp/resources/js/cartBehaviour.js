@@ -7,6 +7,7 @@ $('#cartIcon').hover(function () {
     $(this).css('width','7%');
 })
 
+
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -37,6 +38,31 @@ var idCart = parseInt(readCookie("cartId"));
 
 $(document).ready(refreshCartProductsNumber(idCart));
 
+$("html").click(function () {
+    toggleMenu = false;
+    $('#cartPanel').css("visibility", "hidden");
+})
+
+function deleteEntryFunction(val) {
+    $.ajax({
+        type: "POST",
+        url: contextURL + "cart/removeFromCart",
+        data: {
+            entryId: val,
+            cartId: idCart
+        },
+        success: function (response) {
+            refreshCartProductsNumber(idCart);
+            var toggleMenu = false;
+            $('#cartPanel').css("visibility", "hidden");
+            console.log("successs!");
+        },
+        error: function (e) {
+            alert('Error: ' + e);
+        }
+    });
+}
+
 $('#cartIcon, #prodNr').click(function () {
 
     var entriesNo = 0;
@@ -57,7 +83,8 @@ $('#cartIcon, #prodNr').click(function () {
                             "<div class='entry-line'>" +
                                 "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
                                 "<span class='entry-name'>" + entry.name + "   " + "</span>" +
-                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "X"+"</span>" +
+                                "<span class='entry-subtotal'>" + entry.subtotal + "$ </span>" +
+                                "<span> <a class='removeProd' onclick=\"deleteEntryFunction(" + entry.id + ")\"> x </a> </span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -67,7 +94,7 @@ $('#cartIcon, #prodNr').click(function () {
                 $('#cartPanel').css("position","absolute");
                 refreshCartProductsNumber(idCart);
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*28 + 65).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*30 + 65).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
@@ -94,6 +121,8 @@ $("#addButtonID").click(function() {
              success : function(response) {
                  alert(response);
                  refreshCartProductsNumber(idCart);
+                 var toggleMenu = false;
+                 $('#cartPanel').css("visibility", "hidden");
                  console.log("success");
              },
              error : function(e) {

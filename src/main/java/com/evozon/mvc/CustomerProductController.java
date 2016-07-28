@@ -78,8 +78,8 @@ public class CustomerProductController {
     }
 
 
-    @RequestMapping(value = "/checkout/{cartId}", method = RequestMethod.GET)
-    public String goToCheckout(@PathVariable("cartId") int cartId, Model model) {
+    @RequestMapping(value = "/checkout", method = RequestMethod.GET)
+    public String goToCheckout(@RequestParam("cartId") int cartId, Model model) {
         Cart cart = new Cart();
         if (cartService.getCartById(cartId) != null) {
             cart = cartService.getCartById(cartId);

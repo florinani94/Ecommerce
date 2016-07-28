@@ -30,4 +30,5 @@ public interface ProductDAO {
 
     List<Product> getProductsFilteredByCategories(Integer startPageIndex, int maxProductsPerPage, List<Integer> categoriesList);
 
+    void removeFromStock(int quantity, Product product);
 }

@@ -71,7 +71,7 @@
             background-color: rgb(242, 242, 242);
         }
 
-        .finishButton {
+        .checkoutButton {
             background-color: #4CAF50; /* Green */
             border: none;
             color: white;
@@ -155,7 +155,7 @@
         </div>
 
         <div class="row">
-            <input type="submit" class="finishButton" value="SUBMIT ORDER">
+            <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT">
         </div>
     </div>
 
@@ -163,6 +163,10 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#cartIcon").css('pointer-events','none');
+    })
+
     function deletefunction(val) {
         $.ajax({
             type: "POST",
@@ -204,8 +208,11 @@
                 alert('Error: ' + e);
             }
         });
-
     }
+
+    $("#goToCheckout").click(function () {
+        window.location.href = contextURL + "products/checkout/?cartId=" + idCart;
+    });
 </script>
 
 <jsp:include page="customerFooter.jsp"/>

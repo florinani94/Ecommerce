@@ -144,4 +144,13 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return products;
     }
+
+    @Override
+    public void removeFromStock(int quantity, Product product) {
+        Session session=sessionFactory.getCurrentSession();
+        Query query = session.createQuery("UPDATE Product SET stockLevel = :newStock" + " WHERE productId=:id");
+        query.setParameter("newStock", product.getStockLevel()-quantity);
+        query.setParameter("id", product.getProductId());
+        query.executeUpdate();
+    }
 }
