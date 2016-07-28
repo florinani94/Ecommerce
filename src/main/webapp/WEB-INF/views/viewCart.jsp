@@ -50,6 +50,11 @@
             color: rgb(102, 153, 0);
         }
 
+        #outOfStockLabel {
+            font-family: Calibri;
+            color: rgb(153, 0, 0);
+        }
+
         th, td {
             color: rgb(114, 114, 114);
             font-family: Calibri;
@@ -93,7 +98,6 @@
 
     <div class="col-md-4">
         <h1 id="productTitle">My Cart</h1>
-        <div class="myHr"></div>
 
         <c:forEach var="entry" items="${entries}">
             <div class="row row-buffer">
@@ -140,6 +144,10 @@
                             <c:if test="${entry.product.stockLevel != 0}">
                                 <td colspan="4"><h4 id="stockLabel"><strong>In Stock & Ready To Ship</strong></h4></td>
                             </c:if>
+
+                            <c:if test="${entry.product.stockLevel == 0}">
+                                <td colspan="4"><h4 id="outOfStockLabel"><strong>Out Of Stock</strong></h4></td>
+                            </c:if>
                         </tr>
                         <tr>
                             <td><a id="removeEntryBtn${entry.entryId}"
@@ -155,6 +163,12 @@
         </div>
 
         <div class="row">
+            <c:forEach var="message" items="${stockErrorMessage}">
+                <h4 style="color: rgb(153, 0, 0);"><strong>${message}</strong></h4>
+            </c:forEach>
+        </div>
+
+        <div class="row">
             <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT">
         </div>
     </div>
@@ -164,7 +178,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#cartIcon").css('pointer-events','none');
+        $('#cartIcon, #prodNr').css('pointer-events','none');
     })
 
     function deletefunction(val) {
@@ -213,6 +227,7 @@
     $("#goToCheckout").click(function () {
         window.location.href = contextURL + "products/checkout/?cartId=" + idCart;
     });
+
 </script>
 
 <jsp:include page="customerFooter.jsp"/>

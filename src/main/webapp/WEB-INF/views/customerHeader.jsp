@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            <a id="checkoutButtonID">Checkout</a>
+                            <a id="checkoutButtonID">VIEW CART</a>
                         </div>
                     </div>
                 </div>

@@ -37,8 +37,19 @@ public class CartController {
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String viewDataFromCart(Model model, @RequestParam("cartId") Integer cartId){
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(cartId));
+        List<Entry> entries = cartService.getAllEntriesFromCart(cartId);
+
+        List<String> messages = new ArrayList<String>();
+        for (Entry e : entries) {
+            if (e.getProduct().getStockLevel() == 0) {
+                messages.add("The product " + e.getProductName().toUpperCase() + " is currently out of stock!");
+                cartService.editEntry(e.getEntryId(), cartId, 0);
+            }
+        }
+
+        model.addAttribute("entries", entries);
         model.addAttribute("total", cartService.getCartById(cartId).getTotal());
+        model.addAttribute("stockErrorMessage", messages);
         return "viewCart";
     }
 
