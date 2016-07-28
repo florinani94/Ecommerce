@@ -93,6 +93,7 @@ $("#addButtonID").click(function() {
              },
              success : function(response) {
                  alert(response);
+                 refreshCartProductsNumber(idCart);
                  console.log("success");
              },
              error : function(e) {
