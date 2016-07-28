@@ -177,8 +177,9 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="", method = RequestMethod.POST)
     public String deleteAll(Model model, @RequestParam(value = "prodArray[]") List<Integer> prodArray) {
+        System.out.println("here");
         for (Integer i : prodArray) {
             productService.deleteProduct(i);
         }
