@@ -40,13 +40,13 @@
             </div>
         </div>
         <div class="row">
-            <div id="products">
+            <div class="squareContainer" id="products">
             <c:if test="${not empty products}">
                 <c:forEach var="product" items="${products}">
 
                     <c:url var="productLink" value="/products/view?productId=${product.productId}"></c:url>
 
-                    <div class="col-sm-3">
+                    <div class="col-md-3">
                         <div class="square">
                             <c:url var="img" value="${product.imageURL}" />
 
@@ -85,25 +85,27 @@
                 </c:if>
 
                 <div class="paginationView">
-                    <c:if test="${currentPage > 1}">
-                        <a href="<c:url value='/products?page=1&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">1</a>
-                    </c:if>
-                    <c:if test="${currentPage-1 > 2}">
-                        ...
-                    </c:if>
-                    <c:if test="${currentPage != 1 && currentPage-1 != 1}">
-                        <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage-1}</a>
-                    </c:if>
-                    <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage}</a>
+                    <c:if test="${not empty products}">
+                        <c:if test="${currentPage > 1}">
+                            <a href="<c:url value='/products?page=1&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">1</a>
+                        </c:if>
+                        <c:if test="${currentPage-1 > 2}">
+                            ...
+                        </c:if>
+                        <c:if test="${currentPage != 1 && currentPage-1 != 1}">
+                            <a href="<c:url value='/products?page=${currentPage-1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage-1}</a>
+                        </c:if>
+                        <a href="<c:url value='/products?page=${currentPage}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage}</a>
 
-                    <c:if test="${currentPage < nrPagesInt-1}">
-                        <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage+1}</a>
-                    </c:if>
-                    <c:if test="${currentPage+1 < nrPagesInt-1}">
-                        ...
-                    </c:if>
-                    <c:if test="${currentPage != nrPagesInt}">
-                        <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${nrPagesInt}</a>
+                        <c:if test="${currentPage < nrPagesInt-1}">
+                            <a href="<c:url value='/products?page=${currentPage+1}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${currentPage+1}</a>
+                        </c:if>
+                        <c:if test="${currentPage+1 < nrPagesInt-1}">
+                            ...
+                        </c:if>
+                        <c:if test="${currentPage != nrPagesInt}">
+                            <a href="<c:url value='/products?page=${nrPagesInt}&sortValue=${sortValue}${selectedCategoriesUrl}'/>" methods="GET">${nrPagesInt}</a>
+                        </c:if>
                     </c:if>
                 </div>
 

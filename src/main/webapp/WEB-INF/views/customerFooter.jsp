@@ -4,8 +4,8 @@
         <div class="row">
             <div id="footerLinks" class="col-md-4 col-md-offset-4">
                 <a class="footerLink" href="/mvc/products"> Products </a>
-                <a class="footerLink"> Terms and Conditions </a>
-                <a class="footerLink"> Contact </a>
+                <a class="footerLink" href="#"> Terms and Conditions </a>
+                <a class="footerLink" href="#"> Contact </a>
             </div>
         </div>
         <div class="row">
@@ -16,4 +16,4 @@
     </footer>
 
 <script src="/mvc/resources/jquery-1.8.3.js"></script>
-<script type="application/javascript" src="${cartJavaScriptUrl}"></script>
+<script type="application/javascript" src="/mvc/resources/js/cartBehaviour.js"></script>

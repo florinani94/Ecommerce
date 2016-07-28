@@ -103,6 +103,7 @@ public class Entry {
     public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
+    
     public Integer getQuantity() {
         return quantity;
     }

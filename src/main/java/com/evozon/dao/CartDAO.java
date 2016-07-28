@@ -9,8 +9,6 @@ import java.util.Set;
  * Created by vladblana on 19/07/2016.
  */
 public interface CartDAO {
-    Product getProductById(Integer productId);
-
     Entry getEntryById(Integer entryId);
 
     Cart getCartById(Integer cartId);
@@ -23,11 +21,9 @@ public interface CartDAO {
 
     void updateEntryDetails(Entry entry);
 
-    Entry addEntryToCart(Product product, Cart cart, Orders orders);
+    Entry addEntryToCart(Product product, Cart cart);
 
     void deleteEntryFromCart(Integer entryId);
-
-    void updateQuantity(Entry entry);
 
     List<Entry> getEntryForAdding(Integer productId, Integer cartId);
 

@@ -223,10 +223,9 @@ html, body {
 #prodNr{
 	position: absolute;
 	top: 80%;
-	color: rgba(255,255,255,0.5);
+	color: rgba(255,255,255,0.7);
 	font-family: 'Calibri';
 	font-weight: lighter;
-	margin-left: -1%;
 	text-decoration: none;
 }
 
@@ -267,6 +266,7 @@ html, body {
 }
 
 #totalTag{
+	color: rgba(0,0,0,0.9);
 	margin-top: 3%;
 	font-style: italic;
 	position: absolute;
