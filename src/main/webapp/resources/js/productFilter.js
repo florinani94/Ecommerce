@@ -22,6 +22,7 @@ $(document).ready(function () {
             }
         });
     }
+    
 })
 
 function addCategoyBox($selectedCheckboxCategory) {
@@ -51,7 +52,7 @@ function applySelectedFilter($selectedCheckboxCategory) {
         if ($url.indexOf("?") <0){
             $url=$url+"?";
         }
-        else {
+        if ($url.indexOf("?")<$url.length-1){
             $url=$url+"&";
         }
         if ($url.indexOf("&category"+$valueInput) <0){
@@ -60,8 +61,11 @@ function applySelectedFilter($selectedCheckboxCategory) {
         }
             }
     else {
-        if ($url.indexOf("category="+$valueInput) >= 0){
+        if ($url.indexOf("&category="+$valueInput) >= 0){
             $url=$url.replace("&category="+$valueInput,'');
+        }
+        if ($url.indexOf("category="+$valueInput) >= 0){
+            $url=$url.replace("category="+$valueInput,'');
         }
         $("#selectedCategories").find("."+$valueInput).remove();
         if(jQuery.inArray( $valueInput, arr )){
