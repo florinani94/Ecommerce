@@ -156,7 +156,7 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <input type="submit" value="Save" class="btn btn-lg btn-primary"/>
+            <input type="submit" value="Save" class="btn btn-lg btn-primary" />
         </div>
     </div>
 
@@ -164,7 +164,6 @@
 
 
 </c:if>
-
 
 
 

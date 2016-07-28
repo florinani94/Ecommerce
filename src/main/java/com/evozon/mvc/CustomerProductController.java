@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,6 +102,8 @@ public class CustomerProductController {
             return "customerCartCheckout";
         }
         Cart cart = cartService.getCartById(order.getCartId());
+        String keyUrl = UUID.randomUUID().toString();
+        cart.setOrdersKey(keyUrl);
         cartService.getDataFromOrderds(order, cart);
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
@@ -107,16 +111,28 @@ public class CustomerProductController {
     }
 
     @RequestMapping(value = "/customerOrderPlaced", method = RequestMethod.GET)
-    public String orderPlaced(@RequestParam(value = "cartId") Integer cartId) {
+    public String orderPlaced(@RequestParam(value = "cartId") Integer cartId, HttpServletResponse httpServletResponse , HttpServletRequest httpServletRequest) {
         Cart cart = cartService.getCartById(cartId);
-        String keyUrl = UUID.randomUUID().toString();
         Orders orderPlaced = new Orders();
         orderPlaced.cloneCart(cart);
-        orderPlaced.setOrdersKey(keyUrl);
         orderPlaced.setStatus("processing");
         orderService.addOrder(orderPlaced);
-        orderManager.sendOrderPlacementMail(orderPlaced.getEmail(), "iulia", keyUrl, "/mvc/products/details");
-        return "customerOrderPlaced";
+        orderManager.sendOrderPlacementMail(orderPlaced.getEmail(), "Iulia", orderPlaced.getOrdersKey(), "/mvc/products/details");
+        Cart newCart = cartService.createCart();
+
+        //todo: refactor the code - as it's currently duplicated
+
+
+        HttpSession session = httpServletRequest.getSession(true);
+        session.setAttribute("cart", newCart);
+
+        Cookie newCookie = new Cookie("cartId", String.format("%s", newCart.getCartId()));
+        newCookie.setPath("/mvc");
+
+        newCookie.setMaxAge(43200); //The time the cookie can be eaten is 12 hours
+        httpServletResponse.addCookie(newCookie);
+
+        return "redirect:/products";
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -139,6 +155,7 @@ public class CustomerProductController {
     @RequestMapping(value = "details", method = RequestMethod.GET)
     public String getOrderDetailsPage(@RequestParam("orderKey") String orderKey, Model model) {
         Cart orderDetails = orderService.getOrderByKey(orderKey);
+        System.out.println("This is cart "+ orderDetails.toString());
         List<Entry> entries = orderService.getAllEntries(orderDetails.getCartId());
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("entries", entries);
