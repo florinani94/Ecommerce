@@ -69,7 +69,7 @@ public class CartDAOImpl implements CartDAO{
         entry.setProductCode(product.getCode());
         entry.setProductName(product.getName());
         entry.setProductPrice(product.getPrice());
-        session.save(entry);
+        session.update(entry);
     }
 
     @Override

@@ -74,27 +74,22 @@ public class CartService {
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
-                if(e.getProductCode()!=null) {
-                    if(quantity==0){
-                        cartDAO.deleteEntryFromCart(e.getEntryId());
-                        status="Product successfully deleted from cart!";
-                    }else {
-                        if (e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
-                            e.setQuantity(e.getQuantity() + quantity);
-                            status = "Product successfully added to cart with quantity: " + quantity;
-                        } else {
-                            e.setQuantity(e.getProduct().getStockLevel());
-                            status = "Insufficient stock. Maximum available quantity added in cart.";
-                        }
-                        cartDAO.updateEntry(e);
-                        Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
-                        cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
-                    }
-                    cartDAO.computeTotalForCart(cartId);
-                }
-                else{
+                if(quantity==0){
                     cartDAO.deleteEntryFromCart(e.getEntryId());
+                    status="Product successfully deleted from cart!";
+                }else {
+                    if (e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
+                        e.setQuantity(e.getQuantity() + quantity);
+                        status = "Product successfully added to cart with quantity: " + quantity;
+                    } else {
+                        e.setQuantity(e.getProduct().getStockLevel());
+                        status = "Insufficient stock. Maximum available quantity added in cart.";
+                    }
+                    cartDAO.updateEntry(e);
+                    Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
+                    cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
                 }
+                cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
