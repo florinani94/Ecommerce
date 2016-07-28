@@ -45,8 +45,7 @@
                         <a>
                             <img  src="${cartImageUrl}" alt="My Cart" id="cartIcon" ismap></a>
 
-                        <%--NEEDS TO BE UPDATED WITH PRODUCTS NUMBER FROM COOKIE!!!--%>
-                        <a id="prodNr">00</a>
+                        <a id="prodNr"></a>
 
                         <div id="cartPanel">
                             <div id="allCartData">

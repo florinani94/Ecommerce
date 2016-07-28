@@ -28,10 +28,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-1 col-md-offset-5">
-            <a class="btn btn-default" href="/mvc/home">Home</a>
-        </div>
-        <div class="col-md-1">
+        <div class="col-md-2 col-md-offset-5" style="text-align: center">
             <a class="btn btn-default" href="/mvc/products">Products page</a>
         </div>
     </div>
