@@ -9,8 +9,6 @@ import java.util.Set;
  * Created by vladblana on 19/07/2016.
  */
 public interface CartDAO {
-    Product getProductById(Integer productId);
-
     Entry getEntryById(Integer entryId);
 
     Cart getCartById(Integer cartId);
