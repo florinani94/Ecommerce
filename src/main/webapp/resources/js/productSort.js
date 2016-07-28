@@ -1,6 +1,15 @@
 /**
  * Created by nicoletatica on 27/07/2016.
  */
+$(document).ready(function () {
+
+    if(getUrlParameter('sortValue')!=='' ) {
+        $sortValue=getUrlParameter('sortValue');
+        $("#sort").val($sortValue).change();
+    }
+})
+
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -43,5 +52,6 @@ function sortProduct() {
         $url=$url.replace($currentPage,'1');
     }
     location.replace($url);
+
 
 }

@@ -115,7 +115,7 @@
 
         </div>
 
-    <div class="leftDiv" >
+    <div class="leftDiv">
 
         <div class="filter">
             <br><br><br>
