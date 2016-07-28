@@ -5,6 +5,7 @@ import com.evozon.dao.CartDAO;
 import com.evozon.domain.*;
 import com.evozon.domain.dtos.OrdersDTO;
 import com.evozon.domain.*;
+import com.evozon.mvc.validator.OrderValidator;
 import com.evozon.service.*;
 import com.evozon.util.CreateUrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class CustomerProductController {
     @Autowired
     private CreateUrlUtils createUrlUtils;
 
+    @Autowired
+    private OrderValidator validator;
+
     @RequestMapping(method = RequestMethod.GET)
     public String getProducts(@RequestParam(value = "sortValue", defaultValue = "none") String sortValue,
                                  Model model, @RequestParam(value = "page", defaultValue = "1") Integer startPageIndex,
@@ -87,39 +91,31 @@ public class CustomerProductController {
     }
 
 
+
     @RequestMapping(value = "checkout", method = RequestMethod.POST)
     public String checkout(Model model, @ModelAttribute("order") OrdersDTO order, BindingResult data) {
         model.addAttribute("order", order);
+        validator.validate(order, data);
         if(data.hasErrors()){
             return "customerCartCheckout";
         }
         Cart cart = cartService.getCartById(order.getCartId());
-        Address deliveryAddress = new Address();
-        Address billingAddress = new Address();
-        Payment payment = new Payment();
-        deliveryAddress.setCity(order.getDeliveryCity());
-        deliveryAddress.setNumber(order.getDeliveryNumber());
-        deliveryAddress.setStreet(order.getDeliveryStreet());
-        deliveryAddress.setPhone(order.getDeliveryPhone());
-        billingAddress.setCity(order.getBillingCity());
-        billingAddress.setNumber(order.getBillingNumber());
-        billingAddress.setPhone(order.getBillingPhone());
-        billingAddress.setStreet(order.getBillingStreet());
-        payment.setPaymentMethod(order.getPaymentMethod());
-        payment.setCardNumber(order.getCardNumber());
-        payment.setCardCode(order.getCardCode());
-        cart.setDeliveryAddress(deliveryAddress);
-        cart.setBillingAddress(billingAddress);
-        cart.setPayment(payment);
-        cart.setEmail(order.getEmail());
-        String keyUrl = UUID.randomUUID().toString();
-        cart.setOrdersKey(keyUrl);
-        cart.setStatus("processing");
+        cartService.getDataFromOrderds(order, cart);
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
+        return "customerOrderPlaced";
+    }
 
-        orderManager.sendOrderPlacementMail("iuliacodau@yahoo.com", "iulia", keyUrl, "/mvc/products/details");
-
+    @RequestMapping(value = "/customerOrderPlaced", method = RequestMethod.GET)
+    public String orderPlaced(@RequestParam(value = "cartId") Integer cartId) {
+        Cart cart = cartService.getCartById(cartId);
+        String keyUrl = UUID.randomUUID().toString();
+        Orders orderPlaced = new Orders();
+        orderPlaced.cloneCart(cart);
+        orderPlaced.setOrdersKey(keyUrl);
+        orderPlaced.setStatus("processing");
+        orderService.addOrder(orderPlaced);
+        orderManager.sendOrderPlacementMail(orderPlaced.getEmail(), "iulia", keyUrl, "/mvc/products/details");
         return "customerOrderPlaced";
     }
 
@@ -143,7 +139,7 @@ public class CustomerProductController {
 
     @RequestMapping(value = "details", method = RequestMethod.GET)
     public String getOrderDetailsPage(@RequestParam("orderKey") String orderKey, Model model) {
-        Orders orderDetails = orderService.getOrderByKey(orderKey);
+        Cart orderDetails = orderService.getOrderByKey(orderKey);
         List<Entry> entries = orderService.getAllEntries(orderDetails.getCartId());
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("entries", entries);
