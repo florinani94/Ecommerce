@@ -69,11 +69,9 @@
 
                     <c:forEach var="categoryItem" items="${allCategories}">
                         <c:if test="${categoryItem.id != product.category.id}">
-                            <c:out value="Nu"></c:out>
                             <option value="${categoryItem.id}">${categoryItem.name}</option>
                         </c:if>
                         <c:if test="${categoryItem.id == product.category.id}">
-                            <c:out value="Da"></c:out>
                             <option value="${categoryItem.id}" selected>${categoryItem.name}</option>
                         </c:if>
 
