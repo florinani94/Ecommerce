@@ -25,8 +25,6 @@ public interface CartDAO {
 
     void deleteEntryFromCart(Integer entryId);
 
-    void updateQuantity(Entry entry);
-
     List<Entry> getEntryForAdding(Integer productId, Integer cartId);
 
     List<Entry> getAllEntriesFromCart(Integer cartId);
