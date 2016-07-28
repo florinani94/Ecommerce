@@ -130,7 +130,7 @@ public class CartDAOImpl implements CartDAO{
 
         ArrayList<Entry> result = (ArrayList)query.list();
 
-        return new Double(result.get(0).getQuantity()*result.get(0).getProductPrice());
+        return result.get(0).getQuantity()*result.get(0).getProductPrice();
     }
 
     @Override
@@ -141,7 +141,7 @@ public class CartDAOImpl implements CartDAO{
         List<Cart> carts = query.list();
 
         if(carts.size() > 0){
-            Double total=new Double(0);
+            Double total=0.0;
             for(Entry e:carts.get(0).getEntryList()){
                 total+=e.getSubTotal();
 
