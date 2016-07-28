@@ -36,6 +36,8 @@ public class CartCookieInterceptor implements HandlerInterceptor {
                     if (session.getAttribute("cart") == null){
                         Cart cart = cartService.getCartById(Integer.parseInt(cookie.getValue()));
                         session.setAttribute("cart", cart);
+
+
                     }
                 }
             //the cookie was not found on request

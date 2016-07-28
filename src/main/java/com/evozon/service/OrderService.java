@@ -1,6 +1,7 @@
 package com.evozon.service;
 
 import com.evozon.dao.OrderDAO;
+import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class OrderService {
     @Autowired
     private OrderDAO orderDAO;
 
-    public Orders getOrderByKey(String orderKey) {
+    public Cart getOrderByKey(String orderKey) {
         return orderDAO.getOrderByKey(orderKey);
     }
 

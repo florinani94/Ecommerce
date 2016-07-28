@@ -6,8 +6,11 @@ import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Product;
+import com.evozon.domain.*;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
+import com.evozon.domain.dtos.OrdersDTO;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -121,6 +124,7 @@ public class CartService {
         ArrayList<EntryDTO> entryDTOList = new ArrayList<>();
         for(Entry entryModel : entryList) {
             EntryDTO entryDTO = new EntryDTO();
+            entryDTO.setId(entryModel.getEntryId());
             entryDTO.setName(entryModel.getProductName());
             entryDTO.setPrice(entryModel.getProductPrice());
             entryDTO.setQuantity(entryModel.getQuantity());
@@ -150,5 +154,26 @@ public class CartService {
             result+=e.getQuantity();
         }
         return result;
+    }
+
+    public void getDataFromOrderds(OrdersDTO order, Cart cart) {
+        Address deliveryAddress = new Address();
+        Address billingAddress = new Address();
+        Payment payment = new Payment();
+        deliveryAddress.setCity(order.getDeliveryCity());
+        deliveryAddress.setNumber(order.getDeliveryNumber());
+        deliveryAddress.setStreet(order.getDeliveryStreet());
+        deliveryAddress.setPhone(order.getDeliveryPhone());
+        billingAddress.setCity(order.getBillingCity());
+        billingAddress.setNumber(order.getBillingNumber());
+        billingAddress.setPhone(order.getBillingPhone());
+        billingAddress.setStreet(order.getBillingStreet());
+        payment.setPaymentMethod(order.getPaymentMethod());
+        payment.setCardNumber(order.getCardNumber());
+        payment.setCardCode(order.getCardCode());
+        cart.setDeliveryAddress(deliveryAddress);
+        cart.setBillingAddress(billingAddress);
+        cart.setPayment(payment);
+        cart.setEmail(order.getEmail());
     }
 }

@@ -322,6 +322,12 @@ public class ProductService {
         return DTOproducts;
     }
 
+    public void updatePrice(int productId, double price){
+        Product product = this.getProductById(productId);
+        product.setPrice(price);
+        this.updateProduct(product);
+    }
+
     public List<Product> getProductsByCategories(Integer startPageIndex, int maxProductsPerPage, List<Integer> categoriesList) {
         if(startPageIndex<=0){
             return null;

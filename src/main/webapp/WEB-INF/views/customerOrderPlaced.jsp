@@ -25,21 +25,31 @@
 <body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
 
 <jsp:include page="customerHeader.jsp" />
-<c:url var="addressUrl" value="/products/checkout"></c:url>
-<c:url var="backUrl" value="/products"></c:url>
+<c:url var="backUrl" value="/products"></c:url>\
+<c:url var="orderPlacedUrl" value="/products/customerOrderPlaced"></c:url>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1> <b> Order Placed </b></h1>
+        <h1> <b> Order </b></h1>
         <br><br>
-        <h4> Thank you for your order! </h4>
-        <h4> Check your email for further details</h4>
+        <h4> Are you sure you want to place your order? </h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <%--<a href="${orderPlacedUrl}" class="btn btn-success" role="button"> Yes </a>--%>
+        <input type="submit" class="btn btn-success" id="checkoutID" value="Yes">
+       <%-- <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>--%>
     </div>
 </div>
 
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
+
+<c:url var="jsUrl" value="/resources/js/myscript.js"/>
+<script type="text/javascript" src="${jsUrl}"></script>
 
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>

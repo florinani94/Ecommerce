@@ -243,6 +243,7 @@ html, body {
 	margin-top: 10px;
 	font-family: Calibri;
 	margin-left: 15px;
+	z-index: 1000;
 }
 
 

@@ -210,6 +210,21 @@
 			<version>2.4.0</version>
 		</dependency>
 
+		<!-- Quartz framework dependencies -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.xml/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
 		<!--Spring Session-->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
@@ -237,4 +252,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 </project>

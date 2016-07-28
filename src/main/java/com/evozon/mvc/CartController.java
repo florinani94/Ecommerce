@@ -36,17 +36,15 @@ public class CartController {
     }
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String viewDataFromCart(Model model){
-        // get cart id here from cookie
-
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(4));
-        model.addAttribute("total", cartService.getCartById(4).getTotal());
+    public String viewDataFromCart(Model model, @RequestParam("cartId") Integer cartId){
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(cartId));
+        model.addAttribute("total", cartService.getCartById(cartId).getTotal());
         return "viewCart";
     }
 
-    @RequestMapping(value="", method = RequestMethod.POST)
-    public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
-        cartService.deleteEntryFromCart(id, 4);
+    @RequestMapping(value="/removeFromCart", method = RequestMethod.POST)
+    public String removeDataFromCart(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "cartId") int cartId){
+        cartService.deleteEntryFromCart(entryId, cartId);
         return "viewCart";
     }
 
@@ -58,11 +56,9 @@ public class CartController {
         return message;
     }
 
-
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
-        // get cart id here from cookie
-        cartService.editEntry(entryId, 4, quantity);
+    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, @RequestParam(value = "cartId") int cartId){
+        cartService.editEntry(entryId, cartId, quantity);
         return "viewCart";
     }
 
