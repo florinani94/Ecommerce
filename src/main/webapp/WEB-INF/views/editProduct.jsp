@@ -66,8 +66,17 @@
             <div class="col-xs-offset-2 col-xs-10">
                 <b> Choose a category: </b> <br><br>
                 <select name="categoryId" id="dropDown">
+
                     <c:forEach var="categoryItem" items="${allCategories}">
-                        <option value="${categoryItem.id}">${categoryItem.name}</option>
+                        <c:if test="${categoryItem.id != product.category.id}">
+                            <c:out value="Nu"></c:out>
+                            <option value="${categoryItem.id}">${categoryItem.name}</option>
+                        </c:if>
+                        <c:if test="${categoryItem.id == product.category.id}">
+                            <c:out value="Da"></c:out>
+                            <option value="${categoryItem.id}" selected>${categoryItem.name}</option>
+                        </c:if>
+
                     </c:forEach>
                 </select>
             </div>
