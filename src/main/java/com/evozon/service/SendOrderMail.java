@@ -27,7 +27,7 @@ public class SendOrderMail {
     public void sendOrderPlacementMail(String email, String name, String keyUrl, String path) {
         SimpleMailMessage msg = new SimpleMailMessage(this.placementMessage);
         msg.setTo(email);
-        msg.setText("Hello " + name + ", thank you for buying from us. If you want to see the details of your orders, please follow the link: "+ url + path + "?orderKey="+ keyUrl);
+        msg.setText("Hello beautiful customer!\n" + "Thank you for buying from us.\n If you want to see the details of your orders, please follow the link: "+ url + path + "?orderKey="+ keyUrl);
         try {
             this.mailSender.send(msg);
         } catch (MailException ex) {

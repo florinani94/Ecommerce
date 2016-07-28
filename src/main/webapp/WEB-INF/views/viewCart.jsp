@@ -57,17 +57,29 @@
         }
 
         .row-buffer {
-            margin-top: 20px;
+            margin-top: 15px;
             background-color: #FFFFFF;
             height: 22%;
         }
 
         .row-bottom {
-            margin-top: 10px;
-            height: 10%;
-            margin-bottom: 15%;
+            margin-top: 15px;
+            height: 6%;
             font-family: Impact;
             text-align: right;
+            padding-right: 5%;
+            background-color: rgb(242, 242, 242);
+        }
+
+        .finishButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 45px;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 15%;
         }
     </style>
 
@@ -139,7 +151,11 @@
         </c:forEach>
 
         <div class="row row-bottom">
-            <h2 id="totalCartPrice">Cart total: ${total}</h2>
+            <h2 id="totalCartPrice">Cart total: ${total}$</h2>
+        </div>
+
+        <div class="row">
+            <input type="submit" class="finishButton" value="SUBMIT ORDER">
         </div>
     </div>
 
@@ -150,13 +166,14 @@
     function deletefunction(val) {
         $.ajax({
             type: "POST",
-            url: contextURL + "cart/",
+            url: contextURL + "cart/removeFromCart",
             data: {
-                entryId: val
+                entryId: val,
+                cartId: idCart
             },
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart +" #totalCartPrice");
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
@@ -174,11 +191,12 @@
             url: contextURL + "cart/edit",
             data: {
                 entryId: val,
+                cartId: idCart,
                 newQuantity: quantity
             },
             success: function (response) {
-                $("#subTotal" + val).load(contextURL + "cart/ #subTotal" + val);
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                $("#subTotal" + val).load(contextURL + "cart/?cartId=" + idCart + " #subTotal" + val);
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart + " #totalCartPrice");
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
