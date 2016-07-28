@@ -148,7 +148,6 @@ public class CartDAOImpl implements CartDAO{
             }
             carts.get(0).setTotal(total);
         }
-
         session.saveOrUpdate(carts.get(0));
     }
 
