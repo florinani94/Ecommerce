@@ -45,14 +45,12 @@ public class CartService {
     }
 
     public void deleteCart(Integer cartId){
-        List<Entry> entryList=cartDAO.getAllEntriesFromCart(cartId);
-        for(Entry e:entryList){
-            cartDAO.deleteEntryFromCart(e.getEntryId());
-        }
         cartDAO.deleteCart(cartId);
     }
 
-    public void editEntry(Integer entryId,Integer cartId,Integer quantity){
+    public String editEntry(Integer entryId,Integer cartId,Integer quantity){
+        if(quantity<0)return "Invalid quantity!";
+        String status = "Edit successful!";
         Entry entry=cartDAO.getEntryById(entryId);
         entry.setQuantity(quantity);
         if(entry.getQuantity()==0){
@@ -62,14 +60,14 @@ public class CartService {
         else {
             if (entry.getProduct().getStockLevel() < entry.getQuantity()) {
                 entry.setQuantity(entry.getProduct().getStockLevel());
-                //send not enough stock message
+                status = "Insufficient stock. Maximum available quantity added in cart.";
             }
             cartDAO.updateEntry(entry);
             Double subTotal = cartDAO.computeSubTotalForEntry(entry.getEntryId(), cartId);
             cartDAO.updateSubTotalForEntry(subTotal, entry.getEntryId(), cartId);
             cartDAO.computeTotalForCart(cartId);
         }
-
+        return status;
     }
     public String addProductToCart(Integer productId,Integer cartId,Integer quantity) {
         if(quantity<0)return "Invalid quantity!";
@@ -98,6 +96,9 @@ public class CartService {
         else{
             Cart cart=cartDAO.getCartById(cartId);
             Product product=productDAO.getProductById(productId);
+            if(product.getStockLevel()==0){
+                return "Product is out of stock!";
+            }
             Entry entry=cartDAO.addEntryToCart(product,cart);
             cartDAO.updateEntryDetails(entry);
             status=addProductToCart(productId,cartId,quantity);
