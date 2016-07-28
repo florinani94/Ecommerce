@@ -102,3 +102,7 @@ $("#addButtonID").click(function() {
         });
 });
 
+$("#checkoutButtonID").click(function () {
+    window.location.href = contextURL + "cart/?cartId=" + idCart;
+})
+
