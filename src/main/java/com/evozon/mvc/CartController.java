@@ -39,15 +39,14 @@ public class CartController {
     public String viewDataFromCart(Model model){
         // get cart id here from cookie
 
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-        model.addAttribute("total", cartService.getCartById(1).getTotal());
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(4));
+        model.addAttribute("total", cartService.getCartById(4).getTotal());
         return "viewCart";
     }
 
-    @RequestMapping(value="/view", method = RequestMethod.POST)
+    @RequestMapping(value="", method = RequestMethod.POST)
     public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
-        // get cart id here from cookie
-        cartService.editEntry(id, 1, 0);
+        cartService.deleteEntryFromCart(id, 4);
         return "viewCart";
     }
 
@@ -63,7 +62,7 @@ public class CartController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, Model model){
         // get cart id here from cookie
-        cartService.editEntry(entryId, 1, quantity);
+        cartService.editEntry(entryId, 4, quantity);
         return "viewCart";
     }
 

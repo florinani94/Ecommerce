@@ -108,7 +108,6 @@ public class CartDAOImpl implements CartDAO{
         session.saveOrUpdate(entry);
     }
 
-
     @Override
     public List<Entry> getEntryForAdding(Integer productId, Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
