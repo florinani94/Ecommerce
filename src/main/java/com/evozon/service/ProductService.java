@@ -265,20 +265,28 @@ public class ProductService {
             String imageURL = "/resources/productImages/" + product.getCode() + ".jpg";
             product.setImageURL(imageURL);
         } else {
-            File file = new File(servletContext.getRealPath("/resources/productImages/default@product.jpg"));
+            String defaultImagePath = "/resources/productImages/default@product.jpg";
             MultipartFile defaultImage = null;
 
             try {
-                FileInputStream input = new FileInputStream(file);
-                defaultImage = new MockMultipartFile(product.getCode() + ".jpg", file.getName(), "image/jpeg", IOUtils.toByteArray(input));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                defaultImage = this.getImageForProduct(product.getCode(), defaultImagePath);
+                this.doImageSaveOperation(product, defaultImage);
+            } catch (Exception e) { /* Do something later */ }
 
-            this.doImageSaveOperation(product, defaultImage);
         }
 
         return product;
+    }
+
+    /* get the defaul image */
+    public MultipartFile getImageForProduct(String productCode, String path) throws Exception {
+        File file = new File(servletContext.getRealPath(path));
+        MultipartFile image = null;
+
+        FileInputStream input = new FileInputStream(file);
+        image = new MockMultipartFile(productCode + ".jpg", file.getName(), "image/jpeg", IOUtils.toByteArray(input));
+
+        return image;
     }
 
     public List<Product> getProductsByCategory(int categoryId){
@@ -328,26 +336,36 @@ public class ProductService {
     }
 
 
-    /* import from file */
-    public void importFromCSV(HttpServletRequest request) {
-        File file;
-        String contentType = request.getContentType();
-        if ((contentType.indexOf("multipart/form-data") >= 0)) {
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            try {
-                List fileItems = upload.parseRequest(request);
-                Iterator i = fileItems.iterator();
-                while (i.hasNext()) {
-                    FileItem fi = (FileItem) i.next();
-                    if (!fi.isFormField()) {
-                        file = new File("temp.csv");
-                        fi.write(file);
-                    }
+    /* import form file V2 */
+    public void importFromCSV(MultipartFile filename) {
+        try {
+            InputStream inputStream = filename.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+
+            String input;
+            while((input = br.readLine()) != null) {
+                String[] productDetails = input.split(",");
+                Product product = new Product();
+                product.setCode(productDetails[0]);
+                product.setDescription(productDetails[1]);
+                product.setName(productDetails[2]);
+                product.setPrice(Double.parseDouble(productDetails[3]));
+                product.setStockLevel(Integer.parseInt(productDetails[4]));
+
+                Category category = categoryDAO.getCategoryById(Integer.parseInt(productDetails[5]));
+                product.setCategory(category);
+
+                try {
+                    MultipartFile image = this.getImageForProduct(product.getCode(),productDetails[6]);
+                    productDAO.addProduct(this.doImageSaveOperation(product, image));
+                } catch (Exception e) {
+                    String defaultImagePath = "/resources/productImages/default@product.jpg";
+                    MultipartFile image = this.getImageForProduct(product.getCode(), defaultImagePath);
+                    productDAO.addProduct(this.doImageSaveOperation(product, image));
                 }
-            } catch (Exception ex) { /* put the error message in the logger after the method is redone */ }
-        }
-        productDAO.importFromFile("temp.csv");
+            }
+
+        } catch (Exception e) { /* do something later */ }
     }
 }
 

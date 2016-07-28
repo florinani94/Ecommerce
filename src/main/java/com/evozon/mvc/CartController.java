@@ -29,7 +29,7 @@ public class CartController {
 
     @RequestMapping(value="/entries", method = RequestMethod.POST)
     @ResponseBody
-    public MiniCartDTO getCartProducts(Model model, @RequestParam("cartId") int cartId){
+    public MiniCartDTO getCartProducts(Model model, @RequestParam("cartId") Integer cartId){
         MiniCartDTO minicart = cartService.getEntriesFromCart(cartId);
 
         return minicart;
@@ -64,7 +64,7 @@ public class CartController {
 
     @RequestMapping(value = "/getProductsNumber", method = RequestMethod.GET)
     @ResponseBody
-    public int getCartProductsNumber(@RequestParam(value = "cartId") int cartId){
+    public int getCartProductsNumber(@RequestParam(value = "cartId") Integer cartId){
         return cartService.getNumberOfProductsInCart(cartId);
     }
 

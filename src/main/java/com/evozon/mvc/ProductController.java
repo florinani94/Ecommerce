@@ -117,9 +117,13 @@ public class ProductController {
         return "viewProducts";
     }
 
+
+
+
+    // import post method -- HttpServletRequest request,
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public String importFromFile(HttpServletRequest request, Model model) {
-        productService.importFromCSV(request);
+    public String importFromFile(@RequestParam(value = "filename", required = false) MultipartFile filename, Model model) {
+       productService.importFromCSV(filename);
 
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
@@ -173,8 +177,9 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="", method = RequestMethod.POST)
     public String deleteAll(Model model, @RequestParam(value = "prodArray[]") List<Integer> prodArray) {
+        System.out.println("here");
         for (Integer i : prodArray) {
             productService.deleteProduct(i);
         }
