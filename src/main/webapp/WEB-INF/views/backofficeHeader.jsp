@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <%@ page session="false" %>
 <html>
@@ -14,6 +15,7 @@
     <c:url var="sortProductsByPriceUpDown" value="/backoffice/product/sortpriceupdown"/>
 
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
+    <c:url var="runJob" value="/backoffice/product/job"/>
 
 
     <link rel="stylesheet" type="text/css" href="${cssUrl}">
@@ -44,6 +46,7 @@
 
         <div class = "col-md-6">
             <ul>
+                <li><a href="${runJob}">Start/Stop Job</a></li>
                 <li><a href="${createCategoryURL}">Create category</a></li>
                 <li><a href="${listCategoryURL}">View categories</a></li>
                 <li><a href="${exportURL}">Export teas to file</a></li>
