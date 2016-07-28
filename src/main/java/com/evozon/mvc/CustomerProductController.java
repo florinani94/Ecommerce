@@ -126,7 +126,6 @@ public class CustomerProductController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String showProductDetails(Model model, @RequestParam String productId){
         model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-        model.addAttribute("successMessage","test");
         return "productDetailsPage";
     }
 

@@ -21,7 +21,7 @@ import java.util.Locale;
 
 
 @Controller
-class HomeController {
+public class HomeController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 

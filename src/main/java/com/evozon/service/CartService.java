@@ -2,6 +2,7 @@ package com.evozon.service;
 
 import com.evozon.dao.CartDAO;
 import com.evozon.dao.OrderDAO;
+import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
 import com.evozon.domain.Orders;
@@ -31,6 +32,9 @@ public class CartService {
 
     @Autowired
     private OrderDAO orderDAO;
+
+    @Autowired
+    private ProductDAO productDAO;
 
     @Autowired
     private ServletContext servletContext;
@@ -97,13 +101,13 @@ public class CartService {
                 }
                 else{
                     cartDAO.deleteEntryFromCart(e.getEntryId());
-                    status="Product successfully deleted!";
+                    status="Product successfully deleted from cart!";
                 }
             }
         }
         else{
             Cart cart=cartDAO.getCartById(cartId);
-            Product product=cartDAO.getProductById(productId);
+            Product product=productDAO.getProductById(productId);
             Entry entry=cartDAO.addEntryToCart(product,cart);
             cartDAO.updateEntryDetails(entry);
             status=addProductToCart(productId,cartId,quantity);

@@ -63,8 +63,6 @@ public class Cart {
     @Embedded
     private Address billingAddress;
 
-
-
     public Cart(){
 
     }
@@ -77,7 +75,6 @@ public class Cart {
         this.billingAddress = billingAddress;
         this.payment = payment;
         this.email = email;
-
     }
 
     public int getCartId() {
@@ -105,7 +102,6 @@ public class Cart {
     public void setTotal(Double total) {
         this.total = total;
     }
-
 
     @Override
     public String toString() {

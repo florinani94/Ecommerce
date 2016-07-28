@@ -16,21 +16,8 @@ import java.util.List;
 @Transactional
 public class CartDAOImpl implements CartDAO{
 
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    public Product getProductById(Integer productId) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Product as P WHERE P.productId = :id");
-        query.setParameter("id", productId);
-        List<Product> products = query.list();
-        if(products.size() > 0){
-            return products.get(0);
-        }
-        return null;
-    }
 
     @Override
     public Entry getEntryById(Integer entryId){

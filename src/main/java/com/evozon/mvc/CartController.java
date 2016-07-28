@@ -53,7 +53,7 @@ public class CartController {
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     @ResponseBody
-    public String addToCart(ModelMap model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+    public String addToCart(@RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
         String message;
         message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
         return message;
