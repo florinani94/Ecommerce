@@ -3,7 +3,6 @@ package com.evozon.mvc.interceptor;
 import com.evozon.domain.Cart;
 import com.evozon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,21 +24,22 @@ public class CartCookieInterceptor implements HandlerInterceptor {
 
         if (cookies != null) {
             // flag = cookie exists or not
-            Integer flag = 0;
+            Boolean flag = false;
             HttpSession session = httpServletRequest.getSession(true);
+
 
             for (Cookie cookie : cookies)
                 if ("cartId".equals(cookie.getName())) {
-                    flag = 1;
-
+                    flag = true;
                     //cookie exists but session not. Now we create a session
                     if (session.getAttribute("cart") == null){
                         Cart cart = cartService.getCartById(Integer.parseInt(cookie.getValue()));
                         session.setAttribute("cart", cart);
                     }
                 }
+
             //the cookie was not found on request
-            if (flag == 0) {
+            if (flag == false) {
                 //1. Create a new Cart if cart not exist
                 Cart newCart = new Cart();
                 cartService.addCart(newCart);
@@ -52,7 +52,6 @@ public class CartCookieInterceptor implements HandlerInterceptor {
                 //3. Put Cart on user Session
                 session.setAttribute("cart", newCart);
             }
-
         }
         return true;
     }
