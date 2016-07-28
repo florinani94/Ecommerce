@@ -163,6 +163,10 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#cartIcon").css('pointer-events','none');
+    })
+
     function deletefunction(val) {
         $.ajax({
             type: "POST",
