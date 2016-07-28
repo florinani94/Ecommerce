@@ -7,8 +7,35 @@ $('#cartIcon').hover(function () {
     $(this).css('width','7%');
 })
 
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function refreshCartProductsNumber(cartIdentifier){
+    $.ajax({
+        type : "GET",
+        url : "/mvc/cart/getProductsNumber",
+        data : {cartId: idCart},
+        success : function(result){
+            $("#prodNr").text(result);
+        },
+        error : function(e) {
+            console.log('Error: ', e);
+        }
+    });
+}
+
 var toggleMenu = false;
-var idCart=1;
+var idCart = parseInt(readCookie("cartId"));
+
+$(document).ready(refreshCartProductsNumber(idCart));
 
 $('#cartIcon, #prodNr').click(function () {
 
@@ -30,7 +57,7 @@ $('#cartIcon, #prodNr').click(function () {
                             "<div class='entry-line'>" +
                                 "<span class='entry-quantity'>" + entry.quantity + "  x  " + "</span>" +
                                 "<span class='entry-name'>" + entry.name + "   " + "</span>" +
-                                "<span class='entry-price'>" + entry.price + "$" + "</span>" +
+                                "<span class='entry-subtotal'>" + entry.subtotal + "$" + "X"+"</span>" +
                             "</div>"
                         );
                     entriesNo++;
@@ -38,8 +65,9 @@ $('#cartIcon, #prodNr').click(function () {
                 );
 
                 $('#cartPanel').css("position","absolute");
+                refreshCartProductsNumber(idCart);
                 $('#cartPanel').css("visibility", "visible");
-                $('#cartPanel').animate({height: (entriesNo*20 + 48).toString() + '%'}, 200);
+                $('#cartPanel').animate({height: (entriesNo*28 + 65).toString() + '%'}, 200);
             },
             error : function(e) {
                 console.log('Error: ', e);
@@ -54,24 +82,23 @@ $('#cartIcon, #prodNr').click(function () {
     }
 )
 
-
 $("#addButtonID").click(function() {
-        $.ajax({
-            type : "POST",
-            url : "/mvc/cart/addToCart",
-            data : {
-                quantity: $("#quantityFieldID").val(),
-                productId: $('#product-id').val(),
-                cartId: 1 //temporary!
-            },
-            success : function(response) {
-                alert("Product successfully added with quantity " + $("#quantityFieldID").val());
-                console.log("success");
-            },
-            error : function(e) {
+         $.ajax({
+             type : "POST",
+             url : "/mvc/cart/addToCart",
+             data : {
+                 quantity: $("#quantityFieldID").val(),
+                 productId: $('#product-id').val(),
+                 cartId: idCart
+             },
+             success : function(response) {
+                 alert(response);
+                 refreshCartProductsNumber(idCart);
+                 console.log("success");
+             },
+             error : function(e) {
                 alert('An error occurred while trying to add the product to the cart. Please try again later. ');
-            }
-       });
-
+             }
+        });
 });
 

@@ -7,7 +7,9 @@ import com.evozon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,48 +35,39 @@ public class CartController {
         return minicart;
     }
 
-
-    @RequestMapping(value="/populate", method = RequestMethod.GET)
-    public String insertEntryProducts(Model model){
-        System.out.println("Populated");
-        //cartService.addProductToCart(1,1);
-      //  cartService.addProductToCart(2,1);
-      //  cartService.addProductToCart(3,1);
-      //  cartService.addProductToCart(5,2);
-      //  cartService.addProductToCart(6,2);
-        return "splashPage";
-    }
-
     @RequestMapping(value="", method = RequestMethod.GET)
     public String viewDataFromCart(Model model){
         // get cart id here from cookie
 
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-        model.addAttribute("total", cartService.getCartById(1).getTotal());
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(4));
+        model.addAttribute("total", cartService.getCartById(4).getTotal());
         return "viewCart";
     }
 
-    @RequestMapping(value="/view", method = RequestMethod.POST)
-    public String removeDataFromCart(@RequestParam(value = "entryId", required = false) int id, Model model){
-        // get cart id here from cookie
-        cartService.editEntry(id, 1, 0);
-
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(1));
-        model.addAttribute("total", cartService.getCartById(1).getTotal());
+    @RequestMapping(value="/removeFromCart", method = RequestMethod.POST)
+    public String removeDataFromCart(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "cartId") int cartId){
+        cartService.deleteEntryFromCart(entryId, cartId);
         return "viewCart";
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(Model model, @RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
-        System.out.println("//Prod id://"+productId);
-        // model.addAttribute("theProduct", productService.getProductById(Integer.parseInt(productId)));
-        if(cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity))){
+    @ResponseBody
+    public String addToCart(@RequestParam String productId, @RequestParam String cartId, @RequestParam String quantity){
+        String message;
+        message=cartService.addProductToCart(Integer.parseInt(productId),Integer.parseInt(cartId),Integer.parseInt(quantity));
+        return message;
+    }
 
-        }
-        else{
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editQuantity(@RequestParam(value = "entryId") int entryId, @RequestParam(value = "newQuantity") int quantity, @RequestParam(value = "cartId") int cartId){
+        cartService.editEntry(entryId, cartId, quantity);
+        return "viewCart";
+    }
 
-        }
-        return "productDetailsPage";
+    @RequestMapping(value = "/getProductsNumber", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCartProductsNumber(@RequestParam(value = "cartId") int cartId){
+        return cartService.getNumberOfProductsInCart(cartId);
     }
 
 }

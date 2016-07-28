@@ -9,6 +9,10 @@ html, body {
 	max-height: 15%;
 }
 
+#footerLinks{
+	text-align: center;
+}
+
 .footer{
 	background-image: linear-gradient(to bottom , rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.35));
 	position:fixed;
@@ -102,10 +106,10 @@ html, body {
 	background: rgba(255,255,255,0.5);
 }
 
-#productDetails{
+#productDetails {
 	margin-top: 3%;
 	width: 70%;
-	height: 35%;
+	height: 32%;
 	margin-left: 15%;
 }
 
@@ -137,9 +141,25 @@ html, body {
 	color: #aebd4c;
 	text-align: center;
 	font-size: 40px;
-	vertical-align: top;
-	margin-top: 5%;
 	margin-left: 5%;
+}
+
+.qtyInput {
+	text-align: center;
+	width: 40%;
+	font-size: 15px;
+	margin-left: 24%;
+}
+
+#quantityFieldID {
+	text-align: center;
+	width: 30%;
+	height: 60%;
+	padding: 6px 5px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 .myHr {
@@ -150,7 +170,7 @@ html, body {
 
 .addButton {
 	text-align: center;
-	margin-top: -18%;
+	margin-top: -4%;
 	margin-left: 20%;
 	background-color: #4CAF50; /* Green */
 	border: none;
@@ -159,6 +179,21 @@ html, body {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 20px;
+}
+
+#checkoutButtonID {
+	margin-top: 17%;
+	text-align: center;
+	background-color: rgba(76,175,80,0.8); /* Green */
+	border: none;
+	color: white;
+	position: absolute;
+	right: 2%;
+	width: 60%;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+	z-index: 1000;
 }
 
 
@@ -188,14 +223,14 @@ html, body {
 #prodNr{
 	position: absolute;
 	top: 80%;
-	color: rgba(255,255,255,0.5);
+	color: rgba(255,255,255,0.7);
 	font-family: 'Calibri';
 	font-weight: lighter;
-	margin-left: -1%;
 	text-decoration: none;
 }
 
 #cartPanel{
+	position: absolute;
 	visibility: hidden;
 	margin-left: 70%;
 	width: 40%;
@@ -208,6 +243,7 @@ html, body {
 	margin-top: 10px;
 	font-family: Calibri;
 	margin-left: 15px;
+	z-index: 1000;
 }
 
 
@@ -217,7 +253,7 @@ html, body {
 	font-size: 18px;
 }
 
-.entry-price{
+.entry-subtotal{
 	position: absolute;
 	right: 15px;
 	font-style: italic;
@@ -231,7 +267,8 @@ html, body {
 }
 
 #totalTag{
-	margin-top: 1%;
+	color: rgba(0,0,0,0.9);
+	margin-top: 3%;
 	font-style: italic;
 	position: absolute;
 	right: 15px;
@@ -241,3 +278,15 @@ html, body {
 	font-size: 15px;
 }
 
+.quantity {
+	text-align:center;
+	width: 80%;
+	margin-top: -18%;
+	margin-left: 20%;
+	padding: 6px 5px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}

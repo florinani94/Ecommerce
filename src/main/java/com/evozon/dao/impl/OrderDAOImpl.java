@@ -22,7 +22,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     public Orders getOrderByKey(String orderKey) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Orders as O WHERE ordersKey = :orderKey");
+        Query query = session.createQuery("FROM Cart as O WHERE ordersKey = :orderKey");
         query.setParameter("orderKey", orderKey);
 
         List<Orders> orders = query.list();
@@ -36,7 +36,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     public Orders getOrderById(Integer orderId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Orders as O WHERE ordersId = :orderId");
+        Query query = session.createQuery("FROM Cart as O WHERE cartId = :orderId");
         query.setParameter("orderId", orderId);
 
         List<Orders> orders = query.list();
@@ -58,10 +58,10 @@ public class OrderDAOImpl implements OrderDAO {
         session.update(order);
     }
 
-    public List<Entry> getAllEntries(Integer orderId) {
+    public List<Entry> getAllEntries(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Entry as E WHERE E.order.ordersId = :id");
-        query.setParameter("id", orderId);
+        Query query = session.createQuery("FROM Entry as E WHERE E.cart.cartId = :id");
+        query.setParameter("id", cartId);
 
         List<Entry> entryList = query.list();
         return entryList;

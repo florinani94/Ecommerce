@@ -5,12 +5,23 @@ package com.evozon.domain.dtos;
  */
 public class EntryDTO {
 
+    private Integer id;
+
     private String name;
 
     private Double price;
 
     private Integer quantity;
 
+    private Double subtotal;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -34,5 +45,13 @@ public class EntryDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }

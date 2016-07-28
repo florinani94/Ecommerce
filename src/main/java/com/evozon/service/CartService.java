@@ -2,20 +2,18 @@ package com.evozon.service;
 
 import com.evozon.dao.CartDAO;
 import com.evozon.dao.OrderDAO;
+import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Cart;
 import com.evozon.domain.Entry;
-import com.evozon.domain.Orders;
 import com.evozon.domain.Product;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by vladblana on 19/07/2016.
@@ -27,6 +25,9 @@ public class CartService {
 
     @Autowired
     private OrderDAO orderDAO;
+
+    @Autowired
+    private ProductDAO productDAO;
 
     @Autowired
     private ServletContext servletContext;
@@ -60,46 +61,45 @@ public class CartService {
                 entry.setQuantity(entry.getProduct().getStockLevel());
                 //send not enough stock message
             }
-            cartDAO.updateQuantity(entry);
+            cartDAO.updateEntry(entry);
             Double subTotal = cartDAO.computeSubTotalForEntry(entry.getEntryId(), cartId);
             cartDAO.updateSubTotalForEntry(subTotal, entry.getEntryId(), cartId);
             cartDAO.computeTotalForCart(cartId);
         }
 
     }
-    public boolean addProductToCart(Integer productId,Integer cartId,Integer quantity) {
+    public String addProductToCart(Integer productId,Integer cartId,Integer quantity) {
+        if(quantity<0)return "Invalid quantity!";
+        String status = "";
         List<Entry> entryList=cartDAO.getEntryForAdding(productId,cartId);
         if(entryList.size()>0){
             for(Entry e:entryList){
-                if(e.getProductCode()!=null) {
-                    if(e.getProduct().getStockLevel() > e.getQuantity() + quantity) {
+                if(quantity==0){
+                    cartDAO.deleteEntryFromCart(e.getEntryId());
+                    status="Product successfully deleted from cart!";
+                }else {
+                    if (e.getProduct().getStockLevel() >= e.getQuantity() + quantity) {
                         e.setQuantity(e.getQuantity() + quantity);
-                    }
-                    else{
+                        status = "Product successfully added to cart with quantity: " + quantity;
+                    } else {
                         e.setQuantity(e.getProduct().getStockLevel());
-                        return false;
-                        //send not enough stock message
+                        status = "Insufficient stock. Maximum available quantity added in cart.";
                     }
                     cartDAO.updateEntry(e);
                     Double subTotal = cartDAO.computeSubTotalForEntry(e.getEntryId(), cartId);
                     cartDAO.updateSubTotalForEntry(subTotal, e.getEntryId(), cartId);
-                    cartDAO.computeTotalForCart(cartId);
                 }
-                else{
-                    cartDAO.deleteEntryFromCart(e.getEntryId());
-                }
+                cartDAO.computeTotalForCart(cartId);
             }
         }
         else{
             Cart cart=cartDAO.getCartById(cartId);
-            Product product=cartDAO.getProductById(productId);
-            //Orders orders=orderDAO.getOrderById(1);//remove hardcoding
+            Product product=productDAO.getProductById(productId);
             Entry entry=cartDAO.addEntryToCart(product,cart);
-
             cartDAO.updateEntryDetails(entry);
-            addProductToCart(productId,cartId,quantity);
+            status=addProductToCart(productId,cartId,quantity);
         }
-        return true;
+        return status;
     }
 
     public void deleteEntryFromCart(Integer entryId, Integer cartId) {
@@ -121,9 +121,11 @@ public class CartService {
         ArrayList<EntryDTO> entryDTOList = new ArrayList<>();
         for(Entry entryModel : entryList) {
             EntryDTO entryDTO = new EntryDTO();
+            entryDTO.setId(entryModel.getEntryId());
             entryDTO.setName(entryModel.getProductName());
             entryDTO.setPrice(entryModel.getProductPrice());
             entryDTO.setQuantity(entryModel.getQuantity());
+            entryDTO.setSubtotal(entryModel.getSubTotal());
 
             entryDTOList.add(entryDTO);
         }
@@ -143,7 +145,7 @@ public class CartService {
 
     public Integer getNumberOfProductsInCart(Integer cartId)
     {
-        Integer result=new Integer(0);
+        Integer result = 0;
         List<Entry> entryList=cartDAO.getAllEntriesFromCart(cartId);
         for(Entry e:entryList){
             result+=e.getQuantity();

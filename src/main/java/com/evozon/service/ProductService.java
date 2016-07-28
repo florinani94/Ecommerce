@@ -5,6 +5,9 @@ import com.evozon.dao.ProductDAO;
 import com.evozon.domain.Category;
 import com.evozon.domain.Product;
 import com.evozon.domain.dtos.ProductDTO;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -125,29 +130,32 @@ public class ProductService {
 
         try {
 
-            br = new BufferedReader(new FileReader((fileName + ".csv")));
-            while ((line = br.readLine()) != null) {
+            File f = new File(fileName + ".csv");
+            if(f.exists()) {
+                br = new BufferedReader(new FileReader((fileName + ".csv")));
+                while ((line = br.readLine()) != null) {
 
-                String[] product = line.split(csvSplitBy);
-                Product newProduct = new Product();
-                newProduct.setCode(product[0]);
-                newProduct.setName(product[1]);
-                newProduct.setDescription(product[2]);
-                newProduct.setPrice(Double.valueOf(product[3]));
-                newProduct.setStockLevel(Integer.valueOf(product[4]));
-                Integer categoryId = Integer.valueOf(product[5]);
-                Category category=null;
-               try{
-                   category=categoryDAO.getCategoryById(categoryId);
-               }
-               catch(Exception e){
-                   e.printStackTrace();
-               }
-                newProduct.setCategory(category);
-                newProduct.setImageURL(product[6]);
+                    String[] product = line.split(csvSplitBy);
+                    Product newProduct = new Product();
+                    newProduct.setCode(product[0]);
+                    newProduct.setName(product[1]);
+                    newProduct.setDescription(product[2]);
+                    newProduct.setPrice(Double.valueOf(product[3]));
+                    newProduct.setStockLevel(Integer.valueOf(product[4]));
+                    Integer categoryId = Integer.valueOf(product[5]);
+                    Category category = null;
 
-                list.add(newProduct);
+                    try {
+                        category = categoryDAO.getCategoryById(categoryId);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    newProduct.setCategory(category);
+                    newProduct.setImageURL(product[6]);
 
+                    list.add(newProduct);
+
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -180,23 +188,46 @@ public class ProductService {
         productDAO.updateProduct(product);
     }
 
-    public int getSize(){
-        return productDAO.getAllProducts().size();
+    public int getSize(List<Integer> categoriesListIds){
+        Integer maxSize=productDAO.getAllProducts().size();
+        Integer categoriesSize=0;
+        if (categoriesListIds.size()>0) {
+            for (Integer categoryId : categoriesListIds) {
+                categoriesSize += productDAO.getProductsByCategory(categoryId).size();
+            }
+            return categoriesSize;
+        }
+        else {
+            return maxSize;
+        }
+
     }
 
-    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer recordsPerPage){
+    public List<Product> getSortedProducts(String option, Integer startPageIndex, Integer recordsPerPage,List<Integer> selectedCategoriesIds){
+        String filterByCategories;
+        if (selectedCategoriesIds.size()==0)
+        {
+            filterByCategories="";
+        }
+        else {
+            filterByCategories=" WHERE P.category.id in (:categoriesIds) ";
+        }
 
             switch (option) {
                 case "sortpriceupdown":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.price", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortpricedownup":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.price DESC", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.price DESC", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortnameaz":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P" + filterByCategories + " ORDER BY P.name", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 case "sortnameza":
-                    return productDAO.getSortedProducts("FROM Product P ORDER BY P.name DESC", startPageIndex, recordsPerPage);
+                    return productDAO.getSortedProducts("FROM Product P " + filterByCategories + " ORDER BY P.name DESC", startPageIndex, recordsPerPage, selectedCategoriesIds);
                 default:
-                    return productDAO.getProductsForPage(startPageIndex, recordsPerPage);
+                    if (selectedCategoriesIds.size() == 0) {
+                        return productDAO.getProductsForPage(startPageIndex, recordsPerPage);
+                    } else {
+                        return productDAO.getProductsFilteredByCategories(startPageIndex, recordsPerPage, selectedCategoriesIds);
+                    }
             }
     }
 
@@ -287,6 +318,36 @@ public class ProductService {
         Product product = this.getProductById(productId);
         product.setPrice(price);
         this.updateProduct(product);
+    }
+
+    public List<Product> getProductsByCategories(Integer startPageIndex, int maxProductsPerPage, List<Integer> categoriesList) {
+        if(startPageIndex<=0){
+            return null;
+        }
+        return productDAO.getProductsFilteredByCategories(startPageIndex,maxProductsPerPage,categoriesList);
+    }
+
+
+    /* import from file */
+    public void importFromCSV(HttpServletRequest request) {
+        File file;
+        String contentType = request.getContentType();
+        if ((contentType.indexOf("multipart/form-data") >= 0)) {
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            try {
+                List fileItems = upload.parseRequest(request);
+                Iterator i = fileItems.iterator();
+                while (i.hasNext()) {
+                    FileItem fi = (FileItem) i.next();
+                    if (!fi.isFormField()) {
+                        file = new File("temp.csv");
+                        fi.write(file);
+                    }
+                }
+            } catch (Exception ex) { /* put the error message in the logger after the method is redone */ }
+        }
+        productDAO.importFromFile("temp.csv");
     }
 }
 

@@ -117,34 +117,10 @@ public class ProductController {
         return "viewProducts";
     }
 
-    /*
-     * TODO Move file processing logic from controller to dedicated service
-     *
-     * TODO Use a logger instead of System.out.println
-     * A dedicated logger will allow you to control the log level, besides other advantages.
-     */
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public String importFromFile(HttpServletRequest request, Model model) {
-        File file;
-        String contentType = request.getContentType();
-        if ((contentType.indexOf("multipart/form-data") >= 0)) {
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            try {
-                List fileItems = upload.parseRequest(request);
-                Iterator i = fileItems.iterator();
-                while (i.hasNext()) {
-                    FileItem fi = (FileItem) i.next();
-                    if (!fi.isFormField()) {
-                        file = new File("temp.csv");
-                        fi.write(file);
-                    }
-                }
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-        }
-        productService.importFromFile("temp.csv");
+        productService.importFromCSV(request);
+
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
     }

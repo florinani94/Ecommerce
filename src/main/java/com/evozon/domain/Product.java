@@ -18,10 +18,8 @@ public class Product implements Serializable {
     @Column(nullable = false, length = 20)
     private String name;
 
-
     @OneToMany(targetEntity=Entry.class,mappedBy="product",fetch=FetchType.EAGER)
     private Set<Entry> entrySet;
-
 
     @Column
     private String description;

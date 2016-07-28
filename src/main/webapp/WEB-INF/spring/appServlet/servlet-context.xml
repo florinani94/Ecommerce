@@ -23,4 +23,10 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:interceptors>
+        <bean class="com.evozon.mvc.interceptor.CartCookieInterceptor" />
+    </mvc:interceptors>
+
+
+
 </beans>

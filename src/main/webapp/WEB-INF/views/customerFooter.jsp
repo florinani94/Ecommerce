@@ -1,22 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
-<%--todo: create a css.tag and js. tag and move these files--%>
-    <link rel="stylesheet" href="/resources/style/detailViewStyle.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+    <c:url var="cartJavaScriptUrl" value="/resources/js/cartBehaviour.js"></c:url>
 
     <footer class="footer">
         <div class="row">
-            <div class="col-md-3 col-md-offset-5">
+            <div id="footerLinks" class="col-md-4 col-md-offset-4">
                 <a class="footerLink" href="/mvc/products"> Products </a>
-                <a class="footerLink"> Terms and Conditions </a>
-                <a class="footerLink"> Contact </a>
+                <a class="footerLink" href="#"> Terms and Conditions </a>
+                <a class="footerLink" href="#"> Contact </a>
             </div>
         </div>
         <div class="row">
@@ -27,4 +16,4 @@
     </footer>
 
 <script src="/mvc/resources/jquery-1.8.3.js"></script>
-<script type="application/javascript" src="${cartJavaScriptUrl}"></script>
+<script type="application/javascript" src="/mvc/resources/js/cartBehaviour.js"></script>

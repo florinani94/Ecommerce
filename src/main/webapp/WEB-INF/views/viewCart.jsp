@@ -23,36 +23,89 @@
     <title>My Cart</title>
 
     <style>
-        #viewProductsTable {
-            width:50%;
-            margin-top: 5%;
+        #entryTitle {
+            font-family: Calibri;
+            color: rgb(114, 114, 114);
+            font-size: 22px;
+            text-decoration: underline;
+            margin-bottom: 13px;
+        }
+
+        a:not([href]) {
+            font-family: Calibri;
+            color: rgb(204, 102, 0);
+            text-decoration: underline;
+            font-size: 20px;
+        }
+
+        a:not([href]):hover {
+            font-family: Calibri;
+            cursor: pointer;
+            color: rgb(153, 77, 0);
+            font-size: 20px;
+        }
+
+        #stockLabel {
+            font-family: Calibri;
+            color: rgb(102, 153, 0);
+        }
+
+        th, td {
+            color: rgb(114, 114, 114);
+            font-family: Calibri;
+            font-size: 18px;
+        }
+
+        .row-buffer {
+            margin-top: 15px;
+            background-color: #FFFFFF;
+            height: 22%;
+        }
+
+        .row-bottom {
+            margin-top: 15px;
+            height: 6%;
+            font-family: Impact;
+            text-align: right;
+            padding-right: 5%;
+            background-color: rgb(242, 242, 242);
+        }
+
+        .finishButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 45px;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 15%;
         }
     </style>
 
 </head>
-<body background="${backgroundURL}" style="background-size: 100%">
-<jsp:include page="customerHeader.jsp" />
+<body background="${backgroundURL}" style="background-size: 100%;">
+<jsp:include page="customerHeader.jsp"/>
 
 <br>
 <div class="row-fluid">
     <div class="col-md-3"></div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h1 id="productTitle">My Cart</h1>
         <div class="myHr"></div>
 
         <c:forEach var="entry" items="${entries}">
-            <div class="row">
-            <h4 class="text-uppercase"><strong>${entry.productName}</strong></h4>
-            <br>
+            <div class="row row-buffer">
+                <h4 id="entryTitle" style="margin-left: 5%">${entry.productName}</h4>
 
                 <div class="col-md-3">
                     <c:url var="img" value="${entry.product.imageURL}"/>
-                    <img src="${img}" style="height: 120px; width: 175px;">
+                    <img src="${img}" style="height: 140px; width: 204px;">
                 </div>
 
                 <div class="col-md-9">
-                    <table id="viewProductsTable">
+                    <table style="width: 70%; margin-left: 15%;">
                         <tr>
                             <th>CODE</th>
                             <th>PRICE</th>
@@ -61,42 +114,97 @@
                         </tr>
                         <tr>
                             <td>${entry.productCode}</td>
-                            <td>${entry.productPrice} $</td>
-                            <td>${entry.quantity}</td>
-                            <td>${entry.subTotal}</td>
+                            <td>${entry.productPrice}</td>
+
+                            <td><select id="quantityOptions${entry.entryId}">
+                                <c:forEach begin="1" end="${entry.product.stockLevel}" var="val">
+                                    <c:if test="${val == entry.quantity}">
+                                        <option selected>${val}</option>
+                                    </c:if>
+
+                                    <c:if test="${val != entry.quantity}">
+                                        <option>${val}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select></td>
+
+                            <td id="subTotal${entry.entryId}">${entry.subTotal}</td>
                         </tr>
                         <tr>
-                            <th><a id="removeEntryBtn${entry.entryId}" onclick="myfunction(${entry.entryId})">Remove</a></th>
+                            <td></td>
+                            <td></td>
+                            <td><a id="editEntryBtn${entry.entryId}" onclick="editfunction(${entry.entryId})">Update</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <c:if test="${entry.product.stockLevel != 0}">
+                                <td colspan="4"><h4 id="stockLabel"><strong>In Stock & Ready To Ship</strong></h4></td>
+                            </c:if>
+                        </tr>
+                        <tr>
+                            <td><a id="removeEntryBtn${entry.entryId}"
+                                   onclick="deletefunction(${entry.entryId})">Remove</a></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <br>
-            <div class="myHr"></div>
         </c:forEach>
 
-        <h1>CART TOTAL: ${total}</h1>
+        <div class="row row-bottom">
+            <h2 id="totalCartPrice">Cart total: ${total}$</h2>
+        </div>
+
+        <div class="row">
+            <input type="submit" class="finishButton" value="SUBMIT ORDER">
+        </div>
     </div>
 
-    <div class="col-md-3"></div>
+    <div class="col-md-5"></div>
 </div>
 
 <script type="text/javascript">
-    function myfunction (val) {
+    function deletefunction(val) {
         $.ajax({
-            type : "POST",
-            url : contextURL + "cart/view",
-            data : {
-                entryId: val
+            type: "POST",
+            url: contextURL + "cart/removeFromCart",
+            data: {
+                entryId: val,
+                cartId: idCart
             },
-            success : function(response) {
-                $("#removeEntryBtn" + val).parent().parent().remove();
+            success: function (response) {
+                $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
+                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                refreshCartProductsNumber(idCart);
                 console.log("success");
             },
-            error : function(e) {
+            error: function (e) {
                 alert('Error: ' + e);
             }
         });
+    }
+
+    function editfunction(val) {
+        var quantity = $('#quantityOptions' + val).find(":selected").text();
+
+        $.ajax({
+            type: "POST",
+            url: contextURL + "cart/edit",
+            data: {
+                entryId: val,
+                cartId: idCart,
+                newQuantity: quantity
+            },
+            success: function (response) {
+                $("#subTotal" + val).load(contextURL + "cart/ #subTotal" + val);
+                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                refreshCartProductsNumber(idCart);
+                console.log("success");
+            },
+            error: function (e) {
+                alert('Error: ' + e);
+            }
+        });
+
     }
 </script>
 

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -36,7 +37,6 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return products;
     }
-
 
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
@@ -97,7 +97,7 @@ public class ProductDAOImpl implements ProductDAO {
         session.update(product);
     }
 
-    public List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage) {
+    public List<Product> getSortedProducts(String queryCommand, Integer startPageIndex, Integer recordsPerPage,List<Integer> selectedCategoriesIds) {
 
         Integer infRange = ((startPageIndex-1 )*recordsPerPage);
         Integer supRange = recordsPerPage ;
@@ -105,7 +105,9 @@ public class ProductDAOImpl implements ProductDAO {
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery(queryCommand);
-
+        if (selectedCategoriesIds.size()!=0) {
+            query.setParameterList("categoriesIds", selectedCategoriesIds);
+        }
         query.setFirstResult(infRange);
         query.setMaxResults(supRange);
         List<Product> products = query.list();
@@ -117,11 +119,29 @@ public class ProductDAOImpl implements ProductDAO {
             return getAllProducts();
         }
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Product as P WHERE P.category_id = :categoryId");
+        Query query = session.createQuery("FROM Product as P WHERE P.category.id = :categoryId");
         query.setParameter("categoryId", categoryId);
         List<Product> products = query.list();
         return products;
     }
 
+    @Override
+    public List<Product> getProductsFilteredByCategories(Integer startPageIndex, int recordsPerPage, List<Integer> categoriesList) {
 
+        Integer infRange = ((startPageIndex-1 )*recordsPerPage);
+        Integer supRange = recordsPerPage ;
+
+        List<Product> products=new ArrayList<Product>();
+        if(categoriesList.size()!=0) {
+            Session session=sessionFactory.getCurrentSession();
+            Query query = session.createQuery("FROM Product as P WHERE P.category.id in (:categoriesIds)");
+            query.setParameterList("categoriesIds", categoriesList);
+
+            query.setFirstResult(infRange);
+            query.setMaxResults(supRange);
+            products = query.list();
+
+        }
+        return products;
+    }
 }

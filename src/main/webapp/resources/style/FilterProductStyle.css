@@ -1,28 +1,29 @@
-.leftDiv{
+.container{
+    position: relative;
+}
+
+.leftDiv {
     float: left;
-    width: 35%;
+    width: 30%;
     margin-left: -32%;
     margin-top: -90%;
-    /*background: #658C00;*/
-
-    /*position: relative;*/
-    /*width: 1000px;*/
-    /*height: 400px;*/
-
+    position: absolute;
+    /*top:50px;*/
+    /*left: -20px;*/
+    /*}*/
+}
+.filter{
+    margin-left: 50%;
+    margin-top: 5%;
 }
 .rightDiv {
     float: left;
     width: 90%;
-    margin-left: 50%;
+    margin-left: 60%;
     margin-top: 0;
     padding-left: 80px;
 
-}
 
-#sumbitFilters{
-    position: relative;
-    top: -30px;
-    left: 25px;
 }
 #rectangle {
     width: 170px;
