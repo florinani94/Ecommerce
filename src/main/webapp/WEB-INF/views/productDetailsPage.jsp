@@ -54,21 +54,6 @@
 
 </div>
 
- <%--The cookie value is ${cookie.cookieCartId.value}--%>
-
-<%
-    String cartId = null;
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null){
-        for (Cookie cookie : cookies){
-            System.out.println();
-            System.out.println(cookie.getValue());
-        }
-    }
-%>
-
-<%--coooookir <%= cartId %>--%>
-
 <jsp:include page="customerFooter.jsp"/>
 
 </body>
