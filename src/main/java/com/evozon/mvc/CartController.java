@@ -36,11 +36,9 @@ public class CartController {
     }
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String viewDataFromCart(Model model){
-        // get cart id here from cookie
-
-        model.addAttribute("entries", cartService.getAllEntriesFromCart(4));
-        model.addAttribute("total", cartService.getCartById(4).getTotal());
+    public String viewDataFromCart(Model model, @RequestParam("cartId") Integer cartId){
+        model.addAttribute("entries", cartService.getAllEntriesFromCart(cartId));
+        model.addAttribute("total", cartService.getCartById(cartId).getTotal());
         return "viewCart";
     }
 
