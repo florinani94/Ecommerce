@@ -75,8 +75,7 @@ public class CartDAOImpl implements CartDAO{
     @Override
     public Entry addEntryToCart(Product product,Cart cart){
         Session session = sessionFactory.getCurrentSession();
-        Entry entry=new Entry(cart,product,new Integer(0),new Double(0.0));
-        //entry.setOrder(orders);//remove hardcoding
+        Entry entry=new Entry(cart,product,0,0.0);
         session.save(entry);
         return entry;
     }
@@ -88,13 +87,6 @@ public class CartDAOImpl implements CartDAO{
         query.setParameter("id", entryId);
         query.executeUpdate();
     }
-
-    @Override
-    public void updateQuantity(Entry entry) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(entry);
-    }
-
 
     @Override
     public List<Entry> getEntryForAdding(Integer productId, Integer cartId) {
