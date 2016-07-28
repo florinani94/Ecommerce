@@ -39,11 +39,16 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <%--<a href="${orderPlacedUrl}" class="btn btn-success" role="button"> Yes </a>--%>
-        <input type="submit" class="btn btn-success" id="checkoutID" value="Yes">
+        <input type="submit" class="btn btn-success" id="goToFinalizeOrder" value="Yes">
        <%-- <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>--%>
     </div>
 </div>
 
+<script type="text/javascript">
+    $("#goToFinalizeOrder").click(function () {
+        window.location.href = contextURL + "products/customerOrderPlaced/?cartId=" + idCart;
+    });
+</script>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
@@ -53,6 +58,8 @@
 
 <c:url var="jsUrl" value="/resources/js/myscript.js"/>
 <script type="text/javascript" src="${jsUrl}"></script>
+
+<jsp:include page="customerFooter.jsp"/>
 
 </body>
 </html>

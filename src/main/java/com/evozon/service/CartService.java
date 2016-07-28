@@ -10,9 +10,9 @@ import com.evozon.domain.*;
 import com.evozon.domain.dtos.EntryDTO;
 import com.evozon.domain.dtos.MiniCartDTO;
 import com.evozon.domain.dtos.OrdersDTO;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class CartService {
     @Autowired
     private ServletContext servletContext;
 
-    public void addCart(Cart cart){
+    public void saveCart(Cart cart){
         cartDAO.addCart(cart);
     }
 
@@ -176,5 +176,13 @@ public class CartService {
         cart.setBillingAddress(billingAddress);
         cart.setPayment(payment);
         cart.setEmail(order.getEmail());
+    }
+
+    @Transactional
+    public Cart createCart() {
+        Cart cart = new Cart();
+        this.saveCart(cart);
+
+        return cart;
     }
 }

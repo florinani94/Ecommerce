@@ -44,7 +44,7 @@ public class CartCookieInterceptor implements HandlerInterceptor {
             if (flag == false) {
                 //1. Create a new Cart if cart not exist
                 Cart newCart = new Cart();
-                cartService.addCart(newCart);
+                cartService.saveCart(newCart);
 
                 //2. Create a new Cookie with the cartId
                 Cookie newCookie = new Cookie("cartId", String.format("%s", newCart.getCartId()));
