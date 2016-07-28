@@ -182,7 +182,7 @@ html, body {
 }
 
 #checkoutButtonID {
-	margin-top: 17%;
+	margin-top: 15%;
 	text-align: center;
 	background-color: rgba(76,175,80,0.8); /* Green */
 	border: none;
@@ -192,7 +192,7 @@ html, body {
 	width: 60%;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 10px;
+	font-size: 12px;
 	z-index: 1000;
 }
 
@@ -233,7 +233,7 @@ html, body {
 	position: absolute;
 	visibility: hidden;
 	margin-left: 70%;
-	width: 40%;
+	width: 50%;
 	height: 0%;
 	text-align: left;
 	background: rgba(242, 242, 242, 0.5);
@@ -255,7 +255,7 @@ html, body {
 
 .entry-subtotal{
 	position: absolute;
-	right: 15px;
+	right: 22px;
 	font-style: italic;
 	font-size: 15px;
 }
@@ -289,4 +289,15 @@ html, body {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
+}
+
+.removeProd{
+	text-decoration: none;
+	position: absolute;
+	right: 8px;
+	z-index: 10002;
+}
+
+.removeProd:hover{
+	text-decoration: none;
 }
