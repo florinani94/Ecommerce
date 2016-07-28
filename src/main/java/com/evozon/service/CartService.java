@@ -121,6 +121,7 @@ public class CartService {
         ArrayList<EntryDTO> entryDTOList = new ArrayList<>();
         for(Entry entryModel : entryList) {
             EntryDTO entryDTO = new EntryDTO();
+            entryDTO.setId(entryModel.getEntryId());
             entryDTO.setName(entryModel.getProductName());
             entryDTO.setPrice(entryModel.getProductPrice());
             entryDTO.setQuantity(entryModel.getQuantity());

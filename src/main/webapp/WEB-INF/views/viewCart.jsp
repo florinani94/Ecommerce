@@ -150,9 +150,10 @@
     function deletefunction(val) {
         $.ajax({
             type: "POST",
-            url: contextURL + "cart/",
+            url: contextURL + "cart/removeFromCart",
             data: {
-                entryId: val
+                entryId: val,
+                cartId: idCart
             },
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
@@ -174,6 +175,7 @@
             url: contextURL + "cart/edit",
             data: {
                 entryId: val,
+                cartId: idCart,
                 newQuantity: quantity
             },
             success: function (response) {
