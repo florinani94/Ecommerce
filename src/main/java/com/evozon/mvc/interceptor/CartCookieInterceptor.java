@@ -30,32 +30,29 @@ public class CartCookieInterceptor implements HandlerInterceptor {
 
             for (Cookie cookie : cookies)
                 if ("cartId".equals(cookie.getName())) {
-                    System.out.println("The cookie exists and we put the cart from DB to the user session");
                     flag = 1;
 
                     //cookie exists but session not. Now we create a session
                     if (session.getAttribute("cart") == null){
                         Cart cart = cartService.getCartById(Integer.parseInt(cookie.getValue()));
                         session.setAttribute("cart", cart);
+
+
                     }
                 }
             //the cookie was not found on request
             if (flag == 0) {
-
                 //1. Create a new Cart if cart not exist
                 Cart newCart = new Cart();
                 cartService.addCart(newCart);
-                System.out.println("Cart created");
 
                 //2. Create a new Cookie with the cartId
                 Cookie newCookie = new Cookie("cartId", String.format("%s", newCart.getCartId()));
                 newCookie.setMaxAge(43200); //The time the cookie can be eaten is 12 hours
                 httpServletResponse.addCookie(newCookie);
-                System.out.println("Cookie created");
 
                 //3. Put Cart on user Session
                 session.setAttribute("cart", newCart);
-                System.out.println("Cart put on session");
             }
 
         }

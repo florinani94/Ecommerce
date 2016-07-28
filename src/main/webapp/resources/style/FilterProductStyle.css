@@ -12,12 +12,10 @@
     /*left: -20px;*/
     /*}*/
 }
-/*.filter{*/
-    /*position: relative;*/
-    /*margin-left: 50px;*/
-    /*margin-top: 50px;*/
-    /*width: 40%;*/
-/*}*/
+.filter{
+    margin-left: 50%;
+    margin-top: 5%;
+}
 .rightDiv {
     float: left;
     width: 90%;
