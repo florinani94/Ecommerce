@@ -173,7 +173,7 @@
             },
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart +" #totalCartPrice");
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
@@ -195,8 +195,8 @@
                 newQuantity: quantity
             },
             success: function (response) {
-                $("#subTotal" + val).load(contextURL + "cart/ #subTotal" + val);
-                $("#totalCartPrice").load(contextURL + "cart/ #totalCartPrice");
+                $("#subTotal" + val).load(contextURL + "cart/?cartId=" + idCart + " #subTotal" + val);
+                $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart + " #totalCartPrice");
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
