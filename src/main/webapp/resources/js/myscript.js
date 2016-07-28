@@ -4,6 +4,8 @@
 // Functions used in viewProducts.jsp
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
+        console.log("In js!");
+
         var arr = new Array();
         var toInt = parseInt(this.value);
         arr.push(toInt);
