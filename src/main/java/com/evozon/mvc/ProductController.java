@@ -120,9 +120,13 @@ public class ProductController {
         return "viewProducts";
     }
 
+
+
+
+    // import post method -- HttpServletRequest request,
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public String importFromFile(HttpServletRequest request, Model model) {
-        productService.importFromCSV(request);
+    public String importFromFile(@RequestParam(value = "filename", required = false) MultipartFile filename, Model model) {
+       productService.importFromCSV(filename);
 
         model.addAttribute("allProducts", productService.getAllProducts());
         return "viewProducts";
