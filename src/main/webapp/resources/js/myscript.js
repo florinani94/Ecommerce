@@ -1,6 +1,3 @@
-/**
- * Created by dianamohanu on 14/07/2016.
- */
 // Functions used in viewProducts.jsp
 $("#deleteButton").click(function() {
     $('input[id="idProd"]:checked').each(function() {
