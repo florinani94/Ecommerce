@@ -115,6 +115,15 @@ public class CustomerProductController {
     @RequestMapping(value = "/customerOrderPlaced", method = RequestMethod.GET)
     public String orderPlaced(@RequestParam(value = "cartId") Integer cartId, HttpServletResponse httpServletResponse , HttpServletRequest httpServletRequest) {
         Cart cart = cartService.getCartById(cartId);
+
+        List<Entry> entries = cartService.getAllEntriesFromCart(cartId);
+        for (Entry e : entries) {
+            Product p = e.getProduct();
+            Integer newProductStock = p.getStockLevel() - e.getQuantity();
+            p.setStockLevel(newProductStock);
+            productService.updateProduct(p);
+        }
+
         Orders orderPlaced = new Orders();
         orderPlaced.cloneCart(cart);
         orderService.addOrder(orderPlaced);
@@ -122,7 +131,6 @@ public class CustomerProductController {
         Cart newCart = cartService.createCart();
 
         //todo: refactor the code - as it's currently duplicated
-
 
         HttpSession session = httpServletRequest.getSession(true);
         session.setAttribute("cart", newCart);

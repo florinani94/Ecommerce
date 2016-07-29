@@ -17,6 +17,8 @@ public interface CartDAO {
 
     void updateCart(Cart cart);
 
+    List<Cart> getAllCarts();
+
     void deleteCart(Integer cartId) ;
 
     void updateEntryDetails(Entry entry);

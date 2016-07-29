@@ -19,6 +19,17 @@
         a:not([href]):hover {
             cursor: pointer;
         }
+
+        .checkoutButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 45px;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 15%;
+        }
     </style>
 
     <title>Tea Shop</title>

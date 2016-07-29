@@ -30,17 +30,15 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1> <b> Order </b></h1>
+        <h1 id="productTitle"> Submit order </h1>
         <br><br>
-        <h4> Are you sure you want to place your order? </h4>
+        <h4> You're delivery, billing and payment information have been saved. Please click the below button to finalize your order! After that, you'll receive an email summarizing your order. </h4>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <%--<a href="${orderPlacedUrl}" class="btn btn-success" role="button"> Yes </a>--%>
-        <input type="submit" class="btn btn-success" id="goToFinalizeOrder" value="Yes">
-       <%-- <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>--%>
+        <input type="submit" class="checkoutButton" id="goToFinalizeOrder" value="COMPLETE ORDER">
     </div>
 </div>
 
