@@ -59,10 +59,9 @@
             <b>2. Delivery Address </b>
             <br><br>
 
-            <label for="deliveryStreet">ID : </label>
-            <br>
-            <form:input readonly="true" path="cartId" cssClass="form-control" maxlength="10" required="true" />
-            <br><br>
+
+            <form:input type="hidden" readonly="true" path="cartId" cssClass="form-control" maxlength="10" required="true" />
+
 
         <label for="deliveryStreet">Street : </label>
             <br>
