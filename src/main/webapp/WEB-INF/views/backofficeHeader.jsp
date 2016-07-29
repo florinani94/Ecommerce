@@ -8,7 +8,6 @@
     <c:url var="cssUrl" value="/resources/style/ProjectStyle.css"/>
     <c:url var="listURL" value="/backoffice/product/"/>
     <c:url var="importURL" value="/backoffice/product/import"/>
-    <c:url var="exportURL" value="/backoffice/product/export"/>
     <c:url var="addURL" value="/backoffice/product/add"/>
     <c:url var="listCategoryURL" value="/backoffice/category/"/>
     <c:url var="createCategoryURL" value="/backoffice/category/add"/>
@@ -38,7 +37,6 @@
                 <li><a href="${runJob}">Start/Stop Job</a></li>
                 <li><a href="${createCategoryURL}">Create category</a></li>
                 <li><a href="${listCategoryURL}">View categories</a></li>
-                <li><a href="${exportURL}">Export teas to file</a></li>
                 <li><a href="${addURL}">Create product</a></li>
                 <li><a href="${listURL}">View products</a></li>
             </ul>
