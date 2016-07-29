@@ -54,6 +54,12 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
+    public List<Cart> getAllCarts(){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Cart as C").list();
+    }
+
+    @Override
     public void deleteCart(Integer cartId) {
         Session session = sessionFactory.getCurrentSession();
         Query query=session.createQuery("DELETE FROM Cart as C WHERE C.cartId=:id");

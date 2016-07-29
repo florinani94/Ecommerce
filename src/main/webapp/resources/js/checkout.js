@@ -11,6 +11,15 @@ function readCookie(name) {
 
 var idCart = parseInt(readCookie("cartId"));
 
+$('#paymentMethod').on('change', function () {
+    if(this.value === "RAMBURS"){
+        $("#cardDetails").hide();
+    } else {
+        $("#cardDetails").show();
+    }
+});
+
+
 $("#checkoutID").click(function() {
     $.ajax({
         type : "POST",
