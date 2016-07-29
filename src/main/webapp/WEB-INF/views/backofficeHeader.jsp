@@ -12,6 +12,7 @@
     <c:url var="listCategoryURL" value="/backoffice/category/"/>
     <c:url var="createCategoryURL" value="/backoffice/category/add"/>
     <c:url var="sortProductsByPriceUpDown" value="/backoffice/product/sortpriceupdown"/>
+    <c:url var="productsURL" value="/products"/>
 
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
     <c:url var="runJob" value="/backoffice/product/job"/>
@@ -39,6 +40,7 @@
                 <li><a href="${listCategoryURL}">View categories</a></li>
                 <li><a href="${addURL}">Create product</a></li>
                 <li><a href="${listURL}">View products</a></li>
+                <li><a href="${productsURL}">Customer view</a></li>
             </ul>
 
 
