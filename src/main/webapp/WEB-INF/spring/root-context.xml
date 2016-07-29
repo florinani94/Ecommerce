@@ -43,7 +43,7 @@
 	<bean id="orderPlacementManager" class="com.evozon.service.SendOrderMail">
 		<property name="mailSender" ref="mailSender"/>
 		<property name="placementMessage" ref="placementMessage"/>
-		<property name="url" value="http://localhost:8080"/>
+		<property name="url" value="http://172.22.130.194:8080"/>
 	</bean>
 
 	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
