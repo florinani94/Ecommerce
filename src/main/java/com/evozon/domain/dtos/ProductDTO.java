@@ -13,8 +13,6 @@ public class ProductDTO {
 
     private String name;
 
-    private Set<Entry> entrySet;
-
     private String description;
 
     private Double price;
@@ -47,14 +45,6 @@ public class ProductDTO {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Set<Entry> getEntrySet() {
-        return entrySet;
-    }
-
-    public void setEntrySet(Set<Entry> entrySet) {
-        this.entrySet = entrySet;
     }
 
     public String getDescription() {
@@ -103,7 +93,6 @@ public class ProductDTO {
                 "productId=" + productId +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", entrySet=" + entrySet +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", stockLevel=" + stockLevel +

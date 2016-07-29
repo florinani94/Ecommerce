@@ -298,7 +298,6 @@ public class ProductService {
         productDTO.setProductId(product.getProductId());
         productDTO.setCode(product.getCode());
         productDTO.setName(product.getName());
-        productDTO.setEntrySet(product.getEntrySet());
         productDTO.setDescription(product.getDescription());
         productDTO.setPrice(product.getPrice());
         productDTO.setStockLevel(product.getStockLevel());
