@@ -34,9 +34,7 @@ public class OrderValidator implements Validator{
         ValidationUtils.rejectIfEmpty(e, "billingStreet", "error.billingStreet", "Billing street is required");
         ValidationUtils.rejectIfEmpty(e, "billingNumber", "error.billingNumber", "Billing number is required");
         ValidationUtils.rejectIfEmpty(e, "billingCity", "error.billingCity", "Billing city is required");
-/*        ValidationUtils.rejectIfEmpty(e, "paymentMethod", "error.paymentMethod", "Payment method is required");
-        ValidationUtils.rejectIfEmpty(e, "cardNumber", "error.cardNumber", "Card number is required");
-        ValidationUtils.rejectIfEmpty(e, "cardCode", "error.cardCode", "Card code is required");*/
+        ValidationUtils.rejectIfEmpty(e, "paymentMethod", "error.paymentMethod", "Payment method is required");
 
         try {
             OrdersDTO orders = (OrdersDTO) o;
@@ -51,11 +49,13 @@ public class OrderValidator implements Validator{
             if (!orders.getBillingPhone().matches("[0-9]+")) {
                 e.rejectValue("billingPhone", "error.billingPhone", "Introduce only numbers");
             }
-            if (!orders.getCardNumber().matches("[0-9]+")) {
-                e.rejectValue("cardNumber", "error.cardNumber", "Introduce only numbers");
-            }
-            if (!orders.getCardCode().matches("[0-9]+")) {
-                e.rejectValue("cardCode", "error.cardCode", "Introduce only numbers");
+            if (orders.getPaymentMethod().matches("CARD")) {
+                if (!orders.getCardNumber().matches("[0-9]+")) {
+                    e.rejectValue("cardNumber", "error.cardNumber", "Introduce only numbers");
+                }
+                if (!orders.getCardCode().matches("[0-9]+")) {
+                    e.rejectValue("cardCode", "error.cardCode", "Introduce only numbers");
+                }
             }
         } catch (Exception error) {
             error. printStackTrace();

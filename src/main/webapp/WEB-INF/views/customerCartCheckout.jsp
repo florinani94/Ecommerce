@@ -133,23 +133,23 @@
 
                 <label for="paymentMethod">Payment Method : </label>
                 <br>
-<%--                <form:input path="paymentMethod" id="paymentMethod" cssClass="form-control" maxlength="10" required="true" />
-            <form:errors path="paymentMethod" cssClass="error" />--%>
             <form:select path="paymentMethod" id="paymentMethod" cssClass="form-control">
                     <option value="CARD">CARD</option>
                 <option value="RAMBURS">RAMBURS</option>
             </form:select>
+            <div id="cardDetails">
             <br><br>
                 <label for="cardNumber">Card Number : </label>
                 <br>
-                <form:input path="cardNumber" id="deliveryStreet" cssClass="form-control" maxlength="10" required="true" />
+                <form:input path="cardNumber" id="deliveryStreet" cssClass="form-control" maxlength="10" />
             <form:errors path="cardNumber" cssClass="error" />
             <br><br>
                 <label for="cardCode">Card Code : </label>
                 <br>
-                <form:input path="cardCode" id="cardCode" cssClass="form-control" maxlength="3" required="true" />
+                <form:input path="cardCode" id="cardCode" cssClass="form-control" maxlength="3" />
             <form:errors path="cardCode" cssClass="error" />
             <br><br>
+            </div>
             </div>
         </div>
 

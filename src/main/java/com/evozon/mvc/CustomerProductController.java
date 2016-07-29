@@ -105,6 +105,7 @@ public class CustomerProductController {
         Cart cart = cartService.getCartById(order.getCartId());
         String keyUrl = UUID.randomUUID().toString();
         cart.setOrdersKey(keyUrl);
+        cart.setStatus("processing");
         cartService.getDataFromOrderds(order, cart);
         cartService.updateAddress(cart);
         model.addAttribute("cart", cart);
@@ -116,7 +117,6 @@ public class CustomerProductController {
         Cart cart = cartService.getCartById(cartId);
         Orders orderPlaced = new Orders();
         orderPlaced.cloneCart(cart);
-        orderPlaced.setStatus("processing");
         orderService.addOrder(orderPlaced);
         orderManager.sendOrderPlacementMail(orderPlaced.getEmail(), "Iulia", orderPlaced.getOrdersKey(), "/mvc/products/details");
         Cart newCart = cartService.createCart();
