@@ -38,9 +38,7 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <%--<a href="${orderPlacedUrl}" class="btn btn-success" role="button"> Yes </a>--%>
-        <input type="submit" class="checkoutButton" id="goToFinalizeOrder" value="FINALIZE ORDER">
-       <%-- <a href="${backUrl}" class="btn btn-default" role="button"> Cancel </a>--%>
+        <input type="submit" class="checkoutButton" id="goToFinalizeOrder" value="COMPLETE ORDER">
     </div>
 </div>
 
