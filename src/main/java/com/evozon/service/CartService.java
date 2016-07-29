@@ -103,6 +103,7 @@ public class CartService {
             cartDAO.updateEntryDetails(entry);
             status=addProductToCart(productId,cartId,quantity);
         }
+
         List<Cart> cartList=cartDAO.getAllCarts();
         for(Cart c:cartList){
             if(c.getTotal()==null){
