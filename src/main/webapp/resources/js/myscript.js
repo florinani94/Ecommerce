@@ -60,8 +60,6 @@ $("#exportButton").click(function() {
 
 });
 
-
-
 $("#selectall").click(function () {
     $('.check').attr('checked', this.checked);
 });
@@ -70,6 +68,7 @@ $("#selectall").click(function () {
 $('.panel-heading h4 a input[type=checkbox]').on('click', function(e) {
     e.stopPropagation();
 })
+
 
 function billingFunction() {
     if (document.getElementById("same").checked) {

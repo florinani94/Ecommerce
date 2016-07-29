@@ -21,149 +21,149 @@
     <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
 
     <title>Checkout</title>
+
+    <style>
+        .informationTitle {
+            font-family: Calibri;
+            color: rgb(114, 114, 114);
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+    </style>
+
 </head>
 
 <body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
 
-<jsp:include page="customerHeader.jsp" />
+<jsp:include page="customerHeader.jsp"/>
 <c:url var="addressUrl" value="/products/checkout/"></c:url>
 <c:url var="backUrl" value="/products"></c:url>
 
 <br>
 
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
+<div class="col-md-3"></div>
+
+<div class="col-md-4">
+    <div class="row">
         <h1 id="productTitle"> Customer Information </h1>
     </div>
-</div>
 
-<c:if test="${data == null || data==false}">
+    <c:if test="${data == null || data==false}">
 
-<form:form commandName="order" method="POST" action="${addressUrl}" id="checkoutAddress" class="form-inline" ><%--cssClass="form-horizontal registrationForm" enctype="multipart/form-data"--%>
+        <form:form commandName="order" method="POST" action="${addressUrl}" id="checkoutAddress">
 
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-
-            <b>1. Contact Details </b>
-            <br><br>
-            <label for="email">E-mail Address : </label>
-            <br>
-            <form:input path="email" id="email" cssClass="form-control" maxlength="30" required="true" />
-            <form:errors path="email" cssClass="error" />
-            <br><br>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-
-            <b>2. Delivery Address </b>
-            <br><br>
-
-
-            <form:input type="hidden" readonly="true" path="cartId" cssClass="form-control" maxlength="10" required="true" />
-
-
-        <label for="deliveryStreet">Street : </label>
-            <br>
-        <form:input path="deliveryStreet" id="deliveryStreet" cssClass="form-control" maxlength="30" required="true" />
-            <form:errors path="deliveryStreet" cssClass="error" />
-            <br><br>
-        <label for="deliveryNumber">Number : </label>
-            <br>
-        <form:input path="deliveryNumber" id="deliveryNumber" cssClass="form-control" maxlength="5" required="true" />
-            <form:errors path="deliveryNumber" cssClass="error" />
-            <br><br>
-        <label for="deliveryCity">City : </label>
-            <br>
-        <form:input path="deliveryCity" id="deliveryCity" cssClass="form-control" maxlength="30" required="true" />
-            <form:errors path="deliveryCity" cssClass="error" />
-            <br><br>
-        <label for="deliveryPhone">Phone : </label>
-            <br>
-        <form:input path="deliveryPhone" id="deliveryPhone" cssClass="form-control" maxlength="30" required="true" />
-            <form:errors path="deliveryPhone" cssClass="error" />
-            <br><br>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-
-            <b>3. Billing Address:</b>
-            <br><br>
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapseAddress">
-                        <input type="checkbox" id="same" name="same" onchange="billingFunction()"> Use the same address
-                    </a>
-                </h4>
-            </div>
-            <div class="collapse" id="collapseAddress">
-                Street: <br>
-                <form:input path="billingStreet" id="billingStreet" cssClass="form-control" maxlength="30" required="true" />
-                <form:errors path="billingStreet" cssClass="error" />
-                <br><br>
-                Number: <br>
-                <form:input path="billingNumber" id="billingNumber" cssClass="form-control" maxlength="5" required="true" />
-                <form:errors path="billingNumber" cssClass="error" />
-                <br><br>
-                City: <br>
-                <form:input path="billingCity" id="billingCity" cssClass="form-control" maxlength="30" required="true" />
-                <form:errors path="billingCity" cssClass="error" />
-                <br><br>
-                Phone <br>
-                <form:input path="billingPhone" id="billingPhone" cssClass="form-control" maxlength="30" required="true" />
-                <form:errors path="billingPhone" cssClass="error" />
-                <br><br>
-
+            <div class="row">
+                <p class="informationTitle">1. Contact Details </p>
+                <label for="email">E-mail Address :</label>
+                <form:input path="email" id="email" cssClass="form-control" maxlength="30" required="true"/>
+                <form:errors path="email" cssClass="error"/>
+                <br>
             </div>
 
-        </div>
-    </div>
+            <div class="row">
+                <p class="informationTitle">2. Delivery Address </p>
+
+                <form:input type="hidden" readonly="true" path="cartId" cssClass="form-control" maxlength="10"
+                            required="true"/>
+
+                <label for="deliveryStreet">Street : </label>
+                <br>
+                <form:input path="deliveryStreet" id="deliveryStreet" cssClass="form-control" maxlength="30"
+                            required="true"/>
+                <form:errors path="deliveryStreet" cssClass="error"/>
+                <br>
+                <label for="deliveryNumber">Number : </label>
+                <br>
+                <form:input path="deliveryNumber" id="deliveryNumber" cssClass="form-control" maxlength="5"
+                            required="true"/>
+                <form:errors path="deliveryNumber" cssClass="error"/>
+                <br>
+                <label for="deliveryCity">City : </label>
+                <br>
+                <form:input path="deliveryCity" id="deliveryCity" cssClass="form-control" maxlength="30"
+                            required="true"/>
+                <form:errors path="deliveryCity" cssClass="error"/>
+                <br>
+                <label for="deliveryPhone">Phone : </label>
+                <br>
+                <form:input path="deliveryPhone" id="deliveryPhone" cssClass="form-control" maxlength="30"
+                            required="true"/>
+                <form:errors path="deliveryPhone" cssClass="error"/>
+                <br>
+            </div>
 
 
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <img src="${paymentUrl}" />
-                <br><br>
-                <b>4. Payment Details</b>
-                <br><br>
+            <div class="row">
+                <p class="informationTitle">3. Billing Address:</p>
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseAddress">
+                            <input type="checkbox" id="same" name="same" onchange="billingFunction()"> Use the same
+                            address
+                        </a>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapseAddress">
+                    Street: <br>
+                    <form:input path="billingStreet" id="billingStreet" cssClass="form-control" maxlength="30"
+                                required="true"/>
+                    <form:errors path="billingStreet" cssClass="error"/>
+                    <br>
+                    Number: <br>
+                    <form:input path="billingNumber" id="billingNumber" cssClass="form-control" maxlength="5"
+                                required="true"/>
+                    <form:errors path="billingNumber" cssClass="error"/>
+                    <br>
+                    City: <br>
+                    <form:input path="billingCity" id="billingCity" cssClass="form-control" maxlength="30"
+                                required="true"/>
+                    <form:errors path="billingCity" cssClass="error"/>
+                    <br>
+                    Phone <br>
+                    <form:input path="billingPhone" id="billingPhone" cssClass="form-control" maxlength="30"
+                                required="true"/>
+                    <form:errors path="billingPhone" cssClass="error"/>
+                    <br>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <p class="informationTitle">4. Payment Details</p>
 
                 <label for="paymentMethod">Payment Method : </label>
                 <br>
-            <form:select path="paymentMethod" id="paymentMethod" cssClass="form-control">
+                <form:select path="paymentMethod" id="paymentMethod" cssClass="form-control">
                     <option value="CARD">CARD</option>
-                <option value="RAMBURS">RAMBURS</option>
-            </form:select>
-            <div id="cardDetails">
-            <br><br>
-                <label for="cardNumber">Card Number : </label>
-                <br>
-                <form:input path="cardNumber" id="deliveryStreet" cssClass="form-control" maxlength="10" />
-            <form:errors path="cardNumber" cssClass="error" />
-            <br><br>
-                <label for="cardCode">Card Code : </label>
-                <br>
-                <form:input path="cardCode" id="cardCode" cssClass="form-control" maxlength="3" />
-            <form:errors path="cardCode" cssClass="error" />
-            <br><br>
+                    <option value="RAMBURS">RAMBURS</option>
+                </form:select>
+                <div id="cardDetails">
+                    <br>
+                    <label for="cardNumber">Card Number : </label>
+                    <br>
+                    <form:input path="cardNumber" id="deliveryStreet" cssClass="form-control" maxlength="10"/>
+                    <form:errors path="cardNumber" cssClass="error"/>
+                    <br>
+                    <label for="cardCode">Card Code : </label>
+                    <br>
+                    <form:input path="cardCode" id="cardCode" cssClass="form-control" maxlength="3"/>
+                    <form:errors path="cardCode" cssClass="error"/>
+                    <br>
+                </div>
             </div>
+
+
+            <div class="row">
+                <input type="submit" value="SUBMIT INFORMATION" class="checkoutButton"/>
             </div>
-        </div>
 
+        </form:form>
 
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <input type="submit" value="SUBMIT INFORMATION" class="checkoutButton" />
-        </div>
-    </div>
+    </c:if>
+</div>
 
-</form:form>
-
-</c:if>
+<div class="col-md-5"></div>
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
