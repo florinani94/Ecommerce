@@ -171,12 +171,12 @@
         <div class="row">
             <div id="buttonsDiv">
                 <c:if test="${total != 0}">
-                    <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT">
+                    <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT" onclick="window.location.href = contextURL + 'products/checkout?cartId=' + idCart;">
                 </c:if>
                 <c:if test="${total == 0}">
                     <h3 style="font-family: Impact; color: rgb(114, 114, 114);"> Your shopping cart is currently
                         empty. </h3>
-                    <input type="submit" class="productsButton" id="goToProducts" value="SHOP NOW">
+                    <input type="submit" class="productsButton" id="goToProducts" value="SHOP NOW" onclick="window.location.href = contextURL + 'products/';">
                 </c:if>
             </div>
         </div>
@@ -201,7 +201,9 @@
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
                 $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart +" #totalCartPrice");
+
                 $("#buttonsDiv").load(contextURL + "cart/?cartId=" + idCart +" #buttonsDiv");
+
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
@@ -233,14 +235,6 @@
             }
         });
     }
-
-    $("#goToCheckout").click(function () {
-        window.location.href = contextURL + "products/checkout?cartId=" + idCart;
-    });
-
-    $("#goToProducts").click(function () {
-        window.location.href = contextURL + "products/";
-    })
 
 </script>
 
