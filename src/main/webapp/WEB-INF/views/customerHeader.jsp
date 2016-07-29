@@ -10,6 +10,8 @@
     <c:url var="cartImageUrl" value="/resources/detailView/cartIcon.png"></c:url>
     <c:url var="checkoutURL" value="/cart"></c:url>
 
+    <c:url var="productsURL" value="/products"></c:url>
+
     <c:url var="logoutUrl" value="/j_spring_security_logout"/>
 
     <jsp:include page="bootstrapImports.jsp" />
@@ -47,6 +49,9 @@
                         <sec:authorize access="hasRole('ROLE_ADMIN') and isAuthenticated()">
                             <h4 style="color: #FFFFFF; padding-left: 1%; font-family: 'Calibri';"> Logged in as: <sec:authentication property="name"/> | <a href="${logoutUrl}">Logout</a> </h4>
                         </sec:authorize>
+
+                        <a class="headerLink" href="${productsURL}">
+                            Products</a>
 
                         <sec:authorize access="!hasRole('ROLE_ADMIN')">
                             <a class="headerLink" href="${loginURL}">
