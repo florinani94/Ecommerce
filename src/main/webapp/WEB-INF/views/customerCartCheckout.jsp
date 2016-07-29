@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${cssUrlHead}">
     <c:url var="bkgURL2" value="/resources/detailView/Background2.jpg"></c:url>
 
-    <title>Cart Checkout</title>
+    <title>Checkout</title>
 </head>
 
 <body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
@@ -31,7 +31,7 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1> <b> Checkout - Part 1</b></h1>
+        <h1 id="productTitle"> Customer Information </h1>
     </div>
 </div>
 
@@ -156,7 +156,7 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <input type="submit" value="Save" class="btn btn-lg btn-primary" />
+            <input type="submit" value="SUBMIT INFORMATION" class="checkoutButton" />
         </div>
     </div>
 
