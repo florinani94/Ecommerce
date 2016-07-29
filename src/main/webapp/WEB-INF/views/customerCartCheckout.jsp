@@ -31,7 +31,7 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1> <b> Checkout - Part 1</b></h1>
+        <h1 id="productTitle"> Checkout </h1>
     </div>
 </div>
 
@@ -156,7 +156,7 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <input type="submit" value="Save" class="btn btn-lg btn-primary" />
+            <input type="submit" value="SUBMIT INFORMATION" class="checkoutButton" />
         </div>
     </div>
 

@@ -75,17 +75,6 @@
             padding-right: 5%;
             background-color: rgb(242, 242, 242);
         }
-
-        .checkoutButton {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 10px 45px;
-            text-decoration: none;
-            font-size: 20px;
-            margin-top: 5px;
-            margin-bottom: 15%;
-        }
     </style>
 
 </head>
@@ -97,7 +86,7 @@
     <div class="col-md-3"></div>
 
     <div class="col-md-4">
-        <h1 id="productTitle">My Cart</h1>
+        <h1 id="productTitle"> My Cart </h1>
 
         <c:forEach var="entry" items="${entries}">
             <div class="row row-buffer">
@@ -225,7 +214,7 @@
     }
 
     $("#goToCheckout").click(function () {
-        window.location.href = contextURL + "products/checkout/?cartId=" + idCart;
+        window.location.href = contextURL + "products/checkout?cartId=" + idCart;
     });
 
 </script>
