@@ -53,7 +53,7 @@
 	<bean id="orderManager" class="com.evozon.service.SendMail">
 		<property name="mailSender" ref="mailSender"/>
 		<property name="templateMessage" ref="templateMessage"/>
-		<property name="url" value="http://localhost:8080"/>
+		<property name="url" value="http://172.22.130.194:8080"/>
 	</bean>
 
 </beans>
