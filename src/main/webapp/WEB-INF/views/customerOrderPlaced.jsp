@@ -24,23 +24,29 @@
 
 <body style="background-image:url(${bkgURL2});background-repeat: repeat; background-size: 100%; )">
 
-<jsp:include page="customerHeader.jsp" />
-<c:url var="backUrl" value="/products"></c:url>\
+<jsp:include page="customerHeader.jsp"/>
+<c:url var="backUrl" value="/products"></c:url>
 <c:url var="orderPlacedUrl" value="/products/customerOrderPlaced"></c:url>
 
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <h1 id="productTitle"> Submit order </h1>
-        <br><br>
-        <h4> You're delivery, billing and payment information have been saved. Please click the below button to finalize your order! After that, you'll receive an email summarizing your order. </h4>
-    </div>
-</div>
+<br>
 
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
+<div class="col-md-3"></div>
+
+<div class="col-md-4">
+
+    <div class="row">
+        <h1 id="productTitle"> Submit order </h1>
+        <h3 style="font-family: Calibri; color: rgb(114, 114, 114);"> You're delivery, billing and payment
+            information have been saved. Please click the below button to finalize your order! After that, you'll
+            receive an email summarizing your order. </h3>
+    </div>
+
+    <div class="row">
         <input type="submit" class="checkoutButton" id="goToFinalizeOrder" value="COMPLETE ORDER">
     </div>
 </div>
+
+<div class="col-md-5"></div>
 
 <script type="text/javascript">
     $("#goToFinalizeOrder").click(function () {

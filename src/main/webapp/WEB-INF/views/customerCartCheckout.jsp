@@ -29,6 +29,8 @@
 <c:url var="addressUrl" value="/products/checkout/"></c:url>
 <c:url var="backUrl" value="/products"></c:url>
 
+<br>
+
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <h1 id="productTitle"> Customer Information </h1>
@@ -162,13 +164,7 @@
 
 </form:form>
 
-
 </c:if>
-
-
-
-
-
 
 <c:url var="jqueyUrl" value="/resources/jquery-1.8.3.js"/>
 <script type="text/javascript" src="${jqueyUrl}"></script>
@@ -178,6 +174,8 @@
 
 <c:url var="jsUrl2" value="/resources/js/checkout.js"/>
 <script type="text/javascript" src="${jsUrl2}"></script>
+
+<jsp:include page="customerFooter.jsp"/>
 
 </body>
 </html>
