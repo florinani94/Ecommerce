@@ -75,6 +75,17 @@
             padding-right: 5%;
             background-color: rgb(242, 242, 242);
         }
+
+        .productsButton {
+            background-color: rgb(255, 133, 51);
+            border: none;
+            color: white;
+            padding: 10px 45px;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 15%;
+        }
     </style>
 
 </head>
@@ -158,7 +169,16 @@
         </div>
 
         <div class="row">
-            <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT">
+            <div id="buttonsDiv">
+                <c:if test="${total != 0}">
+                    <input type="submit" class="checkoutButton" id="goToCheckout" value="CHECKOUT">
+                </c:if>
+                <c:if test="${total == 0}">
+                    <h3 style="font-family: Impact; color: rgb(114, 114, 114);"> Your shopping cart is currently
+                        empty. </h3>
+                    <input type="submit" class="productsButton" id="goToProducts" value="SHOP NOW">
+                </c:if>
+            </div>
         </div>
     </div>
 
@@ -181,6 +201,7 @@
             success: function (response) {
                 $("#removeEntryBtn" + val).parent().parent().parent().parent().parent().parent().remove();
                 $("#totalCartPrice").load(contextURL + "cart/?cartId=" + idCart +" #totalCartPrice");
+                $("#buttonsDiv").load(contextURL + "cart/?cartId=" + idCart +" #buttonsDiv");
                 refreshCartProductsNumber(idCart);
                 console.log("success");
             },
@@ -216,6 +237,10 @@
     $("#goToCheckout").click(function () {
         window.location.href = contextURL + "products/checkout?cartId=" + idCart;
     });
+
+    $("#goToProducts").click(function () {
+        window.location.href = contextURL + "products/";
+    })
 
 </script>
 
